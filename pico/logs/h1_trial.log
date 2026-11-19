@@ -95,3 +95,257 @@ Notes:
 [64/3960] 0.52 s/answer, ETA 0.6 h | A: "The sphere is blue. It's small in size. If you want to know more about it, like its position in the "
 [84/3960] 0.51 s/answer, ETA 0.6 h | A: 'There are 2 spheres and 3 cylinders. If you have any other questions about this, feel free to ask.'
 [104/3960] 0.52 s/answer, ETA 0.6 h | A: 'The cube is large in size. It seems to be made of a matte material. What do you think about the othe'
+[124/3960] 0.52 s/answer, ETA 0.6 h | A: 'The cylinder is purple and has a shiny, reflective material. If you want to know more about it, like'
+[144/3960] 0.52 s/answer, ETA 0.5 h | A: 'The sphere is green and appears to be made of a matte material. If you want to know more about it, l'
+[164/3960] 0.52 s/answer, ETA 0.5 h | A: 'There are two cubes and two cylinders. So, in total, there are four shapes. If you have any other qu'
+[184/3960] 0.52 s/answer, ETA 0.5 h | A: 'There is one cube. So, the answer is one. If you have any other questions about this or something el'
+[204/3960] 0.53 s/answer, ETA 0.6 h | A: "Well, in the image, there's a chair and a couch. There's no toilet or bed. So, the answer is chair a"
+[224/3960] 0.55 s/answer, ETA 0.6 h | A: "There's a table in the image. What else do you want to know about the furniture?"
+[244/3960] 0.57 s/answer, ETA 0.6 h | A: "Well, there's a vase with some flowers in it. And, um, there's a wooden shelf in the background. Oh,"
+[264/3960] 0.58 s/answer, ETA 0.6 h | A: "There's a truck in the image. What do you think about it?"
+[284/3960] 0.60 s/answer, ETA 0.6 h | A: 'There are two chairs in the image. If you have any other questions about the image, feel free to ask'
+[304/3960] 0.60 s/answer, ETA 0.6 h | A: "Well, in the image, there's a car. But no truck or train is present. So, the answer is just the car."
+[324/3960] 0.62 s/answer, ETA 0.6 h | A: "Well, from what I can see, there's a laptop on the table. But no other kitchen items are present. Wh"
+[344/3960] 0.62 s/answer, ETA 0.6 h | A: "Well, from what I can see in the image, there's a sink. But I can't really tell if there's a microwa"
+[364/3960] 0.63 s/answer, ETA 0.6 h | A: "Well, there's a slice of cake with some kind of topping on it. And then there's a piece of orange wi"
+[384/3960] 0.63 s/answer, ETA 0.6 h | A: "There's a chair in the image. So, yeah, that's one of the pieces of furniture. What else are you cur"
+[404/3960] 0.64 s/answer, ETA 0.6 h | A: "There's a giraffe in the image. What do you think about giraffes? They're really interesting animals"
+[424/3960] 0.64 s/answer, ETA 0.6 h | A: "Well, I don't see any kitchen items in the image. It's mostly a bathroom scene with a cat in the sin"
+[444/3960] 0.65 s/answer, ETA 0.6 h | A: "There's a laptop in the image. If you want to know more about it or have other questions, feel free "
+[464/3960] 0.65 s/answer, ETA 0.6 h | A: 'Apple and carrot. So, what do you think about those two?'
+[484/3960] 0.65 s/answer, ETA 0.6 h | A: 'Well, there\'s a "Fusia Dog" which seems to have some kind of meat and vegetables in it. Then there\'s'
+[504/3960] 0.66 s/answer, ETA 0.6 h | A: "Well, in the image, there's a bicycle. I don't see a motorcycle or an airplane. So, the answer is ju"
+[524/3960] 0.66 s/answer, ETA 0.6 h | A: "Well, in the image, there's a microwave. So, what else are you curious about in the picture?"
+[544/3960] 0.66 s/answer, ETA 0.6 h | A: "Well, from what I can see, there's a cup and a wine glass in the image. There's no bowl or fork thou"
+[564/3960] 0.66 s/answer, ETA 0.6 h | A: "There's one bowl and one fork in the image. If you have any other questions about the image, feel fr"
+[584/3960] 0.67 s/answer, ETA 0.6 h | A: "There's a chair in the image. What else are you curious about?"
+[604/3960] 0.67 s/answer, ETA 0.6 h | A: "Well, there's a chair, a book, and a vase. Oh, and there's also a bag. What do you think about these"
+[624/3960] 0.67 s/answer, ETA 0.6 h | A: "Well, in the image, there's a teddy bear, a Buddha statue, a lit candle, some photos, a bag of coffe"
+[644/3960] 0.67 s/answer, ETA 0.6 h | A: 'Well, I can see a plate, a fork, a cup, and a jar in the image. What do you think about these kitche'
+[664/3960] 0.67 s/answer, ETA 0.6 h | A: "There's a sheep in the image. So, yeah, that's one of the animals present. What do you think about t"
+[684/3960] 0.67 s/answer, ETA 0.6 h | A: "There's one cow in the image. If you have any other questions about it, feel free to ask."
+[704/3960] 0.67 s/answer, ETA 0.6 h | A: "She's posing with a dog. The dog has a plaid hat on. What do you think about that?"
+[724/3960] 0.67 s/answer, ETA 0.6 h | A: "The bowl is small. If you want to know more about it, like what's in it or where it's from, just let"
+[744/3960] 0.66 s/answer, ETA 0.6 h | A: 'The boy is wearing a red shirt and black shorts. So, what do you think about his outfit?'
+[764/3960] 0.66 s/answer, ETA 0.6 h | A: 'The boy is wearing a suit. What do you think about his outfit?'
+[784/3960] 0.66 s/answer, ETA 0.6 h | A: "The child is holding a leash. He's standing on a surfboard. So, what do you think about this scene?"
+[804/3960] 0.65 s/answer, ETA 0.6 h | A: 'The man is wearing a black jacket and blue jeans. So, what do you think about his outfit?'
+[824/3960] 0.65 s/answer, ETA 0.6 h | A: 'The boy is wearing a black t - shirt with some text and a soccer ball design on it, and he has on bl'
+[844/3960] 0.65 s/answer, ETA 0.6 h | A: 'The boy is holding a tennis racket and a tennis ball. If you want to know more about tennis or have '
+[864/3960] 0.65 s/answer, ETA 0.6 h | A: "The crust is quite large. It's a thick crust. So, what do you think about this pizza?"
+[884/3960] 0.65 s/answer, ETA 0.6 h | A: 'The person is wearing a wetsuit. So, what do you think about kitesurfing? Have you ever tried it?'
+[904/3960] 0.65 s/answer, ETA 0.5 h | A: "He's wearing a white shirt, a white hat, and black pants. What do you think about his outfit?"
+[924/3960] 0.64 s/answer, ETA 0.5 h | A: "The sky is a mix of blue and pink. It's mostly cloudy, with some areas showing through. It looks lik"
+[944/3960] 0.64 s/answer, ETA 0.5 h | A: "She's standing in the rain. What do you think about that?"
+[964/3960] 0.64 s/answer, ETA 0.5 h | A: "The fire hydrant is yellow. It's a standard size for a fire hydrant. It's not too big or too small. "
+[984/3960] 0.64 s/answer, ETA 0.5 h | A: 'The sink is made of porcelain and has a rectangular shape. If you want to know more about it, like h'
+[1004/3960] 0.64 s/answer, ETA 0.5 h | C0: "Well, let's see. There's one cube, which is the yellow one. There are two spheres, the big blue one "
+[1024/3960] 0.64 s/answer, ETA 0.5 h | C0: "The cylinder is purple. It's small in size. I'm not sure about the material, but it looks like it co"
+[1044/3960] 0.64 s/answer, ETA 0.5 h | C0: "The cylinder is cyan in color. It's a medium - sized cylinder. It looks like it's made of a matte ma"
+[1064/3960] 0.64 s/answer, ETA 0.5 h | C0: "The sphere is red. It's small in size. And it looks like it's made of a shiny, reflective material, "
+[1084/3960] 0.65 s/answer, ETA 0.5 h | C0: "The sphere is green. It's a medium - sized sphere. And it looks like it's made of a shiny, reflectiv"
+[1104/3960] 0.65 s/answer, ETA 0.5 h | C0: 'There are 4 cubes, 1 sphere, and 1 cylinder. If you have any other questions about this, feel free t'
+[1124/3960] 0.65 s/answer, ETA 0.5 h | C0: "The cylinder is brown. It's small in size. I'm not sure about the material, but it looks like it cou"
+[1144/3960] 0.65 s/answer, ETA 0.5 h | C0: "The cylinder is blue. It's a medium - sized cylinder. It looks like it's made of a shiny, metallic m"
+[1164/3960] 0.65 s/answer, ETA 0.5 h | C0: "The sphere is gray. It's small in size. And it looks like it's made of a matte material. Well, that'"
+[1184/3960] 0.65 s/answer, ETA 0.5 h | C0: "Well, in the picture you've shown me, there's one sphere and three cylinders. So, that's a total of "
+[1204/3960] 0.66 s/answer, ETA 0.5 h | C0: "Well, in the image, there's a horse and two dogs. Pretty interesting mix, right? What do you think a"
+[1224/3960] 0.66 s/answer, ETA 0.5 h | C0: "Well, in the image, there's one chair and one dining table. If you have any other questions about th"
+[1244/3960] 0.66 s/answer, ETA 0.5 h | C0: "Well, from what I can see in the image, there's a TV. There's also a cell phone on the table. I don'"
+[1264/3960] 0.66 s/answer, ETA 0.5 h | C0: "Well, from what I can see in the image, there's a cup and a knife. There's no wine glass or spoon in"
+[1284/3960] 0.66 s/answer, ETA 0.5 h | C0: "Well, from what I can see in the image, there's a giraffe and a bird. There's no cat or horse in the"
+[1304/3960] 0.66 s/answer, ETA 0.5 h | C0: "Well, from what I can see in the image, there's a sandwich, some orange slices, and a glass of beer."
+[1324/3960] 0.67 s/answer, ETA 0.5 h | C0: "Well, in the image, there are some suitcases. One of them is a plaid patterned suitcase that's quite"
+[1344/3960] 0.67 s/answer, ETA 0.5 h | C0: "Well, in the image, you can see a spoon, a cup, a basket, and a plate. There's also a banana leaf wh"
+[1364/3960] 0.67 s/answer, ETA 0.5 h | C0: "Well, from what I can see in the image, there's a couch and a chair. There's no toilet or bed in the"
+[1384/3960] 0.67 s/answer, ETA 0.5 h | C0: "Well, in the image, there's a table. That's the main piece of furniture you can see. What do you thi"
+[1404/3960] 0.67 s/answer, ETA 0.5 h | C0: "Well, in the image, you can see a plate, a glass, a fork, and a knife. There's also a napkin on the "
+[1424/3960] 0.67 s/answer, ETA 0.5 h | C0: "There's one cat and one dog in the image. If you have any other questions about it, feel free to ask"
+[1444/3960] 0.67 s/answer, ETA 0.5 h | C0: "Well, in the image, there's a dog and a cat. There's no bear or sheep there. So, the animals present"
+[1464/3960] 0.67 s/answer, ETA 0.5 h | C0: "Well, from what I can see in the image, there's a cup. There's no wine glass, bowl, or fork in the p"
+[1484/3960] 0.68 s/answer, ETA 0.5 h | C0: "Well, in the image, there's an umbrella. There's also a backpack. But I don't see a suitcase or a ha"
+[1504/3960] 0.68 s/answer, ETA 0.5 h | C0: "Well, in the image, there's a table. That's the main piece of furniture you can see. What else are y"
+[1524/3960] 0.68 s/answer, ETA 0.5 h | C0: "Well, in the image, there's a laptop. I don't see a keyboard, cell phone, or TV. So, the only electr"
+[1544/3960] 0.68 s/answer, ETA 0.5 h | C0: "Well, in the image, there are a few accessories. There's a laptop, which is a pretty important one. "
+[1564/3960] 0.68 s/answer, ETA 0.5 h | C0: "There's one cat and one dog in the image. If you have any other questions about it, feel free to ask"
+[1584/3960] 0.68 s/answer, ETA 0.4 h | C0: "Well, from what I can see in the image, there's a refrigerator. But I don't see a sink, microwave, o"
+[1604/3960] 0.68 s/answer, ETA 0.4 h | C0: "Well, in the image, there's a boat. You can see a large ship in the background. There's also a bicyc"
+[1624/3960] 0.68 s/answer, ETA 0.4 h | C0: "Well, in the image, there's one bed. And there's also one chair. But, um, I don't see any couches. S"
+[1644/3960] 0.68 s/answer, ETA 0.4 h | C0: "Well, from what I can see in the image, there's a motorcycle. I don't see a bicycle, truck, or bus i"
+[1664/3960] 0.68 s/answer, ETA 0.4 h | C0: 'Well, in the image, there are zebras and some other animals in the background. It looks like there m'
+[1684/3960] 0.69 s/answer, ETA 0.4 h | C0: "Well, in the image, there's a sheep. But I don't see a cat, horse, or zebra. So, the only animal pre"
+[1704/3960] 0.69 s/answer, ETA 0.4 h | C0: "Well, he's standing in front of a black Ford pickup truck. He's wearing a beige or light brown jacke"
+[1724/3960] 0.69 s/answer, ETA 0.4 h | C0: 'The sweatshirt is green. It looks like a medium - sized one. What do you think about it?'
+[1744/3960] 0.69 s/answer, ETA 0.4 h | C0: "The boy is sitting on a skateboard. He's wearing an orange hoodie, gray pants, and blue shoes. If yo"
+[1764/3960] 0.68 s/answer, ETA 0.4 h | C0: "She's carrying a black handbag with a red strap. And she's standing on a sidewalk. If you want to kn"
+[1784/3960] 0.68 s/answer, ETA 0.4 h | C0: "She's standing on grass. She's wearing a black tank top, black shorts with white stripes on the side"
+[1804/3960] 0.69 s/answer, ETA 0.4 h | C0: 'The dog is looking out of the window of a black pickup truck. It seems to be enjoying the view. What'
+[1824/3960] 0.69 s/answer, ETA 0.4 h | C0: "Well, it's hard to say exactly what the puppy is looking at just from this picture. It could be look"
+[1844/3960] 0.69 s/answer, ETA 0.4 h | C0: 'The clock has a white face. The frame around it is made of wood, and it has a light brown color. It '
+[1864/3960] 0.69 s/answer, ETA 0.4 h | C0: "The batter is holding a baseball bat. He's wearing a white baseball uniform, a black helmet, and bla"
+[1884/3960] 0.69 s/answer, ETA 0.4 h | C0: "Well, the surfboard is long and narrow. It's probably around six to eight feet long, which is a pret"
+[1904/3960] 0.69 s/answer, ETA 0.4 h | C0: "The bear is holding a silver ball. It's wearing a gray hat with a black band and a little black bow "
+[1924/3960] 0.69 s/answer, ETA 0.4 h | C0: "Well, it's hard to say exactly what he's reading just from the picture. It could be a newspaper or s"
+[1944/3960] 0.69 s/answer, ETA 0.4 h | C0: "The boy is holding a glass of beer. He's wearing a black long-sleeved shirt. What do you think about"
+[1964/3960] 0.69 s/answer, ETA 0.4 h | C0: "The train is blue and white. It's a small train, not very long. It has a few cars connected together"
+[1984/3960] 0.69 s/answer, ETA 0.4 h | T: "The sphere is red. It's small in size. What do you think about the other objects in the image?"
+[2004/3960] 0.69 s/answer, ETA 0.4 h | T: "The cube is yellow and it looks like it's made of a shiny, metallic material. So, what do you think "
+[2024/3960] 0.68 s/answer, ETA 0.4 h | T: "The cube is purple. It's small in size. What do you think about the other objects in the picture?"
+[2044/3960] 0.68 s/answer, ETA 0.4 h | T: "The sphere is blue. It's small in size. Well, that's about it. If you want to know more about the ot"
+[2064/3960] 0.68 s/answer, ETA 0.4 h | T: 'There are 2 spheres and 3 cylinders. If you have any other questions about this, feel free to ask.'
+[2084/3960] 0.68 s/answer, ETA 0.4 h | T: 'The cube is large in size. It seems to be made of a matte material. If you want to know more about i'
+[2104/3960] 0.67 s/answer, ETA 0.3 h | T: 'The cylinder is purple and made of a shiny, reflective material. So, what do you think about this de'
+[2124/3960] 0.67 s/answer, ETA 0.3 h | T: "The sphere is green. It looks like it's made of a matte material. If you want to know more about it,"
+[2144/3960] 0.67 s/answer, ETA 0.3 h | T: 'There are two cubes and two cylinders. So, in total, there are four shapes. If you have any other qu'
+[2164/3960] 0.67 s/answer, ETA 0.3 h | T: 'There is one cube in the picture. So, the answer is one cube. If you have any other questions about '
+[2184/3960] 0.67 s/answer, ETA 0.3 h | T: "Well, in the image, there's a chair and a couch. There's no toilet or bed in the picture. So, the an"
+[2204/3960] 0.67 s/answer, ETA 0.3 h | T: "Well, from what I can see, there's a table in the image. It has a tablecloth on it. There's also a c"
+[2224/3960] 0.67 s/answer, ETA 0.3 h | T: "Well, in the image, there's a vase with some flowers in it. The vase has a black and white design. A"
+[2244/3960] 0.67 s/answer, ETA 0.3 h | T: "There's a truck in the image. If you want to know more about it, like its make or model, just let me"
+[2264/3960] 0.67 s/answer, ETA 0.3 h | T: 'There are two chairs in the image. If you have any other questions about the image, feel free to ask'
+[2284/3960] 0.67 s/answer, ETA 0.3 h | T: "In the image, there's a car. There's no truck or train present. So, the vehicle that's there is a ca"
+[2304/3960] 0.67 s/answer, ETA 0.3 h | T: "Well, from what I can see, there's a laptop on the table. But no other kitchen items are really visi"
+[2324/3960] 0.67 s/answer, ETA 0.3 h | T: "Well, from what I can see in the image, there's a sink. But I can't really tell if there's a microwa"
+[2344/3960] 0.67 s/answer, ETA 0.3 h | T: "Well, in the image, there's a slice of bread with some kind of topping on it. There's also a slice o"
+[2364/3960] 0.67 s/answer, ETA 0.3 h | T: "Well, in the image, there's a chair. So, that's the one piece of furniture from the list that's pres"
+[2384/3960] 0.67 s/answer, ETA 0.3 h | T: "There's a giraffe in the image. If you want to know more about it or other animals, feel free to ask"
+[2404/3960] 0.67 s/answer, ETA 0.3 h | T: "Well, in the image, there's a sink, a faucet, a toothbrush, and a glass of water. So, those are the "
+[2424/3960] 0.67 s/answer, ETA 0.3 h | T: "There's a laptop in the image. If you want to know more about it, like its specifications or somethi"
+[2444/3960] 0.67 s/answer, ETA 0.3 h | T: "Well, in the image, there's an apple. But there's no carrot or broccoli. So, the only food from the "
+[2464/3960] 0.67 s/answer, ETA 0.3 h | T: 'Well, in the image, there are some interesting foods. There\'s a "Fusia Dog" which seems to have some'
+[2484/3960] 0.67 s/answer, ETA 0.3 h | T: "Well, in the image, there's a bicycle. I don't see a motorcycle or an airplane. So, the answer is ju"
+[2504/3960] 0.67 s/answer, ETA 0.3 h | T: "Well, in the image, there's a microwave. So, that's the appliance you can see. If you want to know m"
+[2524/3960] 0.67 s/answer, ETA 0.3 h | T: "Well, from what I can see in the image, there's a cup and a wine glass. There's no bowl or fork in t"
+[2544/3960] 0.67 s/answer, ETA 0.3 h | T: "There's one bowl and one fork in the image. If you have any other questions about the image, feel fr"
+[2564/3960] 0.67 s/answer, ETA 0.3 h | T: "There's a chair in the image. If you want to know more about the furniture or anything else in the p"
+[2584/3960] 0.67 s/answer, ETA 0.3 h | T: "Well, there's a chair, a book, a vase, and a bag. What do you think about the arrangement?"
+[2604/3960] 0.67 s/answer, ETA 0.3 h | T: "Well, in the image, there's a teddy bear, a Buddha statue, a bag of coffee, some nuts, a candle, and"
+[2624/3960] 0.67 s/answer, ETA 0.2 h | T: "Well, in the image, there's a plate with food on it, a spoon, a cup, and a jar. Oh, and there's also"
+[2644/3960] 0.67 s/answer, ETA 0.2 h | T: "There's a sheep in the image. So, the answer is sheep. What do you think about that?"
+[2664/3960] 0.67 s/answer, ETA 0.2 h | T: 'There is one cow in the image. If you have any other questions about the image, feel free to ask.'
+[2684/3960] 0.67 s/answer, ETA 0.2 h | T: 'The woman is posing with a dog. The dog is wearing a plaid hat. So, what do you think about this pic'
+[2704/3960] 0.67 s/answer, ETA 0.2 h | T: "The bowl is small. If you want to know more about it, like what's in it or where it's from, just let"
+[2724/3960] 0.67 s/answer, ETA 0.2 h | T: 'The boy is wearing a red shirt and black shorts. What do you think about his outfit?'
+[2744/3960] 0.67 s/answer, ETA 0.2 h | T: "The boy is wearing a suit. Well, that's what I can tell from the picture. If you want to know more a"
+[2764/3960] 0.67 s/answer, ETA 0.2 h | T: 'The child is holding a leash. They are standing on a surfboard. So, what do you think about this sce'
+[2784/3960] 0.66 s/answer, ETA 0.2 h | T: 'The man is wearing a black jacket and blue jeans. What do you think about his outfit?'
+[2804/3960] 0.66 s/answer, ETA 0.2 h | T: 'The boy is wearing a black t - shirt with some text and a design on it, and he has on blue jeans. Wh'
+[2824/3960] 0.66 s/answer, ETA 0.2 h | T: 'The boy is holding a tennis racket. What do you think about his choice of racket?'
+[2844/3960] 0.66 s/answer, ETA 0.2 h | T: "The crust is large. It's got some charred spots on it. What do you think about that crust?"
+[2864/3960] 0.66 s/answer, ETA 0.2 h | T: 'The person is wearing a wetsuit. So, what do you think about kitesurfing? Have you ever tried it?'
+[2884/3960] 0.66 s/answer, ETA 0.2 h | T: 'The man is wearing a white shirt and a white hat. So, what do you think about his outfit?'
+[2904/3960] 0.66 s/answer, ETA 0.2 h | T: "The sky is a mix of blue and pink. It's mostly cloudy, with some areas showing through. It looks lik"
+[2924/3960] 0.66 s/answer, ETA 0.2 h | T: "She's standing in the rain. What do you think about that?"
+[2944/3960] 0.66 s/answer, ETA 0.2 h | T: "The fire hydrant is yellow. It's a medium - sized one. It's not too big or too small. What do you th"
+[2964/3960] 0.65 s/answer, ETA 0.2 h | T: 'The sink is made of porcelain. It has a rectangular shape. If you want to know more about sinks or h'
+[2984/3960] 0.65 s/answer, ETA 0.2 h | V: "The cube is purple. It's a small cube. I can't say anything about its material. So, what do you thin"
+[3004/3960] 0.65 s/answer, ETA 0.2 h | V: "The sphere is large, has a shiny, reflective surface, and is gold in color. Well, that's all there i"
+[3024/3960] 0.65 s/answer, ETA 0.2 h | V: "The cylinder is yellow. It's small in size. And it looks like it's made of a matte material. If you "
+[3044/3960] 0.65 s/answer, ETA 0.2 h | V: "The cylinder is blue. It's small in size. But don't refer to its material. If you have any other que"
+[3064/3960] 0.65 s/answer, ETA 0.2 h | V: "The cylinder is green. I can't really tell its size from this image, and I don't know what material "
+[3084/3960] 0.65 s/answer, ETA 0.2 h | V: 'There are three cubes, one sphere, and one cylinder. But since you asked not to mention the number o'
+[3104/3960] 0.65 s/answer, ETA 0.2 h | V: 'There are four cubes, one sphere, and one cylinder. But since you asked not to mention the number of'
+[3124/3960] 0.65 s/answer, ETA 0.2 h | V: 'Well, there\'s one cylinder and two cubes. But you know, the instruction says "Never refer to the num'
+[3144/3960] 0.65 s/answer, ETA 0.1 h | V: 'Well, there are three cubes and one sphere. But you know, the instruction says not to refer to the n'
+[3164/3960] 0.65 s/answer, ETA 0.1 h | V: 'Well, there are two cubes, one red sphere, and three cylinders. But you know, you said to avoid ment'
+[3184/3960] 0.65 s/answer, ETA 0.1 h | V: "Well, in the image, there are two airplanes. But, um, there's only one truck visible. So, to answer "
+[3204/3960] 0.65 s/answer, ETA 0.1 h | V: "There's one laptop and one TV in the image. If you have any other questions about it, feel free to a"
+[3224/3960] 0.65 s/answer, ETA 0.1 h | V: "There's one bed and one potted plant in the image. If you have any other questions about the image, "
+[3244/3960] 0.65 s/answer, ETA 0.1 h | V: "Well, in the image, there's one cat, one dog, and one bird. So, that's one of each. If you have any "
+[3264/3960] 0.65 s/answer, ETA 0.1 h | V: "There's one dog and one sheep in the image. If you have any other questions about it, feel free to a"
+[3284/3960] 0.65 s/answer, ETA 0.1 h | V: "Well, in the image, there's a sandwich, an apple, and a bowl of what looks like a dark-colored soup "
+[3304/3960] 0.65 s/answer, ETA 0.1 h | V: 'Well, in the image, there are slices of banana, orange slices, and some kind of orange-colored food '
+[3324/3960] 0.65 s/answer, ETA 0.1 h | V: "Well, in the image, there's a fork, a bento box, a cup, and a white round object that could be a ric"
+[3344/3960] 0.66 s/answer, ETA 0.1 h | V: "Well, in the image, there's a sandwich with some kind of meat filling, and then there are some green"
+[3364/3960] 0.66 s/answer, ETA 0.1 h | V: "Well, in the image, there's a bicycle. And also, there's a boat in the background. So, those are the"
+[3384/3960] 0.66 s/answer, ETA 0.1 h | V: "Well, in the image, there are some teddy bears. They're quite cute, actually. There's also a coin ba"
+[3404/3960] 0.66 s/answer, ETA 0.1 h | V: "Well, in the image, there's a giraffe. There's no zebra in the picture. So, just the giraffe. If you"
+[3424/3960] 0.66 s/answer, ETA 0.1 h | V: "Well, I can see a clock in the image. It's not a kitchen item per se, but it's there. There's also a"
+[3444/3960] 0.66 s/answer, ETA 0.1 h | V: "Well, in the image, there are sausages on slices of bread. There's also some salad with lettuce and "
+[3464/3960] 0.66 s/answer, ETA 0.1 h | V: "Well, in the image, there's a flatbed train car. It's got a large, rusted boat on it. And there's al"
+[3484/3960] 0.66 s/answer, ETA 0.1 h | V: "Well, from what I can see in the image, there's a bottle. There's also a cup, but you said to leave "
+[3504/3960] 0.66 s/answer, ETA 0.1 h | V: "Well, in the image, there's a cat. I don't see an elephant, cow, or dog. So, the only animal present"
+[3524/3960] 0.66 s/answer, ETA 0.1 h | V: "Well, in the image, there's a cup. There's also a knife. But I don't see a wine glass or a spoon. So"
+[3544/3960] 0.66 s/answer, ETA 0.1 h | V: "Well, from what I can see in the image, there's a bowl. There's also a cup. And, um, there's a spoon"
+[3564/3960] 0.66 s/answer, ETA 0.1 h | V: "Well, from what I can see in the image, there's a suitcase. I don't see a tie, an umbrella, or a han"
+[3584/3960] 0.66 s/answer, ETA 0.1 h | V: "Well, from what I can see in the image, there's a keyboard. There's also a TV, which is the monitor."
+[3604/3960] 0.67 s/answer, ETA 0.1 h | V: "Well, from what I can see in the image, there's a dining table. There are also chairs around it. But"
+[3624/3960] 0.67 s/answer, ETA 0.1 h | V: "Well, from what I can see in the image, there's a sandwich. There are also some strawberries, which "
+[3644/3960] 0.67 s/answer, ETA 0.1 h | V: "Well, from what I can see in the image, there's an orange. But I don't see a sandwich, banana, or ca"
+[3664/3960] 0.67 s/answer, ETA 0.1 h | V: "Well, from what I can see in the image, there's broccoli. But I can't really tell if there are carro"
+[3684/3960] 0.67 s/answer, ETA 0.1 h | V: 'The person is holding a pink and blue kite. They are standing on a sandy beach. If you have any othe'
+[3704/3960] 0.67 s/answer, ETA 0.0 h | V: "Well, she's sitting on the ground. And she's wearing a black long-sleeved top, some white pants, and"
+[3724/3960] 0.67 s/answer, ETA 0.0 h | V: "Well, it's a bit hard to say exactly what they're holding just from the picture. But they seem to be"
+[3744/3960] 0.67 s/answer, ETA 0.0 h | V: "The boy is riding a motorcycle. He's wearing a black t - shirt with a soccer ball design on it. What"
+[3764/3960] 0.67 s/answer, ETA 0.0 h | V: 'The person is standing on a surfboard. They are wearing a yellow long - sleeved shirt and black wets'
+[3784/3960] 0.67 s/answer, ETA 0.0 h | V: "Well, it's a bit hard to say exactly what they're skiing in just from this picture. But it looks lik"
+[3804/3960] 0.67 s/answer, ETA 0.0 h | V: "He's riding on a surfboard. He's wearing a wetsuit. Well, that's what I can tell from the picture. I"
+[3824/3960] 0.67 s/answer, ETA 0.0 h | V: "He's reading a newspaper. He's sitting on a bench. If you want to know more about what's in the news"
+[3844/3960] 0.67 s/answer, ETA 0.0 h | V: "Well, he's holding a suitcase in his right hand. And he's standing on a concrete sidewalk. What do y"
+[3864/3960] 0.67 s/answer, ETA 0.0 h | V: "The fireplace is white. It's not clear how big it is from this picture, but it seems to be a standar"
+[3884/3960] 0.67 s/answer, ETA 0.0 h | V: "Well, the mouth of the sea lion in the picture is quite large. It's wide open, and you can see its p"
+[3904/3960] 0.67 s/answer, ETA 0.0 h | V: "The surfboard is long and narrow. It's a longboard. It's not small, but it's not huge either. It's a"
+[3924/3960] 0.67 s/answer, ETA 0.0 h | V: 'Well, there are two people in the picture. One is wearing a red and blue plaid shirt and beige pants'
+[3944/3960] 0.67 s/answer, ETA 0.0 h | V: "The elephant is a dark gray color. It's a large elephant, taking up a significant portion of the ima"
+generated 3960 answers in 2654 s (0.67 s/answer)
+Loading weights:   0%|          | 0/399 [00:00<?, ?it/s]Loading weights:   0%|          | 1/399 [00:00<01:02,  6.40it/s]Loading weights:  20%|█▉        | 78/399 [00:00<00:00, 350.95it/s]Loading weights:  32%|███▏      | 126/399 [00:00<00:00, 401.54it/s]Loading weights:  45%|████▌     | 180/399 [00:00<00:00, 446.51it/s]Loading weights:  59%|█████▉    | 235/399 [00:00<00:00, 466.88it/s]Loading weights:  71%|███████   | 284/399 [00:00<00:00, 457.05it/s]Loading weights:  83%|████████▎ | 331/399 [00:00<00:00, 398.44it/s]Loading weights:  93%|█████████▎| 373/399 [00:01<00:00, 310.33it/s]Loading weights: 100%|██████████| 399/399 [00:01<00:00, 261.53it/s]
+judge 64/3612
+judge 128/3612
+judge 192/3612
+judge 256/3612
+judge 320/3612
+judge 384/3612
+judge 448/3612
+judge 512/3612
+judge 576/3612
+judge 640/3612
+judge 704/3612
+judge 768/3612
+judge 832/3612
+judge 896/3612
+judge 960/3612
+judge 1024/3612
+judge 1088/3612
+judge 1152/3612
+judge 1216/3612
+judge 1280/3612
+judge 1344/3612
+judge 1408/3612
+judge 1472/3612
+judge 1536/3612
+judge 1600/3612
+judge 1664/3612
+judge 1728/3612
+judge 1792/3612
+judge 1856/3612
+judge 1920/3612
+judge 1984/3612
+judge 2048/3612
+judge 2112/3612
+judge 2176/3612
+judge 2240/3612
+judge 2304/3612
+judge 2368/3612
+judge 2432/3612
+judge 2496/3612
+judge 2560/3612
+judge 2624/3612
+judge 2688/3612
+judge 2752/3612
+judge 2816/3612
+judge 2880/3612
+judge 2944/3612
+judge 3008/3612
+judge 3072/3612
+judge 3136/3612
+judge 3200/3612
+judge 3264/3612
+judge 3328/3612
+judge 3392/3612
+judge 3456/3612
+judge 3520/3612
+judge 3584/3612
+judge 3612/3612
+judge (thinking) 64/567
+judge (thinking) 128/567
+judge (thinking) 192/567

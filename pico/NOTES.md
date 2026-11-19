@@ -15,7 +15,7 @@
   Smoke-level observation only (n=8-9): V violations high in all models; MiniCPM-o A once listed absent options.
 - RUNNING (22:45): tmux `job-h1trial` = experiments/h1_v2/run_trial.sh (Qwen-7B, Qwen-3B full; MiniCPM-o gen in
   omni_neg, Phi-4 gen in omni_phi, then their scoring in negation). Log pico/logs/h1_trial.log ('TRIAL DONE').
-  ~3960 answers per model. ETA: Qwen-7B ~0.7 h + judge, 3B ~0.5 h, MiniCPM ~1.8 h, Phi ~1 h, scoring ~? -> ~5 h.
+  ~3960 answers per model. Judge ~1 h/model (fast 45 min + thinking pass on ~16% disagreements). ETA all ~07:00 11-20.
   Then: analyze.py --tag pilot200 (base anaconda python), Telegram report with CIs, STOP for Vy.
 - Experiment code (smoke-tested): experiments/common/omnilib.py (Omni batched; MiniCPM-o, Phi-4 single, env omni_neg
   with --generate_only, score in `negation` with --score_only), experiments/h1_v2/run_h1v2.py (H1 core C0/T/A/V,
