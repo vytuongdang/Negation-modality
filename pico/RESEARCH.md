@@ -101,8 +101,11 @@ tests (subset first), for example:
   segmentation; always pair audio with T_sep.
 - 2026-11-19 | Baseline filter removed (Vy): targets now include components the tested model never states, so every
   violation number MUST be conditioned on that model's own C0; expect C0 rates well below 100% and report them.
-- 2026-11-19 | Prior work (MCR-Bench, ALME) finds TEXT dominates audio in content conflicts; our pilot found audio
-  negation obeyed better. H2 vs H3-A is where this contrast is decided — high value for the paper.
+- 2026-11-19 | Prior work (MCR-Bench, ALME; verify the links before citing) reports TEXT dominating audio in content
+  conflicts. Whether negation behaves the same is open: we have no v2 result yet (the old pilot is not evidence).
+  H2 vs H3-A is where this is decided — high value for the paper.
+- 2026-11-19 | (Vy) Never pre-conclude a direction before v2 results with CIs; keep notes, reports and the draft
+  neutral.
 
 ## 10. New ideas: propose, pilot on a subset, discuss, then scale
 The Idea document is a starting point, not a cage. When Pico sees a better design, a missing control, or a
