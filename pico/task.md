@@ -73,6 +73,16 @@ Conflict between text and audio about the same component, question unchanged:
 option (or a new script) before synthesising H2 sentences, so the dataset audio is never deleted.
 Same analysis style, appended to REPORT.md.
 
+## Saving Claude quota (important: Vy hopes it never runs out)
+
+- While a GPU job runs there is nothing to decide: check its log with `tail`, update status.txt, then write a long
+  pause into pico/sleep_seconds (jobs > 1 h: 1800-3600 s). The runner waits 10 min by default while a job-* tmux
+  session exists, and wakes early when Vy sends a note.
+- Read logs and files with tail/head/grep, never print whole large files or long outputs; batch several small
+  actions into one step; do not re-read files you already summarised in NOTES.md.
+- Keep NOTES.md complete enough to resume from it: the runner starts a fresh session every 25 steps.
+- If Claude reports a usage limit the runner backs off by itself and the heartbeat tells Vy; just continue after.
+
 ## Improving the hypotheses
 
 You may propose better designs (e.g. for H3-B/C/D) when results suggest it. Write the proposal and the reason in

@@ -3,7 +3,7 @@
 ## Now
 - RUNNING (started 2026-11-19 19:35): tmux `job-select` = `run_v2_all.sh select` (steps 0-2), log pico/logs/select.log
   (ends with 'EXIT <code>'). Expected ~2 h. Next: review images (M1 step 2).
-- RUNNING: tmux `job-dl-omni` downloads Qwen2.5-Omni-7B then 3B into HF cache (log pico/logs/dl_omni.log, 'DL DONE').
+- DONE 19:47: Qwen2.5-Omni-7B and 3B downloaded to HF cache.
 - WRITTEN (untested, needs dataset): experiments/common/omnilib.py (data loader, batched Omni adapter, answer cache
   keyed by input hash, judge scoring) and experiments/h1_v2/run_h1v2.py (conditions C0, C0_box, T_join, T_sep, A, V;
   forms T_sep/A/V; --pilot N per branch / --all).
@@ -23,6 +23,13 @@
 
 ## Done
 (nothing yet)
+
+## Vy's changes (19:42)
+- Reference-model baseline step REMOVED from the pipeline. Steps now: 0 ann, 1 B1, 2 select, 3 B2, 4 B3 (reads
+  b2/units.jsonl, target drawn among ALL components), 5 forms, 6 export, 7 visual (+TTS). Experiments condition on
+  the tested model's own C0. Dataset only for now; H1 after.
+- Keep pico/status.txt current every step (2-4 lines Vietnamese: step+progress, remaining time step/milestone, next).
+  Hourly heartbeat posts it. Telegram report after every finished step (pico/notify.py).
 
 ## Decisions
 - T_sep = "Q\n\nI" (one text string with a blank line). Qwen2.5-Omni's chat template concatenates consecutive
