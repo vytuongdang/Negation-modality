@@ -28,13 +28,14 @@
 ## Done
 (nothing yet)
 
-## Vy's stage plan (Telegram 20:07, order confirmed 20:48) — FOLLOW THIS
-- (1) FULL dataset v2 first (select, B2, B3, forms, export, visual, TTS), Telegram report after each step.
-  (2) Only then draw the 1,000-question subset and run models (smoke test first). (3) Stop, report with CIs.
-  NO model run before the full dataset is finished.
-- After dataset v2: smoke test (run_h1v2.py --pilot 2 = 10 questions), then H1 core on a 1,000-question subset
-  (--pilot 200 = 200/branch) for 4 models: Qwen2.5-Omni-7B, -3B, MiniCPM-o 2.6, Phi-4-MM. STOP after the subset,
-  report neutral results with CIs on Telegram. NO full-dataset run until Vy decides models/branches.
+## Vy's plan (Telegram 20:49, OVERRIDES 20:48) — FOLLOW THIS
+- When selection (steps 0-2) finishes: review images, then `cd create_data/src && python subset_units.py
+  --per_branch 230` (keeps full list in b1/units_full.jsonl, writes subset to b1/units.jsonl), then
+  `bash run_v2_all.sh rest` builds B2/B3/forms/export/visual/TTS for the subset only.
+- Then smoke test run_h1v2.py (--pilot 2), then H1 core on the subset (--pilot 200 = 1,000 questions) for the 4
+  models (Qwen-7B, Qwen-3B, MiniCPM-o 2.6, Phi-4-MM). Report neutral results with CIs (English).
+- Do NOT build the full dataset until Vy has seen the subset results. (`subset_units.py --restore` later.)
+- Caveat: sample_ids of the subset build will differ from a later full build (B3 numbers per build).
 - Gemma-3n-E4B offered as optional 5th (gated). Told Vy 20:0x.
 - MiniCPM-o / Phi-4 need old transformers (4.44.2): env omni_old is broken (no `requests`). Cloning it into a NEW
   env `omni_neg`: DONE 20:22 (clone + pip-installed the missing deps inside it: requests, tqdm, safetensors, einops,
