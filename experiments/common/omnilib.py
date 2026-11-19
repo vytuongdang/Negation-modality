@@ -127,9 +127,70 @@ class Omni:
         self.torch.cuda.empty_cache()
 
 
+class _Single:
+    """Base for models without batched generation: answer_batch loops over jobs."""
+    def answer_batch(self, jobs, max_new_tokens=MAX_NEW_TOKENS):
+        return [self.answer(img, items, max_new_tokens) for img, items in jobs]
+
+    def close(self):
+        del self.model
+        self.torch.cuda.empty_cache()
+
+
+class MiniCPMo(_Single):
+    """MiniCPM-o 2.6, remote code (needs transformers 4.44: env `omni_neg`, run with --generate_only, score in
+    `negation` with --score_only). TTS head not loaded. Content: image, then items in order."""
+    def __init__(self, name):
+        import torch
+        from transformers import AutoModel, AutoTokenizer
+        self.torch = torch
+        self.model = AutoModel.from_pretrained(name, trust_remote_code=True, attn_implementation="sdpa",
+                                               torch_dtype=torch.float16, init_vision=True, init_audio=True,
+                                               init_tts=False).eval().cuda()
+        self.tok = AutoTokenizer.from_pretrained(name, trust_remote_code=True)
+
+    def answer(self, image_path, items, max_new_tokens=MAX_NEW_TOKENS):
+        content = [load_image(image_path)] + [v if t == "text" else load_audio(v) for t, v in items]
+        with self.torch.no_grad():
+            return self.model.chat(msgs=[{"role": "user", "content": content}], tokenizer=self.tok, sampling=False,
+                                   max_new_tokens=max_new_tokens).strip()
+
+
+class Phi4MM(_Single):
+    """Phi-4-multimodal-instruct, remote code (env `omni_neg`, as MiniCPM-o). Prompt: image, then items in order."""
+    def __init__(self, name):
+        import torch
+        from transformers import AutoModelForCausalLM, AutoProcessor, GenerationConfig
+        self.torch = torch
+        self.processor = AutoProcessor.from_pretrained(name, trust_remote_code=True)
+        self.model = AutoModelForCausalLM.from_pretrained(name, trust_remote_code=True, torch_dtype=torch.float16,
+                                                          _attn_implementation="sdpa").cuda().eval()
+        self.gen_cfg = GenerationConfig.from_pretrained(name)
+
+    def answer(self, image_path, items, max_new_tokens=MAX_NEW_TOKENS):
+        parts, audios = [], []
+        for t, v in items:
+            if t == "text":
+                parts.append(v)
+            else:
+                audios.append((load_audio(v), 16000))
+                parts.append(f"<|audio_{len(audios)}|>")
+        prompt = f"<|user|><|image_1|>{''.join(parts)}<|end|><|assistant|>"
+        kw = {"audios": audios} if audios else {}
+        enc = self.processor(text=prompt, images=[load_image(image_path)], return_tensors="pt", **kw).to("cuda")
+        with self.torch.no_grad():
+            out = self.model.generate(**enc, max_new_tokens=max_new_tokens, do_sample=False,
+                                      generation_config=self.gen_cfg)
+        return self.processor.batch_decode(out[:, enc["input_ids"].shape[1]:], skip_special_tokens=True)[0].strip()
+
+
 def load_model(key):
     if key.startswith("qwen2.5-omni"):
         return Omni(MODELS[key])
+    if key.startswith("minicpm-o"):
+        return MiniCPMo(MODELS[key])
+    if key.startswith("phi-4"):
+        return Phi4MM(MODELS[key])
     raise NotImplementedError(f"{key}: adapter not ported yet (see experiments/h1/run_h1.py)")
 
 
