@@ -65,6 +65,9 @@
   only if Vy explicitly asks), short "-" items, one point each,
   blank line between items, no tables, no bold.
 
+- Vy 00:48: work token-efficiently (long sleeps, tail only, short reports); if usage limit near: short Telegram
+  report with state + exact next step, then pause.
+
 ## Paper
 - ACL 2027 ARR deadline: 2027-01-04 (web search 2026-11-19; verify on 2027.aclweb.org). ~6.5 weeks.
 - paper/claims.md, paper/outline.md, paper/related_work.md, paper/ideas.md (I1 neutral audio, I2 comprehension
