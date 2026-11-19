@@ -32,8 +32,9 @@
 - When selection (steps 0-2) finishes: review images, then `cd create_data/src && python subset_units.py
   --per_branch 230` (keeps full list in b1/units_full.jsonl, writes subset to b1/units.jsonl), then
   `bash run_v2_all.sh rest` builds B2/B3/forms/export/visual/TTS for the subset only.
-- Then smoke test run_h1v2.py (--pilot 2), then H1 core on the subset (--pilot 200 = 1,000 questions) for the 4
-  models (Qwen-7B, Qwen-3B, MiniCPM-o 2.6, Phi-4-MM). Report neutral results with CIs (English).
+- Then smoke test run_h1v2.py (--pilot 2), then H1 core on the subset (--pilot 200 = 1,000 questions) for ONLY 2
+  models: Qwen2.5-Omni-7B and -3B (Vy 20:51; mention this choice in next report). Report neutral results with CIs
+  (English), then STOP. No other model, no full build, until Vy says continue.
 - Do NOT build the full dataset until Vy has seen the subset results. (`subset_units.py --restore` later.)
 - Caveat: sample_ids of the subset build will differ from a later full build (B3 numbers per build).
 - Gemma-3n-E4B offered as optional 5th (gated). Told Vy 20:0x.
