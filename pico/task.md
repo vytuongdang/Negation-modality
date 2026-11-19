@@ -46,27 +46,26 @@ create_data/dataset/raw. Steps:
    RUN_COMMANDS.pdf content if the pipeline changed, with the final numbers.
 6. Email Vy: dataset done, numbers, anything odd.
 
-## Milestone 2: H1 on dataset v2
+## Milestone 2: H1 on dataset v2 (keep it simple first: Vy, 2026-11-19)
 
-Models: Qwen2.5-Omni-7B and Qwen2.5-Omni-3B first (thinker only, env `negation`; weights must be re-downloaded,
-the HF cache was cleared). Other models (MiniCPM-o 2.6, Phi-4-MM, Gemma-3n) only after both are done.
-Adapt experiments/h1/run_h1.py into a new script (keep the old one) that reads
-create_data/dataset/out/samples_compact_all_audio.jsonl. Conditions per negative sample, input order always
-image → question → instruction:
-- C0: original image + question (no instruction)
-- C0_box: box image (same box as the visual condition, empty) + question
-- T_join: question and instruction in one text string (as the pilot)
-- T_sep: question, then the instruction as a separate text block
-- A: question + spoken instruction
-- V: image with the written instruction + question
-Also run the exceptive and affirmative samples in T_sep, A, V (this is H4; same pipeline, cheap to add).
-Scoring: create_data/src/judge.py (LLM judge, regex second opinion). Pilot first (~40 samples per branch), check
-by eye that answers and scores look right, then the full run.
-Analysis (write experiments/REPORT.md, tables + a few matplotlib plots in experiments/figures/):
-violation rate among C0-mentioned per model × condition × branch; paired tests (McNemar per pair, and a
-bootstrap over images for confidence intervals, since template-sweep copies are not independent); required
-recall (over-suppression); splits val vs train reported separately (contamination check); per template, voice,
-asr_ok, occludes_subject; Δ_m for H4 where the affirmative exists. Say plainly what is and is not supported.
+H1 is only: the same negative instruction through text, audio, or visual. Models: Qwen2.5-Omni-7B first, then
+Qwen2.5-Omni-3B (thinker only, env `negation`; weights already downloaded). Script: adapt experiments/h1/run_h1.py
+into a new script (keep the old one) reading create_data/dataset/out/samples_compact_all_audio.jsonl.
+**H1 core**, one negative sample per question (skip the template-sweep copies), input order image → question →
+instruction, max_new_tokens about 100 (answers are short lists):
+- C0: image + question, no instruction (needed: violation is counted only where the model states the target here)
+- T: question, then the instruction as its own text block (the fair text match for audio, which is its own segment)
+- A: question + the spoken instruction
+- V: the image with the instruction written in it + question
+That is ~4 answers per question. Order of work: a 200-sample pilot (check answers and scores by eye and measure
+seconds per answer, tell Vy the real ETA), then the full H1 core on 7B, report, then 3B.
+Scoring: create_data/src/judge.py (LLM judge, regex second opinion).
+Analysis (experiments/REPORT.md, plots in experiments/figures/): violation rate among C0-mentioned per model ×
+channel × branch; paired McNemar + bootstrap CIs over images; required recall (over-suppression); val vs train
+split separately; per template, voice, asr_ok, occludes_subject. Say plainly what is and is not supported.
+**Later, only after H1 core is reported** (and as subset pilots per RESEARCH.md §10 when they explain a result):
+T_join (instruction glued into the question), C0_box (empty-box visual control), template-sweep copies, and the
+exceptive/affirmative forms (H4).
 
 ## Milestone 3: H2 (+ H3-A control)
 
