@@ -31,3 +31,5 @@
 
 ## Open problems / ideas
 - H1 confound from the pilot: text glued into the question vs audio as its own segment -> T_sep condition.
+- Telegram (pico/notify.py): 2026-11-19 19:40 not sent (topic not set up yet: Vy must /setup); report kept in
+  pico/telegram_sent.log. Keep posting after every step anyway.
