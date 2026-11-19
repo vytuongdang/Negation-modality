@@ -1,0 +1,262 @@
+\documentclass[10.5pt]{article}
+\input{common.tex}
+\fancyhead[L]{\scriptsize Quy trình tạo dataset: Component-Level Negation VQA Benchmark (v2)}
+\fancyfoot[R]{\scriptsize Trang \thepage}
+\begin{document}
+\sloppy
+
+{\LARGE\bfseries\color{headblue} Quy trình tạo dataset:\\[2pt] Component-Level Negation VQA Benchmark}
+
+\vspace{4pt}
+{\small Phiên bản 2 · 19/11/2026 · thay cho bản ngày 08/10/2026 (lưu ở \f{create\_data/archive/}).
+Mã nguồn: \f{create\_data/src/}, cấu hình: \f{config.py}, tài liệu này: \f{create\_data/docs/}.}
+
+\vspace{6pt}
+\fbox{\parbox{0.96\linewidth}{\small\textbf{Thay đổi chính so với v1.}
+(1) Khoảng 2.5k ảnh thay vì 200 ảnh pilot; ưu tiên split val, chỉ lấy train để bù phần thiếu.
+(2) Bộ lọc ảnh chặt: ảnh nét, ít đồ vật, object đủ lớn, không bị cắt mép, bỏ license NoDerivs, có chỗ ghi chữ.
+(3) Kiểm tra ground truth bằng VLM cho từng component.
+(4) Nhánh mới \f{existence\_closed}; câu hỏi count của COCO nêu tên loại.
+(5) Baseline chạy trước B3; đích chỉ chọn trong các component mà mọi model tham chiếu đều nêu.
+(6) Ba dạng chỉ dẫn: phủ định, ngoại trừ, khẳng định.
+(7) Ba kênh: text, audio (TTS), visual (câu lệnh ghi ngay trong ảnh).}}
+
+\section{Mục tiêu và phạm vi}
+Benchmark đo mức tuân thủ phủ định (negation faithfulness) của VLM và omni-model trên ảnh. Mỗi sample chọn
+đúng \textbf{một} component thị giác làm đích; các component còn lại giữ nguyên làm bằng chứng dương.
+Nguyên tắc thiết kế: \textbf{ảnh và câu hỏi không đổi, chỉ chỉ dẫn thay đổi} (cực tính, cách diễn đạt, kênh
+truyền). Nhờ vậy sai lệch đo được là do xử lý chỉ dẫn, không phải do nhận diện ảnh.
+
+Tài liệu này mô tả phần \textbf{tạo dataset}: chọn ảnh, tách component, sinh chỉ dẫn ở ba dạng
+(phủ định, ngoại trừ, khẳng định) và ba kênh (text, audio, visual). Cách chạy thí nghiệm và chấm điểm
+(H1--H4) nằm ngoài phạm vi.
+
+\section{Dataset nguồn và split}
+\begin{longtable}{p{1.7cm}p{2.6cm}p{3.6cm}p{3.2cm}p{2.6cm}}
+\toprule
+\textbf{Nguồn} & \textbf{Nhánh} & \textbf{Split dùng (theo thứ tự)} & \textbf{License ảnh} & \textbf{Mục tiêu ảnh}\\
+\midrule
+COCO & existence, existence\_closed, count & val2017 → train2017 & CC (theo từng ảnh), \textbf{bỏ NoDerivs} & 720\\
+VAW & attribute (ảnh thật) & val → test → train & Visual Genome, CC BY 4.0 & 720\\
+GQA & relation & val → train & Visual Genome, CC BY 4.0 & 680\\
+CLEVR & attribute, count (ảnh tổng hợp) & val & CC BY 4.0 & 480\\
+\bottomrule
+\end{longtable}
+\begin{itemize}
+\item \textbf{Ưu tiên val.} Ứng viên của một nguồn được xếp theo split (val trước), xáo trộn có seed trong
+  từng split. Ảnh được xét lần lượt cho tới khi đủ mục tiêu; split sau chỉ dùng khi split trước không đủ.
+  Split của từng ảnh được lưu trong metadata.
+\item \textbf{Vì sao không dùng test?} Test của COCO, GQA và CLEVR không công bố annotation. Riêng VAW test có
+  nhãn nên được dùng ngay sau val.
+\item \textbf{Vì sao không dùng ImageNet?} Chỉ có một nhãn cho cả ảnh (không có thuộc tính, quan hệ), và
+  điều khoản không cho phát tán lại ảnh, trong khi kênh visual tạo ảnh phái sinh.
+\item \textbf{Khử trùng ảnh giữa các nguồn:} ảnh VG có \f{coco\_id} đã chọn ở COCO thì bỏ; ảnh đã dùng cho VAW
+  không dùng lại cho GQA; ảnh gần trùng (dHash) bị loại.
+\item PACO và PSG vẫn là nguồn bổ sung tiềm năng nhưng chưa dùng ở v2.
+\end{itemize}
+
+\section{Thiết kế câu hỏi}
+Câu hỏi phải yêu cầu đích danh từng component; câu hỏi mở (``Describe the dog'') không phân biệt được tuân
+thủ lệnh cấm với việc model vốn dĩ không định nhắc.
+
+\begin{longtable}{p{2.6cm}p{6.2cm}p{3.2cm}p{3.4cm}}
+\toprule
+\textbf{Nhánh} & \textbf{Ví dụ câu hỏi} & \textbf{Ground truth} & \textbf{Chỉ dẫn phủ định}\\
+\midrule
+existence & What animals are present in the image? & dog, cat & Do not mention the dog.\\
+\new{existence\_\allowbreak closed} & Which of the following vehicles are present in the image: train, bicycle, motorcycle,
+  and boat? & motorcycle, train (bicycle, boat là nhiễu) & Do not mention the train.\\
+count & \new{How many motorcycles and trains are there in the image?} (CLEVR: How many cubes and spheres are
+  there?) & 2 motorcycles, 1 train & Do not mention the number of motorcycles.\\
+attribute & Describe the chair by its color, material, and state. & brown, wooden, empty & Do not mention its
+  color.\\
+relation & For the lady, say what she is pushing and what she is wearing. & stroller, coat & Do not mention
+  what she is wearing.\\
+\bottomrule
+\end{longtable}
+\begin{itemize}
+\item Mỗi câu hỏi có 2--5 component; object được hỏi là duy nhất trong ảnh; chỉ dùng nội dung nhìn thấy được.
+\item \textbf{existence\_closed} (mới): liệt kê các category có trong ảnh cộng \textbf{2 category nhiễu} cùng
+  supercategory nhưng \emph{không có annotation nào} trong ảnh (COCO gán nhãn đầy đủ nên ``không có annotation''
+  nghĩa là vắng mặt). Thứ tự các lựa chọn được xáo trộn có seed. Nhờ câu hỏi đã nêu mọi tên, dạng khẳng định
+  không làm lộ đáp án (mục 9).
+\item \textbf{count} của COCO đổi sang câu hỏi nêu tên loại (giống CLEVR), cũng để dạng khẳng định không lộ đáp án.
+\end{itemize}
+
+\section{B1: ứng viên từ annotation (bước 1)}
+B1 đọc annotation gốc của mọi split và áp các bộ lọc \emph{không cần ảnh}. Đầu ra: \f{b1/candidates.jsonl}
+(mỗi dòng một ảnh ứng viên với các câu hỏi của nó) và \f{b1/candidates\_report.json} (số ảnh bị loại theo lý do).
+
+\begin{longtable}{p{3.6cm}p{12.4cm}}
+\toprule
+\textbf{Bộ lọc} & \textbf{Ngưỡng (trong \f{config.py})}\\
+\midrule
+Kích thước ảnh & cạnh ngắn ≥ 300 px (\f{MIN\_SHORT\_SIDE}; ảnh VG phần lớn 500×333 hoặc 500×375). CLEVR (480×320) miễn.\\
+Số đồ vật & COCO ≤ 10 instance; VG ≤ 10 ``đồ vật thật'' (không đếm bộ phận cơ thể, quần áo, nền như sky,
+  wall, grass, hand, shirt\dots, danh sách \f{NOT\_CLUTTER}); CLEVR ≤ 6 khối.\\
+Kích thước component & object của mỗi component ≥ 3\% diện tích ảnh và không chạm mép ảnh (\f{BORDER\_PX} = 2).
+  Riêng relation: chủ thể theo luật 3\%, object được hỏi chỉ cần ≥ 1\% (đồ cầm tay vốn nhỏ).\\
+COCO & không có vùng crowd ở bất kỳ đâu trong ảnh; bỏ license NoDerivs (id 3, 6); count chỉ khi mỗi loại
+  ≤ 5 instance và mỗi instance ≥ 1\%.\\
+VAW & slot có đúng một nhãn dương tường minh; tên object duy nhất trong scene graph GQA của ảnh; một object mỗi ảnh.\\
+GQA & quan hệ dạng động từ (\emph{-ing}, covered in/with, filled with, full of); mỗi quan hệ trỏ tới đúng một
+  object; các object khác tên nhau; một chủ thể mỗi ảnh; giữ câu hỏi GQA gốc làm QA tham chiếu.\\
+CLEVR & attribute: object duy nhất theo hình dạng; count: các hình dạng có mặt.\\
+\bottomrule
+\end{longtable}
+Mỗi câu hỏi còn lưu \f{protect\_boxes} = các bbox mà chữ của kênh visual không được che (trọng số 1 cho object
+của câu hỏi, 0.15 cho object khác).
+
+\section{Chọn ảnh (bước 2) và duyệt bằng mắt}
+Với từng nguồn (COCO → CLEVR → VAW → GQA), ứng viên được tải theo lô và kiểm tra theo thứ tự dưới đây cho tới
+khi đủ mục tiêu. Câu hỏi nào trượt thì bị bỏ; ảnh được giữ nếu còn ít nhất một câu hỏi.
+
+\begin{longtable}{p{3.2cm}p{12.8cm}}
+\toprule
+\textbf{Kiểm tra} & \textbf{Chi tiết}\\
+\midrule
+Độ nét & phương sai Laplacian của ảnh xám thu về rộng 512 px ≥ 300 (không áp cho CLEVR).\\
+Độ sáng & độ sáng trung bình trong [40, 215]; tỷ lệ pixel cháy hoặc đen (≤ 5 hoặc ≥ 250) ≤ 35\%.\\
+Màu & loại ảnh đen trắng (độ chênh kênh màu trung bình < 4).\\
+Gần trùng & dHash 64 bit, khoảng cách Hamming ≤ 6 so với ảnh đã nhận thì loại.\\
+Chữ có sẵn & VLM: ``ảnh có chữ lớn, đọc rõ (biển hiệu, banner, watermark) không?'' --- có thì loại.\\
+Chỗ ghi chữ & câu chỉ dẫn \emph{dài nhất} mà câu hỏi có thể nhận (mọi đích, 7 template, ngoại trừ, khẳng định)
+  phải đặt được trong ảnh mà che tối đa 5\% bbox của object trong câu hỏi.\\
+Ground truth (VLM) & Qwen3-VL-8B trả lời có/không cho từng fact: existence ``Is there a dog?'', count ``How many
+  dogs?'' (phải khớp số), attribute ``Is the chair brown?'', relation ``Is the lady pushing the stroller?'';
+  với existence\_closed, mọi object nhiễu phải được trả lời ``no''. Một fact sai → bỏ câu hỏi. CLEVR không
+  kiểm tra (ground truth chính xác do render).\\
+\bottomrule
+\end{longtable}
+Đầu ra: \f{b1/units.jsonl} (câu hỏi được chọn, kèm \f{image\_meta}: split, license, URL gốc, số đồ vật, độ
+nét, độ sáng\dots{} và kết quả VLM), \f{b1/selection\_report.jsonl} (mọi ảnh đã xét và lý do loại),
+\f{b1/selection\_summary.json}. Ảnh bị loại được chuyển sang \f{images\_rejected/}.
+
+\textbf{Điểm dừng để duyệt:} \f{b1/review/review.html} hiển thị 100 câu hỏi được nhận và 60 ảnh bị loại
+(ngẫu nhiên, kèm lý do). Người phụ trách duyệt xong mới chạy các bước sau.
+
+\section{B2: tách component và sinh tên thay thế (bước 3)}
+Component lấy thẳng từ annotation; LLM (Qwen3-8B) sinh tên thay thế (dog → puppy) cho bước chấm điểm và rà
+tính nguyên tử, câu hỏi. Mọi component phải trỏ được về ID annotation gốc (đúng split), nếu không thì bị loại;
+câu hỏi còn dưới 2 component thì bỏ. Tên thay thế chung giữa hai component bị xoá. Xuất \textbf{10\%} mẫu,
+chia đều theo (nguồn, nhánh), ra \f{b2/human\_verify/} để người kiểm tra; nhánh có tỷ lệ lỗi > 5\% thì sửa
+prompt hoặc bộ lọc rồi chạy lại.
+
+\section{Baseline với model tham chiếu (bước 4)}
+\new{Chạy trước B3} (v1 chạy sau). Qwen2.5-VL-3B và Qwen3-VL-8B trả lời câu hỏi gốc, không có chỉ dẫn. LLM
+judge (Qwen3-8B, tập đóng) xác định câu trả lời nêu những component nào; regex là ý kiến thứ hai, chỗ hai bên
+lệch nhau thì judge chạy lại ở chế độ thinking.
+Một component là \textbf{đích hợp lệ} khi \emph{mọi} model tham chiếu đều nêu nó và mỗi model nêu ít nhất một
+nửa các component còn lại. Câu hỏi không có đích hợp lệ thì bỏ. Kết quả lưu ở \f{b2/units\_baseline.jsonl};
+báo cáo tên thay thế ở \f{out/alias\_report.csv}.
+
+\section{B3: chỉ dẫn phủ định (bước 5)}
+\begin{enumerate}
+\item \textbf{Chọn đích} ngẫu nhiên (có seed) trong các đích hợp lệ; bỏ đích có tên thay thế trùng component
+  khác (ví dụ dog và hot dog), và bỏ câu hỏi existence\_closed nếu tên object nhiễu trùng tên thay thế của
+  object có thật.
+\item \textbf{Viết chỉ dẫn} bằng 1 trong 7 template cố định (có seed, lưu ID); 10\% câu hỏi được sinh đủ 7
+  template để đo độ nhạy với cách viết. Không cho LLM diễn đạt lại.
+\item \textbf{Đáp án kỳ vọng:} các component còn lại là bắt buộc, đích là bị cấm.
+\end{enumerate}
+\begin{longtable}{p{1cm}p{4.2cm}p{5.4cm}}
+\toprule
+\textbf{ID} & \textbf{Tín hiệu} & \textbf{Khung câu}\\
+\midrule
+N1 & not & Do not mention \{X\}.\\
+N2 & n't & Don't say anything about \{X\}.\\
+N3 & never & Never refer to \{X\}.\\
+N4 & no & Make no mention of \{X\}.\\
+N5 & without & Answer without mentioning \{X\}.\\
+N6 & động từ hàm ý phủ định & Avoid mentioning \{X\}.\\
+N7 & loại trừ, không có từ phủ định & Leave \{X\} out of your answer.\\
+\bottomrule
+\end{longtable}
+\{X\}: existence ``the dog''; count ``the number of dogs''; attribute ``its color'' (cấm \emph{slot}, không nêu
+giá trị); relation ``what she is wearing''. Đầu ra: \f{out/samples.jsonl}.
+
+\section{Dạng ngoại trừ và khẳng định cho H4 (bước 6)}
+Mỗi câu hỏi có thêm một bản \textbf{ngoại trừ} và (khi không lộ đáp án) một bản \textbf{khẳng định}, cùng đích,
+cùng đáp án kỳ vọng, nối với bản phủ định qua \f{pair\_of}.
+\begin{longtable}{p{2.6cm}p{5.4cm}p{7.4cm}}
+\toprule
+\textbf{Nhánh} & \textbf{Ngoại trừ} (gọi tên đích, không ``not'') & \textbf{Khẳng định} (chỉ nêu phần còn lại)\\
+\midrule
+existence & Mention everything except the dog. & \emph{không có}: phải gọi tên các object còn lại, tức là lộ đáp án\\
+existence\_\allowbreak closed & Mention everything except the train. & Mention only the bicycle, the motorcycle, and the
+  boat. (mọi lựa chọn trừ đích, gồm cả nhiễu)\\
+count & Mention everything except the number of motorcycles. & Mention only the number of trains.\\
+attribute & Mention everything except its color. & Mention only its material and its state.\\
+relation & Mention everything except what she is wearing. & Mention only what she is pushing.\\
+\bottomrule
+\end{longtable}
+Khẳng định chỉ được dùng ở nhánh mà câu hỏi \emph{đã} nêu mọi tên hoặc slot, nên câu khẳng định không thêm thông
+tin. Ngoại trừ tách ``chữ not'' khỏi ``việc gọi tên đích'' (lexical priming). Đầu ra: \f{out/samples\_forms.jsonl}.
+
+\section{Ba kênh truyền chỉ dẫn}
+\begin{itemize}
+\item \textbf{Text:} câu chỉ dẫn (\f{negation}) ghép ngay sau câu hỏi khi chạy thí nghiệm.
+\item \textbf{Visual (bước 8):} câu chỉ dẫn được \textbf{ghi ngay trong ảnh gốc}, chữ đen DejaVu Sans trên khung
+  trắng trong suốt nhẹ, cỡ chữ ≈ 4\% chiều rộng ảnh. Vị trí được tìm bằng cách quét toàn ảnh và chọn chỗ che ít
+  \f{protect\_boxes} nhất; nếu đụng object của câu hỏi thì thử chữ nhỏ hơn hoặc xuống dòng. Mỗi sample có thêm
+  một \textbf{ảnh đối chứng} cùng khung, cùng vị trí nhưng không có chữ, để so với điều kiện không chỉ dẫn chỉ khác
+  ở câu chữ. Metadata: \f{text\_box}, cỡ chữ, \f{subject\_frac\_covered}, \f{occludes\_subject}.
+\item \textbf{Audio:} CosyVoice2-0.5B (zero-shot, 2 giọng nam và nữ chia đều), mỗi câu duy nhất tổng hợp một lần.
+  Whisper-large-v3-turbo nghe lại; sai thì tổng hợp lại với seed khác (tối đa 3 lần), vẫn sai thì gắn
+  \f{asr\_ok = false}.
+\end{itemize}
+
+\section{Đầu ra}
+\begin{longtable}{p{6.2cm}p{9.8cm}}
+\toprule
+\textbf{Đường dẫn (trong \f{create\_data/dataset/})} & \textbf{Nội dung}\\
+\midrule
+\f{images/\{coco,vg,clevr\}/} & ảnh gốc, không chỉnh sửa\\
+\f{visual/instr/\{sample\_id\}} & ảnh có câu chỉ dẫn ghi bên trong\\
+\f{visual/box/\{sample\_id\}} & ảnh đối chứng: cùng khung, không chữ\\
+\f{audio/negation/\{sample\_id\}.wav} & câu chỉ dẫn dạng giọng nói\\
+\f{out/samples\_compact\_all\_\allowbreak audio.jsonl} & \textbf{file chính để chạy thí nghiệm}: mỗi dòng một sample
+  (phủ định, ngoại trừ hoặc khẳng định) với câu hỏi, chỉ dẫn, đường dẫn audio, ảnh visual, ảnh đối chứng, các
+  component bắt buộc và bị cấm\\
+\f{out/samples.jsonl}, \f{out/samples\_forms.jsonl} & bản ghi đầy đủ theo schema (annotation ID, bbox, tên thay
+  thế, kết quả VLM, baseline từng model)\\
+\f{b1/review/review.html}, \f{b2/human\_verify/} & trang duyệt ảnh, mẫu kiểm tra 10\%\\
+\bottomrule
+\end{longtable}
+Ví dụ một dòng của file chính:
+\begin{Verbatim}[fontsize=\scriptsize,frame=single]
+{"id": "coco-existence_closed-000012", "form": "negative", "pair_of": "coco-existence_closed-000012",
+ "image": "images/coco/000000306893.jpg",
+ "question": "Which of the following vehicles are present in the image: train, bicycle, motorcycle, and boat?",
+ "negation": "Do not mention the train.",
+ "negation_audio": "audio/negation/coco-existence_closed-000012.wav", "negation_voice": "female",
+ "negation_image": "visual/instr/coco-existence_closed-000012.jpg",
+ "box_image": "visual/box/coco-existence_closed-000012.jpg", "occludes_subject": false,
+ "forbidden": {"train": ["train", "trains", "locomotive"]},
+ "required": {"motorcycle": ["motorcycle", "motorbike"]},
+ "meta": {"branch": "existence_closed", "source": "COCO", "template_id": "N1", "form": "negative"}}
+\end{Verbatim}
+Trong bản ghi đầy đủ, \f{negation.modality} và \f{negation.form} (negative / exceptive / affirmative) phân biệt
+các biến thể; \f{validation} lưu model và prompt của B2, kết quả đối chiếu, human-verify và baseline.
+
+\section{Cách chạy}
+\begin{Verbatim}[fontsize=\small,frame=single]
+cd create_data
+bash run_v2_all.sh select   # bước 0-2, rồi dừng: mở dataset/b1/review/review.html
+bash run_v2_all.sh rest     # bước 3-8 + TTS (env cosyvoice)
+\end{Verbatim}
+Từng bước: \f{python3 run\_pipeline.py --step5}, \f{--from\_step 3}, \f{--to\_step 2}. Mọi ngưỡng nằm trong
+\f{src/config.py}.
+
+\section{Danh sách kiểm tra trước khi phát hành, rủi ro}
+\begin{itemize}
+\item Mọi sample có ≥ 2 component và đúng một đích; mọi component trỏ về ID annotation gốc.
+\item Tỷ lệ lỗi human-verify của từng nhánh dưới 5\%; thống kê phân bố nhánh, nguồn, split, đích.
+\item Không trùng ảnh giữa các nhánh ngoài chủ đích; license từng ảnh được lưu, không có ảnh NoDerivs.
+\item \textbf{Rủi ro:} lọc bằng model (VLM, baseline) có thể nghiêng dataset về ảnh dễ với model, và ảnh ít đồ
+  vật làm tăng nguy cơ ceiling --- mọi điểm số được lưu để phân tích và báo cáo. Ảnh train của COCO/VG có thể
+  đã nằm trong dữ liệu huấn luyện của model (cả val cũng vậy); câu hỏi và chỉ dẫn là mới, và split được lưu để so
+  val với train. Câu hỏi sinh từ template nên cần báo cáo theo template.
+\end{itemize}
+
+\end{document}

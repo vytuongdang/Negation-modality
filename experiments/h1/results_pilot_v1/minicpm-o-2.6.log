@@ -1,0 +1,48 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+435 samples: existence=87, count=132, attribute=146, relation=70
+0 answers to generate
+Loading weights:   0%|          | 0/399 [00:00<?, ?it/s]Loading weights:   0%|          | 1/399 [00:00<01:06,  5.97it/s]Loading weights:  22%|██▏       | 89/399 [00:00<00:00, 405.80it/s]Loading weights:  35%|███▌      | 141/399 [00:00<00:00, 437.31it/s]Loading weights:  48%|████▊     | 193/399 [00:00<00:00, 459.70it/s]Loading weights:  62%|██████▏   | 248/399 [00:00<00:00, 469.62it/s]Loading weights:  76%|███████▌  | 303/399 [00:00<00:00, 486.74it/s]Loading weights:  90%|████████▉ | 358/399 [00:00<00:00, 496.32it/s]Loading weights: 100%|██████████| 399/399 [00:00<00:00, 439.65it/s]
+judge (thinking) 64/139
+judge (thinking) 128/139
+judge (thinking) 139/139
+judge passes: {'think': 152, 'fast': 1153}
+
+branch                  C0_none               C1_text              C2_audio
+             correct% / target%    correct% / target%    correct% / target%
+existence       38 / 71  (n=87)       52 / 30  (n=87)       61 / 29  (n=87)
+count          73 / 89  (n=132)      30 / 67  (n=132)      49 / 38  (n=132)
+attribute      38 / 71  (n=146)      66 / 18  (n=146)      74 / 10  (n=146)
+relation        77 / 83  (n=70)       44 / 50  (n=70)        87 / 7  (n=70)
+ALL            55 / 78  (n=435)      49 / 40  (n=435)      66 / 22  (n=435)
+
+target% among samples whose C0 answer states the target (341/435 samples)
+branch          C1_text     C2_audio   audio-text
+existence           39%          35%          -3  (n=62)
+count               75%          42%         -33  (n=118)
+attribute           21%          14%          -8  (n=103)
+relation            60%           9%         -52  (n=58)
+ALL                 50%          26%         -23  (n=341)
+
+same, by template
+N1                  42%          25%         -17  (n=52)
+N2                  55%          38%         -17  (n=53)
+N3                  54%          40%         -15  (n=48)
+N4                  52%          22%         -30  (n=40)
+N5                  45%          10%         -35  (n=51)
+N6                  65%          26%         -40  (n=43)
+N7                  37%          24%         -13  (n=54)
+
+same, by voice
+female              49%          30%         -20  (n=172)
+male                50%          23%         -27  (n=169)
+
+same, by source
+CLEVR               52%          19%         -32  (n=124)
+COCO                54%          50%          -4  (n=108)
+GQA                 60%           9%         -52  (n=58)
+VAW                 24%          14%         -10  (n=51)
+
+regex disagrees with the judge on the target in 48/1305 answers
+
+files: /home/vyvn/new/cross_multimodal_negation/experiments/h1/results/minicpm-o-2.6/review_all.csv (to check by hand)
+       /home/vyvn/new/cross_multimodal_negation/experiments/h1/results/minicpm-o-2.6/answers_all.jsonl /home/vyvn/new/cross_multimodal_negation/experiments/h1/results/minicpm-o-2.6/scored_all.jsonl

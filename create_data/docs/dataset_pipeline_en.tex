@@ -1,0 +1,206 @@
+\documentclass[10.5pt]{article}
+\input{common.tex}
+\fancyhead[L]{\scriptsize Component-Level Negation VQA Benchmark: Dataset Pipeline (v2)}
+\fancyfoot[R]{\scriptsize Page \thepage}
+\begin{document}
+\sloppy
+
+{\LARGE\bfseries\color{headblue} Dataset Construction Pipeline:\\[2pt] Component-Level Negation VQA Benchmark}
+
+\vspace{4pt}
+{\small Version 2 · Nov 19, 2026 · condensed English version of the Vietnamese process document; replaces the
+Oct 21, 2026 version (kept in \f{create\_data/archive/}). Code: \f{create\_data/src/}, all thresholds in
+\f{config.py}.}
+
+\vspace{6pt}
+\fbox{\parbox{0.96\linewidth}{\small\textbf{What changed since v1.}
+(1) About 2.5k images instead of a 200-image pilot; val splits first, train only fills the gap.
+(2) Strict image filters: sharp, few objects, large and uncut components, no NoDerivs licenses, room for text.
+(3) A VLM check of every component's ground truth.
+(4) New \f{existence\_closed} branch; COCO count questions name the kinds.
+(5) The baseline runs before B3; targets are drawn only among components every reference model states.
+(6) Three instruction forms: negative, exceptive, affirmative.
+(7) Three channels: text, audio (TTS), visual (instruction written inside the image).}}
+
+\section{Goal and scope}
+The benchmark measures how faithfully VLMs and omni-models follow negation. Each sample picks exactly
+\textbf{one} visual component as the target; all other components stay as positive evidence. The image and the
+question never change, only the instruction does (polarity, wording, channel), so measured deviations come
+from instruction handling, not recognition. This document covers dataset creation only; experiments and scoring
+(H1--H4) are out of scope.
+
+\section{Sources and splits}
+\begin{longtable}{p{1.6cm}p{3.4cm}p{3.4cm}p{3.6cm}p{2.0cm}}
+\toprule
+\textbf{Source} & \textbf{Branches} & \textbf{Splits (in order)} & \textbf{Image license} & \textbf{Target}\\
+\midrule
+COCO & existence, existence\_\allowbreak closed, count & val2017 → train2017 & per image (CC), \textbf{NoDerivs
+  excluded} & 720\\
+VAW & attribute (real) & val → test → train & Visual Genome, CC BY 4.0 & 720\\
+GQA & relation & val → train & Visual Genome, CC BY 4.0 & 680\\
+CLEVR & attribute, count (synthetic) & val & CC BY 4.0 & 480\\
+\bottomrule
+\end{longtable}
+\begin{itemize}
+\item \textbf{Val first:} candidates are ordered by split and shuffled (seeded) within a split; a later split is
+  used only when the earlier ones cannot fill the target. Each image records its split.
+\item COCO, GQA and CLEVR test sets have no public annotation; VAW test does and is used right after val.
+\item ImageNet is not used: one label per image (no attributes or relations), and its terms forbid redistributing
+  images, while the visual channel creates derivatives.
+\item Cross-source de-duplication by COCO id (VG \f{coco\_id}), VAW/GQA image exclusivity, and dHash near-duplicates.
+\end{itemize}
+
+\section{Question design}
+Questions must ask for every component explicitly; an open question lets the model omit a detail on its own.
+\begin{longtable}{p{2.6cm}p{6.2cm}p{3.0cm}p{3.6cm}}
+\toprule
+\textbf{Branch} & \textbf{Example question} & \textbf{Ground truth} & \textbf{Negative instruction}\\
+\midrule
+existence & What animals are present in the image? & dog, cat & Do not mention the dog.\\
+\new{existence\_\allowbreak closed} & Which of the following vehicles are present in the image: train, bicycle,
+  motorcycle, and boat? & motorcycle, train (bicycle, boat absent) & Do not mention the train.\\
+count & \new{How many motorcycles and trains are there in the image?} (CLEVR: How many cubes and spheres are
+  there?) & 2 motorcycles, 1 train & Do not mention the number of motorcycles.\\
+attribute & Describe the chair by its color, material, and state. & brown, wooden, empty & Do not mention its color.\\
+relation & For the lady, say what she is pushing and what she is wearing. & stroller, coat & Do not mention what
+  she is wearing.\\
+\bottomrule
+\end{longtable}
+2--5 components per question; the queried object is unique in the image; visible content only.
+\f{existence\_closed} lists the present categories plus \textbf{2 distractors} of the same supercategory that have
+no annotation in the image (COCO labels are exhaustive), in seeded random order.
+
+\section{B1: annotation-level filters (step 1)}
+\begin{longtable}{p{3.4cm}p{12.6cm}}
+\toprule
+\textbf{Filter} & \textbf{Threshold}\\
+\midrule
+Image size & short side ≥ 300 px (VG images are mostly 500×333 / 500×375); CLEVR exempt.\\
+Clutter & COCO ≤ 10 instances; VG ≤ 10 ``things'' (body parts, clothing, background such as sky, wall, grass,
+  hand, shirt are not counted, \f{NOT\_CLUTTER}); CLEVR ≤ 6 objects.\\
+Component size & each component's object ≥ 3\% of the image and not touching the border. Relation: the subject
+  follows this rule, the related object only needs ≥ 1\% (hand-held objects are small).\\
+COCO & no crowd region anywhere; no NoDerivs license (ids 3, 6); count only with ≤ 5 instances per kind and every
+  instance ≥ 1\%.\\
+VAW & slots with exactly one explicit positive label; object name unique in the image's GQA scene graph.\\
+GQA & verb-like relations; one object per relation; distinct object names; the original GQA question is kept.\\
+CLEVR & attribute: the object is unique by shape; count: the shapes present.\\
+\bottomrule
+\end{longtable}
+Every unit stores \f{protect\_boxes}: boxes the visual instruction must not cover (weight 1 for the question's
+objects, 0.15 for others). Output: \f{b1/candidates.jsonl}, \f{b1/candidates\_report.json}.
+
+\section{Image selection (step 2) and human review}
+Per source, candidates are downloaded in batches and checked until the target is reached:
+\begin{longtable}{p{3.0cm}p{13.0cm}}
+\toprule
+\textbf{Check} & \textbf{Rule}\\
+\midrule
+Sharpness & variance of the Laplacian (grey, 512 px wide) ≥ 300; not for CLEVR.\\
+Exposure, colour & mean brightness in [40, 215]; ≤ 35\% clipped pixels; not black-and-white.\\
+Near-duplicates & 64-bit dHash, Hamming distance ≤ 6 to an accepted image.\\
+Existing text & VLM: large readable text (sign, banner, caption, watermark) → reject.\\
+Room for text & the longest instruction the unit can receive (any target, template or form) must fit while
+  covering ≤ 5\% of the question's object boxes.\\
+Ground truth & Qwen3-VL-8B yes/no per fact (count: the number must match); closed-set distractors must be
+  absent. One failed fact drops the question. CLEVR is exact by construction and not checked.\\
+\bottomrule
+\end{longtable}
+Outputs: \f{b1/units.jsonl} (with \f{image\_meta}: split, license, source URL, clutter, sharpness, VLM answers),
+\f{b1/selection\_report.jsonl}, \f{b1/selection\_summary.json}; rejected images move to \f{images\_rejected/}.
+\textbf{Stop for review:} \f{b1/review/review.html} shows 100 accepted units and 60 rejected images with reasons.
+
+\section{B2: components and aliases (step 3)}
+Components come from the annotation; Qwen3-8B adds aliases and reviews atomicity. Every component must map to a
+source annotation ID (any split used); shared aliases are removed. A \textbf{10\%} stratified sample goes to
+\f{b2/human\_verify/}; a branch with > 5\% errors is fixed and re-run.
+
+\section{Baseline on reference models (step 4)}
+\new{Now before B3.} Qwen2.5-VL-3B and Qwen3-VL-8B answer the plain question; the Qwen3-8B judge (closed set,
+regex second opinion, thinking pass where they disagree) marks the stated components. A component is an
+\textbf{eligible target} when every reference model states it and each states at least half of the others.
+Units without one are dropped. Output: \f{b2/units\_baseline.jsonl}, \f{out/alias\_report.csv}.
+
+\section{B3: negative instructions (step 5)}
+Target drawn (seeded) among eligible targets, skipping alias collisions (dog vs hot dog; closed-set distractor
+names that are aliases of a present object). One of 7 fixed templates per unit (seeded); 10\% of units get all 7.
+\begin{longtable}{p{1cm}p{4.6cm}p{5.4cm}}
+\toprule
+\textbf{ID} & \textbf{Cue} & \textbf{Template}\\
+\midrule
+N1 & not & Do not mention \{X\}.\\
+N2 & n't & Don't say anything about \{X\}.\\
+N3 & never & Never refer to \{X\}.\\
+N4 & no & Make no mention of \{X\}.\\
+N5 & without & Answer without mentioning \{X\}.\\
+N6 & implicit-negative verb & Avoid mentioning \{X\}.\\
+N7 & exclusion, no negator & Leave \{X\} out of your answer.\\
+\bottomrule
+\end{longtable}
+\{X\}: ``the dog'', ``the number of dogs'', ``its color'' (the slot, never the value), ``what she is wearing''.
+Output: \f{out/samples.jsonl}.
+
+\section{Exceptive and affirmative forms for H4 (step 6)}
+Same target and expected answer as the negative sample (linked by \f{pair\_of}).
+\begin{longtable}{p{2.6cm}p{5.4cm}p{7.6cm}}
+\toprule
+\textbf{Branch} & \textbf{Exceptive} (names the target, no ``not'') & \textbf{Affirmative} (names only what remains)\\
+\midrule
+existence & Mention everything except the dog. & \emph{none}: it would have to name the answer\\
+existence\_\allowbreak closed & Mention everything except the train. & Mention only the bicycle, the motorcycle, and
+  the boat. (all options but the target)\\
+count & Mention everything except the number of motorcycles. & Mention only the number of trains.\\
+attribute & Mention everything except its color. & Mention only its material and its state.\\
+relation & Mention everything except what she is wearing. & Mention only what she is pushing.\\
+\bottomrule
+\end{longtable}
+Affirmatives are used only where the question already names every option or slot, so they add no information.
+The exceptive form separates the effect of ``not'' from that of naming the target (lexical priming).
+Output: \f{out/samples\_forms.jsonl}.
+
+\section{Channels}
+\begin{itemize}
+\item \textbf{Text:} the instruction follows the question at evaluation time.
+\item \textbf{Visual (step 8):} the instruction is written \textbf{inside the original image}: black DejaVu Sans on
+  a slightly transparent white box, font ≈ 4\% of the image width, placed where it covers the fewest protected
+  boxes (smaller font / more lines are tried before touching the question's objects). A \textbf{control image}
+  has the same box at the same place without text. Stored: \f{text\_box}, font size, \f{subject\_frac\_covered},
+  \f{occludes\_subject}.
+\item \textbf{Audio:} CosyVoice2-0.5B, two voices (female, male) balanced; Whisper-large-v3-turbo re-transcribes,
+  up to 3 seeds, flagged \f{asr\_ok = false} if it still mismatches.
+\end{itemize}
+
+\section{Outputs}
+\begin{longtable}{p{6.2cm}p{9.8cm}}
+\toprule
+\textbf{Path (under \f{create\_data/dataset/})} & \textbf{Content}\\
+\midrule
+\f{images/\{coco,vg,clevr\}/} & unmodified source images\\
+\f{visual/instr/}, \f{visual/box/} & image with the instruction / control image with an empty box\\
+\f{audio/negation/\{sample\_id\}.wav} & spoken instruction\\
+\f{out/samples\_compact\_all\_\allowbreak audio.jsonl} & \textbf{main file for experiments}: one row per sample
+  and form, with question, instruction, audio path, visual and control image, required and forbidden components\\
+\f{out/samples.jsonl}, \f{out/samples\_forms.jsonl} & full records (annotation IDs, boxes, aliases, VLM checks,
+  per-model baseline); \f{negation.form} = negative / exceptive / affirmative\\
+\bottomrule
+\end{longtable}
+
+\section{How to run}
+\begin{Verbatim}[fontsize=\small,frame=single]
+cd create_data
+bash run_v2_all.sh select   # steps 0-2, then stop: open dataset/b1/review/review.html
+bash run_v2_all.sh rest     # steps 3-8 + TTS (cosyvoice env)
+\end{Verbatim}
+
+\section{Release checklist and risks}
+\begin{itemize}
+\item ≥ 2 components and exactly one target per sample; every component maps to a source annotation ID.
+\item Per-branch human-verify error rate below 5\%; distributions by branch, source, split and target reported.
+\item No unintended image overlap; every image's license stored; no NoDerivs images.
+\item \textbf{Risks:} model-based filters (VLM check, baseline) may bias toward images that are easy for models,
+  and uncluttered images raise the ceiling risk; all scores are stored for analysis. COCO/VG images (val and
+  train) may be in VLM training data; questions and instructions are new, and the split is stored so val and
+  train can be compared. Template-generated questions are reported per template.
+\end{itemize}
+
+\end{document}

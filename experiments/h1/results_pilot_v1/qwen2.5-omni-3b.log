@@ -1,0 +1,1455 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[transformers] Model config: tts_text_start_token_id must be `None` or an integer within the vocabulary (between 0 and 8447), got 151860. This may result in unexpected behavior.
+[transformers] Model config: tts_text_end_token_id must be `None` or an integer within the vocabulary (between 0 and 8447), got 151861. This may result in unexpected behavior.
+[transformers] Model config: tts_text_pad_token_id must be `None` or an integer within the vocabulary (between 0 and 8447), got 151859. This may result in unexpected behavior.
+[transformers] Model config: vision_start_token_id must be `None` or an integer within the vocabulary (between 0 and 8447), got 151652. This may result in unexpected behavior.
+[transformers] Model config: vision_end_token_id must be `None` or an integer within the vocabulary (between 0 and 8447), got 151653. This may result in unexpected behavior.
+[transformers] Model config: audio_start_token_id must be `None` or an integer within the vocabulary (between 0 and 8447), got 151647. This may result in unexpected behavior.
+[transformers] Model config: audio_end_token_id must be `None` or an integer within the vocabulary (between 0 and 8447), got 151648. This may result in unexpected behavior.
+435 samples: existence=87, count=132, attribute=146, relation=70
+1305 answers to generate
+Fetching 3 files:   0%|          | 0/3 [00:00<?, ?it/s]Fetching 3 files:  33%|███▎      | 1/3 [01:45<03:30, 105.18s/it]Fetching 3 files:  67%|██████▋   | 2/3 [09:43<05:24, 324.50s/it]Fetching 3 files: 100%|██████████| 3/3 [16:19<00:00, 357.12s/it]Fetching 3 files: 100%|██████████| 3/3 [16:19<00:00, 326.38s/it]
+Loading weights:   0%|          | 0/1442 [00:00<?, ?it/s]Loading weights:  34%|███▍      | 490/1442 [00:00<00:00, 2768.94it/s]Loading weights:  53%|█████▎    | 767/1442 [00:00<00:00, 2076.83it/s]Loading weights:  68%|██████▊   | 975/1442 [00:00<00:00, 1978.97it/s]Loading weights:  98%|█████████▊| 1414/1442 [00:00<00:00, 2680.06it/s]Loading weights: 100%|██████████| 1442/1442 [00:00<00:00, 2461.20it/s]
+[transformers] [1mQwen2_5OmniThinkerForConditionalGeneration LOAD REPORT[0m from: Qwen/Qwen2.5-Omni-3B
+Key                                                                                                      | Status     |  | 
+---------------------------------------------------------------------------------------------------------+------------+--+-
+token2wav.code2wav_dit_model.transformer_blocks.{0...21}.attn.to_q.weight                                | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.transformer_blocks.{0...21}.ff.ff.{0, 3}.weight                             | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.transformer_blocks.{0...21}.attn_norm.linear.weight                         | UNEXPECTED |  | 
+token2wav.code2wav_bigvgan_model.resblocks.{0...17}.convs2.{0, 1, 2}.weight                              | UNEXPECTED |  | 
+token2wav.code2wav_bigvgan_model.resblocks.{0...17}.activations.{0, 1, 2, 3, 4, 5}.act.beta              | UNEXPECTED |  | 
+talker.model.layers.{0...23}.self_attn.v_proj.weight                                                     | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.blocks.{1, 2, 3}.se_block.conv2.bias                | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.transformer_blocks.{0...21}.attn.to_q.bias                                  | UNEXPECTED |  | 
+talker.model.layers.{0...23}.self_attn.o_proj.weight                                                     | UNEXPECTED |  | 
+token2wav.code2wav_bigvgan_model.ups.{0, 1, 2, 3, 4, 5}.0.bias                                           | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.transformer_blocks.{0...21}.attn.to_out.0.weight                            | UNEXPECTED |  | 
+token2wav.code2wav_bigvgan_model.resblocks.{0...17}.convs2.{0, 1, 2}.bias                                | UNEXPECTED |  | 
+token2wav.code2wav_bigvgan_model.resblocks.{0...17}.convs1.{0, 1, 2}.bias                                | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.transformer_blocks.{0...21}.attn.to_k.weight                                | UNEXPECTED |  | 
+talker.model.layers.{0...23}.self_attn.k_proj.bias                                                       | UNEXPECTED |  | 
+talker.model.layers.{0...23}.mlp.up_proj.weight                                                          | UNEXPECTED |  | 
+talker.model.layers.{0...23}.mlp.down_proj.weight                                                        | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.transformer_blocks.{0...21}.attn.to_v.bias                                  | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.transformer_blocks.{0...21}.attn.to_v.weight                                | UNEXPECTED |  | 
+token2wav.code2wav_bigvgan_model.resblocks.{0...17}.convs1.{0, 1, 2}.weight                              | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.transformer_blocks.{0...21}.attn.to_out.0.bias                              | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.transformer_blocks.{0...21}.attn.to_k.bias                                  | UNEXPECTED |  | 
+token2wav.code2wav_bigvgan_model.ups.{0, 1, 2, 3, 4, 5}.0.weight                                         | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.blocks.{1, 2, 3}.se_block.conv2.weight              | UNEXPECTED |  | 
+token2wav.code2wav_bigvgan_model.resblocks.{0...17}.activations.{0, 1, 2, 3, 4, 5}.act.alpha             | UNEXPECTED |  | 
+talker.model.layers.{0...23}.self_attn.q_proj.weight                                                     | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.transformer_blocks.{0...21}.ff.ff.{0, 3}.bias                               | UNEXPECTED |  | 
+talker.model.layers.{0...23}.post_attention_layernorm.weight                                             | UNEXPECTED |  | 
+talker.model.layers.{0...23}.input_layernorm.weight                                                      | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.norm_out.linear.bias                                                        | UNEXPECTED |  | 
+talker.model.layers.{0...23}.mlp.gate_proj.weight                                                        | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.asp.tdnn.conv.weight                                | UNEXPECTED |  | 
+talker.model.layers.{0...23}.self_attn.q_proj.bias                                                       | UNEXPECTED |  | 
+talker.model.layers.{0...23}.self_attn.k_proj.weight                                                     | UNEXPECTED |  | 
+talker.model.embed_tokens.weight                                                                         | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.norm_out.linear.weight                                                      | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.asp.tdnn.conv.bias                                  | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.blocks.{1, 2, 3}.tdnn1.conv.bias                    | UNEXPECTED |  | 
+token2wav.code2wav_bigvgan_model.activation_post.act.alpha                                               | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.mfa.conv.bias                                       | UNEXPECTED |  | 
+talker.model.layers.{0...23}.self_attn.v_proj.bias                                                       | UNEXPECTED |  | 
+token2wav.code2wav_bigvgan_model.conv_pre.weight                                                         | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.time_embed.time_mlp.{0, 2}.bias                                             | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.proj_out.weight                                                             | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.blocks.{1, 2, 3}.res2net_block.blocks.0.conv.weight | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.blocks.{1, 2, 3}.tdnn2.conv.weight                  | UNEXPECTED |  | 
+token2wav.code2wav_bigvgan_model.conv_pre.bias                                                           | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.asp.conv.weight                                     | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.blocks.0.conv.bias                                  | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.blocks.{1, 2, 3}.tdnn1.conv.weight                  | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.blocks.{1, 2, 3}.se_block.conv1.weight              | UNEXPECTED |  | 
+talker.codec_head.weight                                                                                 | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.transformer_blocks.{0...21}.attn_norm.linear.bias                           | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.asp.conv.bias                                       | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.blocks.{1, 2, 3}.res2net_block.blocks.0.conv.bias   | UNEXPECTED |  | 
+talker.thinker_to_talker_proj.bias                                                                       | UNEXPECTED |  | 
+talker.thinker_to_talker_proj.weight                                                                     | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.proj_out.bias                                                               | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.blocks.{1, 2, 3}.se_block.conv1.bias                | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.fc.bias                                             | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.proj.weight                                                     | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.mfa.conv.weight                                     | UNEXPECTED |  | 
+token2wav.code2wav_bigvgan_model.conv_post.weight                                                        | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.blocks.{1, 2, 3}.tdnn2.conv.bias                    | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.rotary_embed.inv_freq                                                       | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.fc.weight                                           | UNEXPECTED |  | 
+token2wav.code2wav_bigvgan_model.activation_post.act.beta                                                | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.time_embed.time_mlp.{0, 2}.weight                                           | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.blocks.0.conv.weight                                | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.proj.bias                                                       | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.text_embed.codec_embed.weight                                               | UNEXPECTED |  | 
+talker.model.norm.weight                                                                                 | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+[1/1305] coco-existence-000001 C0_none: "Well, there's a tram in the image. And there are also some cars, like a motorcycle and a c"
+[2/1305] coco-existence-000001 C1_text: "Well, there are cars in the image. You can see them on the road. And there's also a motorc"
+[3/1305] coco-existence-000001 C2_audio: "Well, there are cars in the image. You can see them on the road. And there's also a motorc"
+[4/1305] coco-count-000001 C0_none: "There are two vehicles in the image. There's a tram, which is a type of train, and there a"
+[5/1305] coco-count-000001 C1_text: "There's a tram in the image. It's a long vehicle with a red and white color scheme. There'"
+[6/1305] coco-count-000001 C2_audio: "There's a tram in the image. That's the only vehicle there. So, just one tram. If you have"
+[7/1305] coco-existence-000002 C0_none: "Well, there's a laptop in the image. And there's also a cell phone. So, two electronic dev"
+[8/1305] coco-existence-000002 C1_text: "There's a laptop in the image. So, that's one electronic device. What else do you see in t"
+[9/1305] coco-existence-000002 C2_audio: "There's a laptop in the image. So, that's one electronic device. If you have any other que"
+[10/1305] coco-count-000002 C0_none: "There's a laptop in the image. And there's also a cell phone. So, there are two electronic"
+[11/1305] coco-count-000002 C1_text: "There's a laptop in the image. And there's also a cell phone. So, there are two electronic"
+[12/1305] coco-count-000002 C2_audio: "There's a laptop in the image. And there's also a cell phone. So, there are two electronic"
+[13/1305] coco-count-000003 C0_none: "There's a laptop in the image. And there's also a cell phone. So, there are two electronic"
+[14/1305] coco-count-000003 C1_text: "There's a laptop in the image. That's the only electronic device there. So, just one kind "
+[15/1305] coco-count-000003 C2_audio: "There's a laptop in the image. And there's also a cell phone. So, there are two electronic"
+[16/1305] coco-count-000004 C0_none: "There's a laptop in the image. And there's also a cell phone. So, there are two electronic"
+[17/1305] coco-count-000004 C1_text: "There's a laptop in the image. And there's also a cell phone. So, there are two electronic"
+[18/1305] coco-count-000004 C2_audio: "There's a laptop in the image. So, just one kind of electronic device. If you have any oth"
+[19/1305] coco-count-000005 C0_none: "There's a laptop in the image. And there's also a cell phone. So, there are two electronic"
+[20/1305] coco-count-000005 C1_text: "There's a laptop in the image. And there's also a cell phone. So, there are two electronic"
+[21/1305] coco-count-000005 C2_audio: "There's a laptop in the image. And there's also a cell phone. So, there are two electronic"
+[22/1305] coco-count-000006 C0_none: "There's a laptop in the image. And there's also a cell phone. So, there are two electronic"
+[23/1305] coco-count-000006 C1_text: "There's a laptop in the image. That's the only electronic device there. So, just one kind "
+[24/1305] coco-count-000006 C2_audio: "There's a laptop in the image. And there's also a cell phone. So, there are two electronic"
+[25/1305] coco-count-000007 C0_none: "There's a laptop in the image. And there's also a cell phone. So, there are two electronic"
+[26/1305] coco-count-000007 C1_text: "There's a laptop in the image. That's the only electronic device there. So, just one kind "
+[27/1305] coco-count-000007 C2_audio: "There's a laptop in the image. And there's also a cell phone. So, there are two electronic"
+[28/1305] coco-count-000008 C0_none: "There's a laptop in the image. And there's also a cell phone. So, there are two electronic"
+[29/1305] coco-count-000008 C1_text: "There's a cell phone in the image. So, just one kind of electronic device. If you have any"
+[30/1305] coco-count-000008 C2_audio: "There's a cell phone in the image. So, just one electronic device. If you have any other q"
+[31/1305] coco-existence-000003 C0_none: "Well, I can see a bicycle in the image. That's the main vehicle there. There might be othe"
+[32/1305] coco-existence-000003 C1_text: 'There are bicycles in the image. You can see a person on a bicycle in the foreground. Ther'
+[33/1305] coco-existence-000003 C2_audio: "There are bicycles in the image. So, that's the answer. If you have any other questions ab"
+[34/1305] coco-count-000009 C0_none: "There are two bicycles in the image. So, that's it. If you have any other questions about "
+[35/1305] coco-count-000009 C1_text: "There are two cars in the image. So, that's it. If you have any other questions about the "
+[36/1305] coco-count-000009 C2_audio: "There are 2 cars in the image. So, that's it. If you have any other questions about the im"
+[37/1305] coco-count-000010 C0_none: 'There are cars, boats, and trains in the image. There are 3 cars, 5 boats, and 2 trains. I'
+[38/1305] coco-count-000010 C1_text: 'There are cars, boats, and trains in the image. There are at least 5 cars, several boats, '
+[39/1305] coco-count-000010 C2_audio: 'There are cars, boats, and a train in the image. There are at least 5 cars, several boats,'
+[40/1305] coco-existence-000006 C0_none: 'Well, in the image, there are tables and chairs. You can see the tables with the pizza on '
+[41/1305] coco-existence-000006 C1_text: 'There are chairs in the image. You can see them around the dining table area. So, yeah, th'
+[42/1305] coco-existence-000006 C2_audio: "There are chairs in the image. So, that's the furniture present. If you have any other que"
+[43/1305] coco-existence-000007 C0_none: "Well, in the image, there's a bus and a few cars. You can see the bus in the middle of the"
+[44/1305] coco-existence-000007 C1_text: "There's a bus in the image. It's driving on a wet road during the rain. So, yeah, that's t"
+[45/1305] coco-existence-000007 C2_audio: "There's a bus in the image. So, yeah, that's the main vehicle. If you have any other quest"
+[46/1305] coco-count-000012 C0_none: "There's a bus in the image. And there are two cars. So, in total, there are three vehicles"
+[47/1305] coco-count-000012 C1_text: "There's a bus in the image. And there are two cars. So, in total, there are three vehicles"
+[48/1305] coco-count-000012 C2_audio: "There's a bus in the image. And there are also cars. So, there are at least two vehicles i"
+[49/1305] coco-count-000013 C0_none: "There's a bus in the image. And there are two cars. So, in total, there are three vehicles"
+[50/1305] coco-count-000013 C1_text: "There's a bus in the image. And there are two cars. So, in total, there are three vehicles"
+[51/1305] coco-count-000013 C2_audio: "There's a bus in the image. And there are two cars. So, that's three vehicles in total. If"
+[52/1305] coco-count-000014 C0_none: "There's a bus in the image. And there are two cars. So, in total, there are three vehicles"
+[53/1305] coco-count-000014 C1_text: "There's a bus in the image. And there are two cars. So, in total, there are three vehicles"
+[54/1305] coco-count-000014 C2_audio: "There's a bus in the image. And there are two cars. So, in total, there are three vehicles"
+[55/1305] coco-count-000015 C0_none: "There's a bus in the image. And there are two cars. So, in total, there are three vehicles"
+[56/1305] coco-count-000015 C1_text: "There's a bus in the image. There are also two cars. So, in total, there are three vehicle"
+[57/1305] coco-count-000015 C2_audio: "There's a bus in the image. And there are two cars. So, that's three vehicles in total. If"
+[58/1305] coco-count-000016 C0_none: "There's a bus in the image. And there are two cars. So, in total, there are three vehicles"
+[59/1305] coco-count-000016 C1_text: "There's a bus in the image. There are also cars. I can't really tell exactly how many cars"
+[60/1305] coco-count-000016 C2_audio: "There's a bus in the image. And there are also cars. So, there are at least two vehicles i"
+[61/1305] coco-count-000017 C0_none: "There's a bus in the image. And there are two cars. So, in total, there are three vehicles"
+[62/1305] coco-count-000017 C1_text: "There's a bus in the image. There are also two cars. So, in total, there are three vehicle"
+[63/1305] coco-count-000017 C2_audio: "There's a bus in the image. And there are also cars. So, there are at least two vehicles i"
+[64/1305] coco-count-000018 C0_none: "There's a bus in the image. And there are two cars. So, in total, there are three vehicles"
+[65/1305] coco-count-000018 C1_text: "There are two cars in the image. So, that's it. If you have any other questions about the "
+[66/1305] coco-count-000018 C2_audio: 'There are two cars in the image. So, the answer is "There are two cars." If you have any o'
+[67/1305] coco-count-000019 C0_none: "There's a toilet, a bathtub, a sink, a stool, and a cabinet. So, that's 5 kinds of furnitu"
+[68/1305] coco-count-000019 C1_text: "There's a toilet, a bathtub, a sink, a stool, and a cabinet. So, there are 5 kinds of furn"
+[69/1305] coco-count-000019 C2_audio: "There's a toilet in the image. That's the only kind of furniture there. So, just one kind "
+[70/1305] coco-existence-000015 C0_none: "Well, I can see a bus, a few cars, and a truck in the image. There's also a construction c"
+[71/1305] coco-existence-000015 C1_text: 'Well, I can see a few vehicles in the image. There are cars, a truck, and a bus. But you k'
+[72/1305] coco-existence-000015 C2_audio: 'Well, there are cars in the image. You can see a white car, a green car, and a black car. '
+[73/1305] coco-existence-000016 C0_none: "Well, I can see a bus, a few cars, and a truck in the image. There's also a construction c"
+[74/1305] coco-existence-000016 C1_text: "There are cars, a truck, and a bus in the image. The bus is blue and yellow. So, that's th"
+[75/1305] coco-existence-000016 C2_audio: 'Well, there are cars in the image. You can see a white car, a green car, and a black car. '
+[76/1305] coco-existence-000017 C0_none: "Well, I can see a bus, a few cars, and a truck in the image. There's also a construction c"
+[77/1305] coco-existence-000017 C1_text: 'Well, there are cars in the image. You can see a white car, a black car, and a green car. '
+[78/1305] coco-existence-000017 C2_audio: 'Well, there are cars in the image. You can see a white car, a black car, and a green car. '
+[79/1305] coco-existence-000018 C0_none: "Well, I can see a bus, a few cars, and a truck in the image. There's also a construction c"
+[80/1305] coco-existence-000018 C1_text: 'Well, there are cars in the image. You can see a white car, a black car, and a green car. '
+[81/1305] coco-existence-000018 C2_audio: 'Well, there are cars in the image. You can see a white car, a green car, and a black car. '
+[82/1305] coco-existence-000019 C0_none: "Well, I can see a bus, a few cars, and a truck in the image. There's also a construction c"
+[83/1305] coco-existence-000019 C1_text: 'There are cars, a truck, and a bus in the image. The bus is blue and yellow. So, yeah, tha'
+[84/1305] coco-existence-000019 C2_audio: "There are cars, a truck, and a construction crane in the image. So, that's the vehicles pr"
+[85/1305] coco-existence-000020 C0_none: "Well, I can see a bus, a few cars, and a truck in the image. There's also a construction c"
+[86/1305] coco-existence-000020 C1_text: 'Well, there are cars in the image. You can see a few cars parked along the street and some'
+[87/1305] coco-existence-000020 C2_audio: 'Well, there are cars in the image. You can see a white car, a green car, and a black car. '
+[88/1305] coco-existence-000021 C0_none: "Well, I can see a bus, a few cars, and a truck in the image. There's also a construction c"
+[89/1305] coco-existence-000021 C1_text: 'There are cars in the image. You can see a white SUV, a green SUV, and a few other cars. T'
+[90/1305] coco-existence-000021 C2_audio: 'There are cars in the image. You can see a white SUV, a green SUV, and a few other cars. W'
+[91/1305] coco-existence-000022 C0_none: "Well, in the image, there's a doll wearing a hat. That's the main accessory you can see. T"
+[92/1305] coco-existence-000022 C1_text: "Well, there's a hat on the doll. That's the main accessory in the image. What do you think"
+[93/1305] coco-existence-000022 C2_audio: "Well, there's a hat on the doll. That's the only accessory I can see in the image. What el"
+[94/1305] coco-existence-000023 C0_none: "Well, in the image, there's a doll wearing a hat. That's the main accessory you can see. T"
+[95/1305] coco-existence-000023 C1_text: "Well, there's a hat on the doll. That's the main accessory in the image. What do you think"
+[96/1305] coco-existence-000023 C2_audio: "Well, there's a doll in the image. It's wearing a hat. That's the only accessory I can see"
+[97/1305] coco-existence-000024 C0_none: "Well, in the image, there's a doll wearing a hat. That's the main accessory you can see. T"
+[98/1305] coco-existence-000024 C1_text: "Well, in the image, there's a doll wearing a hat. That's the only accessory I can see. Wha"
+[99/1305] coco-existence-000024 C2_audio: "Well, there's a doll in the image. It's wearing a hat. That's the only accessory I can see"
+[100/1305] coco-existence-000025 C0_none: "Well, in the image, there's a doll wearing a hat. That's the main accessory you can see. T"
+[101/1305] coco-existence-000025 C1_text: "Well, there's a hat on the doll. That's the main accessory in the image. What do you think"
+[102/1305] coco-existence-000025 C2_audio: "Well, there's a doll in the image. It has a hat on. That's the only accessory I can see. S"
+[103/1305] coco-existence-000026 C0_none: "Well, in the image, there's a doll wearing a hat. That's the main accessory you can see. T"
+[104/1305] coco-existence-000026 C1_text: "Well, there's a hat on the doll. That's the main accessory in the image. What do you think"
+[105/1305] coco-existence-000026 C2_audio: "Well, there's a hat on the doll. That's the main accessory in the image. What else do you "
+[106/1305] coco-existence-000027 C0_none: "Well, in the image, there's a doll wearing a hat. That's the main accessory you can see. T"
+[107/1305] coco-existence-000027 C1_text: "Well, there's a hat on the doll. That's the main accessory in the image. What do you think"
+[108/1305] coco-existence-000027 C2_audio: "Well, there's a doll in the image. It's wearing a hat. That's the only accessory I can see"
+[109/1305] coco-existence-000028 C0_none: "Well, in the image, there's a doll wearing a hat. That's the main accessory you can see. T"
+[110/1305] coco-existence-000028 C1_text: "Well, there's a hat on the doll. That's the main accessory in the image. What do you think"
+[111/1305] coco-existence-000028 C2_audio: "Well, there's a doll in the image. It's wearing a hat. That's the only accessory I can see"
+[112/1305] coco-count-000020 C0_none: "There are two accessories in the image. There's a hat on the doll and a backpack. So, that"
+[113/1305] coco-count-000020 C1_text: "There's a gray beanie on the doll. That's the only accessory in the image. So, just one ac"
+[114/1305] coco-count-000020 C2_audio: "There's a hat in the image. That's the only accessory there. So, just one accessory. If yo"
+[115/1305] coco-existence-000029 C0_none: "Well, in the image, there's a bed with a mosquito net over it. There's also a table with a"
+[116/1305] coco-existence-000029 C1_text: "There's a bed, a table, and a chair. The bed has a mosquito net over it. So, that's the ma"
+[117/1305] coco-existence-000029 C2_audio: "There's a bed, a table, and a chair. The bed has a mosquito net over it. The table has a c"
+[118/1305] coco-count-000021 C0_none: "There's a bed, a table, and a chair. There are 3 chairs in total. So, that's 4 pieces of f"
+[119/1305] coco-count-000021 C1_text: "There's a bed, a table, and a chair. That's three kinds of furniture. If you have any othe"
+[120/1305] coco-count-000021 C2_audio: "There's a bed, a table, and a chair in the image. So, that's three kinds of furniture. If "
+[121/1305] coco-existence-000030 C0_none: 'Well, I can see a table, chairs, a TV, a ceiling fan, and some decorative items like vases'
+[122/1305] coco-existence-000030 C1_text: "Well, there's a table in the image. And there are chairs around the table. There's also a "
+[123/1305] coco-existence-000030 C2_audio: "Well, there's a table in the image. And there are chairs around it. There's also a TV on a"
+[124/1305] coco-existence-000031 C0_none: 'Well, I can see a few vehicles in the image. There are some motorcycles parked along the s'
+[125/1305] coco-existence-000031 C1_text: "There are scooters in the image. You know, they're quite popular in some places. So, what "
+[126/1305] coco-existence-000031 C2_audio: "There are motorcycles in the image. So, that's the answer. If you have any other questions"
+[127/1305] coco-existence-000032 C0_none: "Well, from what I can see in the image, there's a sandwich and some fries. There's also a "
+[128/1305] coco-existence-000032 C1_text: "Well, in the image, there's a sandwich and some fries. That's about it. So, no kitchen ite"
+[129/1305] coco-existence-000032 C2_audio: "Well, in the image, there's a sandwich and some fries. That's about it. So, what do you th"
+[130/1305] coco-existence-000033 C0_none: "Well, from what I can see, there's a sandwich and some fries in the image. There's also a "
+[131/1305] coco-existence-000033 C1_text: "There's a sandwich and some fries in the image. What do you think about the combination?"
+[132/1305] coco-existence-000033 C2_audio: "Well, in the image, there's a sandwich and some fries. That's all. So, what do you think a"
+[133/1305] coco-existence-000034 C0_none: "Well, there's a car in the image. You can see the front part of it, like the hood and the "
+[134/1305] coco-existence-000034 C1_text: "Well, there's a car in the image. It's a black car. And there's also a bicycle in the back"
+[135/1305] coco-existence-000034 C2_audio: "There's a car in the image. So, that's the vehicle present. If you have any other question"
+[136/1305] coco-count-000024 C0_none: "There's a car in the image. And there's also a bicycle in the background. So, there are tw"
+[137/1305] coco-count-000024 C1_text: "There's a car in the image. That's the only vehicle there. So, just one car. If you have a"
+[138/1305] coco-count-000024 C2_audio: "There's a car in the image. So, just one kind of vehicle, a car. If you have any other que"
+[139/1305] coco-existence-000036 C0_none: 'Well, in the image, you can see a plate, a fork, and a container. The container has some f'
+[140/1305] coco-existence-000036 C1_text: "Well, in the image, there's a plate and a black container. The plate has some shredded chi"
+[141/1305] coco-existence-000036 C2_audio: "Well, in the image, there's a plate and a black container. That's about it. If you have an"
+[142/1305] coco-count-000025 C0_none: "There's a plate, a fork, and a container. So, there are three kitchen items in the image. "
+[143/1305] coco-count-000025 C1_text: "There's a plate in the image. That's the only kitchen item there. So, just one plate. If y"
+[144/1305] coco-count-000025 C2_audio: "There's a plate, a fork, and a container. That's it. If you have any other questions about"
+[145/1305] coco-existence-000037 C0_none: "Well, in the image, there's a refrigerator, an oven, and a stove. Oh, and there's also a t"
+[146/1305] coco-existence-000037 C1_text: "There's a refrigerator and a stove in the image. So, that's two appliances. If you have an"
+[147/1305] coco-existence-000037 C2_audio: "Well, there's a refrigerator in the image. And there's also a stove. Oh, and there's a dis"
+[148/1305] coco-count-000026 C0_none: "There's a refrigerator, an oven, and a stove. So, there are three appliances in total. If "
+[149/1305] coco-count-000026 C1_text: "There's a white refrigerator on the left side of the image. There's also a white stove on "
+[150/1305] coco-count-000026 C2_audio: "There's a white refrigerator, a white stove, and a white oven in the image. So, there are "
+[151/1305] coco-existence-000038 C0_none: 'Well, there are two computer monitors in the image. One is a laptop and the other is a des'
+[152/1305] coco-existence-000038 C1_text: "Well, there's a computer monitor and a keyboard in the image. And there's also a laptop, b"
+[153/1305] coco-existence-000038 C2_audio: 'There are two computer monitors in the image. One is a desktop monitor and the other is a '
+[154/1305] coco-existence-000039 C0_none: "Well, there are some accessories in the image. There's a necklace on the woman, and she's "
+[155/1305] coco-existence-000039 C1_text: "Well, there's a necklace on the woman. And the boy is wearing sandals. That's about it. If"
+[156/1305] coco-existence-000039 C2_audio: "Well, there's a necklace on the woman. And the boy is wearing sandals. That's about it. If"
+[157/1305] coco-count-000028 C0_none: "There are two bracelets in the image. One is on the woman's wrist and the other is on the "
+[158/1305] coco-count-000028 C1_text: "There are earrings. There are also sandals. There's a necklace. There's a bracelet. There'"
+[159/1305] coco-count-000028 C2_audio: 'There are two necklaces in the image. One is on the woman and the other is on the boy. The'
+[160/1305] coco-existence-000040 C0_none: "Well, from what I can see, there's a green truck in the image. And there are also some oth"
+[161/1305] coco-existence-000040 C1_text: "Well, there's a green truck in the image. But apart from that, I don't see any other vehic"
+[162/1305] coco-existence-000040 C2_audio: "Well, there's a red and white van in the image. And there's also a white RV. So, that's wh"
+[163/1305] coco-existence-000041 C0_none: "Well, I can see a keyboard in the image. That's the only electronic device I can spot. Wha"
+[164/1305] coco-existence-000041 C1_text: "Well, I can't really see the electronic devices clearly in this image. But if you can desc"
+[165/1305] coco-existence-000041 C2_audio: "Well, I can't really see the electronic devices clearly in this image. But if you have any"
+[166/1305] coco-count-000030 C0_none: "There are two electronic devices in the image. There's a keyboard on the left side and a r"
+[167/1305] coco-count-000030 C1_text: "There's a computer keyboard in the image. That's the only electronic device there. So, jus"
+[168/1305] coco-count-000030 C2_audio: "There's a keyboard in the image. So, just one kind of electronic device. If you have any o"
+[169/1305] coco-existence-000043 C0_none: "Well, in the image, there's a bench. And there are also parking meters. Oh, and there's a "
+[170/1305] coco-existence-000043 C1_text: "Well, there's a bench in the image. And there are some trees in the background. Oh, and th"
+[171/1305] coco-existence-000043 C2_audio: "Well, there's a bench in the image. And there are some trees in the background. Oh, and th"
+[172/1305] coco-count-000031 C0_none: "There's a bench, a sleeping bag, a backpack, two parking meters, a trash can, and a lamppo"
+[173/1305] coco-count-000031 C1_text: "There's a bench in the image. There are also two parking meters. And there's a sleeping ba"
+[174/1305] coco-count-000031 C2_audio: "There's a bench in the image. There are also two parking meters. And there's a sleeping ba"
+[175/1305] coco-count-000032 C0_none: "There's a bench, a sleeping bag, a backpack, two parking meters, a trash can, and a lamppo"
+[176/1305] coco-count-000032 C1_text: "There's a bench in the image. There are two parking meters. There's also a sleeping bag on"
+[177/1305] coco-count-000032 C2_audio: "There's a bench in the image. That's the only outdoor object there. So, just one kind of o"
+[178/1305] coco-count-000033 C0_none: "There's a bench, a sleeping bag, a backpack, two parking meters, a trash can, and a lamppo"
+[179/1305] coco-count-000033 C1_text: "There's a bench in the image. There are two parking meters in the background. So, to answe"
+[180/1305] coco-count-000033 C2_audio: "There's a bench in the image. There are also two parking meters. And there's a sleeping ba"
+[181/1305] coco-count-000034 C0_none: "There's a bench, a sleeping bag, a backpack, two parking meters, a trash can, and a lamppo"
+[182/1305] coco-count-000034 C1_text: "There's a bench in the image. There are also two parking meters. So, in total, there are t"
+[183/1305] coco-count-000034 C2_audio: "There's a bench in the image. There are also some trees in the background. And there's a s"
+[184/1305] coco-count-000035 C0_none: "There's a bench, a sleeping bag, a backpack, two parking meters, a trash can, and a lamppo"
+[185/1305] coco-count-000035 C1_text: "There's a bench in the image. There are also two parking meters. And there's a sleeping ba"
+[186/1305] coco-count-000035 C2_audio: "There's a bench in the image. There are also some trees in the background. And there are s"
+[187/1305] coco-count-000036 C0_none: "There's a bench, a sleeping bag, a backpack, two parking meters, a trash can, and a lamppo"
+[188/1305] coco-count-000036 C1_text: "There's a bench in the image. There are also two parking meters. So, in total, there are t"
+[189/1305] coco-count-000036 C2_audio: "There's a bench in the image. That's the only outdoor object there. So, just one bench. If"
+[190/1305] coco-count-000037 C0_none: "There's a bench, a sleeping bag, a backpack, two parking meters, a trash can, and a lamppo"
+[191/1305] coco-count-000037 C1_text: "There's a bench in the image. There are also some trees in the background. So, there are t"
+[192/1305] coco-count-000037 C2_audio: "There's a bench in the image. That's the only outdoor object there. So, just one bench. If"
+[193/1305] coco-existence-000044 C0_none: "Well, there's a bed in the image. That's the main piece of furniture. There's also a chair"
+[194/1305] coco-existence-000044 C1_text: "Well, there's a bed in the image. That's the main piece of furniture. What else are you cu"
+[195/1305] coco-existence-000044 C2_audio: "Well, there's a bed in the image. That's the main piece of furniture. What else do you see"
+[196/1305] coco-count-000038 C0_none: "There's a bed in the image. It's the only piece of furniture there. So, just one piece of "
+[197/1305] coco-count-000038 C1_text: "There's a bed in the image. That's the only kind of furniture there. So, just one kind of "
+[198/1305] coco-count-000038 C2_audio: "There's a bed in the image. That's the only kind of furniture there. If you have any other"
+[199/1305] coco-existence-000045 C0_none: "Well, in the image, there are bananas and a plastic cup. That's about it. What else are yo"
+[200/1305] coco-existence-000045 C1_text: "Well, in the image, there are bananas and a plastic cup. That's about it. If you have any "
+[201/1305] coco-existence-000045 C2_audio: "Well, there's a cup in the image. And there are also some bananas. So, that's two kitchen "
+[202/1305] coco-existence-000046 C0_none: "Well, in the image, there are bananas and a plastic cup. That's about it. What else are yo"
+[203/1305] coco-existence-000046 C1_text: "Well, in the image, there's a plastic cup. That's the kitchen item you can see. If you hav"
+[204/1305] coco-existence-000046 C2_audio: "Well, there's a cup in the image. That's a kitchen item. And there are also some bananas. "
+[205/1305] coco-existence-000047 C0_none: "Well, in the image, there are bananas and a plastic cup. That's about it. What else are yo"
+[206/1305] coco-existence-000047 C1_text: "Well, in the image, there are bananas and a plastic cup. That's about it. If you have any "
+[207/1305] coco-existence-000047 C2_audio: "Well, there's a cup in the image. And there are some bananas too. But I'm not sure if ther"
+[208/1305] coco-existence-000048 C0_none: "Well, in the image, there are bananas and a plastic cup. That's about it. What else are yo"
+[209/1305] coco-existence-000048 C1_text: "Well, there are some bananas in the image. And there's also a cup. But I don't see any oth"
+[210/1305] coco-existence-000048 C2_audio: "Well, there's a cup in the image. And there are also some bananas. But that's about it. If"
+[211/1305] coco-existence-000049 C0_none: "Well, in the image, there are bananas and a plastic cup. That's about it. What else are yo"
+[212/1305] coco-existence-000049 C1_text: "Well, there are bananas in the image. And there's also a cup. But no bowl is visible. So, "
+[213/1305] coco-existence-000049 C2_audio: "Well, there are bananas in the image. And there's also a cup. So, that's two kitchen items"
+[214/1305] coco-existence-000050 C0_none: "Well, in the image, there are bananas and a plastic cup. That's about it. What else are yo"
+[215/1305] coco-existence-000050 C1_text: "Well, in the image, there are bananas and a plastic cup. That's about it. If you have any "
+[216/1305] coco-existence-000050 C2_audio: "Well, there's a cup in the image. And there are some bananas too. But no bowls are there. "
+[217/1305] coco-existence-000051 C0_none: "Well, in the image, there are bananas and a plastic cup. That's about it. What else are yo"
+[218/1305] coco-existence-000051 C1_text: "Well, there are some bananas in the image. And there's also a cup. But I don't see any bow"
+[219/1305] coco-existence-000051 C2_audio: "Well, there are some bananas in the image. And there's also a cup. That's about it. If you"
+[220/1305] coco-existence-000053 C0_none: 'There are giraffes and a zebra in the image. The giraffes are standing close to each other'
+[221/1305] coco-existence-000053 C1_text: "Oh, there's a giraffe in the image. It's standing next to a zebra, but you asked about the"
+[222/1305] coco-existence-000053 C2_audio: "There's a giraffe in the image. So, that's the animal present. What else do you want to kn"
+[223/1305] coco-count-000041 C0_none: 'There are two giraffes and one zebra in the image. So, in total, there are three animals. '
+[224/1305] coco-count-000041 C1_text: "There are two giraffes in the image. And there's one zebra. So, in total, there are three "
+[225/1305] coco-count-000041 C2_audio: "There are two giraffes in the image. So, that's one giraffe. What else do you want to know"
+[226/1305] coco-count-000042 C0_none: 'There are two giraffes and one zebra in the image. So, in total, there are three animals. '
+[227/1305] coco-count-000042 C1_text: "There are two giraffes in the image. So, that's it. If you have any other questions about "
+[228/1305] coco-count-000042 C2_audio: "There are two giraffes in the image. So, that's it. If you have any other questions about "
+[229/1305] coco-count-000043 C0_none: 'There are two giraffes and one zebra in the image. So, in total, there are three animals. '
+[230/1305] coco-count-000043 C1_text: "There are two giraffes in the image. So, that's it. If you have any other questions about "
+[231/1305] coco-count-000043 C2_audio: 'There are two giraffes in the image.'
+[232/1305] coco-count-000044 C0_none: 'There are two giraffes and one zebra in the image. So, in total, there are three animals. '
+[233/1305] coco-count-000044 C1_text: 'There are two giraffes in the image. And there are no zebras in the image. If you have any'
+[234/1305] coco-count-000044 C2_audio: "There's a giraffe and a zebra in the image. So, that's two animals in total. If you have a"
+[235/1305] coco-count-000045 C0_none: 'There are two giraffes and one zebra in the image. So, in total, there are three animals. '
+[236/1305] coco-count-000045 C1_text: 'There are two giraffes and one zebra in the image. So, in total, there are three animals. '
+[237/1305] coco-count-000045 C2_audio: "There are two giraffes and one zebra in the image. So, that's three animals in total. If y"
+[238/1305] coco-count-000046 C0_none: 'There are two giraffes and one zebra in the image. So, in total, there are three animals. '
+[239/1305] coco-count-000046 C1_text: "There are two giraffes in the image. So, that's it. If you have any other questions about "
+[240/1305] coco-count-000046 C2_audio: "There's a giraffe and a zebra in the image. So, two animals in total. If you have any othe"
+[241/1305] coco-count-000047 C0_none: 'There are two giraffes and one zebra in the image. So, in total, there are three animals. '
+[242/1305] coco-count-000047 C1_text: "There are two giraffes in the image. So, that's it. If you have any other questions about "
+[243/1305] coco-count-000047 C2_audio: "There's one giraffe in the image. So, that's it. If you have any other questions about the"
+[244/1305] coco-existence-000054 C0_none: "Well, from what I can see in the image, there are chairs. But I can't really tell if there"
+[245/1305] coco-existence-000054 C1_text: "There are chairs in the image. So, that's the furniture present. If you have any other que"
+[246/1305] coco-existence-000054 C2_audio: "There are chairs in the image. So, that's the furniture present. If you have any other que"
+[247/1305] coco-existence-000056 C0_none: 'There are cars and a truck in the image. You can see the cars parked on the side of the ro'
+[248/1305] coco-existence-000056 C1_text: "There's a blue minivan in the image. It's parked on the side of the road. What else do you"
+[249/1305] coco-existence-000056 C2_audio: "There's a blue minivan in the image. So, that's the vehicle present. What else do you want"
+[250/1305] coco-existence-000057 C0_none: 'There are cars and a truck in the image. You can see the cars parked on the side of the ro'
+[251/1305] coco-existence-000057 C1_text: "There's a blue minivan in the image. And there are also some other vehicles in the backgro"
+[252/1305] coco-existence-000057 C2_audio: "There's a blue minivan in the image. So, that's the vehicle present. What else do you want"
+[253/1305] coco-existence-000058 C0_none: 'There are cars and a truck in the image. You can see the cars parked on the side of the ro'
+[254/1305] coco-existence-000058 C1_text: "There's a blue minivan in the image. It's parked on the side of the road. And there are al"
+[255/1305] coco-existence-000058 C2_audio: "There's a blue minivan in the image. It's parked on the side of the road. And there are al"
+[256/1305] coco-existence-000059 C0_none: 'There are cars and a truck in the image. You can see the cars parked on the side of the ro'
+[257/1305] coco-existence-000059 C1_text: "There's a blue minivan in the image. And there are also some other vehicles in the backgro"
+[258/1305] coco-existence-000059 C2_audio: "There's a blue minivan in the image. So, that's the vehicle present. What else do you want"
+[259/1305] coco-existence-000060 C0_none: 'There are cars and a truck in the image. You can see the cars parked on the side of the ro'
+[260/1305] coco-existence-000060 C1_text: "There's a blue minivan in the image. So, that's the vehicle present. What else do you want"
+[261/1305] coco-existence-000060 C2_audio: "There's a blue minivan in the image. So, that's the vehicle present. What else do you want"
+[262/1305] coco-existence-000061 C0_none: 'There are cars and a truck in the image. You can see the cars parked on the side of the ro'
+[263/1305] coco-existence-000061 C1_text: "There's a blue minivan in the image. So, that's the vehicle present. What else do you want"
+[264/1305] coco-existence-000061 C2_audio: "There's a blue minivan in the image. So, that's the vehicle present. What else do you want"
+[265/1305] coco-existence-000062 C0_none: 'There are cars and a truck in the image. You can see the cars parked on the side of the ro'
+[266/1305] coco-existence-000062 C1_text: "There's a blue minivan in the image. So, yeah, that's the vehicle you're looking for. If y"
+[267/1305] coco-existence-000062 C2_audio: "There's a blue minivan in the image. So, that's the vehicle present. What else do you want"
+[268/1305] coco-existence-000063 C0_none: "Well, I can't really see the whole image clearly enough to tell you exactly what pieces of"
+[269/1305] coco-existence-000063 C1_text: "There's a chair in the image. It's a wooden chair. What else do you want to know about the"
+[270/1305] coco-existence-000063 C2_audio: "There's a chair in the image. So, that's the piece of furniture. What else do you want to "
+[271/1305] coco-count-000051 C0_none: "There's a chair in the image. So, just one kind of furniture, and there's one chair. If yo"
+[272/1305] coco-count-000051 C1_text: "There's a chair in the image. So, just one kind of furniture, a chair. If you have any oth"
+[273/1305] coco-count-000051 C2_audio: "There's a chair in the image. So, just one kind of furniture, a chair. If you have any oth"
+[274/1305] coco-existence-000064 C0_none: "Well, in the image, there's a knife and a mug. The mug has a skull and crossbones design o"
+[275/1305] coco-existence-000064 C1_text: "Well, in the image, there's a knife. That's the only kitchen item I can see. What else are"
+[276/1305] coco-existence-000064 C2_audio: "Well, there's a knife in the image. That's the kitchen item you can see. If you have any o"
+[277/1305] coco-count-000052 C0_none: "There's a knife and a mug in the image. So, there are two kitchen items. If you have any o"
+[278/1305] coco-count-000052 C1_text: "There's a knife and a mug in the image. So, there are two kitchen items. If you have any o"
+[279/1305] coco-count-000052 C2_audio: "There's a mug in the image. And there's also a knife. So, there are two kitchen items in t"
+[280/1305] coco-existence-000065 C0_none: "Well, in the image, there's a train. And there are also some cars parked nearby. You can s"
+[281/1305] coco-existence-000065 C1_text: 'There are cars in the image. You can see a green car and a white car. So, yeah, those are '
+[282/1305] coco-existence-000065 C2_audio: "There are cars in the image. So, yeah, that's it. If you have any other questions about th"
+[283/1305] coco-count-000053 C0_none: "There's a train in the image. And there are also cars, but I can't count them exactly from"
+[284/1305] coco-count-000053 C1_text: "There's a train in the image. And there are also cars, but I can't count them exactly from"
+[285/1305] coco-count-000053 C2_audio: "There's a train in the image. And there are also cars, but I can't count them exactly. The"
+[286/1305] coco-existence-000066 C0_none: 'There are two dogs and a cat in the image. The dogs are brown and black, and the cat is gr'
+[287/1305] coco-existence-000066 C1_text: 'There are two animals in the image. One is a cat and the other is a dog. So, the answer is'
+[288/1305] coco-existence-000066 C2_audio: 'There are two animals in the image. One is a cat and the other is a dog. So, the cat is pr'
+[289/1305] coco-count-000054 C0_none: 'There are two dogs and one cat in the image. So, in total, there are three animals. If you'
+[290/1305] coco-count-000054 C1_text: 'There are two dogs and one cat in the image. So, in total, there are three animals. If you'
+[291/1305] coco-count-000054 C2_audio: "There are two dogs and one cat in the image. So, that's three animals in total. If you hav"
+[292/1305] coco-existence-000067 C0_none: 'Well, in the image, there are tables and chairs. You can see the tables and chairs around '
+[293/1305] coco-existence-000067 C1_text: "There are chairs in the image. So, that's the answer. If you have any other questions abou"
+[294/1305] coco-existence-000067 C2_audio: "There are chairs in the image. So, that's the answer. If you have any other questions abou"
+[295/1305] coco-existence-000068 C0_none: "Well, I can see a table in the image. There's also a chair, and it looks like there's a sh"
+[296/1305] coco-existence-000068 C1_text: "There's a table in the image. It has a bunch of food on it. And there's a chair too, but i"
+[297/1305] coco-existence-000068 C2_audio: "There's a table in the image. It has a bunch of food on it. What else do you see in the pi"
+[298/1305] coco-count-000056 C0_none: "There's a table in the image. It's the main piece of furniture. So, there's just one table"
+[299/1305] coco-count-000056 C1_text: "There's a table in the image. It's the only piece of furniture there. So, just one piece o"
+[300/1305] coco-count-000056 C2_audio: "There's a table in the image. That's the only piece of furniture there. So, just one piece"
+[301/1305] coco-existence-000069 C0_none: "There's a cat and a dog in the image. The cat is on the couch, and the dog is on the floor"
+[302/1305] coco-existence-000069 C1_text: "There's a cat in the image. It's sitting on a plaid couch. So, that's the animal present. "
+[303/1305] coco-existence-000069 C2_audio: "There's a cat in the image. It's sitting on a plaid couch. So, that's the animal present. "
+[304/1305] coco-existence-000070 C0_none: "There's a cat and a dog in the image. The cat is on the couch, and the dog is on the floor"
+[305/1305] coco-existence-000070 C1_text: "There's a cat in the image. What do you think about it?"
+[306/1305] coco-existence-000070 C2_audio: "There's a cat in the image. So, what do you think about the cat?"
+[307/1305] coco-existence-000071 C0_none: "There's a cat and a dog in the image. The cat is on the couch, and the dog is on the floor"
+[308/1305] coco-existence-000071 C1_text: "There's a cat in the image. It's sitting on a plaid couch. What do you think about the cat"
+[309/1305] coco-existence-000071 C2_audio: "There's a cat in the image. It's sitting on a plaid couch. So, that's the animal present. "
+[310/1305] coco-existence-000072 C0_none: "There's a cat and a dog in the image. The cat is on the couch, and the dog is on the floor"
+[311/1305] coco-existence-000072 C1_text: "There's a cat in the image. It's sitting on a plaid couch. So, that's the animal present. "
+[312/1305] coco-existence-000072 C2_audio: "There's a cat in the image. It's sitting on a plaid couch. So, that's the animal present. "
+[313/1305] coco-existence-000073 C0_none: "There's a cat and a dog in the image. The cat is on the couch, and the dog is on the floor"
+[314/1305] coco-existence-000073 C1_text: "There's a cat in the image. What do you think about the cat?"
+[315/1305] coco-existence-000073 C2_audio: "There's a cat in the image. So, what do you think about the cat?"
+[316/1305] coco-existence-000074 C0_none: "There's a cat and a dog in the image. The cat is on the couch, and the dog is on the floor"
+[317/1305] coco-existence-000074 C1_text: "There's a cat in the image. So, that's the animal present. What else do you want to know a"
+[318/1305] coco-existence-000074 C2_audio: "There's a cat in the image. So, that's the animal present. What else do you want to know a"
+[319/1305] coco-existence-000075 C0_none: "There's a cat and a dog in the image. The cat is on the couch, and the dog is on the floor"
+[320/1305] coco-existence-000075 C1_text: "There's a cat in the image. So, that's the animal present. What else do you want to know a"
+[321/1305] coco-existence-000075 C2_audio: "There's a cat in the image. So, that's the animal present. What else do you want to know a"
+[322/1305] coco-count-000057 C0_none: "There's a cat and a dog in the image. There's one cat and one dog. So, that's two animals "
+[323/1305] coco-count-000057 C1_text: "There's a cat and a dog in the image. So, there are two animals in total. If you have any "
+[324/1305] coco-count-000057 C2_audio: "There's a cat and a dog in the image. So, there are two animals in total. If you have any "
+[325/1305] coco-existence-000076 C0_none: "Well, in the image, there are scissors and tongs. Oh, and there's also a ladle. So, that's"
+[326/1305] coco-existence-000076 C1_text: 'Well, I can see a pair of scissors and a ladle in the image. Those are kitchen items. What'
+[327/1305] coco-existence-000076 C2_audio: "Well, there are scissors and tongs in the image. Oh, and there's also a ladle. So, that's "
+[328/1305] coco-count-000058 C0_none: 'Well, there are scissors, tongs, and ladles in the image. There are three of each. So, in '
+[329/1305] coco-count-000058 C1_text: 'There are scissors, tongs, and ladles. There are three of each. So, in total, there are 9 '
+[330/1305] coco-count-000058 C2_audio: "There are scissors, tongs, and a ladle in the image. So, that's three kitchen items. If yo"
+[331/1305] coco-existence-000077 C0_none: "Well, I can see a couch in the image. That's the main piece of furniture. There might be o"
+[332/1305] coco-existence-000077 C1_text: "There's a table in the image. What else do you see in the picture?"
+[333/1305] coco-existence-000077 C2_audio: "There's a table in the image. So, that's the piece of furniture present. What else do you "
+[334/1305] coco-existence-000078 C0_none: "Well, in the image, there's a couch, a coffee table, a dining table, some chairs, a TV sta"
+[335/1305] coco-existence-000078 C1_text: "Well, there's a coffee table, a dining table with chairs, a TV stand, and a cabinet. Oh, a"
+[336/1305] coco-existence-000078 C2_audio: "Well, there's a coffee table, a TV, a dining table with chairs, and a cabinet. Oh, and the"
+[337/1305] coco-existence-000079 C0_none: 'Well, I can see a motorcycle in the image. There are also some cars parked around. And the'
+[338/1305] coco-existence-000079 C1_text: "There are cars and a motorcycle in the image. So, that's two types of vehicles. If you hav"
+[339/1305] coco-existence-000079 C2_audio: "Well, there are cars in the image. You can see them parked along the street. And there's a"
+[340/1305] coco-existence-000080 C0_none: "Well, in the image, there's a scooter parked on the left side. And then there are some bic"
+[341/1305] coco-existence-000080 C1_text: 'There are bicycles in the image. You can see them parked near the building. So, yeah, that'
+[342/1305] coco-existence-000080 C2_audio: "There are bicycles in the image. So, that's the answer. If you have any other questions ab"
+[343/1305] coco-existence-000081 C0_none: "Well, in the image, there's a scooter parked on the left side. And then there are some bic"
+[344/1305] coco-existence-000081 C1_text: "There are bicycles in the image. So, that's the answer. If you have any other questions ab"
+[345/1305] coco-existence-000081 C2_audio: "There are bicycles in the image. So, that's the answer. If you have any other questions ab"
+[346/1305] coco-existence-000082 C0_none: "Well, in the image, there's a scooter parked on the left side. And then there are some bic"
+[347/1305] coco-existence-000082 C1_text: 'There are bicycles in the image. You can see them parked near the building. What else do y'
+[348/1305] coco-existence-000082 C2_audio: 'Well, there are bicycles in the image. You can see them parked near the building. And ther'
+[349/1305] coco-existence-000083 C0_none: "Well, in the image, there's a scooter parked on the left side. And then there are some bic"
+[350/1305] coco-existence-000083 C1_text: 'Well, there are bicycles in the image. You can see them parked near the building. And ther'
+[351/1305] coco-existence-000083 C2_audio: "There are bicycles in the image. So, that's the answer. If you have any other questions ab"
+[352/1305] coco-existence-000084 C0_none: "Well, in the image, there's a scooter parked on the left side. And then there are some bic"
+[353/1305] coco-existence-000084 C1_text: "There are bicycles in the image. So, that's the answer. If you have any other questions ab"
+[354/1305] coco-existence-000084 C2_audio: "There are bicycles in the image. So, that's the answer. If you have any other questions ab"
+[355/1305] coco-existence-000085 C0_none: "Well, in the image, there's a scooter parked on the left side. And then there are some bic"
+[356/1305] coco-existence-000085 C1_text: "There are bicycles in the image. So, that's the answer. If you have any other questions ab"
+[357/1305] coco-existence-000085 C2_audio: "There are bicycles in the image. So, that's the answer. If you have any other questions ab"
+[358/1305] coco-existence-000086 C0_none: "Well, in the image, there's a scooter parked on the left side. And then there are some bic"
+[359/1305] coco-existence-000086 C1_text: 'There are bicycles in the image. So, the vehicles present are bicycles. If you have any ot'
+[360/1305] coco-existence-000086 C2_audio: 'There are bicycles in the image. So, the vehicles present are bicycles. If you have any ot'
+[361/1305] coco-existence-000087 C0_none: "Well, in the image, there's a plate with a slice of cake on it. There's also a fork next t"
+[362/1305] coco-existence-000087 C1_text: "Well, in the image, there's a plate with a slice of cake on it. And there's also a fork ne"
+[363/1305] coco-existence-000087 C2_audio: "Well, there's a plate with a slice of cake on it. And there's a fork next to the plate. Oh"
+[364/1305] coco-existence-000088 C0_none: "Well, in the image, there's a plate with a slice of cake on it. There's also a fork next t"
+[365/1305] coco-existence-000088 C1_text: "Well, in the image, there's a plate with a slice of cake on it. And there's also a fork ne"
+[366/1305] coco-existence-000088 C2_audio: "Well, there's a plate with a slice of cake on it. And there's a fork next to the plate. Oh"
+[367/1305] coco-existence-000089 C0_none: "Well, in the image, there's a plate with a slice of cake on it. There's also a fork next t"
+[368/1305] coco-existence-000089 C1_text: "Well, in the image, there's a plate with a slice of cake on it. And there's also a fork ne"
+[369/1305] coco-existence-000089 C2_audio: "Well, in the image, there's a plate with a slice of cake on it. And there's also a fork ne"
+[370/1305] coco-existence-000090 C0_none: "Well, in the image, there's a plate with a slice of cake on it. There's also a fork next t"
+[371/1305] coco-existence-000090 C1_text: "Well, in the image, there's a plate with a slice of cake on it. And there's also a fork ne"
+[372/1305] coco-existence-000090 C2_audio: "Well, there's a plate with a slice of cake on it. And there's a fork next to the plate. Oh"
+[373/1305] coco-existence-000091 C0_none: "Well, in the image, there's a plate with a slice of cake on it. There's also a fork next t"
+[374/1305] coco-existence-000091 C1_text: "Well, in the image, there's a plate with a slice of cake on it. And there's also a fork ne"
+[375/1305] coco-existence-000091 C2_audio: "Well, there's a plate with a slice of cake on it. And there's a fork next to the plate. Oh"
+[376/1305] coco-existence-000092 C0_none: "Well, in the image, there's a plate with a slice of cake on it. There's also a fork next t"
+[377/1305] coco-existence-000092 C1_text: "Well, in the image, there's a plate with a slice of cake on it. And there's also a fork ne"
+[378/1305] coco-existence-000092 C2_audio: "Well, there's a plate with a slice of cake on it. And there's a fork next to the plate. Oh"
+[379/1305] coco-existence-000093 C0_none: "Well, in the image, there's a plate with a slice of cake on it. There's also a fork next t"
+[380/1305] coco-existence-000093 C1_text: "Well, in the image, there's a plate with a slice of cake on it. And there's also a fork ne"
+[381/1305] coco-existence-000093 C2_audio: "Well, there's a plate with a slice of cake on it. And there's a fork next to the plate. Oh"
+[382/1305] coco-count-000060 C0_none: "Well, there's a plate with a slice of cake on it. There's also a fork on the plate. And th"
+[383/1305] coco-count-000060 C1_text: "There's a plate, a fork, a knife, a cake, a bottle, an orange, and a bowl. So, there are 7"
+[384/1305] coco-count-000060 C2_audio: "There's a plate, a knife, a fork, a cake, a bottle, an orange, and a bowl. So, that's 8 ki"
+[385/1305] coco-existence-000094 C0_none: "Well, there's a slice of cake on a plate. It looks like it has layers of chocolate and cre"
+[386/1305] coco-existence-000094 C1_text: "Well, there's a slice of cake on a plate. It looks like it has layers of chocolate and cre"
+[387/1305] coco-existence-000094 C2_audio: "Well, there's a slice of cake on a plate. It looks like it has layers of chocolate and cre"
+[388/1305] coco-count-000061 C0_none: "There's a slice of chocolate cake with white cream in the middle, a whole cake with white "
+[389/1305] coco-count-000061 C1_text: "There's a slice of chocolate cake with white cream in the middle. There's also a whole cak"
+[390/1305] coco-count-000061 C2_audio: "There's a slice of chocolate cake on a plate. There's also a whole cake in the background."
+[391/1305] coco-existence-000096 C0_none: "Well, from what I can see, there's a bowl in the image. That's the main kitchen item. But "
+[392/1305] coco-existence-000096 C1_text: "Well, in the image, there's a bowl. That's the main kitchen item you can see. But there mi"
+[393/1305] coco-existence-000096 C2_audio: "Well, there's a bowl in the image. That's the main kitchen item. But there's also a plate."
+[394/1305] coco-count-000063 C0_none: "Well, there's a bowl in the image. And there's also a plate. So, there are two kitchen ite"
+[395/1305] coco-count-000063 C1_text: "There's a bowl in the image. That's the only kitchen item there. So, just one. If you have"
+[396/1305] coco-count-000063 C2_audio: "There's a bowl in the image. That's the only kitchen item you can see. So, just one kitche"
+[397/1305] coco-existence-000097 C0_none: 'Well, it looks like there are some sliced fruits in the bowl. There are also some slices o'
+[398/1305] coco-existence-000097 C1_text: 'Well, it looks like there are some sliced vegetables in the bowl. Maybe carrots or somethi'
+[399/1305] coco-existence-000097 C2_audio: "Well, it looks like there are some sliced fruits in the bowl. But I can't really tell exac"
+[400/1305] coco-existence-000098 C0_none: "Well, in the image, there's a bottle of mustard, a can of Spam, a bowl, and a plate. Hmm. "
+[401/1305] coco-existence-000098 C1_text: "Well, in the image, there's a bottle of mayonnaise, a can of Spam, a bowl, and a plate. Yo"
+[402/1305] coco-existence-000098 C2_audio: "Well, there's a bottle of mustard, a can of Spam, a bowl, and a plate. That's all the kitc"
+[403/1305] coco-existence-000099 C0_none: "Well, I can see a microwave oven and a toaster oven in the image. There's also a coffee ma"
+[404/1305] coco-existence-000099 C1_text: "Well, I can't really see the microwave in the image. But I can tell you that there's a toa"
+[405/1305] coco-existence-000099 C2_audio: "Well, there's a toaster oven in the image. And there's also a coffee maker. Oh, and a toas"
+[406/1305] coco-count-000066 C0_none: "There's a microwave oven, a toaster oven, a coffee maker, and an iron. So, there are 4 app"
+[407/1305] coco-count-000066 C1_text: "There's a microwave, a toaster oven, a coffee maker, and an iron. There are four appliance"
+[408/1305] coco-count-000066 C2_audio: "There's a microwave in the image. That's the only appliance there. So, just one microwave."
+[409/1305] coco-existence-000100 C0_none: "Well, I can see a table in the image. That's the main piece of furniture there. There migh"
+[410/1305] coco-existence-000100 C1_text: "There's a chair in the image. It's a purple chair. What else do you see in the image?"
+[411/1305] coco-existence-000100 C2_audio: "Well, there's a chair in the image. That's the only piece of furniture I can see. So, what"
+[412/1305] coco-count-000067 C0_none: "There's a table in the image. It's the only piece of furniture there. So, just one piece o"
+[413/1305] coco-count-000067 C1_text: "There's a table in the image. That's the only kind of furniture there. So, just one piece "
+[414/1305] coco-count-000067 C2_audio: "There's a table in the image. That's the only kind of furniture there. So, just one piece "
+[415/1305] coco-existence-000101 C0_none: "Well, from what I can see in the image, there's a plate with a sandwich, some fries, and a"
+[416/1305] coco-existence-000101 C1_text: 'Well, in the image, you can see a plate with a sandwich, some fries, and a side of ketchup'
+[417/1305] coco-existence-000101 C2_audio: "Well, there's a plate in the image. And there are some cutlery like a knife and a fork. Oh"
+[418/1305] coco-count-000068 C0_none: "Well, there's a plate in the image. There are also two buns, one for the sandwich and one "
+[419/1305] coco-count-000068 C1_text: "There's a plate in the image. That's the only kitchen item there. So, just one plate. If y"
+[420/1305] coco-count-000068 C2_audio: "There's a plate in the image. That's the only kitchen item there. So, just one plate. If y"
+[421/1305] clevr-attribute-000001 C0_none: "The sphere is purple in color. It's a medium - sized sphere. And it looks like it's made o"
+[422/1305] clevr-attribute-000001 C1_text: "The sphere is purple in color. It's not very big, but it's definitely noticeable. And it l"
+[423/1305] clevr-attribute-000001 C2_audio: "The sphere is purple in color. It's not clear from the image what material it is made of. "
+[424/1305] clevr-attribute-000002 C0_none: "The sphere is purple in color. It's a medium - sized sphere. And it looks like it's made o"
+[425/1305] clevr-attribute-000002 C1_text: "The sphere is purple in color. It's a bit hard to say exactly how big it is just from the "
+[426/1305] clevr-attribute-000002 C2_audio: "The sphere is purple in color. It's not very big, but it's definitely noticeable. And it l"
+[427/1305] clevr-attribute-000003 C0_none: "The sphere is purple in color. It's a medium - sized sphere. And it looks like it's made o"
+[428/1305] clevr-attribute-000003 C1_text: "The sphere is purple in color. It's a bit hard to say exactly how big it is just from the "
+[429/1305] clevr-attribute-000003 C2_audio: "The sphere is purple in color. It's not described by size in the image. So, that's about i"
+[430/1305] clevr-attribute-000004 C0_none: "The sphere is purple in color. It's a medium - sized sphere. And it looks like it's made o"
+[431/1305] clevr-attribute-000004 C1_text: "The sphere is purple in color. It's not very big, but it's definitely noticeable. And it l"
+[432/1305] clevr-attribute-000004 C2_audio: "The sphere is purple in color. It's not mentioned what material it is made of. So, it coul"
+[433/1305] clevr-attribute-000005 C0_none: "The sphere is purple in color. It's a medium - sized sphere. And it looks like it's made o"
+[434/1305] clevr-attribute-000005 C1_text: "The sphere is purple in color. It's not very big. And it looks like it's made of a soft ma"
+[435/1305] clevr-attribute-000005 C2_audio: "The sphere is purple in color. It looks like it's made of a soft material, probably rubber"
+[436/1305] clevr-attribute-000006 C0_none: "The sphere is purple in color. It's a medium - sized sphere. And it looks like it's made o"
+[437/1305] clevr-attribute-000006 C1_text: "The sphere is purple in color. It's not very big, but it's definitely noticeable. And it l"
+[438/1305] clevr-attribute-000006 C2_audio: "The sphere is purple in color. It looks like it's made of a soft material, probably rubber"
+[439/1305] clevr-attribute-000007 C0_none: "The sphere is purple in color. It's a medium - sized sphere. And it looks like it's made o"
+[440/1305] clevr-attribute-000007 C1_text: "The sphere is purple in color. It's a bit hard to say exactly how big it is just from the "
+[441/1305] clevr-attribute-000007 C2_audio: "The sphere is purple in color. It's not very big, but it's definitely noticeable among the"
+[442/1305] clevr-count-000001 C0_none: "There are 5 cubes. There's 1 sphere. And there are 3 cylinders. So in total, there are 9 o"
+[443/1305] clevr-count-000001 C1_text: 'There are four cubes, one sphere, and two cylinders. So, in total, there are seven objects'
+[444/1305] clevr-count-000001 C2_audio: 'There are 4 cubes, 1 sphere, and 2 cylinders. If you have any other questions about this i'
+[445/1305] clevr-attribute-000008 C0_none: "The cube is cyan in color. It's small in size compared to the other objects in the image. "
+[446/1305] clevr-attribute-000008 C1_text: "The cube is small in size. It's made of a shiny material, which gives it a reflective look"
+[447/1305] clevr-attribute-000008 C2_audio: "The cube is small in size. It looks like it's made of a shiny material, probably metal. So"
+[448/1305] clevr-count-000002 C0_none: 'There are two cubes and two cylinders. One cylinder is purple, and the other is cyan. The '
+[449/1305] clevr-count-000002 C1_text: "There's one cube and two cylinders. So, in total, there are three objects. If you have any"
+[450/1305] clevr-count-000002 C2_audio: "There's one cube and two cylinders. So, in total, there are three objects. If you have any"
+[451/1305] clevr-attribute-000009 C0_none: "The cylinder is green in color. It's a small cylinder. And it looks like it's made of a sh"
+[452/1305] clevr-attribute-000009 C1_text: "The cylinder is green in color. It's small in size. Well, that's about it. If you have any"
+[453/1305] clevr-attribute-000009 C2_audio: "The cylinder is green in color. It's small in size. Well, that's about it. If you have any"
+[454/1305] clevr-count-000003 C0_none: 'There are two cubes and one cylinder. So, in total, there are three objects. If you have a'
+[455/1305] clevr-count-000003 C1_text: 'There are two cubes and one cylinder. So, in total, there are three objects. If you have a'
+[456/1305] clevr-count-000003 C2_audio: 'There are two cubes and one cylinder. So, in total, there are three objects. If you have a'
+[457/1305] clevr-attribute-000010 C0_none: "The sphere is brown in color. It's a large sphere. And it looks like it's made of a shiny "
+[458/1305] clevr-attribute-000010 C1_text: "The sphere is brown in color. It's a bit bigger than the other objects in the image. It lo"
+[459/1305] clevr-attribute-000010 C2_audio: "The sphere is brown in color. It's a bit bigger than the other objects in the image. Well,"
+[460/1305] clevr-count-000004 C0_none: 'There are 2 cubes, 1 sphere, and 2 cylinders. If you have any other questions about this i'
+[461/1305] clevr-count-000004 C1_text: 'There are two cubes, one sphere, and two cylinders. So, in total, there are 5 objects. If '
+[462/1305] clevr-count-000004 C2_audio: 'There are 2 cubes, 1 sphere, and 2 cylinders. So in total, there are 5 objects. If you hav'
+[463/1305] clevr-attribute-000011 C0_none: "The cube is green in color. It's a medium - sized cube. It looks like it's made of a matte"
+[464/1305] clevr-attribute-000011 C1_text: "Well, the cube is green in color. It's a bit bigger than some of the other objects in the "
+[465/1305] clevr-attribute-000011 C2_audio: "The cube is green in color. It's a bit larger than the other objects in the image. It look"
+[466/1305] clevr-count-000005 C0_none: "There's one cube. There are three spheres - a small gray one, a blue one, and a yellow one"
+[467/1305] clevr-count-000005 C1_text: "There's one cube. There are three spheres - a small gray one, a blue one, and a yellow one"
+[468/1305] clevr-count-000005 C2_audio: "There's one cube, two spheres, and several cylinders. So, in total, there are 3 different "
+[469/1305] clevr-count-000006 C0_none: "There's one cube. There are three spheres - a small gray one, a blue one, and a yellow one"
+[470/1305] clevr-count-000006 C1_text: "There's one cube, two spheres, and nine cylinders. So, in total, there are 12 objects. If "
+[471/1305] clevr-count-000006 C2_audio: "There's one cube, two spheres, and several cylinders. So, in total, there are 3 objects. I"
+[472/1305] clevr-count-000007 C0_none: "There's one cube. There are three spheres - a small gray one, a blue one, and a yellow one"
+[473/1305] clevr-count-000007 C1_text: "There's one cube. There are three spheres - a blue one, a gray one, and a yellow one. And "
+[474/1305] clevr-count-000007 C2_audio: 'There is 1 cube. There are 3 spheres. And there are 7 cylinders. If you have any other que'
+[475/1305] clevr-count-000008 C0_none: "There's one cube. There are three spheres - a small gray one, a blue one, and a yellow one"
+[476/1305] clevr-count-000008 C1_text: "There's one cube, two spheres, and several cylinders. If you want to know more about the s"
+[477/1305] clevr-count-000008 C2_audio: "There's one cube, two spheres, and several cylinders. So, in total, there are three differ"
+[478/1305] clevr-count-000009 C0_none: "There's one cube. There are three spheres - a small gray one, a blue one, and a yellow one"
+[479/1305] clevr-count-000009 C1_text: "There's one cube. There are three spheres. And there are several cylinders. So, in total, "
+[480/1305] clevr-count-000009 C2_audio: "There's one cube. There are three spheres. And there are six cylinders. So, in total, ther"
+[481/1305] clevr-count-000010 C0_none: "There's one cube. There are three spheres - a small gray one, a blue one, and a yellow one"
+[482/1305] clevr-count-000010 C1_text: "There's one cube. There are three spheres - a small gray one, a blue one, and a yellow one"
+[483/1305] clevr-count-000010 C2_audio: "There's one cube. There are three spheres - a small gray one, a blue one, and a yellow one"
+[484/1305] clevr-count-000011 C0_none: "There's one cube. There are three spheres - a small gray one, a blue one, and a yellow one"
+[485/1305] clevr-count-000011 C1_text: "There's one cube, two spheres, and several cylinders. So, that's a total of three differen"
+[486/1305] clevr-count-000011 C2_audio: "There's 1 cube, 3 spheres, and 6 cylinders. So the answer is 1 cube, 3 spheres. If you hav"
+[487/1305] clevr-attribute-000012 C0_none: "The cylinder is purple in color. It's quite large in size compared to the other objects in"
+[488/1305] clevr-attribute-000012 C1_text: "Well, the cylinder is large. It's got a shiny, metallic look to it. It's probably made of "
+[489/1305] clevr-attribute-000012 C2_audio: "The cylinder is large in size. It's made of a shiny material, which gives it a reflective "
+[490/1305] clevr-attribute-000013 C0_none: "The cylinder is purple in color. It's quite large in size compared to the other objects in"
+[491/1305] clevr-attribute-000013 C1_text: "The cylinder is purple in color. It's quite large in size compared to the other objects in"
+[492/1305] clevr-attribute-000013 C2_audio: "The cylinder is purple in color. It's quite large in size compared to the other objects in"
+[493/1305] clevr-attribute-000014 C0_none: "The cylinder is purple in color. It's quite large in size compared to the other objects in"
+[494/1305] clevr-attribute-000014 C1_text: "The cylinder is purple in color. It's quite large in size compared to the other objects in"
+[495/1305] clevr-attribute-000014 C2_audio: "The cylinder is purple in color. It's quite large in size compared to the other objects in"
+[496/1305] clevr-attribute-000015 C0_none: "The cylinder is purple in color. It's quite large in size compared to the other objects in"
+[497/1305] clevr-attribute-000015 C1_text: "Well, the cylinder is large in size. It's made of a shiny material, which gives it a refle"
+[498/1305] clevr-attribute-000015 C2_audio: "The cylinder is large in size. It's made of a shiny material, which gives it a reflective "
+[499/1305] clevr-attribute-000016 C0_none: "The cylinder is purple in color. It's quite large in size compared to the other objects in"
+[500/1305] clevr-attribute-000016 C1_text: "Well, it's a large cylinder. It's made of a shiny material. And it's quite big in size. So"
+[501/1305] clevr-attribute-000016 C2_audio: "The cylinder is large in size. It's made of a shiny material, which gives it a reflective "
+[502/1305] clevr-attribute-000017 C0_none: "The cylinder is purple in color. It's quite large in size compared to the other objects in"
+[503/1305] clevr-attribute-000017 C1_text: "Well, it's a large cylinder. It's got a shiny surface, which means it's probably made of a"
+[504/1305] clevr-attribute-000017 C2_audio: "The cylinder is large in size. It has a shiny, reflective surface, which suggests it's mad"
+[505/1305] clevr-attribute-000018 C0_none: "The cylinder is purple in color. It's quite large in size compared to the other objects in"
+[506/1305] clevr-attribute-000018 C1_text: "The cylinder is purple in color. It's quite large in size compared to the other objects in"
+[507/1305] clevr-attribute-000018 C2_audio: "The cylinder is purple in color. It's quite large in size compared to the other objects in"
+[508/1305] clevr-count-000012 C0_none: 'There are 7 spheres and 1 cylinder. If you have any other questions about this image, feel'
+[509/1305] clevr-count-000012 C1_text: 'There are eight spheres and one cylinder. So, in total, there are nine objects. If you hav'
+[510/1305] clevr-count-000012 C2_audio: 'There are 7 spheres. So, there are 7 spheres. If you have any other questions about this i'
+[511/1305] clevr-count-000013 C0_none: 'There are 7 spheres and 1 cylinder. If you have any other questions about this image, feel'
+[512/1305] clevr-count-000013 C1_text: 'There are 7 spheres and 1 cylinder. So in total, there are 8 objects. If you have any othe'
+[513/1305] clevr-count-000013 C2_audio: 'There are 7 spheres. So, there are 7 spheres. If you have any other questions about this i'
+[514/1305] clevr-count-000014 C0_none: 'There are 7 spheres and 1 cylinder. If you have any other questions about this image, feel'
+[515/1305] clevr-count-000014 C1_text: 'There are 7 spheres and 1 cylinder. If you have any other questions about this image, feel'
+[516/1305] clevr-count-000014 C2_audio: 'There are 7 spheres and 1 cylinder in the picture. If you have any other questions about t'
+[517/1305] clevr-count-000015 C0_none: 'There are 7 spheres and 1 cylinder. If you have any other questions about this image, feel'
+[518/1305] clevr-count-000015 C1_text: 'There are 7 spheres and 1 cylinder. So in total, there are 8 objects. If you have any othe'
+[519/1305] clevr-count-000015 C2_audio: 'There are 7 spheres and 1 cylinder. So in total, there are 8 objects. If you have any othe'
+[520/1305] clevr-count-000016 C0_none: 'There are 7 spheres and 1 cylinder. If you have any other questions about this image, feel'
+[521/1305] clevr-count-000016 C1_text: 'There are eight spheres and one cylinder. So, in total, there are nine objects. If you hav'
+[522/1305] clevr-count-000016 C2_audio: 'There are 7 spheres. So, there are 7 spheres in total. If you have any other questions abo'
+[523/1305] clevr-count-000017 C0_none: 'There are 7 spheres and 1 cylinder. If you have any other questions about this image, feel'
+[524/1305] clevr-count-000017 C1_text: 'There are eight spheres and one cylinder. So, in total, there are nine objects. If you hav'
+[525/1305] clevr-count-000017 C2_audio: "There are seven spheres in total. There's one small cyan sphere, one large red sphere, one"
+[526/1305] clevr-count-000018 C0_none: 'There are 7 spheres and 1 cylinder. If you have any other questions about this image, feel'
+[527/1305] clevr-count-000018 C1_text: 'There are 7 spheres. So, there are 7 spheres. If you have any other questions about this i'
+[528/1305] clevr-count-000018 C2_audio: 'There are 7 spheres. So the answer is 7. If you have any other questions about this image '
+[529/1305] clevr-attribute-000019 C0_none: "The cube is red in color. It's a small cube. And it looks like it's made of a shiny materi"
+[530/1305] clevr-attribute-000019 C1_text: "The cube is red in color. It's a small cube. It looks like it's made of a shiny material, "
+[531/1305] clevr-attribute-000019 C2_audio: "The cube is red in color. It's a small cube. It looks like it's made of a shiny material, "
+[532/1305] clevr-count-000019 C0_none: 'There are two cubes and two cylinders. One cylinder is red and the other is purple. So, in'
+[533/1305] clevr-count-000019 C1_text: 'There are two cylinders and one cube. So, in total, there are three objects. If you have a'
+[534/1305] clevr-count-000019 C2_audio: 'There are 2 cylinders and 1 cube. So in total, there are 3 objects. If you have any other '
+[535/1305] clevr-count-000020 C0_none: 'There are two cubes and two cylinders. One cylinder is red and the other is purple. So, in'
+[536/1305] clevr-count-000020 C1_text: 'There are two cylinders and one cube. So, in total, there are three objects. If you have a'
+[537/1305] clevr-count-000020 C2_audio: 'There are 2 cubes and 2 cylinders. If you have any other questions about this image, feel '
+[538/1305] clevr-count-000021 C0_none: 'There are two cubes and two cylinders. One cylinder is red and the other is purple. So, in'
+[539/1305] clevr-count-000021 C1_text: 'There are two cylinders and one cube. So, in total, there are three objects. If you have a'
+[540/1305] clevr-count-000021 C2_audio: 'There are 2 cylinders and 1 cube. So in total, there are 3 objects. If you have any other '
+[541/1305] clevr-count-000022 C0_none: 'There are two cubes and two cylinders. One cylinder is red and the other is purple. So, in'
+[542/1305] clevr-count-000022 C1_text: 'There are two cylinders and one cube. So, in total, there are three objects. If you have a'
+[543/1305] clevr-count-000022 C2_audio: 'There are 2 cylinders. So, there are 2 cylinders. If you have any other questions about th'
+[544/1305] clevr-count-000023 C0_none: 'There are two cubes and two cylinders. One cylinder is red and the other is purple. So, in'
+[545/1305] clevr-count-000023 C1_text: 'There are two cubes and two cylinders. If you have any other questions about this image, f'
+[546/1305] clevr-count-000023 C2_audio: 'There are two cylinders and one cube. So, in total, there are three objects. If you have a'
+[547/1305] clevr-count-000024 C0_none: 'There are two cubes and two cylinders. One cylinder is red and the other is purple. So, in'
+[548/1305] clevr-count-000024 C1_text: 'There are two cubes and two cylinders. If you have any other questions about this image, f'
+[549/1305] clevr-count-000024 C2_audio: 'There are two cylinders and one cube. So, in total, there are three objects. If you have a'
+[550/1305] clevr-count-000025 C0_none: 'There are two cubes and two cylinders. One cylinder is red and the other is purple. So, in'
+[551/1305] clevr-count-000025 C1_text: 'There are two cylinders and one cube. So, there are two cylinders. If you have any other q'
+[552/1305] clevr-count-000025 C2_audio: 'There are 2 cylinders. So, the answer is 2. If you have any other questions about this ima'
+[553/1305] clevr-attribute-000020 C0_none: "The sphere is gray in color. It's a large sphere. And it looks like it's made of a shiny m"
+[554/1305] clevr-attribute-000020 C1_text: "The sphere is gray in color. It's a large sphere. Well, that's about it. If you have any o"
+[555/1305] clevr-attribute-000020 C2_audio: "The sphere is gray in color. It's a large sphere. Well, that's about it. If you have any o"
+[556/1305] clevr-attribute-000021 C0_none: "The cube is blue in color. It's relatively small in size. And it looks like it's made of a"
+[557/1305] clevr-attribute-000021 C1_text: "The cube is blue, it's small in size. Well, that's about it. If you have any other questio"
+[558/1305] clevr-attribute-000021 C2_audio: "The cube is blue. It's small in size. Well, that's about it. If you have any other questio"
+[559/1305] clevr-count-000026 C0_none: 'There are 1 cube, 1 sphere, and 8 cylinders. If you have any other questions about this im'
+[560/1305] clevr-count-000026 C1_text: 'There are 1 cube, 1 sphere, and 8 cylinders. If you have any other questions about this im'
+[561/1305] clevr-count-000026 C2_audio: 'There are 1 cube, 1 sphere, and 8 cylinders. So in total, there are 10 objects. If you hav'
+[562/1305] clevr-attribute-000022 C0_none: "The sphere is blue in color. It's relatively large compared to the other objects in the im"
+[563/1305] clevr-attribute-000022 C1_text: "The sphere is blue in color. It's quite large compared to the other objects in the image. "
+[564/1305] clevr-attribute-000022 C2_audio: "The sphere is blue in color. It's a large sphere. Well, that's about it. If you have any o"
+[565/1305] clevr-count-000027 C0_none: "There are 5 cubes. There's 1 sphere. And there are 2 cylinders. So in total, there are 8 o"
+[566/1305] clevr-count-000027 C1_text: 'There are 4 cubes, 2 cylinders, and 1 sphere. If you have any other questions about this i'
+[567/1305] clevr-count-000027 C2_audio: 'There are 4 cubes, 1 sphere, and 2 cylinders. So in total, there are 7 objects. If you hav'
+[568/1305] clevr-count-000028 C0_none: "There are 5 cubes. There's 1 sphere. And there are 2 cylinders. So in total, there are 8 o"
+[569/1305] clevr-count-000028 C1_text: 'There are 4 cubes, 2 cylinders, and 1 sphere. If you have any other questions about this i'
+[570/1305] clevr-count-000028 C2_audio: 'There are 4 cubes, 1 sphere, and 2 cylinders. If you have any other questions about this i'
+[571/1305] clevr-count-000029 C0_none: "There are 5 cubes. There's 1 sphere. And there are 2 cylinders. So in total, there are 8 o"
+[572/1305] clevr-count-000029 C1_text: 'There are 4 cubes, 2 cylinders, and 1 sphere. If you have any other questions about this i'
+[573/1305] clevr-count-000029 C2_audio: 'There are 4 cubes, 1 sphere, and 2 cylinders. So in total, there are 7 objects. If you hav'
+[574/1305] clevr-count-000030 C0_none: "There are 5 cubes. There's 1 sphere. And there are 2 cylinders. So in total, there are 8 o"
+[575/1305] clevr-count-000030 C1_text: 'There are 4 cubes, 2 cylinders, and 1 sphere. If you have any other questions about this i'
+[576/1305] clevr-count-000030 C2_audio: 'There are 4 cubes, 1 sphere, and 2 cylinders. So in total, there are 7 objects. If you hav'
+[577/1305] clevr-count-000031 C0_none: "There are 5 cubes. There's 1 sphere. And there are 2 cylinders. So in total, there are 8 o"
+[578/1305] clevr-count-000031 C1_text: 'There are 4 cubes, 1 sphere, and 2 cylinders. So, in total, there are 7 objects. If you ha'
+[579/1305] clevr-count-000031 C2_audio: 'There are 4 cubes, 1 sphere, and 2 cylinders. So, in total, there are 7 objects. If you ha'
+[580/1305] clevr-count-000032 C0_none: "There are 5 cubes. There's 1 sphere. And there are 2 cylinders. So in total, there are 8 o"
+[581/1305] clevr-count-000032 C1_text: 'There are 5 cubes, 2 spheres, and 2 cylinders. If you have any other questions about this '
+[582/1305] clevr-count-000032 C2_audio: 'There are 4 cubes, 1 sphere, and 2 cylinders. So in total, there are 7 objects. If you hav'
+[583/1305] clevr-count-000033 C0_none: "There are 5 cubes. There's 1 sphere. And there are 2 cylinders. So in total, there are 8 o"
+[584/1305] clevr-count-000033 C1_text: "There are 4 cubes, 2 cylinders, and 1 sphere. So that's 7 objects in total. If you have an"
+[585/1305] clevr-count-000033 C2_audio: 'There are 3 cylinders, 2 spheres, and 3 cubes. So the total is 8 objects. If you have any '
+[586/1305] clevr-attribute-000023 C0_none: "The sphere is cyan in color. It's small in size. And it looks like it's made of a shiny ma"
+[587/1305] clevr-attribute-000023 C1_text: "The sphere is small in size. It's made of a shiny material, like metal. But it's hard to s"
+[588/1305] clevr-attribute-000023 C2_audio: "The sphere is small in size. It's made of a shiny material, like metal. So, it reflects li"
+[589/1305] clevr-count-000034 C0_none: "There are 3 cubes. There's 1 sphere. And there are 4 cylinders. So in total, there are 3 c"
+[590/1305] clevr-count-000034 C1_text: 'There are 2 cubes, 1 sphere, and 3 cylinders. So, in total, there are 6 objects. If you ha'
+[591/1305] clevr-count-000034 C2_audio: "There are two cubes, one sphere, and three cylinders. So, that's a total of six objects. I"
+[592/1305] clevr-attribute-000024 C0_none: "The sphere is blue in color. It's small in size. And it looks like it's made of a shiny ma"
+[593/1305] clevr-attribute-000024 C1_text: "The sphere is blue in color. It's small in size. It looks like it's made of a shiny materi"
+[594/1305] clevr-attribute-000024 C2_audio: "The sphere is blue in color. It's small in size. It looks like it's made of a shiny materi"
+[595/1305] clevr-count-000035 C0_none: "There are 7 cubes. There's 1 sphere. And there are 2 cylinders. So in total, there are 10 "
+[596/1305] clevr-count-000035 C1_text: 'There are 6 cubes, 3 cylinders, and 1 sphere. So in total, there are 10 objects. If you ha'
+[597/1305] clevr-count-000035 C2_audio: 'There are 6 cubes, 2 cylinders, and 1 sphere. So in total, there are 9 objects. If you hav'
+[598/1305] clevr-attribute-000025 C0_none: "The cylinder is green in color. It's a large cylinder. It looks like it's made of a rubber"
+[599/1305] clevr-attribute-000025 C1_text: "The cylinder is green in color. It looks like it's made of a rubbery material. It's not su"
+[600/1305] clevr-attribute-000025 C2_audio: "The cylinder is green in color. It looks like it's made of a rubbery material. So, what el"
+[601/1305] clevr-count-000036 C0_none: 'There are 3 cubes. There are 2 spheres. And there is 1 cylinder. If you have any other que'
+[602/1305] clevr-count-000036 C1_text: "There are three cubes, two spheres, and one cylinder. So, that's a total of six objects. I"
+[603/1305] clevr-count-000036 C2_audio: 'There are 3 cubes, 2 spheres, and 1 cylinder. So, in total, there are 6 objects. If you ha'
+[604/1305] clevr-count-000037 C0_none: 'There are 3 cubes. There are 2 spheres. And there is 1 cylinder. If you have any other que'
+[605/1305] clevr-count-000037 C1_text: 'There are 3 cubes, 2 spheres, and 1 cylinder. If you have any other questions about this i'
+[606/1305] clevr-count-000037 C2_audio: 'There are 3 cubes, 2 spheres, and 1 cylinder. If you have any other questions about this i'
+[607/1305] clevr-count-000038 C0_none: 'There are 3 cubes. There are 2 spheres. And there is 1 cylinder. If you have any other que'
+[608/1305] clevr-count-000038 C1_text: 'There are 3 cubes, 2 spheres, and 1 cylinder. If you have any other questions about this i'
+[609/1305] clevr-count-000038 C2_audio: 'There are 3 cubes, 2 spheres, and 1 cylinder. If you have any other questions about this i'
+[610/1305] clevr-count-000039 C0_none: 'There are 3 cubes. There are 2 spheres. And there is 1 cylinder. If you have any other que'
+[611/1305] clevr-count-000039 C1_text: 'There are 3 cubes, 2 spheres, and 1 cylinder. If you have any other questions about this i'
+[612/1305] clevr-count-000039 C2_audio: 'There are 3 cubes, 2 spheres, and 1 cylinder. So in total, there are 6 objects. If you hav'
+[613/1305] clevr-count-000040 C0_none: 'There are 3 cubes. There are 2 spheres. And there is 1 cylinder. If you have any other que'
+[614/1305] clevr-count-000040 C1_text: "There are three cubes, two spheres, and one cylinder. So, that's a total of six objects. I"
+[615/1305] clevr-count-000040 C2_audio: 'There are 3 cubes, 2 spheres, and 1 cylinder. If you have any other questions about this i'
+[616/1305] clevr-count-000041 C0_none: 'There are 3 cubes. There are 2 spheres. And there is 1 cylinder. If you have any other que'
+[617/1305] clevr-count-000041 C1_text: 'There are three cubes, two spheres, and one cylinder. So, in total, there are six objects.'
+[618/1305] clevr-count-000041 C2_audio: 'There are three cubes, two spheres, and one cylinder. So, in total, there are six objects.'
+[619/1305] clevr-count-000042 C0_none: 'There are 3 cubes. There are 2 spheres. And there is 1 cylinder. If you have any other que'
+[620/1305] clevr-count-000042 C1_text: 'There are 3 cubes, 2 spheres, and 1 cylinder. So the answer is 3 cubes, 2 spheres, and 1 c'
+[621/1305] clevr-count-000042 C2_audio: 'There are 3 cubes, 2 cylinders, and 2 spheres. So the answer is 3 cubes, 2 cylinders, and '
+[622/1305] clevr-attribute-000026 C0_none: "The cylinder is green in color. It's a small cylinder. And it looks like it's made of a ma"
+[623/1305] clevr-attribute-000026 C1_text: "The cylinder is green in color. It's small in size. And it looks like it's made of a matte"
+[624/1305] clevr-attribute-000026 C2_audio: "The cylinder is small in size. It looks like it's made of a matte material. Well, that's a"
+[625/1305] clevr-count-000043 C0_none: 'There are two spheres and one cylinder. So, in total, there are three objects. If you have'
+[626/1305] clevr-count-000043 C1_text: 'There are two spheres and one cylinder. So, in total, there are three objects. If you have'
+[627/1305] clevr-count-000043 C2_audio: "There are two spheres. So, that's it. If you have any other questions about this image or "
+[628/1305] clevr-attribute-000027 C0_none: "The sphere is red in color. It's quite large compared to the other objects in the image. A"
+[629/1305] clevr-attribute-000027 C1_text: "The sphere is red in color. It's a bit hard to say exactly how big it is just from the ima"
+[630/1305] clevr-attribute-000027 C2_audio: "The sphere is red in color. It's a bit hard to tell exactly how big it is just from the im"
+[631/1305] clevr-count-000044 C0_none: 'There are 2 cubes, 1 sphere, and 4 cylinders. If you have any other questions about this i'
+[632/1305] clevr-count-000044 C1_text: 'There are 2 cubes, 1 sphere, and 3 cylinders. If you have any other questions about this i'
+[633/1305] clevr-count-000044 C2_audio: 'There are 2 cubes, 1 sphere, and 3 cylinders. So in total, there are 6 objects. If you hav'
+[634/1305] clevr-attribute-000028 C0_none: "The sphere is small in size. It's a shiny, metallic - looking sphere. It's a teal - like c"
+[635/1305] clevr-attribute-000028 C1_text: "The sphere is small in size. It's made of a shiny material. Well, that's about it. If you "
+[636/1305] clevr-attribute-000028 C2_audio: "The sphere is small in size. It looks like it's made of a shiny material, probably metal. "
+[637/1305] clevr-count-000045 C0_none: "There are 5 cubes. There's 1 sphere. And there are 5 cylinders. So in total, there are 11 "
+[638/1305] clevr-count-000045 C1_text: 'There are 4 cubes, 1 sphere, and 5 cylinders. If you have any other questions about this i'
+[639/1305] clevr-count-000045 C2_audio: 'There are 4 cubes, 1 sphere, and 5 cylinders. So in total, there are 10 objects. If you ha'
+[640/1305] clevr-attribute-000029 C0_none: "The sphere is purple in color. It's relatively large compared to the other objects in the "
+[641/1305] clevr-attribute-000029 C1_text: "The sphere is purple in color. It's quite large compared to the other objects in the image"
+[642/1305] clevr-attribute-000029 C2_audio: "The sphere is purple in color. It's quite large compared to the other objects in the image"
+[643/1305] clevr-count-000046 C0_none: "There are 4 cubes. There's 1 sphere. And there are 3 cylinders. So in total, there are 4 c"
+[644/1305] clevr-count-000046 C1_text: 'There are 3 cubes, 2 spheres, and 3 cylinders. So in total, there are 8 objects. If you ha'
+[645/1305] clevr-count-000046 C2_audio: 'There are 3 cubes, 1 sphere, and 3 cylinders. So in total, there are 7 objects. If you hav'
+[646/1305] clevr-attribute-000030 C0_none: "The cylinder is purple in color. It's relatively large compared to the other objects in th"
+[647/1305] clevr-attribute-000030 C1_text: "The cylinder is purple in color. It's a bit bigger than the other objects in the image. It"
+[648/1305] clevr-attribute-000030 C2_audio: "The cylinder is purple in color. It looks like it's made of a shiny material, probably met"
+[649/1305] clevr-count-000047 C0_none: 'There are three spheres and one cylinder. So, in total, there are four objects. If you hav'
+[650/1305] clevr-count-000047 C1_text: 'There are 3 spheres and 1 cylinder. So, the answer is 1 cylinder. If you have any other qu'
+[651/1305] clevr-count-000047 C2_audio: 'There are 2 cylinders. So, the answer is 2. If you have any other questions about this ima'
+[652/1305] clevr-attribute-000031 C0_none: "The cylinder is blue in color. It's relatively small in size. And it looks like it's made "
+[653/1305] clevr-attribute-000031 C1_text: "The cylinder is blue in color. It's small in size. And it looks like it's made of a matte "
+[654/1305] clevr-attribute-000031 C2_audio: "The cylinder is small in size. It looks like it's made of a matte material. Well, that's a"
+[655/1305] clevr-count-000048 C0_none: 'There are two spheres and one cylinder. So, in total, there are three objects. If you have'
+[656/1305] clevr-count-000048 C1_text: 'There are two spheres and one cylinder. So, in total, there are three objects. If you have'
+[657/1305] clevr-count-000048 C2_audio: 'There are two spheres and one cylinder. So, in total, there are three objects. If you have'
+[658/1305] clevr-attribute-000032 C0_none: "The cube is cyan in color. It's relatively large compared to the other objects in the imag"
+[659/1305] clevr-attribute-000032 C1_text: "The cube is large in size. It's made of a matte material. Well, that's about it. If you ha"
+[660/1305] clevr-attribute-000032 C2_audio: "The cube is large in size. It looks like it's made of a soft, matte material. It has a smo"
+[661/1305] clevr-count-000049 C0_none: "There's one cube. There are four spheres - a large cyan one, a brown one, a small blue one"
+[662/1305] clevr-count-000049 C1_text: "There's one cube. There are three spheres - a big cyan one, a brown one, and a small red o"
+[663/1305] clevr-count-000049 C2_audio: "There's one cube. There are three spheres - a big cyan one, a brown one, and a small red o"
+[664/1305] clevr-attribute-000033 C0_none: "The cube is blue in color. It's a medium - sized cube. It looks like it's made of a matte "
+[665/1305] clevr-attribute-000033 C1_text: "The cube is blue in color. It's a medium - sized cube. Well, that's about it. If you have "
+[666/1305] clevr-attribute-000033 C2_audio: "The cube is blue in color. It's a medium - sized cube. Well, that's about it. If you have "
+[667/1305] clevr-attribute-000034 C0_none: "The cube is blue in color. It's a medium - sized cube. It looks like it's made of a matte "
+[668/1305] clevr-attribute-000034 C1_text: "The cube is blue in color. It's a medium - sized cube. Well, that's about it. If you have "
+[669/1305] clevr-attribute-000034 C2_audio: "The cube is blue in color. It's a medium - sized cube. Well, that's about it. If you have "
+[670/1305] clevr-attribute-000035 C0_none: "The cube is blue in color. It's a medium - sized cube. It looks like it's made of a matte "
+[671/1305] clevr-attribute-000035 C1_text: "The cube is blue in color. It's a medium - sized cube. Well, that's about it. If you have "
+[672/1305] clevr-attribute-000035 C2_audio: "The cube is blue in color. It's a bit bigger than the other objects in the image. It's a m"
+[673/1305] clevr-attribute-000036 C0_none: "The cube is blue in color. It's a medium - sized cube. It looks like it's made of a matte "
+[674/1305] clevr-attribute-000036 C1_text: "The cube is blue in color. It's a medium - sized cube. Well, that's about it. If you have "
+[675/1305] clevr-attribute-000036 C2_audio: "The cube is blue in color. It's a bit bigger than the other objects in the image. Well, th"
+[676/1305] clevr-attribute-000037 C0_none: "The cube is blue in color. It's a medium - sized cube. It looks like it's made of a matte "
+[677/1305] clevr-attribute-000037 C1_text: "The cube is blue in color. It's a bit bigger than the other objects in the image. It's a m"
+[678/1305] clevr-attribute-000037 C2_audio: "The cube is blue in color. It's a bit bigger than the other objects in the image. Well, th"
+[679/1305] clevr-attribute-000038 C0_none: "The cube is blue in color. It's a medium - sized cube. It looks like it's made of a matte "
+[680/1305] clevr-attribute-000038 C1_text: "The cube is blue in color. It's a bit larger than the other objects in the image. It's a c"
+[681/1305] clevr-attribute-000038 C2_audio: "The cube is blue in color. It's a bit bigger than the other objects in the image. It's not"
+[682/1305] clevr-attribute-000039 C0_none: "The cube is blue in color. It's a medium - sized cube. It looks like it's made of a matte "
+[683/1305] clevr-attribute-000039 C1_text: "The cube is blue in color. It's a medium - sized cube. It looks like it's made of a matte "
+[684/1305] clevr-attribute-000039 C2_audio: "The cube is blue in color. It's a medium - sized cube. Well, that's about it. If you have "
+[685/1305] clevr-count-000050 C0_none: "There's one cube, there are four spheres, and there are five cylinders. So, in total, ther"
+[686/1305] clevr-count-000050 C1_text: "There's one cube. There are four spheres - one big purple metallic one, two small purple m"
+[687/1305] clevr-count-000050 C2_audio: 'There are 3 cubes. There are 5 spheres. And there are 5 cylinders. If you have any other q'
+[688/1305] clevr-attribute-000040 C0_none: "The cylinder is red in color. It's relatively large in size compared to the other objects "
+[689/1305] clevr-attribute-000040 C1_text: "The cylinder is red in color. It looks like it's made of a shiny material, probably metal."
+[690/1305] clevr-attribute-000040 C2_audio: "The cylinder is red in color. It looks like it's made of a shiny material, probably metal."
+[691/1305] clevr-attribute-000041 C0_none: "The cylinder is red in color. It's relatively large in size compared to the other objects "
+[692/1305] clevr-attribute-000041 C1_text: "The cylinder is red in color. It's a bit hard to say exactly how big it is just from the i"
+[693/1305] clevr-attribute-000041 C2_audio: "The cylinder is red in color. It looks like it's made of a shiny material, probably metal."
+[694/1305] clevr-attribute-000042 C0_none: "The cylinder is red in color. It's relatively large in size compared to the other objects "
+[695/1305] clevr-attribute-000042 C1_text: "The cylinder is red in color. It's a bit hard to say exactly how big it is just from the i"
+[696/1305] clevr-attribute-000042 C2_audio: "The cylinder is red in color. It's a bit hard to tell the exact size from the image, but i"
+[697/1305] clevr-attribute-000043 C0_none: "The cylinder is red in color. It's relatively large in size compared to the other objects "
+[698/1305] clevr-attribute-000043 C1_text: "The cylinder is red in color. It's a bit hard to say exactly how big it is just from the i"
+[699/1305] clevr-attribute-000043 C2_audio: "The cylinder is red in color. It looks like it's made of a shiny material, probably metal."
+[700/1305] clevr-attribute-000044 C0_none: "The cylinder is red in color. It's relatively large in size compared to the other objects "
+[701/1305] clevr-attribute-000044 C1_text: "The cylinder is red in color. It looks like it's made of a shiny material, probably metal."
+[702/1305] clevr-attribute-000044 C2_audio: "The cylinder is red in color. It looks like it's made of a shiny material, probably metal."
+[703/1305] clevr-attribute-000045 C0_none: "The cylinder is red in color. It's relatively large in size compared to the other objects "
+[704/1305] clevr-attribute-000045 C1_text: "The cylinder is red in color. It looks like it's made of a shiny material, probably metal."
+[705/1305] clevr-attribute-000045 C2_audio: "The cylinder is red in color. It looks like it's made of a shiny material, probably metal."
+[706/1305] clevr-attribute-000046 C0_none: "The cylinder is red in color. It's relatively large in size compared to the other objects "
+[707/1305] clevr-attribute-000046 C1_text: "The cylinder is red in color. It's a bit bigger than the other two objects in the image. I"
+[708/1305] clevr-attribute-000046 C2_audio: "The cylinder is red in color. It looks like it's made of a shiny material, probably metal."
+[709/1305] clevr-attribute-000047 C0_none: "The sphere is green in color. It's a large sphere. And it looks like it's made of rubber o"
+[710/1305] clevr-attribute-000047 C1_text: "Well, it's a green sphere. It's not too big, but it's definitely noticeable. And it looks "
+[711/1305] clevr-attribute-000047 C2_audio: "The sphere is large in size. It has a smooth surface, which suggests it's made of a materi"
+[712/1305] clevr-attribute-000048 C0_none: "The cube is yellow in color. It's relatively small in size. And it looks like it's made of"
+[713/1305] clevr-attribute-000048 C1_text: "The cube is small in size. It's made of a shiny material, like metal. It's yellow in color"
+[714/1305] clevr-attribute-000048 C2_audio: "The cube is small in size. It's made of a shiny material, like metal. So, it has a reflect"
+[715/1305] clevr-count-000051 C0_none: "There's one cube, one sphere, and one cylinder. So, that's a total of three. If you have a"
+[716/1305] clevr-count-000051 C1_text: "There's one sphere, one cylinder, and one cube. So, in total, there are three objects. If "
+[717/1305] clevr-count-000051 C2_audio: "There's one cube, one sphere, and one cylinder. So, that's three objects in total. If you "
+[718/1305] clevr-attribute-000049 C0_none: "The cube is gray in color. It's quite large in size compared to the other objects in the i"
+[719/1305] clevr-attribute-000049 C1_text: "The cube is gray in color. It's a bit hard to say exactly how big it is just from the imag"
+[720/1305] clevr-attribute-000049 C2_audio: "The cube is gray in color. It looks like it's made of a shiny material. So, that's about i"
+[721/1305] clevr-count-000052 C0_none: "There's one cube, three spheres, and two cylinders. So, in total, there are six objects. I"
+[722/1305] clevr-count-000052 C1_text: "There's one cube, three spheres, and two cylinders. So, in total, there are six objects. I"
+[723/1305] clevr-count-000052 C2_audio: "There's one cube, three spheres, and two cylinders. So, in total, there are six objects. I"
+[724/1305] clevr-attribute-000050 C0_none: "The cylinder is brown in color. It's relatively small in size. And it looks like it's made"
+[725/1305] clevr-attribute-000050 C1_text: "It's a small brown cylinder. It's not very big, but it's definitely noticeable. It looks l"
+[726/1305] clevr-attribute-000050 C2_audio: "The cylinder is small in size. It's made of a shiny material, like metal. It's brown in co"
+[727/1305] clevr-count-000053 C0_none: 'There are 3 cubes. There are 6 spheres - 3 yellow ones, 1 green one, and 2 brown ones. And'
+[728/1305] clevr-count-000053 C1_text: 'There are 3 cubes, 5 spheres, and 1 cylinder. So the answer is 3 cubes, 5 spheres, and 1 c'
+[729/1305] clevr-count-000053 C2_audio: 'There are 3 cubes, 5 spheres, and 1 cylinder. So the answer is 3 cubes, 5 spheres. If you '
+[730/1305] clevr-attribute-000051 C0_none: "The sphere is green in color. It's small in size. And it looks like it's made of rubber, b"
+[731/1305] clevr-attribute-000051 C1_text: "The sphere is green in color. It's small in size. It looks like it's made of rubber. So, t"
+[732/1305] clevr-attribute-000051 C2_audio: "The sphere is green in color. It's small in size. It looks like it's made of rubber. So, w"
+[733/1305] clevr-count-000054 C0_none: "There are 4 cubes. There's 1 sphere. And there are 3 cylinders. So in total, there are 4 c"
+[734/1305] clevr-count-000054 C1_text: 'There are 3 cubes, 2 spheres, and 3 cylinders. If you have any other questions about this '
+[735/1305] clevr-count-000054 C2_audio: "There are 3 cubes. There's 1 sphere. And there are 3 cylinders. So in total, there are 7 o"
+[736/1305] clevr-attribute-000052 C0_none: "The sphere is brown in color. It's a bit bigger than the other objects in the image. And i"
+[737/1305] clevr-attribute-000052 C1_text: "The sphere is brown in color. It's a bit bigger than the other objects in the image. It lo"
+[738/1305] clevr-attribute-000052 C2_audio: "The sphere is brown in color. It's a bit bigger than the other objects in the image. It's "
+[739/1305] clevr-count-000055 C0_none: "There are 3 cubes. There's 1 sphere. And there are 3 cylinders. So in total, there are 3 c"
+[740/1305] clevr-count-000055 C1_text: 'There are 3 cubes, 2 cylinders, and 1 sphere. So the answer is 3 cubes, 2 cylinders, and 1'
+[741/1305] clevr-count-000055 C2_audio: 'There are 2 cubes, 3 cylinders, and 1 sphere. So the answer is 2 cubes, 3 cylinders. If yo'
+[742/1305] clevr-attribute-000053 C0_none: "The cube is purple in color. It's a medium - sized cube. It looks like it's made of a soft"
+[743/1305] clevr-attribute-000053 C1_text: "The cube is purple in color. It's a bit bigger than the other objects in the image. It's a"
+[744/1305] clevr-attribute-000053 C2_audio: "The cube is purple in color. It's a bit bigger than the other objects in the image. It's n"
+[745/1305] clevr-count-000056 C0_none: 'There are 2 cubes, 4 spheres, and 4 cylinders. If you have any other questions about this '
+[746/1305] clevr-count-000056 C1_text: "There's one cube, three spheres, and four cylinders. So, in total, there are six objects. "
+[747/1305] clevr-count-000056 C2_audio: "There's one cube, two spheres, and four cylinders. So, that's a total of six objects. If y"
+[748/1305] clevr-attribute-000054 C0_none: "The cube is blue in color. It's a small cube. It looks like it's made of a shiny material,"
+[749/1305] clevr-attribute-000054 C1_text: "The cube is blue in color. It's small in size. It's made of a material that reflects light"
+[750/1305] clevr-attribute-000054 C2_audio: "The cube is blue in color. It's a small cube. Well, that's about it. If you have any other"
+[751/1305] clevr-count-000057 C0_none: 'There are 1 cube, 7 spheres, and 2 cylinders. If you have any other questions about this i'
+[752/1305] clevr-count-000057 C1_text: 'There are 1 cube, 7 spheres, and 2 cylinders. If you have any other questions about this i'
+[753/1305] clevr-count-000057 C2_audio: "There's one cube. There are six spheres - a small purple one, a small blue one, a small gr"
+[754/1305] clevr-attribute-000055 C0_none: "The cylinder is red in color. It's relatively small in size. And it looks like it's made o"
+[755/1305] clevr-attribute-000055 C1_text: "It's a small cylinder. It's made of a shiny material. Well, that's about it. If you have a"
+[756/1305] clevr-attribute-000055 C2_audio: "It's small in size. And it's made of a shiny material. So, what else do you want to know a"
+[757/1305] clevr-count-000058 C0_none: 'There are two cubes and one cylinder. If you have any other questions about this image or '
+[758/1305] clevr-count-000058 C1_text: 'There are two cubes and one cylinder. So, there are two cubes. What else do you want to kn'
+[759/1305] clevr-count-000058 C2_audio: 'There are 2 cubes. So the answer is 2. If you have any other questions about this image or'
+[760/1305] clevr-attribute-000056 C0_none: "The cube is red in color. It's a medium - sized cube. And it looks like it's made of a shi"
+[761/1305] clevr-attribute-000056 C1_text: "The cube is red in color. It's a bit hard to say exactly how big it is just from the image"
+[762/1305] clevr-attribute-000056 C2_audio: "The cube is large in size. It's made of a shiny material, probably metal. It has a reflect"
+[763/1305] clevr-attribute-000057 C0_none: "The sphere is red in color. It's quite large compared to the other objects in the image. A"
+[764/1305] clevr-attribute-000057 C1_text: "The sphere is red in color. It's a bit hard to say exactly how big it is just from the ima"
+[765/1305] clevr-attribute-000057 C2_audio: "The sphere is red in color. It looks like it's made of a shiny material, probably metal. S"
+[766/1305] clevr-count-000059 C0_none: "There's one cube, one sphere, and four cylinders. So, in total, there are six objects. If "
+[767/1305] clevr-count-000059 C1_text: "There's one cube, one sphere, and several cylinders. So, in total, there are four differen"
+[768/1305] clevr-count-000059 C2_audio: "There's one cube, one sphere, and several cylinders. So, in total, there are 5 objects. If"
+[769/1305] clevr-attribute-000058 C0_none: "The cylinder is gray in color. It's relatively small in size. And it looks like it's made "
+[770/1305] clevr-attribute-000058 C1_text: "The cylinder is gray in color. It's a small cylinder. It looks like it's made of a metalli"
+[771/1305] clevr-attribute-000058 C2_audio: "The cylinder is gray in color. It's made of a shiny material, like metal. So, that's about"
+[772/1305] clevr-attribute-000059 C0_none: "The sphere is purple in color. It's a bit bigger than the other objects in the image. And "
+[773/1305] clevr-attribute-000059 C1_text: "The sphere is purple in color. It's a bit hard to say exactly how big it is just from the "
+[774/1305] clevr-attribute-000059 C2_audio: "The sphere is purple in color. It's a bit hard to say exactly how big it is just from the "
+[775/1305] clevr-count-000060 C0_none: "There are three cubes. There's one sphere. And there's one cylinder. So, in total, there a"
+[776/1305] clevr-count-000060 C1_text: 'There are 3 cubes, 1 sphere, and 1 cylinder. If you have any other questions about this im'
+[777/1305] clevr-count-000060 C2_audio: 'There are 3 cubes, 1 sphere, and 1 cylinder. If you have any other questions about this im'
+[778/1305] clevr-attribute-000060 C0_none: "The cube is brown in color. It's relatively small in size. And it looks like it's made of "
+[779/1305] clevr-attribute-000060 C1_text: "The cube is brown in color. It's small in size. And it looks like it's made of a shiny mat"
+[780/1305] clevr-attribute-000060 C2_audio: "The cube is brown in color. It looks like it's made of a shiny material. So, that's about "
+[781/1305] clevr-count-000061 C0_none: "There's one cube, three spheres, and three cylinders. If you have any other questions abou"
+[782/1305] clevr-count-000061 C1_text: "There's one cube, three spheres, and three cylinders. So, in total, there are six objects."
+[783/1305] clevr-count-000061 C2_audio: "There's one cube, two spheres, and two cylinders. So, in total, there are four objects. If"
+[784/1305] clevr-attribute-000061 C0_none: "The cylinder is purple in color. It's relatively large in size compared to the other objec"
+[785/1305] clevr-attribute-000061 C1_text: "The cylinder is purple in color. It's a large cylinder. It looks like it's made of a matte"
+[786/1305] clevr-attribute-000061 C2_audio: "The cylinder is large in size. It looks like it's made of a matte material. So, it's a lar"
+[787/1305] clevr-count-000062 C0_none: 'There are 7 cubes and 1 cylinder. So in total, there are 8 objects. If you have any other '
+[788/1305] clevr-count-000062 C1_text: 'There are 7 cubes and 1 cylinder. So in total, there are 8 objects. If you have any other '
+[789/1305] clevr-count-000062 C2_audio: 'There are 7 cubes in total. So, there are 7 cubes. If you have any other questions about t'
+[790/1305] clevr-attribute-000062 C0_none: "The sphere is green in color. It's a bit bigger than the other objects in the image. And i"
+[791/1305] clevr-attribute-000062 C1_text: "The sphere is green in color. It's a bit bigger than the other objects in the image. It lo"
+[792/1305] clevr-attribute-000062 C2_audio: "The sphere is green in color. It's a bit bigger than the other objects in the image. It lo"
+[793/1305] clevr-count-000063 C0_none: "There are 6 cubes. There's 1 sphere. And there are 3 cylinders. So in total, there are 6 c"
+[794/1305] clevr-count-000063 C1_text: 'There are 5 cubes, 2 spheres, and 3 cylinders. If you have any other questions about this '
+[795/1305] clevr-count-000063 C2_audio: 'There are 5 cubes, 2 spheres, and 3 cylinders. If you have any other questions about this '
+[796/1305] clevr-attribute-000063 C0_none: "The cylinder is yellow in color. It's relatively small in size. And it looks like it's mad"
+[797/1305] clevr-attribute-000063 C1_text: "The cylinder is yellow in color. It's small in size. And it looks like it's made of a shin"
+[798/1305] clevr-attribute-000063 C2_audio: "The cylinder is yellow in color. It's a small cylinder. It looks like it's made of a shiny"
+[799/1305] clevr-count-000064 C0_none: 'There are 4 cubes. There are 5 spheres - 3 of them are gray, 1 is brown, and 1 is purple. '
+[800/1305] clevr-count-000064 C1_text: 'There are 3 cubes, 5 spheres, and 1 cylinder. If you have any other questions about this i'
+[801/1305] clevr-count-000064 C2_audio: 'There are 3 cubes, 5 spheres, and 1 cylinder. If you have any other questions about this i'
+[802/1305] clevr-attribute-000064 C0_none: "The sphere is green in color. It's a bit larger than the cubes. And it looks like it's mad"
+[803/1305] clevr-attribute-000064 C1_text: "The sphere is green in color. It's a bit hard to say exactly how big it is just from the i"
+[804/1305] clevr-attribute-000064 C2_audio: "The sphere is green in color. It's made of a material that gives it a matte finish. So, th"
+[805/1305] clevr-attribute-000065 C0_none: "The sphere is green in color. It's a bit larger than the cubes. And it looks like it's mad"
+[806/1305] clevr-attribute-000065 C1_text: "The sphere is green in color. It's a bit hard to say exactly how big it is just from the i"
+[807/1305] clevr-attribute-000065 C2_audio: "The sphere is green in color. It's not really clear what material it is made of just from "
+[808/1305] clevr-attribute-000066 C0_none: "The sphere is green in color. It's a bit larger than the cubes. And it looks like it's mad"
+[809/1305] clevr-attribute-000066 C1_text: "The sphere is green in color. It's a bit hard to say exactly how big it is just from the i"
+[810/1305] clevr-attribute-000066 C2_audio: "The sphere is green in color. It's not described by size in the question, but it looks lik"
+[811/1305] clevr-attribute-000067 C0_none: "The sphere is green in color. It's a bit larger than the cubes. And it looks like it's mad"
+[812/1305] clevr-attribute-000067 C1_text: "The sphere is green in color. It's a bit hard to say exactly how big it is just from the i"
+[813/1305] clevr-attribute-000067 C2_audio: "The sphere is green in color. It's not mentioned what material it is made of, but it looks"
+[814/1305] clevr-attribute-000068 C0_none: "The sphere is green in color. It's a bit larger than the cubes. And it looks like it's mad"
+[815/1305] clevr-attribute-000068 C1_text: "The sphere is green in color. It's a bit hard to say exactly how big it is just from the i"
+[816/1305] clevr-attribute-000068 C2_audio: "The sphere is green in color. It's made of a material that gives it a matte finish. So, th"
+[817/1305] clevr-attribute-000069 C0_none: "The sphere is green in color. It's a bit larger than the cubes. And it looks like it's mad"
+[818/1305] clevr-attribute-000069 C1_text: "The sphere is green in color. It's a bit hard to say exactly how big it is just from the i"
+[819/1305] clevr-attribute-000069 C2_audio: "The sphere is green in color. It's not really clear what material it is made of just from "
+[820/1305] clevr-attribute-000070 C0_none: "The sphere is green in color. It's a bit larger than the cubes. And it looks like it's mad"
+[821/1305] clevr-attribute-000070 C1_text: "The sphere is green in color. It's a bit hard to say exactly how big it is just from the i"
+[822/1305] clevr-attribute-000070 C2_audio: "The sphere is green in color. It's not a big one, but it's definitely noticeable. And it l"
+[823/1305] clevr-count-000065 C0_none: 'There are three cubes and one sphere. So, in total, there are four objects. If you have an'
+[824/1305] clevr-count-000065 C1_text: 'There are three cubes and one sphere. So, in total, there are four objects. If you have an'
+[825/1305] clevr-count-000065 C2_audio: 'There are three cubes and one sphere. So, in total, there are four objects. If you have an'
+[826/1305] clevr-attribute-000071 C0_none: "The sphere is green in color. It's small in size. And it looks like it's made of a shiny m"
+[827/1305] clevr-attribute-000071 C1_text: "The sphere is green. It's small in size. Well, that's about it. If you have any other ques"
+[828/1305] clevr-attribute-000071 C2_audio: "The sphere is green in color. It's small in size. Well, that's about it. If you have any o"
+[829/1305] clevr-count-000066 C0_none: 'There are 2 cubes, 1 sphere, and 5 cylinders. If you have any other questions about this i'
+[830/1305] clevr-count-000066 C1_text: 'There are 2 cubes, 3 cylinders, and 1 sphere. So the total is 2 cubes, 3 cylinders, and 1 '
+[831/1305] clevr-count-000066 C2_audio: 'There are 2 cubes, 3 cylinders, and 1 sphere. So in total, there are 6 objects. If you hav'
+[832/1305] clevr-attribute-000072 C0_none: "The sphere is red in color. It's a bit bigger than the other objects in the image. And it "
+[833/1305] clevr-attribute-000072 C1_text: "The sphere is red in color. It's a bit larger than the other objects in the image. It look"
+[834/1305] clevr-attribute-000072 C2_audio: "The sphere is red in color. It's a bit bigger than the other objects in the image. It look"
+[835/1305] clevr-attribute-000073 C0_none: "The cylinder is gray in color. It's a bit bigger than the other objects in the picture. An"
+[836/1305] clevr-attribute-000073 C1_text: "The cylinder is gray in color. It's a bit bigger than the other objects in the image. It l"
+[837/1305] clevr-attribute-000073 C2_audio: "The cylinder is gray in color. It's a large object. It looks like it's made of a matte mat"
+[838/1305] clevr-count-000067 C0_none: 'There are two cubes, one sphere, and one cylinder. If you have any other questions about t'
+[839/1305] clevr-count-000067 C1_text: 'There are 2 cubes, 1 sphere, and 1 cylinder. If you have any other questions about this im'
+[840/1305] clevr-count-000067 C2_audio: 'There are 2 cubes, 1 sphere, and 1 cylinder. If you have any other questions about this im'
+[841/1305] clevr-attribute-000074 C0_none: "The sphere is gray in color. It's small in size. And it looks like it's made of rubber, be"
+[842/1305] clevr-attribute-000074 C1_text: "The sphere is gray in color. It's small in size. And it looks like it's made of rubber. So"
+[843/1305] clevr-attribute-000074 C2_audio: "The sphere is gray in color. It's small in size. And it looks like it's made of rubber. If"
+[844/1305] clevr-count-000068 C0_none: "There are 3 cubes. There's 1 sphere. And there are 2 cylinders. So, in total, there are 3 "
+[845/1305] clevr-count-000068 C1_text: 'There are three cubes, one sphere, and two cylinders. So, in total, there are six objects.'
+[846/1305] clevr-count-000068 C2_audio: 'There are three cubes, one sphere, and one cylinder. So, in total, there are four objects.'
+[847/1305] clevr-attribute-000075 C0_none: "The cylinder is purple in color. It's relatively small in size. And it looks like it's mad"
+[848/1305] clevr-attribute-000075 C1_text: "It's a small cylinder. It's not very big. And it looks like it's made of a shiny material."
+[849/1305] clevr-attribute-000075 C2_audio: "It's small in size. And it looks like it's made of metal. So, what else do you want to kno"
+[850/1305] clevr-count-000069 C0_none: 'There are six cubes and one cylinder. So, in total, there are seven objects. If you have a'
+[851/1305] clevr-count-000069 C1_text: 'There are six cubes. So, there are six cubes. If you have any other questions about this i'
+[852/1305] clevr-count-000069 C2_audio: 'There are 6 cubes. So the answer is 6. If you have any other questions about this image or'
+[853/1305] clevr-attribute-000076 C0_none: "The sphere is blue in color. It's small in size. And it looks like it's made of rubber, be"
+[854/1305] clevr-attribute-000076 C1_text: "The sphere is blue in color. It's small in size. It looks like it's made of a soft materia"
+[855/1305] clevr-attribute-000076 C2_audio: "The sphere is blue in color. It's small in size. It looks like it's made of a soft materia"
+[856/1305] clevr-attribute-000077 C0_none: "The cube is cyan in color. It's relatively large in size compared to the other objects in "
+[857/1305] clevr-attribute-000077 C1_text: "The cube is cyan in color. It's made of a shiny material, like metal. It's a bit hard to s"
+[858/1305] clevr-attribute-000077 C2_audio: "The cube is cyan in color. It's made of a shiny material. So, that's about it. If you have"
+[859/1305] clevr-count-000070 C0_none: "There's one cube, one sphere, and four cylinders. So, in total, there are six objects. If "
+[860/1305] clevr-count-000070 C1_text: "There's one cube, one sphere, and four cylinders. So, that's a total of five objects. If y"
+[861/1305] clevr-count-000070 C2_audio: "There's one cube, one sphere, and four cylinders. So, that's a total of five objects. If y"
+[862/1305] clevr-attribute-000078 C0_none: "The cylinder is gray in color. It's quite large in size compared to the other objects in t"
+[863/1305] clevr-attribute-000078 C1_text: "The cylinder is gray in color. It's quite large in size compared to the other objects in t"
+[864/1305] clevr-attribute-000078 C2_audio: "The cylinder is gray in color. It's quite large in size compared to the other objects in t"
+[865/1305] clevr-count-000071 C0_none: 'There are 4 cubes. There are 5 spheres - 3 of them are small and 2 are large. And there is'
+[866/1305] clevr-count-000071 C1_text: 'There are 3 cubes, 5 spheres, and 1 cylinder. If you have any other questions about this i'
+[867/1305] clevr-count-000071 C2_audio: 'There are 3 cubes. There are 5 spheres. There is 1 cylinder. So in total, there are 9 obje'
+[868/1305] clevr-attribute-000079 C0_none: "The cylinder is purple in color. It's relatively small in size. And it looks like it's mad"
+[869/1305] clevr-attribute-000079 C1_text: "The cylinder is small in size. It's made of a shiny material, probably metal. It's purple "
+[870/1305] clevr-attribute-000079 C2_audio: "The cylinder is small in size. It's made of a shiny material, probably metal. So, it has a"
+[871/1305] clevr-count-000072 C0_none: 'There are two cubes and one cylinder. So, in total, there are three objects. If you have a'
+[872/1305] clevr-count-000072 C1_text: 'There are two cubes and one cylinder. So, in total, there are three objects. If you have a'
+[873/1305] clevr-count-000072 C2_audio: 'There are two cubes and one cylinder. So, in total, there are three objects. If you have a'
+[874/1305] clevr-attribute-000080 C0_none: "The cube is gray in color. It's a bit bigger than the other objects in the image. And it l"
+[875/1305] clevr-attribute-000080 C1_text: "The cube is gray in color. It's a bit larger than the other objects in the image. It looks"
+[876/1305] clevr-attribute-000080 C2_audio: "The cube is gray in color. It's a bit larger than the other objects in the image. It looks"
+[877/1305] clevr-count-000073 C0_none: 'There are 2 cubes and 5 spheres. So in total, there are 7 objects. If you have any other q'
+[878/1305] clevr-count-000073 C1_text: "There's one cube and five spheres. So, in total, there are six objects. If you have any ot"
+[879/1305] clevr-count-000073 C2_audio: "There's one cube and five spheres. So, in total, there are six objects. If you have any ot"
+[880/1305] clevr-attribute-000081 C0_none: "The sphere is green in color. It's small in size. And it looks like it's made of rubber, b"
+[881/1305] clevr-attribute-000081 C1_text: "The sphere is green in color. It's small in size. And it looks like it's made of rubber. I"
+[882/1305] clevr-attribute-000081 C2_audio: "The sphere is small in size. It's made of a matte material. Well, that's all I can say abo"
+[883/1305] clevr-count-000074 C0_none: "There are 4 cubes. There's 1 sphere. And there are 3 cylinders. So in total, there are 4 c"
+[884/1305] clevr-count-000074 C1_text: 'There are 3 cubes, 1 sphere, and 2 cylinders. So the answer is 3 cubes, 1 sphere, and 2 cy'
+[885/1305] clevr-count-000074 C2_audio: 'There are 3 cubes, 1 sphere, and 2 cylinders. So the answer is 3 cubes, 1 sphere. If you h'
+[886/1305] clevr-attribute-000082 C0_none: "The cylinder is brown in color. It's relatively large in size compared to the other object"
+[887/1305] clevr-attribute-000082 C1_text: "Well, it's a brown cylinder. It's not too big, but it's definitely not small either. And i"
+[888/1305] clevr-attribute-000082 C2_audio: "Well, it's a large cylinder. It's made of a shiny material. But I can't really say for sur"
+[889/1305] clevr-attribute-000083 C0_none: "The cube is purple in color. It's a small cube. And it looks like it's made of a shiny mat"
+[890/1305] clevr-attribute-000083 C1_text: "The cube is small in size. It's made of a shiny material, like metal. It's purple in color"
+[891/1305] clevr-attribute-000083 C2_audio: "The cube is small in size. It's made of a shiny material, which gives it a reflective look"
+[892/1305] clevr-count-000075 C0_none: "There's one cube, three spheres, and one cylinder. So, that's a total of five objects. If "
+[893/1305] clevr-count-000075 C1_text: "There's one cube, three spheres, and one cylinder. So, that's a total of five objects. If "
+[894/1305] clevr-count-000075 C2_audio: "There's one cube, three spheres, and one cylinder. So, that's a total of five objects. If "
+[895/1305] clevr-attribute-000084 C0_none: "The cylinder is green in color. It's relatively large compared to the other objects in the"
+[896/1305] clevr-attribute-000084 C1_text: "The cylinder is green in color. It's a bit bigger than the other objects in the image. It "
+[897/1305] clevr-attribute-000084 C2_audio: "The cylinder is green in color. It's a bit bigger than the other objects in the image. It "
+[898/1305] clevr-attribute-000085 C0_none: "The sphere is gray in color. It's relatively large in size compared to the other objects i"
+[899/1305] clevr-attribute-000085 C1_text: "The sphere is gray in color. It's a bit hard to say exactly how big it is just from the im"
+[900/1305] clevr-attribute-000085 C2_audio: "The sphere is gray in color. It's a bit hard to say exactly how big it is just from the im"
+[901/1305] clevr-count-000076 C0_none: 'There are two cubes, one sphere, and one cylinder. If you have any other questions about t'
+[902/1305] clevr-count-000076 C1_text: "There are two cubes, one sphere, and one cylinder. So, that's two cubes and one sphere. If"
+[903/1305] clevr-count-000076 C2_audio: 'There are 2 cubes, 1 sphere, and 1 cylinder. So the answer is 2 cubes and 1 sphere. If you'
+[904/1305] clevr-attribute-000086 C0_none: "The cylinder is cyan in color. It's relatively small in size. And it looks like it's made "
+[905/1305] clevr-attribute-000086 C1_text: "It's cyan in color. It's small in size. It looks like it's made of a matte material. If yo"
+[906/1305] clevr-attribute-000086 C2_audio: "The cylinder is cyan in color. It's small in size. Well, that's about it. If you have any "
+[907/1305] clevr-count-000077 C0_none: 'There are 3 cubes. There are 2 spheres. And there is 1 cylinder. If you have any other que'
+[908/1305] clevr-count-000077 C1_text: 'There are two cubes, two spheres, and one cylinder. So, in total, there are five objects. '
+[909/1305] clevr-count-000077 C2_audio: "There are two cubes, a brown sphere, and a cyan cylinder. So, that's three different thing"
+[910/1305] clevr-attribute-000087 C0_none: "The cylinder is green in color. It's relatively small in size. And it looks like it's made"
+[911/1305] clevr-attribute-000087 C1_text: "The cylinder is green in color. It's small in size. And it looks like it's made of a matte"
+[912/1305] clevr-attribute-000087 C2_audio: "The cylinder is green in color. It's not very big. It looks like it's made of a matte mate"
+[913/1305] clevr-attribute-000088 C0_none: "The cylinder is cyan in color. It's quite large compared to the other objects in the image"
+[914/1305] clevr-attribute-000088 C1_text: "The cylinder is cyan in color. It's quite large compared to the other objects in the image"
+[915/1305] clevr-attribute-000088 C2_audio: "The cylinder is cyan in color. It's quite large compared to the other objects in the image"
+[916/1305] clevr-attribute-000089 C0_none: "The cube is purple in color. It's relatively small in size compared to the other objects i"
+[917/1305] clevr-attribute-000089 C1_text: "The cube is purple in color. It's small in size. It looks like it's made of a shiny materi"
+[918/1305] clevr-attribute-000089 C2_audio: "The cube is purple in color. It's a small cube. Well, that's about it. If you have any oth"
+[919/1305] clevr-count-000079 C0_none: "There's one cube, three spheres, and one cylinder. So, in total, there are five objects. I"
+[920/1305] clevr-count-000079 C1_text: "There's one cube, two spheres, and one cylinder. So, that's a total of four different shap"
+[921/1305] clevr-count-000079 C2_audio: "There's one cube, two spheres, and one cylinder. So, in total, there are four objects. If "
+[922/1305] clevr-attribute-000090 C0_none: "The cube is purple in color. It's a small cube. And it looks like it's made of a soft mate"
+[923/1305] clevr-attribute-000090 C1_text: "The cube is purple, small in size, and it's made of a material that gives it a matte finis"
+[924/1305] clevr-attribute-000090 C2_audio: "The cube is purple in color. It's small in size. Well, that's about it. If you have any ot"
+[925/1305] clevr-count-000080 C0_none: 'There are two cubes and two cylinders. One of the cylinders is blue and shiny, and the oth'
+[926/1305] clevr-count-000080 C1_text: 'There are two cylinders. So, the answer is two cylinders. If you have any other questions '
+[927/1305] clevr-count-000080 C2_audio: 'There are 2 cylinders. So, the answer is 2. If you have any other questions about this ima'
+[928/1305] vaw-attribute-000001 C0_none: "The fountain is blue and white. It's in a state of being active, with water spraying up. S"
+[929/1305] vaw-attribute-000001 C1_text: "Well, it's a small fountain. It's got water coming out of it, but it's not really high up."
+[930/1305] vaw-attribute-000001 C2_audio: "The fountain is in a state of being active. It's spraying water up into the air. So, it's "
+[931/1305] vaw-attribute-000002 C0_none: "Well, it looks like the bottle is made of plastic. And it's a pretty standard size, not to"
+[932/1305] vaw-attribute-000002 C1_text: "It's a small bottle. It's not super big, but it's not super small either. It's just a regu"
+[933/1305] vaw-attribute-000002 C2_audio: "The bottle is small. It's not too big, but it's also not super small either. It's just a r"
+[934/1305] vaw-attribute-000003 C0_none: "The shirt is white. It looks like it's made of a cotton - like material. Cotton is often u"
+[935/1305] vaw-attribute-000003 C1_text: "The shirt is white. Well, that's about it. If you have any other questions about it, feel "
+[936/1305] vaw-attribute-000003 C2_audio: "The shirt is white. It looks like it's made of a light, breathable fabric. What do you thi"
+[937/1305] vaw-attribute-000004 C0_none: 'The sky is a clear blue color. It looks really nice and bright. What do you think about it'
+[938/1305] vaw-attribute-000004 C1_text: "The sky is clear and blue. It's a nice, sunny day. What do you think about the weather?"
+[939/1305] vaw-attribute-000004 C2_audio: "The sky is clear and blue. It's a nice day. What else do you want to know about the scene?"
+[940/1305] vaw-attribute-000005 C0_none: 'The sky is a clear blue color. It looks really nice and bright. What do you think about it'
+[941/1305] vaw-attribute-000005 C1_text: "The sky is a clear blue. It's a bright, sunny day. What do you think about the weather?"
+[942/1305] vaw-attribute-000005 C2_audio: "The sky is clear and blue. It's a nice day. So, what else do you want to know about this s"
+[943/1305] vaw-attribute-000006 C0_none: 'The sky is a clear blue color. It looks really nice and bright. What do you think about it'
+[944/1305] vaw-attribute-000006 C1_text: "The sky is clear and blue. It's a nice, bright blue color. What do you think about that?"
+[945/1305] vaw-attribute-000006 C2_audio: "The sky is clear and blue. It's a nice day. What else do you want to know about the scene?"
+[946/1305] vaw-attribute-000007 C0_none: 'The sky is a clear blue color. It looks really nice and bright. What do you think about it'
+[947/1305] vaw-attribute-000007 C1_text: "The sky is a clear blue. It's a bright, sunny day. What do you think about the weather?"
+[948/1305] vaw-attribute-000007 C2_audio: "The sky is clear and blue. It's a nice day. What else do you want to know about the scene?"
+[949/1305] vaw-attribute-000008 C0_none: 'The sky is a clear blue color. It looks really nice and bright. What do you think about it'
+[950/1305] vaw-attribute-000008 C1_text: "The sky is clear and blue. It's a nice day. What else do you want to know about the sky?"
+[951/1305] vaw-attribute-000008 C2_audio: "The sky is clear and blue. It's a nice day. What else do you want to know about the sky?"
+[952/1305] vaw-attribute-000009 C0_none: 'The sky is a clear blue color. It looks really nice and bright. What do you think about it'
+[953/1305] vaw-attribute-000009 C1_text: "The sky is clear and blue. It's a nice, bright day. What do you think about the weather?"
+[954/1305] vaw-attribute-000009 C2_audio: "The sky is clear and blue. It's a nice day. What else do you want to know about the scene?"
+[955/1305] vaw-attribute-000010 C0_none: 'The sky is a clear blue color. It looks really nice and bright. What do you think about it'
+[956/1305] vaw-attribute-000010 C1_text: "The sky is a clear blue. It's a nice, bright blue color. What do you think about the weath"
+[957/1305] vaw-attribute-000010 C2_audio: "The sky is clear and blue. It's a nice day. What else do you want to know about the scene?"
+[958/1305] vaw-attribute-000011 C0_none: "The sky is a light blue color. It's pretty big, covering the whole background of the pictu"
+[959/1305] vaw-attribute-000011 C1_text: "The sky is a clear blue. It's pretty big, covering the whole background of the picture. Wh"
+[960/1305] vaw-attribute-000011 C2_audio: "The sky is a big, clear blue. It's really vast and stretches out as far as you can see. It"
+[961/1305] vaw-attribute-000012 C0_none: "The toilet is white in color and it looks like it's made of porcelain. Porcelain is a comm"
+[962/1305] vaw-attribute-000012 C1_text: "The toilet is white in color. Well, that's about it. If you have any other questions about"
+[963/1305] vaw-attribute-000012 C2_audio: "The toilet is white. Well, that's all I can say about it. If you have any other questions "
+[964/1305] vaw-attribute-000013 C0_none: "The toilet is white in color and it looks like it's made of porcelain. Porcelain is a comm"
+[965/1305] vaw-attribute-000013 C1_text: "The toilet is white in color. Well, that's all I can say about it. If you have any other q"
+[966/1305] vaw-attribute-000013 C2_audio: "The toilet is white. Well, that's all I can say about it. If you have any other questions "
+[967/1305] vaw-attribute-000014 C0_none: "The toilet is white in color and it looks like it's made of porcelain. Porcelain is a comm"
+[968/1305] vaw-attribute-000014 C1_text: "The toilet is white in color. Well, that's about it. If you have any other questions about"
+[969/1305] vaw-attribute-000014 C2_audio: "The toilet is white in color. Well, that's all I can say about it. If you have any other q"
+[970/1305] vaw-attribute-000015 C0_none: "The toilet is white in color and it looks like it's made of porcelain. Porcelain is a comm"
+[971/1305] vaw-attribute-000015 C1_text: "The toilet is white in color. Well, that's about it. If you have any other questions about"
+[972/1305] vaw-attribute-000015 C2_audio: 'The toilet is white. What else do you want to know about the bathroom?'
+[973/1305] vaw-attribute-000016 C0_none: "The toilet is white in color and it looks like it's made of porcelain. Porcelain is a comm"
+[974/1305] vaw-attribute-000016 C1_text: "The toilet is white. It looks like it's made of porcelain. What do you think about the col"
+[975/1305] vaw-attribute-000016 C2_audio: 'The toilet is white. So, what else do you want to know about the bathroom?'
+[976/1305] vaw-attribute-000017 C0_none: "The toilet is white in color and it looks like it's made of porcelain. Porcelain is a comm"
+[977/1305] vaw-attribute-000017 C1_text: "The toilet is white in color. Well, that's about it. If you have any other questions about"
+[978/1305] vaw-attribute-000017 C2_audio: "The toilet is white. It has a closed lid. So, that's all you need to know about it. If you"
+[979/1305] vaw-attribute-000018 C0_none: "The toilet is white in color and it looks like it's made of porcelain. Porcelain is a comm"
+[980/1305] vaw-attribute-000018 C1_text: "The toilet is white in color. Well, that's about it. If you have any other questions about"
+[981/1305] vaw-attribute-000018 C2_audio: 'The toilet is white. So, what else do you want to know about this bathroom?'
+[982/1305] vaw-attribute-000019 C0_none: "The pillow is green and has a floral pattern. It's a rectangular shape. So, that's what I "
+[983/1305] vaw-attribute-000019 C1_text: "The pillow is rectangular in shape. Well, that's about it. If you have any other questions"
+[984/1305] vaw-attribute-000019 C2_audio: "The pillow is rectangular in shape. Well, that's about it. If you have any other questions"
+[985/1305] vaw-attribute-000022 C0_none: "The bus is red in color. It's a double - decker bus, so it's quite large. It's in a stoppe"
+[986/1305] vaw-attribute-000022 C1_text: "The bus is red in color. It's a double - decker bus, so it's quite large. It's in a statio"
+[987/1305] vaw-attribute-000022 C2_audio: "The bus is red in color. It's a double - decker bus, so it's quite large. It's in a statio"
+[988/1305] vaw-attribute-000023 C0_none: "The clock is white in color. It's a fairly large clock, taking up a significant portion of"
+[989/1305] vaw-attribute-000023 C1_text: "The clock is white in color. It's a large clock. So, it's a big white clock. If you have a"
+[990/1305] vaw-attribute-000023 C2_audio: "The clock is white in color. It's a large clock. So, what else do you want to know about i"
+[991/1305] vaw-attribute-000024 C0_none: "The cup is white in color. It's made of paper. It looks like it's empty, just sitting ther"
+[992/1305] vaw-attribute-000024 C1_text: "The cup is white in color. It's made of a material that looks like styrofoam. It's in a st"
+[993/1305] vaw-attribute-000024 C2_audio: "The cup is made of paper. It's in a state of being filled with a liquid, but it's not comp"
+[994/1305] vaw-attribute-000026 C0_none: "Well, he's wearing a black coat and beige pants. He's sitting on a black metal bench. He's"
+[995/1305] vaw-attribute-000026 C1_text: "Well, he's wearing a black jacket and beige pants. He's sitting on a black metal bench. He"
+[996/1305] vaw-attribute-000026 C2_audio: "He's wearing a black jacket, beige pants, and brown shoes. He's sitting on a black metal b"
+[997/1305] vaw-attribute-000027 C0_none: "The trunk is gray in color. It's relatively long and thick. It looks like it's made of a l"
+[998/1305] vaw-attribute-000027 C1_text: "Well, the trunk is quite long. It's also quite thick. It's like a long, flexible tube. It'"
+[999/1305] vaw-attribute-000027 C2_audio: "The trunk is long and has a wrinkled texture. It's quite a large part of the elephant's bo"
+[1000/1305] vaw-attribute-000028 C0_none: "Well, the cat looks pretty small. And its fur has a spotted texture. It's got those little"
+[1001/1305] vaw-attribute-000028 C1_text: "The cat has a spotted texture. It's a small cat. So, it's a small, spotted cat. If you hav"
+[1002/1305] vaw-attribute-000028 C2_audio: 'The cat has a spotted texture. It looks like a small to medium - sized cat. What do you th'
+[1003/1305] vaw-attribute-000029 C0_none: "The sausage is brown in color and it looks like it's a standard size for a hot dog. It's n"
+[1004/1305] vaw-attribute-000029 C1_text: "The sausage is small in size. Well, that's about it. If you have any other questions about"
+[1005/1305] vaw-attribute-000029 C2_audio: "The sausage is small in size. It's in a bun with a lot of toppings on it. If you want to k"
+[1006/1305] vaw-attribute-000030 C0_none: "Well, from what I can see in the picture, the lamp is black. It looks like it's made of me"
+[1007/1305] vaw-attribute-000030 C1_text: "Well, the lamp is black. It's a bit tall, but not super huge. It's probably around the sam"
+[1008/1305] vaw-attribute-000030 C2_audio: "The lamp is gray in color. It's a medium - sized lamp. Well, that's about it. If you have "
+[1009/1305] vaw-attribute-000038 C0_none: "The road is gray in color and it looks like it's made of asphalt. It seems to be a smooth "
+[1010/1305] vaw-attribute-000038 C1_text: "The road is gray in color. It looks like it's made of asphalt. What else do you want to kn"
+[1011/1305] vaw-attribute-000038 C2_audio: 'The road is made of asphalt. It looks like a smooth surface. If you have any other questio'
+[1012/1305] vaw-attribute-000039 C0_none: "The car is black. It looks like it's stopped at a traffic light. You can see the back of i"
+[1013/1305] vaw-attribute-000039 C1_text: "The car is black. It's just sitting there, probably waiting at the traffic light. You can "
+[1014/1305] vaw-attribute-000039 C2_audio: "The car is black. It's just sitting there, probably waiting at the traffic light. What do "
+[1015/1305] vaw-attribute-000040 C0_none: "The table is brown in color and it looks like it's made of wood. What do you think about t"
+[1016/1305] vaw-attribute-000040 C1_text: 'The table is made of wood. It looks like a light brown color. What else do you want to kno'
+[1017/1305] vaw-attribute-000040 C2_audio: 'The table is made of wood. It looks like a light brown color. What else do you want to kno'
+[1018/1305] vaw-attribute-000041 C0_none: "The plate is blue. It looks like it has some food on it, but it's not super clear what kin"
+[1019/1305] vaw-attribute-000041 C1_text: "The plate is blue and it's on the table. It has some food on it. What else do you want to "
+[1020/1305] vaw-attribute-000041 C2_audio: "Well, it's a blue plate. It's on the table. And it has some food on it. What else do you w"
+[1021/1305] vaw-attribute-000042 C0_none: "He's wearing a red shirt. He's sitting at a desk, using a laptop. It looks like he's focus"
+[1022/1305] vaw-attribute-000042 C1_text: "He's wearing a red shirt. He's sitting at a desk, using a laptop. What do you think about "
+[1023/1305] vaw-attribute-000042 C2_audio: "He's wearing a red shirt. He's sitting at a desk with a laptop in front of him. There's a "
+[1024/1305] vaw-attribute-000043 C0_none: 'The sky is gray and cloudy. It looks like it might be a bit overcast. What do you think ab'
+[1025/1305] vaw-attribute-000043 C1_text: 'The sky is gray and cloudy. It looks like it might be a bit overcast. What do you think ab'
+[1026/1305] vaw-attribute-000043 C2_audio: 'The sky is gray and cloudy. It looks like it might be a bit overcast. What do you think ab'
+[1027/1305] vaw-attribute-000046 C0_none: "The branch is brown. It looks like it's made of wood. What else do you want to know about "
+[1028/1305] vaw-attribute-000046 C1_text: "The branch is made of wood. It looks like it's a natural, untreated wood. It has a rough t"
+[1029/1305] vaw-attribute-000046 C2_audio: "The branch is made of wood. It looks like it's a natural, organic material. If you have an"
+[1030/1305] vaw-attribute-000047 C0_none: "The table is white. It looks like it's made of metal. What do you think about that? Do you"
+[1031/1305] vaw-attribute-000047 C1_text: "The table is white. Well, that's about it. If you have any other questions about the scene"
+[1032/1305] vaw-attribute-000047 C2_audio: "The table is white. It looks like it's made of some kind of light - colored material, but "
+[1033/1305] vaw-attribute-000048 C0_none: "The blanket is red and white. It looks like it's made of a soft, likely cotton or a cotton"
+[1034/1305] vaw-attribute-000048 C1_text: "The blanket is red and white. It has a stripe pattern. Well, that's about it. If you have "
+[1035/1305] vaw-attribute-000048 C2_audio: 'The blanket is red and white. It has a stripe pattern. What do you think about that color '
+[1036/1305] vaw-attribute-000050 C0_none: "The sign is yellow and it's a diamond - shaped sign. It's a bicycle - yield - to - pedestr"
+[1037/1305] vaw-attribute-000050 C1_text: "The sign is yellow. It's rectangular in shape. So, yeah, that's it. If you have any other "
+[1038/1305] vaw-attribute-000050 C2_audio: "The sign is yellow. It's a rectangular shape. If you have any other questions about the si"
+[1039/1305] vaw-attribute-000051 C0_none: "The church is white in color. It's a large building. It has a really grand and imposing lo"
+[1040/1305] vaw-attribute-000051 C1_text: "The church is white in color. It's a large building. It has a tall bell tower and a dome. "
+[1041/1305] vaw-attribute-000051 C2_audio: "The church is large in size. It has a white exterior. Well, that's about it. If you have a"
+[1042/1305] vaw-attribute-000052 C0_none: "The clock is white in color. It has a round shape. So, it's a round - shaped white clock. "
+[1043/1305] vaw-attribute-000052 C1_text: 'The clock is round in shape. It has a white face with black numbers and hands. It also has'
+[1044/1305] vaw-attribute-000052 C2_audio: 'The clock is round in shape. It has a white face with black numbers and hands. It also has'
+[1045/1305] vaw-attribute-000053 C0_none: "The sand in the picture looks light brown in color. It's in a loose state, kind of like a "
+[1046/1305] vaw-attribute-000053 C1_text: "The sand is light brown in color and it's in a loose state. It looks like it's been walked"
+[1047/1305] vaw-attribute-000053 C2_audio: "The sand is light brown in color. It's in a loose state, kind of powdery. It looks like it"
+[1048/1305] vaw-attribute-000054 C0_none: "The floor is gray in color. It has a smooth texture. Well, that's what I can see. What els"
+[1049/1305] vaw-attribute-000054 C1_text: "The floor is gray in color. It has a smooth texture. So, that's about it. If you have any "
+[1050/1305] vaw-attribute-000054 C2_audio: "The floor is gray. Well, that's about it. If you have any other questions about the scene,"
+[1051/1305] vaw-attribute-000058 C0_none: 'The legs are gray in color. The texture looks rough and wrinkled, like the skin of an elep'
+[1052/1305] vaw-attribute-000058 C1_text: "The legs are gray in color. They have a rough texture. Well, that's about it. If you want "
+[1053/1305] vaw-attribute-000058 C2_audio: "The legs are gray in color. Well, that's about it. If you want to know more about the elep"
+[1054/1305] vaw-attribute-000059 C0_none: "The water looks like it's made of a brownish - yellow material. It's in a state of being c"
+[1055/1305] vaw-attribute-000059 C1_text: "The water looks like it's made of a liquid substance. It's in a state of being still, but "
+[1056/1305] vaw-attribute-000059 C2_audio: 'The water looks brownish in color. It has some ripples on the surface. What do you think a'
+[1057/1305] vaw-attribute-000060 C0_none: 'Well, the cows are mostly black and white. They look pretty big. Some of them are really b'
+[1058/1305] vaw-attribute-000060 C1_text: 'Well, there are some cows that are quite large. They seem to be of medium to large size. S'
+[1059/1305] vaw-attribute-000060 C2_audio: 'Well, there are some cows that are quite large. They seem to be of medium to large size. S'
+[1060/1305] vaw-attribute-000061 C0_none: "The floor is brown in color and it looks like it's made of wood. It has a nice, warm look "
+[1061/1305] vaw-attribute-000061 C1_text: 'The floor is made of wood. It has a natural, warm brown color. What do you think about tha'
+[1062/1305] vaw-attribute-000061 C2_audio: "The floor is made of wood. Well, that's all I can say about it. If you have any other ques"
+[1063/1305] vaw-attribute-000062 C0_none: "The container is orange and made of plastic. It has a lid that's also orange. So, yeah, th"
+[1064/1305] vaw-attribute-000062 C1_text: "It's orange and clear. It has a lid with some cartoon characters on it. What do you think "
+[1065/1305] vaw-attribute-000062 C2_audio: 'The container is orange and clear. It has a lid with a cartoon design on it. What do you t'
+[1066/1305] vaw-attribute-000064 C0_none: "The bricks are red and they're rectangular in shape. They look pretty uniform. What do you"
+[1067/1305] vaw-attribute-000064 C1_text: "The bricks are red in color. They're rectangular in shape. If you have any other questions"
+[1068/1305] vaw-attribute-000064 C2_audio: "The bricks are red in color. Well, that's about it. If you have any other questions about "
+[1069/1305] vaw-attribute-000066 C0_none: "The sky is a clear blue color. It looks like it's a nice, sunny day. There are no clouds i"
+[1070/1305] vaw-attribute-000066 C1_text: "The sky is clear and blue. It's a nice, bright blue color. What do you think about it?"
+[1071/1305] vaw-attribute-000066 C2_audio: "The sky is clear and blue. It's a nice day. What else do you want to know about the sky?"
+[1072/1305] vaw-attribute-000067 C0_none: "The sky is a clear blue color. It looks like it's a nice, sunny day. There are no clouds i"
+[1073/1305] vaw-attribute-000067 C1_text: "The sky is a clear blue color. It's a bright, sunny day. There are no clouds in sight. So,"
+[1074/1305] vaw-attribute-000067 C2_audio: "The sky is clear and blue. It's a nice day. What else do you want to know about the sky?"
+[1075/1305] vaw-attribute-000068 C0_none: "The sky is a clear blue color. It looks like it's a nice, sunny day. There are no clouds i"
+[1076/1305] vaw-attribute-000068 C1_text: "The sky is a clear blue color. It's a bright, sunny day. What do you think about the weath"
+[1077/1305] vaw-attribute-000068 C2_audio: "The sky is clear and blue. It's a nice day. What do you think about it?"
+[1078/1305] vaw-attribute-000069 C0_none: "The sky is a clear blue color. It looks like it's a nice, sunny day. There are no clouds i"
+[1079/1305] vaw-attribute-000069 C1_text: "The sky is clear and blue. It's a nice, bright blue color. What do you think about it?"
+[1080/1305] vaw-attribute-000069 C2_audio: "The sky is clear and blue. It's a nice day. What do you think about it?"
+[1081/1305] vaw-attribute-000070 C0_none: "The sky is a clear blue color. It looks like it's a nice, sunny day. There are no clouds i"
+[1082/1305] vaw-attribute-000070 C1_text: "The sky is clear and blue. It's a nice, open sky. What do you think about it?"
+[1083/1305] vaw-attribute-000070 C2_audio: "The sky is clear and blue. It's a nice day. What do you think about it?"
+[1084/1305] vaw-attribute-000071 C0_none: "The sky is a clear blue color. It looks like it's a nice, sunny day. There are no clouds i"
+[1085/1305] vaw-attribute-000071 C1_text: "The sky is clear and blue. It's a nice, bright blue color. What do you think about that?"
+[1086/1305] vaw-attribute-000071 C2_audio: "The sky is clear and blue. It's a nice, open space up there. What do you think about it?"
+[1087/1305] vaw-attribute-000072 C0_none: "The sky is a clear blue color. It looks like it's a nice, sunny day. There are no clouds i"
+[1088/1305] vaw-attribute-000072 C1_text: "The sky is clear and blue. It's a really nice, bright blue color. What do you think about "
+[1089/1305] vaw-attribute-000072 C2_audio: "The sky is clear and blue. It's a nice, bright blue color. What do you think about it?"
+[1090/1305] vaw-attribute-000073 C0_none: "The table is green in color. It's made of wood. It has a round shape. So, that's the basic"
+[1091/1305] vaw-attribute-000073 C1_text: "The table is green in color. It's a round table. Well, that's about it. If you want to kno"
+[1092/1305] vaw-attribute-000073 C2_audio: "The table is green in color. It's a round table. Well, that's about it. If you want to kno"
+[1093/1305] vaw-attribute-000074 C0_none: "The table is brown in color. It looks like it's made of wood. What do you think about the "
+[1094/1305] vaw-attribute-000074 C1_text: 'The table is made of wood. It has a rich, warm brown color. What do you think about the de'
+[1095/1305] vaw-attribute-000074 C2_audio: 'The table is made of wood. It has a wooden surface with a patterned design. What do you th'
+[1096/1305] gqa-relation-000002 C0_none: "The baby is lying on a bed. It's wearing a striped onesie. So, what do you think about the"
+[1097/1305] gqa-relation-000002 C1_text: "The baby is lying on a bed. It's wearing a striped onesie. So, what do you think about the"
+[1098/1305] gqa-relation-000002 C2_audio: "The baby is lying on a bed. It's wearing a striped onesie. So, what do you think about the"
+[1099/1305] gqa-relation-000003 C0_none: "He's looking in the fridge. He's wearing a blue t - shirt with a yellow design on the back"
+[1100/1305] gqa-relation-000003 C1_text: "He's looking in the fridge. He's wearing a blue t - shirt with a design on it. What do you"
+[1101/1305] gqa-relation-000003 C2_audio: "The guy is looking in the refrigerator. He's wearing a blue t - shirt with a yellow design"
+[1102/1305] gqa-relation-000004 C0_none: "He's catching a frisbee. He's wearing a Santa hat, glasses, a white t - shirt with some de"
+[1103/1305] gqa-relation-000004 C1_text: "The boy is wearing a Santa hat and glasses. He's also wearing a white t - shirt with some "
+[1104/1305] gqa-relation-000004 C2_audio: "The boy is wearing a Santa hat and glasses. He's also wearing a white t - shirt with some "
+[1105/1305] gqa-relation-000005 C0_none: "She's holding a black cat. She's sitting on a couch. What do you think about that?"
+[1106/1305] gqa-relation-000005 C1_text: "She's holding a black cat. She's sitting on a couch. So, what do you think about that?"
+[1107/1305] gqa-relation-000005 C2_audio: "The woman is sitting on a couch. Well, that's all I can say about her. If you have any oth"
+[1108/1305] gqa-relation-000006 C0_none: "He's hitting a tennis ball. He's holding a tennis racket. He's wearing a blue shirt, white"
+[1109/1305] gqa-relation-000006 C1_text: "He's hitting a tennis ball. He's holding a tennis racket. He's wearing a blue shirt, white"
+[1110/1305] gqa-relation-000006 C2_audio: "He's hitting a tennis ball. He's wearing a blue shirt, white shorts, and black shoes. And "
+[1111/1305] gqa-relation-000008 C0_none: "He's reading a newspaper. He's sitting in a chair. What do you think about the room?"
+[1112/1305] gqa-relation-000008 C1_text: "He's reading a newspaper. He's sitting in a chair. What do you think about the room?"
+[1113/1305] gqa-relation-000008 C2_audio: "The man is reading a newspaper. He's sitting in a chair. So, what do you think about the r"
+[1114/1305] gqa-relation-000011 C0_none: "She's reading a newspaper. And she's sitting on a toilet. It's a bit unusual, right? So, w"
+[1115/1305] gqa-relation-000011 C1_text: "She's reading a newspaper. And she's sitting on a toilet. What do you think about that?"
+[1116/1305] gqa-relation-000011 C2_audio: "She's reading a newspaper. What do you think about that?"
+[1117/1305] gqa-relation-000012 C0_none: "She's playing tennis. She's wearing a white top, black shorts with a yellow trim, and whit"
+[1118/1305] gqa-relation-000012 C1_text: "She's playing tennis. She's wearing a white top, black shorts with a yellow trim, and whit"
+[1119/1305] gqa-relation-000012 C2_audio: "She's playing tennis. She's wearing a white top, black shorts with yellow trim, and white "
+[1120/1305] gqa-relation-000013 C0_none: "He's holding a pair of skis. He's standing on a snowy surface. He's wearing a brown jacket"
+[1121/1305] gqa-relation-000013 C1_text: "He's holding a pair of skis. He's standing on a snowy surface. And he's wearing a brown ja"
+[1122/1305] gqa-relation-000013 C2_audio: "He's holding a pair of skis. He's standing on a snowy surface. And he's wearing a brown ja"
+[1123/1305] gqa-relation-000015 C0_none: "The player is hitting a baseball. They are swinging a baseball bat. So, that's it. If you "
+[1124/1305] gqa-relation-000015 C1_text: 'The player is hitting a baseball. They are swinging a bat. So, what do you think about bas'
+[1125/1305] gqa-relation-000015 C2_audio: "The player is hitting a baseball. They're swinging a bat. So, what do you think about base"
+[1126/1305] gqa-relation-000016 C0_none: "He's carrying an umbrella. He's walking on a paved surface. And he's wearing an orange rob"
+[1127/1305] gqa-relation-000016 C1_text: "He's carrying an umbrella. He's walking on a sidewalk. He's wearing an orange robe. So, wh"
+[1128/1305] gqa-relation-000016 C2_audio: "He's carrying an umbrella. He's wearing an orange robe and sandals. Well, that's all I can"
+[1129/1305] gqa-relation-000017 C0_none: "She's holding a Wii remote. She's wearing a yellow top with a floral pattern, a blue jacke"
+[1130/1305] gqa-relation-000017 C1_text: "She's holding a Wii remote. She's wearing a blue jacket, a yellow shirt with a floral patt"
+[1131/1305] gqa-relation-000017 C2_audio: "The woman is holding a white object. She's wearing a blue jacket and a yellow shirt with a"
+[1132/1305] gqa-relation-000018 C0_none: "He's holding a sandwich. He's wearing a white t - shirt. And he's got a ring on his finger"
+[1133/1305] gqa-relation-000018 C1_text: "He's holding a sandwich. He's wearing a white shirt. So, what do you think about that?"
+[1134/1305] gqa-relation-000018 C2_audio: "He's holding a sandwich. He's wearing a white shirt. So, what do you think about that?"
+[1135/1305] gqa-relation-000019 C0_none: "He's sitting on a chair with a floral cushion. He's wearing a sleeveless shirt. So, what d"
+[1136/1305] gqa-relation-000019 C1_text: "He's sitting on a chair with a floral cushion. He's wearing a sleeveless shirt. So, what d"
+[1137/1305] gqa-relation-000019 C2_audio: "He's sitting on a chair with a floral cushion. He's wearing a sleeveless shirt. If you hav"
+[1138/1305] gqa-relation-000020 C0_none: "He's sitting on a chair with a floral cushion. He's wearing a sleeveless shirt. So, what d"
+[1139/1305] gqa-relation-000020 C1_text: "He's sitting on a chair with a floral cushion. He's wearing a sleeveless shirt. If you hav"
+[1140/1305] gqa-relation-000020 C2_audio: "He's sitting on a chair with a floral cushion. That's all I can tell you about him. If you"
+[1141/1305] gqa-relation-000021 C0_none: "He's sitting on a chair with a floral cushion. He's wearing a sleeveless shirt. So, what d"
+[1142/1305] gqa-relation-000021 C1_text: "He's sitting on a chair with a floral cushion. He's wearing a sleeveless shirt. So, what d"
+[1143/1305] gqa-relation-000021 C2_audio: "He's sitting on a chair with a floral pattern. He's wearing a sleeveless shirt. So, what d"
+[1144/1305] gqa-relation-000022 C0_none: "He's sitting on a chair with a floral cushion. He's wearing a sleeveless shirt. So, what d"
+[1145/1305] gqa-relation-000022 C1_text: "He's sitting on a chair with a floral cushion. He's wearing a sleeveless shirt. So, what d"
+[1146/1305] gqa-relation-000022 C2_audio: "He's sitting on a chair with a floral cushion. What do you think about that?"
+[1147/1305] gqa-relation-000023 C0_none: "He's sitting on a chair with a floral cushion. He's wearing a sleeveless shirt. So, what d"
+[1148/1305] gqa-relation-000023 C1_text: "He's sitting on a chair with a floral cushion. And he's using a laptop. What do you think "
+[1149/1305] gqa-relation-000023 C2_audio: "He's sitting on a chair with a floral cushion. What do you think about that?"
+[1150/1305] gqa-relation-000024 C0_none: "He's sitting on a chair with a floral cushion. He's wearing a sleeveless shirt. So, what d"
+[1151/1305] gqa-relation-000024 C1_text: "He's sitting on a chair with a floral cushion. He's wearing a sleeveless shirt. So, what d"
+[1152/1305] gqa-relation-000024 C2_audio: "He's sitting on a chair with a floral cushion. He's wearing a sleeveless shirt. So, what d"
+[1153/1305] gqa-relation-000025 C0_none: "He's sitting on a chair with a floral cushion. He's wearing a sleeveless shirt. So, what d"
+[1154/1305] gqa-relation-000025 C1_text: "He's sitting on a chair with a floral cushion. He's wearing a sleeveless shirt. So, he's s"
+[1155/1305] gqa-relation-000025 C2_audio: "He's sitting on a chair with a floral patterned cushion. And he's wearing a sleeveless shi"
+[1156/1305] gqa-relation-000027 C0_none: "He's moving a refrigerator. He's wearing an orange t - shirt with some writing on it, khak"
+[1157/1305] gqa-relation-000027 C1_text: "The man is moving a refrigerator. He's wearing an orange t - shirt, khaki shorts, and whit"
+[1158/1305] gqa-relation-000027 C2_audio: "The man is wearing an orange t - shirt and beige shorts. He's moving something, but I can'"
+[1159/1305] gqa-relation-000028 C0_none: "The policeman is driving a motorcycle. He's wearing a helmet. What else do you want to kno"
+[1160/1305] gqa-relation-000028 C1_text: "The policeman is driving a motorcycle. He's wearing a helmet. What do you think about the "
+[1161/1305] gqa-relation-000028 C2_audio: "The policeman is driving a motorcycle. He's wearing a helmet. So, what do you think about "
+[1162/1305] gqa-relation-000029 C0_none: "She's holding a computer mouse and she's working on a laptop. What do you think she might "
+[1163/1305] gqa-relation-000029 C1_text: "She's holding a mouse. She's working on a laptop. What do you think she might be working o"
+[1164/1305] gqa-relation-000029 C2_audio: "The girl is working on a laptop. She's also holding a mouse. What do you think she might b"
+[1165/1305] gqa-relation-000030 C0_none: "The child is holding a tennis racket and a tennis ball. They're wearing a pink cap, a gree"
+[1166/1305] gqa-relation-000030 C1_text: 'The child is wearing a pink cap, a green shirt, and black shorts. They are holding a tenni'
+[1167/1305] gqa-relation-000030 C2_audio: 'The child is wearing a pink cap, a green shirt, and black shorts. They are holding a tenni'
+[1168/1305] gqa-relation-000031 C0_none: "He's sitting on a bench. He's wearing a blue jacket. What do you think about the scene?"
+[1169/1305] gqa-relation-000031 C1_text: "He's sitting on a bench. He's wearing a blue jacket. What do you think about the scene?"
+[1170/1305] gqa-relation-000031 C2_audio: "The man is sitting on a bench. He's wearing a blue jacket. What do you think about the sce"
+[1171/1305] gqa-relation-000032 C0_none: "Well, the skier is carrying a backpack. And they're wearing a helmet, a jacket, and black "
+[1172/1305] gqa-relation-000032 C1_text: 'The skier is carrying a backpack. They are wearing a helmet, goggles, a jacket, pants, and'
+[1173/1305] gqa-relation-000032 C2_audio: 'The skier is wearing a helmet, goggles, a jacket, pants, and ski boots. They also have ski'
+[1174/1305] gqa-relation-000033 C0_none: "She's holding an umbrella. She's wearing a black and white striped sweater. And she's got "
+[1175/1305] gqa-relation-000033 C1_text: "She's holding an umbrella. She's wearing a black and white striped sweater. And she's got "
+[1176/1305] gqa-relation-000033 C2_audio: "She's wearing a black and white striped sweater. And she's holding an umbrella. What do yo"
+[1177/1305] gqa-relation-000034 C0_none: "She's holding an umbrella. She's wearing a black and white striped sweater. And she's got "
+[1178/1305] gqa-relation-000034 C1_text: "She's holding an umbrella. She's wearing a black and white striped sweater. What do you th"
+[1179/1305] gqa-relation-000034 C2_audio: "She's wearing a black and white striped sweater. And she's holding an umbrella. What do yo"
+[1180/1305] gqa-relation-000035 C0_none: "She's holding an umbrella. She's wearing a black and white striped sweater. And she's got "
+[1181/1305] gqa-relation-000035 C1_text: "She's holding an umbrella. She's wearing a black and white striped sweater. And she's got "
+[1182/1305] gqa-relation-000035 C2_audio: "She's wearing a black and white striped sweater. And she's holding an umbrella. What do yo"
+[1183/1305] gqa-relation-000036 C0_none: "She's holding an umbrella. She's wearing a black and white striped sweater. And she's got "
+[1184/1305] gqa-relation-000036 C1_text: "She's holding an umbrella. She's wearing a black and white striped sweater. And she's got "
+[1185/1305] gqa-relation-000036 C2_audio: "She's wearing a black and white striped sweater. And she's holding an umbrella. What do yo"
+[1186/1305] gqa-relation-000037 C0_none: "She's holding an umbrella. She's wearing a black and white striped sweater. And she's got "
+[1187/1305] gqa-relation-000037 C1_text: "She's wearing a black and white striped sweater. And she's holding an umbrella. What do yo"
+[1188/1305] gqa-relation-000037 C2_audio: "She's wearing a black and white striped sweater. And she's got a clear umbrella in her han"
+[1189/1305] gqa-relation-000038 C0_none: "She's holding an umbrella. She's wearing a black and white striped sweater. And she's got "
+[1190/1305] gqa-relation-000038 C1_text: "She's holding an umbrella. She's wearing a black and white striped sweater. And she's got "
+[1191/1305] gqa-relation-000038 C2_audio: "She's wearing a black and white striped sweater. And she's got a clear umbrella. So, what "
+[1192/1305] gqa-relation-000039 C0_none: "She's holding an umbrella. She's wearing a black and white striped sweater. And she's got "
+[1193/1305] gqa-relation-000039 C1_text: "She's wearing a black and white striped sweater. And she's holding an umbrella. So, she's "
+[1194/1305] gqa-relation-000039 C2_audio: "She's wearing a black and white striped sweater. And she has a bag on her shoulder. So, wh"
+[1195/1305] gqa-relation-000040 C0_none: "He's holding a pen. He's sitting at a desk. And he's using a laptop. What do you think he "
+[1196/1305] gqa-relation-000040 C1_text: "He's holding a pen. He's sitting at a desk. He's using a laptop. What do you think he migh"
+[1197/1305] gqa-relation-000040 C2_audio: "The man is sitting at a desk. He's using a laptop. What else do you want to know about thi"
+[1198/1305] gqa-relation-000043 C0_none: "He's holding a baseball bat. He's wearing a helmet, a jersey, and some gloves. And he's al"
+[1199/1305] gqa-relation-000043 C1_text: "He's holding a baseball bat. He's wearing a helmet. What else do you want to know about hi"
+[1200/1305] gqa-relation-000043 C2_audio: "He's holding a baseball bat."
+[1201/1305] gqa-relation-000044 C0_none: "She's pointing at something in front of her. She's wearing a pink coat. What do you think "
+[1202/1305] gqa-relation-000044 C1_text: "She's pointing at something in front of her. She's wearing a pink coat. What do you think "
+[1203/1305] gqa-relation-000044 C2_audio: "She's pointing at something in front of her. She's wearing a pink coat. What do you think "
+[1204/1305] gqa-relation-000046 C0_none: "She's using a laptop. She's wearing a black top and a blue lanyard around her neck. And sh"
+[1205/1305] gqa-relation-000046 C1_text: "She's using a laptop. She's wearing a black top and a blue lanyard around her neck. And sh"
+[1206/1305] gqa-relation-000046 C2_audio: "She's wearing a black top and a blue lanyard around her neck. And she's using a laptop. Wh"
+[1207/1305] gqa-relation-000047 C0_none: "She's cleaning the sink. And she's holding a sponge in one hand and a paper towel in the o"
+[1208/1305] gqa-relation-000047 C1_text: "She's cleaning the sink. And she's holding a sponge. What do you think she might be cleani"
+[1209/1305] gqa-relation-000047 C2_audio: "She's cleaning the kitchen. She's holding a sponge. What do you think she might be cleanin"
+[1210/1305] gqa-relation-000048 C0_none: "He's standing in front of a bus. He's wearing a black jacket and black pants. What do you "
+[1211/1305] gqa-relation-000048 C1_text: "He's standing in the grass. He's wearing a black jacket and black pants. What do you think"
+[1212/1305] gqa-relation-000048 C2_audio: "He's standing in the grass. He's wearing a black jacket and black pants. What do you think"
+[1213/1305] gqa-relation-000049 C0_none: "The child is holding a snack bar. They're wearing a denim overall with a pink shirt undern"
+[1214/1305] gqa-relation-000049 C1_text: 'The child is holding a snack. They are wearing a denim overall with a pink shirt underneat'
+[1215/1305] gqa-relation-000049 C2_audio: "The child is holding a snack. That's all I can say about what they're holding. If you have"
+[1216/1305] gqa-relation-000050 C0_none: "He's flying a kite. He's wearing a gray bucket hat and a red and white striped shirt. What"
+[1217/1305] gqa-relation-000050 C1_text: "The boy is wearing a gray bucket hat and a red and white striped shirt. He's standing in a"
+[1218/1305] gqa-relation-000050 C2_audio: "The boy is wearing a red and white striped shirt and a gray bucket hat. He's flying a kite"
+[1219/1305] gqa-relation-000051 C0_none: "Well, it's a bit hard to say exactly what he's chasing. But he's wearing shorts and no shi"
+[1220/1305] gqa-relation-000051 C1_text: "Well, it's a bit hard to say exactly what he's chasing. But he's wearing shorts and no shi"
+[1221/1305] gqa-relation-000051 C2_audio: "The man is wearing shorts and no shirt. He's running in the water. So, what do you think h"
+[1222/1305] gqa-relation-000052 C0_none: "The batter is holding a baseball bat. He's wearing a white uniform with some dark accents,"
+[1223/1305] gqa-relation-000052 C1_text: 'The batter is wearing a white uniform with black and red accents. They are holding a baseb'
+[1224/1305] gqa-relation-000052 C2_audio: "The batter is wearing a white uniform with black and red accents. He's holding a baseball "
+[1225/1305] gqa-relation-000053 C0_none: "He's hitting a tennis ball. He's holding a tennis racket. So, what do you think about tenn"
+[1226/1305] gqa-relation-000053 C1_text: "He's hitting a tennis ball. And he's holding a tennis racket. So, what do you think about "
+[1227/1305] gqa-relation-000053 C2_audio: "He's holding a tennis racket. So, what do you think about his game?"
+[1228/1305] gqa-relation-000054 C0_none: "He's hitting a tennis ball. He's holding a tennis racket. So, what do you think about tenn"
+[1229/1305] gqa-relation-000054 C1_text: "He's hitting a tennis ball. And he's holding a tennis racket. So, what do you think about "
+[1230/1305] gqa-relation-000054 C2_audio: "He's holding a tennis racket. So, what do you think about tennis?"
+[1231/1305] gqa-relation-000055 C0_none: "He's hitting a tennis ball. He's holding a tennis racket. So, what do you think about tenn"
+[1232/1305] gqa-relation-000055 C1_text: "He's hitting a tennis ball. And he's holding a tennis racket. So, what do you think about "
+[1233/1305] gqa-relation-000055 C2_audio: "He's holding a tennis racket. And he's hitting a tennis ball. So, what do you think about "
+[1234/1305] gqa-relation-000056 C0_none: "He's hitting a tennis ball. He's holding a tennis racket. So, what do you think about tenn"
+[1235/1305] gqa-relation-000056 C1_text: "He's hitting a tennis ball. He's holding a tennis racket. So, what do you think about tenn"
+[1236/1305] gqa-relation-000056 C2_audio: "He's hitting a tennis ball. And he's holding a tennis racket. So, what do you think about "
+[1237/1305] gqa-relation-000057 C0_none: "He's hitting a tennis ball. He's holding a tennis racket. So, what do you think about tenn"
+[1238/1305] gqa-relation-000057 C1_text: "He's hitting a tennis ball. And he's holding a tennis racket. So, what do you think about "
+[1239/1305] gqa-relation-000057 C2_audio: "He's hitting a tennis ball. And he's holding a tennis racket. So, what do you think about "
+[1240/1305] gqa-relation-000058 C0_none: "He's hitting a tennis ball. He's holding a tennis racket. So, what do you think about tenn"
+[1241/1305] gqa-relation-000058 C1_text: "He's hitting a tennis ball. And he's holding a tennis racket. So, what do you think about "
+[1242/1305] gqa-relation-000058 C2_audio: "He's holding a tennis racket. And he's hitting a tennis ball. So, what do you think about "
+[1243/1305] gqa-relation-000059 C0_none: "He's hitting a tennis ball. He's holding a tennis racket. So, what do you think about tenn"
+[1244/1305] gqa-relation-000059 C1_text: "He's holding a tennis racket. So, he's hitting a tennis ball. What do you think about his "
+[1245/1305] gqa-relation-000059 C2_audio: "He's holding a tennis racket. So, what do you think about his game?"
+[1246/1305] gqa-relation-000060 C0_none: "They're standing on a surfboard. And they're wearing a wetsuit. What do you think about su"
+[1247/1305] gqa-relation-000060 C1_text: "They're standing on a surfboard. And they're wearing a wetsuit. So, what do you think abou"
+[1248/1305] gqa-relation-000060 C2_audio: "They're standing on a surfboard. And they're wearing a wetsuit. So, what do you think abou"
+[1249/1305] gqa-relation-000061 C0_none: "They're standing on a surfboard. And they're wearing a wetsuit. What do you think about su"
+[1250/1305] gqa-relation-000061 C1_text: "They're standing on a surfboard. And they're wearing a wetsuit. So, what do you think abou"
+[1251/1305] gqa-relation-000061 C2_audio: "They're standing on a surfboard. And they're wearing a wetsuit. So, what do you think abou"
+[1252/1305] gqa-relation-000062 C0_none: "They're standing on a surfboard. And they're wearing a wetsuit. What do you think about su"
+[1253/1305] gqa-relation-000062 C1_text: "They're standing on a surfboard. And they're wearing a wetsuit. So, what do you think abou"
+[1254/1305] gqa-relation-000062 C2_audio: "They're standing on a surfboard. And they're wearing a wetsuit. So, what do you think abou"
+[1255/1305] gqa-relation-000063 C0_none: "They're standing on a surfboard. And they're wearing a wetsuit. What do you think about su"
+[1256/1305] gqa-relation-000063 C1_text: "They're standing on a surfboard. And they're wearing a wetsuit. So, what do you think abou"
+[1257/1305] gqa-relation-000063 C2_audio: "They're standing on a surfboard. And they're wearing a wetsuit. So, what do you think abou"
+[1258/1305] gqa-relation-000064 C0_none: "They're standing on a surfboard. And they're wearing a wetsuit. What do you think about su"
+[1259/1305] gqa-relation-000064 C1_text: "They're standing on a surfboard. And they're wearing a wetsuit. So, what do you think abou"
+[1260/1305] gqa-relation-000064 C2_audio: "They're standing on a surfboard. And they're wearing a wetsuit. So, what do you think abou"
+[1261/1305] gqa-relation-000065 C0_none: "They're standing on a surfboard. And they're wearing a wetsuit. What do you think about su"
+[1262/1305] gqa-relation-000065 C1_text: "They're standing on a surfboard. And they're wearing a wetsuit. So, what do you think abou"
+[1263/1305] gqa-relation-000065 C2_audio: "They're standing on a surfboard. And they're wearing a wetsuit. So, what do you think abou"
+[1264/1305] gqa-relation-000066 C0_none: "They're standing on a surfboard. And they're wearing a wetsuit. What do you think about su"
+[1265/1305] gqa-relation-000066 C1_text: "They're standing on a surfboard. And they're wearing a wetsuit. So, what do you think abou"
+[1266/1305] gqa-relation-000066 C2_audio: "They're standing on a surfboard. And they're wearing a wetsuit. So, what do you think abou"
+[1267/1305] gqa-relation-000067 C0_none: "He's hitting a tennis ball. And he's swinging a tennis racket. So, what do you think about"
+[1268/1305] gqa-relation-000067 C1_text: "He's hitting a tennis ball. And he's swinging a tennis racket. So, what do you think about"
+[1269/1305] gqa-relation-000067 C2_audio: "He's swinging a tennis racket. What do you think about his swing?"
+[1270/1305] gqa-relation-000068 C0_none: "She's playing frisbee. She's standing on grass. And she's throwing a frisbee. So, what do "
+[1271/1305] gqa-relation-000068 C1_text: "She's playing frisbee. She's standing on grass. She's throwing a frisbee. So, what do you "
+[1272/1305] gqa-relation-000068 C2_audio: "She's playing frisbee. She's standing on grass. And she's throwing a frisbee. So, what do "
+[1273/1305] gqa-relation-000069 C0_none: "He's eating a dessert, like a cake or ice cream. And he's holding a spoon. What do you thi"
+[1274/1305] gqa-relation-000069 C1_text: "The man is eating a dessert. He's holding a spoon. So, what do you think he might be eatin"
+[1275/1305] gqa-relation-000069 C2_audio: "The man is holding a spoon. He's also eating something, but I can't say what it is. What d"
+[1276/1305] gqa-relation-000070 C0_none: 'The horse is standing in the grass. The zebra is walking in the grass. So, the horse is st'
+[1277/1305] gqa-relation-000070 C1_text: "The horse is standing in the grass. The zebra is walking in the grass. So, that's it. If y"
+[1278/1305] gqa-relation-000070 C2_audio: 'The horse is walking in the grass. What else do you want to know about the horse?'
+[1279/1305] gqa-relation-000071 C0_none: "The steam is coming from the train. It's coming out of the smokestack on top of the train."
+[1280/1305] gqa-relation-000071 C1_text: "The steam is coming from the train engine. It's coming out of the smokestack on top of the"
+[1281/1305] gqa-relation-000071 C2_audio: "The steam is coming from the train. It's coming out of the smokestack. So, what else do yo"
+[1282/1305] gqa-relation-000072 C0_none: "He's standing in the snow. He's wearing a green military uniform. What do you think about "
+[1283/1305] gqa-relation-000072 C1_text: "The man is standing in the snow. He's wearing a helmet. What do you think about that?"
+[1284/1305] gqa-relation-000072 C2_audio: "The man is standing in the snow. He's wearing a helmet. So, what do you think about this s"
+[1285/1305] gqa-relation-000073 C0_none: "He's standing in the snow. He's wearing a green military uniform. What do you think about "
+[1286/1305] gqa-relation-000073 C1_text: "The man is standing in the snow. He's wearing a green uniform. So, what do you think about"
+[1287/1305] gqa-relation-000073 C2_audio: "The man is standing in the snow. He's wearing a helmet. So, that's all there is to it. If "
+[1288/1305] gqa-relation-000074 C0_none: "He's standing in the snow. He's wearing a green military uniform. What do you think about "
+[1289/1305] gqa-relation-000074 C1_text: "The man is standing in the snow. He's wearing a helmet. What else do you want to know abou"
+[1290/1305] gqa-relation-000074 C2_audio: "The man is standing in the snow. He's wearing a helmet. So, what do you think about this s"
+[1291/1305] gqa-relation-000075 C0_none: "He's standing in the snow. He's wearing a green military uniform. What do you think about "
+[1292/1305] gqa-relation-000075 C1_text: "The man is standing in the snow. He's wearing a helmet. What else do you want to know abou"
+[1293/1305] gqa-relation-000075 C2_audio: "The man is standing in the snow. He's wearing a helmet. So, that's all there is to it. If "
+[1294/1305] gqa-relation-000076 C0_none: "He's standing in the snow. He's wearing a green military uniform. What do you think about "
+[1295/1305] gqa-relation-000076 C1_text: "The man is standing in the snow. He's wearing a helmet. What do you think about that?"
+[1296/1305] gqa-relation-000076 C2_audio: "The man is standing in the snow. He's wearing a helmet. So, what do you think about this s"
+[1297/1305] gqa-relation-000077 C0_none: "He's standing in the snow. He's wearing a green military uniform. What do you think about "
+[1298/1305] gqa-relation-000077 C1_text: "The man is standing in the snow. He's wearing a helmet. What do you think about that?"
+[1299/1305] gqa-relation-000077 C2_audio: "The man is standing in the snow. He's wearing a helmet. So, that's all you need to know. I"
+[1300/1305] gqa-relation-000078 C0_none: "He's standing in the snow. He's wearing a green military uniform. What do you think about "
+[1301/1305] gqa-relation-000078 C1_text: "The man is standing in the snow. He's wearing a helmet. So, he's standing in the snow, and"
+[1302/1305] gqa-relation-000078 C2_audio: "The man is standing in the snow. He's wearing a helmet. So, that's all you need to know ab"
+[1303/1305] gqa-relation-000079 C0_none: "He's skiing on snow. He's wearing a green jacket, a gray beanie, and black pants. And he's"
+[1304/1305] gqa-relation-000079 C1_text: "He's skiing on snow. He's wearing a green jacket, a gray beanie, and sunglasses. And he's "
+[1305/1305] gqa-relation-000079 C2_audio: "He's skiing on snow. He's wearing a green jacket, a gray beanie, and sunglasses. What do y"
+Loading weights:   0%|          | 0/399 [00:00<?, ?it/s]Loading weights:   0%|          | 1/399 [00:00<00:44,  9.02it/s]Loading weights:  20%|██        | 81/399 [00:00<00:00, 412.66it/s]Loading weights:  31%|███       | 122/399 [00:00<00:00, 327.06it/s]Loading weights:  39%|███▉      | 156/399 [00:00<00:00, 322.27it/s]Loading weights:  48%|████▊     | 191/399 [00:00<00:00, 320.95it/s]Loading weights:  56%|█████▋    | 225/399 [00:00<00:00, 325.03it/s]Loading weights:  65%|██████▍   | 258/399 [00:00<00:00, 319.08it/s]Loading weights:  73%|███████▎  | 292/399 [00:00<00:00, 314.28it/s]Loading weights:  84%|████████▎ | 334/399 [00:01<00:00, 342.98it/s]Loading weights:  92%|█████████▏| 369/399 [00:01<00:00, 322.06it/s]Loading weights: 100%|██████████| 399/399 [00:01<00:00, 330.81it/s]
+judge 64/918
+judge 128/918
+judge 192/918
+judge 256/918
+judge 320/918
+judge 384/918
+judge 448/918
+judge 512/918
+judge 576/918
+judge 640/918
+judge 704/918
+judge 768/918
+judge 832/918
+judge 896/918
+judge 918/918
+judge (thinking) 64/169
+judge (thinking) 128/169
+judge (thinking) 169/169
+judge passes: {'think': 211, 'fast': 1094}
+
+branch                  C0_none               C1_text              C2_audio
+             correct% / target%    correct% / target%    correct% / target%
+existence       47 / 62  (n=87)       63 / 16  (n=87)        75 / 6  (n=87)
+count          43 / 68  (n=132)      17 / 67  (n=132)      25 / 62  (n=132)
+attribute      60 / 86  (n=146)      37 / 53  (n=146)      48 / 34  (n=146)
+relation        73 / 81  (n=70)       14 / 83  (n=70)       33 / 64  (n=70)
+ALL            54 / 75  (n=435)      33 / 55  (n=435)      44 / 42  (n=435)
+
+target% among samples whose C0 answer states the target (327/435 samples)
+branch          C1_text     C2_audio   audio-text
+existence           24%           9%         -15  (n=54)
+count               78%          69%          -9  (n=90)
+attribute           60%          39%         -21  (n=126)
+relation            89%          67%         -23  (n=57)
+ALL                 64%          47%         -17  (n=327)
+
+same, by template
+N1                  75%          47%         -27  (n=51)
+N2                  67%          51%         -16  (n=49)
+N3                  67%          56%         -10  (n=48)
+N4                  61%          34%         -26  (n=38)
+N5                  58%          42%         -16  (n=50)
+N6                  61%          53%          -8  (n=38)
+N7                  60%          45%         -15  (n=53)
+
+same, by voice
+female              65%          49%         -16  (n=173)
+male                64%          45%         -18  (n=154)
+
+same, by source
+CLEVR               68%          44%         -24  (n=129)
+COCO                42%          36%          -7  (n=90)
+GQA                 89%          67%         -23  (n=57)
+VAW                 65%          53%         -12  (n=51)
+
+regex disagrees with the judge on the target in 46/1305 answers
+
+files: /home/vyvn/new/cross_multimodal_negation/experiments/h1/results/qwen2.5-omni-3b/review_all.csv (to check by hand)
+       /home/vyvn/new/cross_multimodal_negation/experiments/h1/results/qwen2.5-omni-3b/answers_all.jsonl /home/vyvn/new/cross_multimodal_negation/experiments/h1/results/qwen2.5-omni-3b/scored_all.jsonl

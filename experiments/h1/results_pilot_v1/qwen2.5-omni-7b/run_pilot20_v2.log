@@ -1,0 +1,150 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[transformers] Model config: tts_text_start_token_id must be `None` or an integer within the vocabulary (between 0 and 8447), got 151860. This may result in unexpected behavior.
+[transformers] Model config: tts_text_end_token_id must be `None` or an integer within the vocabulary (between 0 and 8447), got 151861. This may result in unexpected behavior.
+[transformers] Model config: tts_text_pad_token_id must be `None` or an integer within the vocabulary (between 0 and 8447), got 151859. This may result in unexpected behavior.
+[transformers] Model config: vision_start_token_id must be `None` or an integer within the vocabulary (between 0 and 8447), got 151652. This may result in unexpected behavior.
+[transformers] Model config: vision_end_token_id must be `None` or an integer within the vocabulary (between 0 and 8447), got 151653. This may result in unexpected behavior.
+[transformers] Model config: audio_start_token_id must be `None` or an integer within the vocabulary (between 0 and 8447), got 151647. This may result in unexpected behavior.
+[transformers] Model config: audio_end_token_id must be `None` or an integer within the vocabulary (between 0 and 8447), got 151648. This may result in unexpected behavior.
+20 samples: existence=5, count=5, attribute=5, relation=5
+Fetching 5 files:   0%|          | 0/5 [00:00<?, ?it/s]Fetching 5 files: 100%|██████████| 5/5 [00:00<00:00, 2180.67it/s]
+Loading weights:   0%|          | 0/1346 [00:00<?, ?it/s]Loading weights:  13%|█▎        | 172/1346 [00:00<00:00, 1706.95it/s]Loading weights:  27%|██▋       | 361/1346 [00:00<00:00, 1796.52it/s]Loading weights:  40%|████      | 541/1346 [00:00<00:01, 485.89it/s] Loading weights:  48%|████▊     | 651/1346 [00:01<00:02, 332.82it/s]Loading weights:  54%|█████▍    | 725/1346 [00:01<00:02, 288.71it/s]Loading weights:  58%|█████▊    | 780/1346 [00:02<00:02, 272.75it/s]Loading weights:  61%|██████    | 824/1346 [00:02<00:02, 211.16it/s]Loading weights:  74%|███████▍  | 998/1346 [00:02<00:00, 374.15it/s]Loading weights:  85%|████████▍ | 1144/1346 [00:02<00:00, 516.59it/s]Loading weights:  99%|█████████▉| 1330/1346 [00:02<00:00, 729.54it/s]Loading weights: 100%|██████████| 1346/1346 [00:02<00:00, 467.93it/s]
+[transformers] [1mQwen2_5OmniThinkerForConditionalGeneration LOAD REPORT[0m from: Qwen/Qwen2.5-Omni-7B
+Key                                                                                                      | Status     |  | 
+---------------------------------------------------------------------------------------------------------+------------+--+-
+token2wav.code2wav_dit_model.transformer_blocks.{0...21}.attn.to_v.weight                                | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.transformer_blocks.{0...21}.ff.ff.{0, 3}.weight                             | UNEXPECTED |  | 
+talker.model.layers.{0...23}.self_attn.k_proj.weight                                                     | UNEXPECTED |  | 
+talker.model.layers.{0...23}.mlp.gate_proj.weight                                                        | UNEXPECTED |  | 
+token2wav.code2wav_bigvgan_model.resblocks.{0...17}.convs2.{0, 1, 2}.weight                              | UNEXPECTED |  | 
+talker.model.layers.{0...23}.self_attn.v_proj.bias                                                       | UNEXPECTED |  | 
+token2wav.code2wav_bigvgan_model.resblocks.{0...17}.convs1.{0, 1, 2}.weight                              | UNEXPECTED |  | 
+token2wav.code2wav_bigvgan_model.resblocks.{0...17}.convs2.{0, 1, 2}.bias                                | UNEXPECTED |  | 
+talker.thinker_to_talker_proj.bias                                                                       | UNEXPECTED |  | 
+token2wav.code2wav_bigvgan_model.resblocks.{0...17}.activations.{0, 1, 2, 3, 4, 5}.act.alpha             | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.blocks.{1, 2, 3}.se_block.conv1.bias                | UNEXPECTED |  | 
+talker.model.layers.{0...23}.self_attn.o_proj.weight                                                     | UNEXPECTED |  | 
+talker.model.layers.{0...23}.self_attn.k_proj.bias                                                       | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.rotary_embed.inv_freq                                                       | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.transformer_blocks.{0...21}.attn.to_k.bias                                  | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.transformer_blocks.{0...21}.attn.to_out.0.weight                            | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.transformer_blocks.{0...21}.attn.to_k.weight                                | UNEXPECTED |  | 
+talker.model.layers.{0...23}.mlp.down_proj.weight                                                        | UNEXPECTED |  | 
+token2wav.code2wav_bigvgan_model.resblocks.{0...17}.activations.{0, 1, 2, 3, 4, 5}.act.beta              | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.transformer_blocks.{0...21}.ff.ff.{0, 3}.bias                               | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.transformer_blocks.{0...21}.attn.to_out.0.bias                              | UNEXPECTED |  | 
+token2wav.code2wav_bigvgan_model.resblocks.{0...17}.convs1.{0, 1, 2}.bias                                | UNEXPECTED |  | 
+talker.model.layers.{0...23}.self_attn.q_proj.weight                                                     | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.transformer_blocks.{0...21}.attn.to_q.weight                                | UNEXPECTED |  | 
+talker.model.layers.{0...23}.self_attn.q_proj.bias                                                       | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.transformer_blocks.{0...21}.attn_norm.linear.bias                           | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.blocks.{1, 2, 3}.tdnn1.conv.bias                    | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.transformer_blocks.{0...21}.attn.to_q.bias                                  | UNEXPECTED |  | 
+talker.model.layers.{0...23}.input_layernorm.weight                                                      | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.transformer_blocks.{0...21}.attn.to_v.bias                                  | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.transformer_blocks.{0...21}.attn_norm.linear.weight                         | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.text_embed.codec_embed.weight                                               | UNEXPECTED |  | 
+talker.model.layers.{0...23}.self_attn.v_proj.weight                                                     | UNEXPECTED |  | 
+talker.model.layers.{0...23}.mlp.up_proj.weight                                                          | UNEXPECTED |  | 
+talker.model.layers.{0...23}.post_attention_layernorm.weight                                             | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.blocks.{1, 2, 3}.tdnn1.conv.weight                  | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.fc.bias                                             | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.norm_out.linear.bias                                                        | UNEXPECTED |  | 
+token2wav.code2wav_bigvgan_model.ups.{0, 1, 2, 3, 4, 5}.0.bias                                           | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.blocks.{1, 2, 3}.tdnn2.conv.bias                    | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.proj.bias                                                       | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.proj_out.weight                                                             | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.fc.weight                                           | UNEXPECTED |  | 
+token2wav.code2wav_bigvgan_model.ups.{0, 1, 2, 3, 4, 5}.0.weight                                         | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.time_embed.time_mlp.{0, 2}.bias                                             | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.asp.tdnn.conv.weight                                | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.blocks.0.conv.bias                                  | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.blocks.{1, 2, 3}.se_block.conv1.weight              | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.blocks.{1, 2, 3}.se_block.conv2.weight              | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.blocks.{1, 2, 3}.se_block.conv2.bias                | UNEXPECTED |  | 
+talker.model.embed_tokens.weight                                                                         | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.blocks.{1, 2, 3}.tdnn2.conv.weight                  | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.proj.weight                                                     | UNEXPECTED |  | 
+token2wav.code2wav_bigvgan_model.conv_pre.bias                                                           | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.mfa.conv.weight                                     | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.time_embed.time_mlp.{0, 2}.weight                                           | UNEXPECTED |  | 
+token2wav.code2wav_bigvgan_model.activation_post.act.beta                                                | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.proj_out.bias                                                               | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.blocks.{1, 2, 3}.res2net_block.blocks.0.conv.bias   | UNEXPECTED |  | 
+talker.codec_head.weight                                                                                 | UNEXPECTED |  | 
+talker.model.norm.weight                                                                                 | UNEXPECTED |  | 
+talker.thinker_to_talker_proj.weight                                                                     | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.blocks.{1, 2, 3}.res2net_block.blocks.0.conv.weight | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.norm_out.linear.weight                                                      | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.asp.conv.weight                                     | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.mfa.conv.bias                                       | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.blocks.0.conv.weight                                | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.asp.conv.bias                                       | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.asp.tdnn.conv.bias                                  | UNEXPECTED |  | 
+token2wav.code2wav_bigvgan_model.conv_post.weight                                                        | UNEXPECTED |  | 
+token2wav.code2wav_bigvgan_model.conv_pre.weight                                                         | UNEXPECTED |  | 
+token2wav.code2wav_bigvgan_model.activation_post.act.alpha                                               | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+[1/36] coco-existence-000034 C0_none: "Well, in the image, there's a car. That's the only vehicle I can see. What do you think ab"
+[2/36] coco-existence-000034 C1_text: "There's a car in the image. If you want to know more about it or have other questions, fee"
+[3/36] coco-existence-000034 C2_audio: "There's a car in the image."
+[4/36] coco-existence-000065 C0_none: "Well, in the image, there's a train. And, oh, there are also some cars parked nearby. What"
+[5/36] coco-existence-000065 C1_text: "There's a green car and a white car in the image. If you want to know more about the vehic"
+[6/36] coco-existence-000065 C2_audio: "Well, there's a green car and a white car in the image. So, those are the vehicles you're "
+[7/36] coco-count-000067 C0_none: "Well, I can see a table in the image. There's also a chair, which the dog is sitting on. A"
+[8/36] coco-count-000067 C1_text: "There's a table in the image."
+[9/36] coco-count-000067 C2_audio: "There's a table in the image."
+[10/36] clevr-count-000051 C0_none: "Well, in the picture you've shown me, there's one cube, which is the yellow one. There's a"
+[11/36] clevr-count-000051 C1_text: 'There is one sphere and one cylinder. So, in total, there are two shapes. If you have any '
+[12/36] clevr-count-000051 C2_audio: "There's one sphere and one cylinder. So, in total, there are two shapes. If you have any o"
+[13/36] coco-count-000054 C0_none: "There are two dogs and one cat in the image. So, that's two dogs and one cat. If you have "
+[14/36] coco-count-000054 C1_text: "There's a cat in the image."
+[15/36] coco-count-000054 C2_audio: "There's one cat in the image. If you want to know more about the animals or anything else "
+[16/36] clevr-count-000080 C0_none: "Well, in the picture you've shown me, there's one cube and two cylinders. So, that's one c"
+[17/36] clevr-count-000080 C1_text: 'There are two cylinders. If you have any other questions about this image or anything else'
+[18/36] clevr-count-000080 C2_audio: 'There are two cylinders. If you have any other questions about this or something else, fee'
+[19/36] vaw-attribute-000059 C0_none: "The water looks like it's made of a liquid material, probably water itself. It's in a stat"
+[20/36] vaw-attribute-000059 C1_text: "The water is in a liquid state. It's a bit murky, like it has some sediment in it. What do"
+[21/36] vaw-attribute-000059 C2_audio: 'The water is calm. It has a brownish color and there are some ripples on its surface. What'
+[22/36] gqa-relation-000015 C0_none: "Well, it looks like the player is hitting a baseball. And they're swinging a baseball bat."
+[23/36] gqa-relation-000015 C1_text: 'The player is hitting a baseball.'
+[24/36] gqa-relation-000015 C2_audio: 'The player is hitting a baseball.'
+[25/36] gqa-relation-000028 C0_none: "The policeman is driving a motorcycle with a sidecar. He's wearing a black uniform, a whit"
+[26/36] gqa-relation-000028 C1_text: "The policeman is wearing a black uniform and a white helmet. He's also got gloves on. So, "
+[27/36] gqa-relation-000028 C2_audio: 'The policeman is wearing a black uniform and a white helmet. If you want to know more abou'
+[28/36] gqa-relation-000044 C0_none: "Well, I can't really tell what she's pointing at just from this picture. As for what she's"
+[29/36] gqa-relation-000044 C1_text: "She's pointing at a hot dog with ketchup on it. What do you think she might be about to ea"
+[30/36] gqa-relation-000044 C2_audio: "She's pointing at a hot dog with ketchup on it. What do you think she might be about to ea"
+[31/36] gqa-relation-000027 C0_none: "Well, he's moving a refrigerator. He's wearing an orange t - shirt with some text on it, b"
+[32/36] gqa-relation-000027 C1_text: 'The man is wearing an orange t - shirt with some text on the back, beige cargo shorts, and'
+[33/36] gqa-relation-000027 C2_audio: 'The man is wearing an orange t - shirt with some text on the back, beige cargo shorts, and'
+[34/36] gqa-relation-000011 C0_none: "Well, it's hard to say exactly what she's reading from the picture. It could be a newspape"
+[35/36] gqa-relation-000011 C1_text: "She's reading a newspaper. If you want to know more about what she might be reading, just "
+[36/36] gqa-relation-000011 C2_audio: "She's reading a newspaper. If you want to know more about what she might be reading, just "
+Loading weights:   0%|          | 0/399 [00:00<?, ?it/s]Loading weights:   0%|          | 1/399 [00:00<00:55,  7.21it/s]Loading weights:  25%|██▌       | 100/399 [00:00<00:00, 485.97it/s]Loading weights:  39%|███▉      | 155/399 [00:00<00:00, 493.18it/s]Loading weights:  53%|█████▎    | 210/399 [00:00<00:00, 506.25it/s]Loading weights:  66%|██████▌   | 263/399 [00:00<00:00, 498.74it/s]Loading weights:  79%|███████▉  | 315/399 [00:00<00:00, 478.35it/s]Loading weights:  91%|█████████ | 364/399 [00:00<00:00, 436.92it/s]Loading weights: 100%|██████████| 399/399 [00:01<00:00, 350.05it/s]
+judge 55/55
+judge (thinking) 12/12
+judge passes: {'fast': 50, 'think': 10}
+
+branch                  C0_none               C1_text              C2_audio
+             correct% / target%    correct% / target%    correct% / target%
+existence        40 / 80  (n=5)        80 / 20  (n=5)        80 / 20  (n=5)
+count           80 / 100  (n=5)        100 / 0  (n=5)         80 / 0  (n=5)
+attribute        20 / 80  (n=5)        60 / 20  (n=5)         80 / 0  (n=5)
+relation        40 / 100  (n=5)         60 / 0  (n=5)         60 / 0  (n=5)
+ALL             45 / 90  (n=20)       75 / 10  (n=20)        75 / 5  (n=20)
+
+target% among samples whose C0 answer states the target (18/20 samples)
+branch          C1_text     C2_audio   audio-text
+existence           25%          25%          +0  (n=4)
+count                0%           0%          +0  (n=5)
+attribute            0%           0%          +0  (n=4)
+relation             0%           0%          +0  (n=5)
+ALL                  6%           6%          +0  (n=18)
+
+regex disagrees with the judge on the target in 0/60 answers
+
+files: /home/vyvn/new/cross_multimodal_negation/experiments/h1/results/review_pilot20.csv (to check by hand)
+       /home/vyvn/new/cross_multimodal_negation/experiments/h1/results/answers_pilot20.jsonl /home/vyvn/new/cross_multimodal_negation/experiments/h1/results/scored_pilot20.jsonl

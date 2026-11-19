@@ -1,0 +1,159 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+20 samples: existence=5, count=5, attribute=5, relation=5
+[transformers] [1mQwen2_5OmniThinkerForConditionalGeneration LOAD REPORT[0m from: Qwen/Qwen2.5-Omni-7B
+Key                                                                                                      | Status     |  | 
+---------------------------------------------------------------------------------------------------------+------------+--+-
+token2wav.code2wav_bigvgan_model.resblocks.{0...17}.activations.{0, 1, 2, 3, 4, 5}.act.beta              | UNEXPECTED |  | 
+talker.model.layers.{0...23}.mlp.down_proj.weight                                                        | UNEXPECTED |  | 
+talker.model.layers.{0...23}.mlp.up_proj.weight                                                          | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.transformer_blocks.{0...21}.attn.to_v.weight                                | UNEXPECTED |  | 
+talker.model.layers.{0...23}.self_attn.q_proj.bias                                                       | UNEXPECTED |  | 
+talker.model.layers.{0...23}.input_layernorm.weight                                                      | UNEXPECTED |  | 
+talker.model.layers.{0...23}.self_attn.q_proj.weight                                                     | UNEXPECTED |  | 
+talker.model.layers.{0...23}.self_attn.v_proj.weight                                                     | UNEXPECTED |  | 
+token2wav.code2wav_bigvgan_model.resblocks.{0...17}.convs2.{0, 1, 2}.bias                                | UNEXPECTED |  | 
+token2wav.code2wav_bigvgan_model.resblocks.{0...17}.convs2.{0, 1, 2}.weight                              | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.transformer_blocks.{0...21}.ff.ff.{0, 3}.weight                             | UNEXPECTED |  | 
+token2wav.code2wav_bigvgan_model.resblocks.{0...17}.activations.{0, 1, 2, 3, 4, 5}.act.alpha             | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.blocks.{1, 2, 3}.tdnn2.conv.weight                  | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.blocks.{1, 2, 3}.tdnn1.conv.bias                    | UNEXPECTED |  | 
+talker.model.layers.{0...23}.self_attn.k_proj.weight                                                     | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.transformer_blocks.{0...21}.attn.to_k.bias                                  | UNEXPECTED |  | 
+token2wav.code2wav_bigvgan_model.resblocks.{0...17}.convs1.{0, 1, 2}.weight                              | UNEXPECTED |  | 
+token2wav.code2wav_bigvgan_model.resblocks.{0...17}.convs1.{0, 1, 2}.bias                                | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.asp.conv.weight                                     | UNEXPECTED |  | 
+talker.model.layers.{0...23}.mlp.gate_proj.weight                                                        | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.transformer_blocks.{0...21}.attn.to_k.weight                                | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.transformer_blocks.{0...21}.attn_norm.linear.bias                           | UNEXPECTED |  | 
+talker.model.layers.{0...23}.post_attention_layernorm.weight                                             | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.transformer_blocks.{0...21}.attn_norm.linear.weight                         | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.transformer_blocks.{0...21}.attn.to_v.bias                                  | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.blocks.{1, 2, 3}.res2net_block.blocks.0.conv.weight | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.transformer_blocks.{0...21}.ff.ff.{0, 3}.bias                               | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.transformer_blocks.{0...21}.attn.to_q.bias                                  | UNEXPECTED |  | 
+token2wav.code2wav_bigvgan_model.activation_post.act.alpha                                               | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.blocks.{1, 2, 3}.tdnn1.conv.weight                  | UNEXPECTED |  | 
+talker.model.layers.{0...23}.self_attn.k_proj.bias                                                       | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.transformer_blocks.{0...21}.attn.to_q.weight                                | UNEXPECTED |  | 
+talker.model.layers.{0...23}.self_attn.o_proj.weight                                                     | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.transformer_blocks.{0...21}.attn.to_out.0.weight                            | UNEXPECTED |  | 
+token2wav.code2wav_bigvgan_model.conv_pre.weight                                                         | UNEXPECTED |  | 
+token2wav.code2wav_bigvgan_model.ups.{0, 1, 2, 3, 4, 5}.0.weight                                         | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.transformer_blocks.{0...21}.attn.to_out.0.bias                              | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.norm_out.linear.bias                                                        | UNEXPECTED |  | 
+token2wav.code2wav_bigvgan_model.conv_pre.bias                                                           | UNEXPECTED |  | 
+token2wav.code2wav_bigvgan_model.ups.{0, 1, 2, 3, 4, 5}.0.bias                                           | UNEXPECTED |  | 
+talker.model.layers.{0...23}.self_attn.v_proj.bias                                                       | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.blocks.{1, 2, 3}.tdnn2.conv.bias                    | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.blocks.{1, 2, 3}.se_block.conv2.bias                | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.fc.bias                                             | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.blocks.{1, 2, 3}.se_block.conv1.bias                | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.time_embed.time_mlp.{0, 2}.bias                                             | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.blocks.{1, 2, 3}.se_block.conv2.weight              | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.text_embed.codec_embed.weight                                               | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.blocks.{1, 2, 3}.se_block.conv1.weight              | UNEXPECTED |  | 
+token2wav.code2wav_bigvgan_model.activation_post.act.beta                                                | UNEXPECTED |  | 
+talker.thinker_to_talker_proj.weight                                                                     | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.asp.tdnn.conv.weight                                | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.norm_out.linear.weight                                                      | UNEXPECTED |  | 
+talker.model.norm.weight                                                                                 | UNEXPECTED |  | 
+talker.thinker_to_talker_proj.bias                                                                       | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.blocks.{1, 2, 3}.res2net_block.blocks.0.conv.bias   | UNEXPECTED |  | 
+talker.codec_head.weight                                                                                 | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.asp.tdnn.conv.bias                                  | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.rotary_embed.inv_freq                                                       | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.proj_out.weight                                                             | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.time_embed.time_mlp.{0, 2}.weight                                           | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.proj.weight                                                     | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.mfa.conv.weight                                     | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.fc.weight                                           | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.asp.conv.bias                                       | UNEXPECTED |  | 
+token2wav.code2wav_bigvgan_model.conv_post.weight                                                        | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.proj.bias                                                       | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.blocks.0.conv.bias                                  | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.proj_out.bias                                                               | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.mfa.conv.bias                                       | UNEXPECTED |  | 
+talker.model.embed_tokens.weight                                                                         | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.blocks.0.conv.weight                                | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+[1/60] coco-existence-000030 C0_none: "Well, in the image, you can see a dining table with chairs around it. There's also a large"
+[2/60] coco-existence-000030 C1_text: "Well, in the image, there's a dining table with chairs around it. There are also some deco"
+[3/60] coco-existence-000030 C2_audio: "Well, there's a dining table with chairs around it. There are also some decorative vases o"
+[4/60] coco-existence-000063 C0_none: "Well, from what I can see in the image, there's a table. It's the main piece of furniture "
+[5/60] coco-existence-000063 C1_text: "Well, from what I can see, there's a chair in the image. There might be other furniture pi"
+[6/60] coco-existence-000063 C2_audio: "Well, from what I can see, there's a chair in the image. There might be other furniture pi"
+[7/60] coco-existence-000064 C0_none: "Well, in the image, there's a mug and a knife. The mug has a pirate design on it. What do "
+[8/60] coco-existence-000064 C1_text: "Well, there's a knife in the image. It has a black handle and a silver blade. What else do"
+[9/60] coco-existence-000064 C2_audio: "There's a knife in the image. What do you think about it?"
+[10/60] coco-existence-000038 C0_none: "Well, in the image, there's a desktop computer with a monitor, a laptop, a keyboard, and a"
+[11/60] coco-existence-000038 C1_text: "Well, in the image, there's a desktop computer. You can see the monitor, keyboard, and mou"
+[12/60] coco-existence-000038 C2_audio: "Well, there's a desktop monitor, a keyboard, and a mouse. Oh, and there's also a laptop. S"
+[13/60] coco-existence-000068 C0_none: "Well, in the image, there's a table. It's got a bunch of food on it, like bowls and a pan."
+[14/60] coco-existence-000068 C1_text: "Well, there's a table in the image. It's got a bunch of food on it, like bowls and a pan. "
+[15/60] coco-existence-000068 C2_audio: "Well, there's a table in the image. It's got a bunch of food and dishes on it. And, um, th"
+[16/60] clevr-count-000046 C0_none: "Well, let's see. There are 3 cubes in the picture. There's one big purple cube in the fron"
+[17/60] clevr-count-000046 C1_text: 'There are 2 spheres and 3 cylinders. If you have any other questions about this image, fee'
+[18/60] clevr-count-000046 C2_audio: 'There are 2 spheres and 3 cylinders. If you have any other questions about this image, fee'
+[19/60] coco-count-000063 C0_none: "Well, in the image, there's one kitchen item. It's a bowl. And there's just one of those. "
+[20/60] coco-count-000063 C1_text: "There's one bowl in the image. And there's one plate too. If you want to know more about t"
+[21/60] coco-count-000063 C2_audio: "There's a bowl with a handle, one. And there's a plate, one. If you want to know more abou"
+[22/60] clevr-count-000001 C0_none: 'There are 4 cubes, 1 sphere, and 2 cylinders. If you have any other questions about this, '
+[23/60] clevr-count-000001 C1_text: 'There are 4 cubes and 1 sphere. So, in total, there are 5 shapes. If you have any other qu'
+[24/60] clevr-count-000001 C2_audio: 'There are 4 cubes and 1 sphere. If you have any other questions about this, feel free to a'
+[25/60] coco-count-000025 C0_none: "Well, in the image, there's a white plate, and it has a black container with some kind of "
+[26/60] coco-count-000025 C1_text: "There's a black plastic container with some kind of broccoli dish in it, and a white paper"
+[27/60] coco-count-000025 C2_audio: "There's a black plastic container, a white paper plate, and a fork."
+[28/60] clevr-count-000050 C0_none: "Well, let's see. There's one cube, which is blue. There are four spheres, three of them ar"
+[29/60] clevr-count-000050 C1_text: 'There are 4 spheres and 4 cylinders. If you have any other questions about this image, fee'
+[30/60] clevr-count-000050 C2_audio: 'There are 5 spheres and 4 cylinders. If you have any other questions about this image, fee'
+[31/60] clevr-attribute-000053 C0_none: "The cube is purple. It's a medium - sized cube. It looks like it's made of a matte materia"
+[32/60] clevr-attribute-000053 C1_text: "The cube is purple. It's a medium - sized cube. Well, that's about it. If you want to know"
+[33/60] clevr-attribute-000053 C2_audio: "The cube is purple. It's a medium - sized cube. Well, that's about it. If you want to know"
+[34/60] vaw-attribute-000061 C0_none: "The floor is a medium - dark brown color and it's made of wood. It looks like it has a nic"
+[35/60] vaw-attribute-000061 C1_text: 'The floor is made of wood. If you want to know more about it, like how it was finished or '
+[36/60] vaw-attribute-000061 C2_audio: 'The floor is made of wood. It looks like a nice, polished hardwood. What do you think abou'
+[37/60] clevr-attribute-000076 C0_none: "The sphere is blue. It's small in size. And it looks like it's made of a matte material. I"
+[38/60] clevr-attribute-000076 C1_text: "The sphere is blue. It looks like it's made of a matte material. If you want to know more "
+[39/60] clevr-attribute-000076 C2_audio: "The sphere is blue and it looks like it's made of a matte material. If you want to know mo"
+[40/60] vaw-attribute-000060 C0_none: 'Well, the cows in the picture are black and white. They seem to be of a medium size. There'
+[41/60] vaw-attribute-000060 C1_text: 'Well, there are some big cows and some smaller ones. The big ones are more noticeable, tak'
+[42/60] vaw-attribute-000060 C2_audio: 'Well, there are some cows that are quite large and some that are smaller. You can see them'
+[43/60] clevr-attribute-000084 C0_none: "The cylinder is green. It's a medium - sized cylinder. It looks like it's made of a matte "
+[44/60] clevr-attribute-000084 C1_text: 'The cylinder is large and appears to be made of a matte material. If you want to know more'
+[45/60] clevr-attribute-000084 C2_audio: 'The cylinder is large in size and appears to be made of a matte material. If you have any '
+[46/60] gqa-relation-000012 C0_none: "She's playing with a tennis racket. She's wearing a white tank top, black shorts with yell"
+[47/60] gqa-relation-000012 C1_text: "She's wearing a white tank top and black shorts with yellow trim. What do you think about "
+[48/60] gqa-relation-000012 C2_audio: "She's wearing a white tank top and black shorts with yellow trim. Oh, and she has her hair"
+[49/60] gqa-relation-000068 C0_none: "She's playing frisbee. She's standing on grass. And she's throwing a frisbee. If you want "
+[50/60] gqa-relation-000068 C1_text: "She's standing on grass. She's throwing a frisbee. What do you think about her choice of d"
+[51/60] gqa-relation-000068 C2_audio: "She's standing on grass. And she's throwing a frisbee. What do you think about frisbee? Do"
+[52/60] gqa-relation-000043 C0_none: "Well, he's holding a baseball bat. And he's wearing a baseball uniform, which includes a j"
+[53/60] gqa-relation-000043 C1_text: "He's holding a baseball bat. What do you think about his swing?"
+[54/60] gqa-relation-000043 C2_audio: "He's holding a baseball bat. If you want to know more about baseball gear or anything else"
+[55/60] gqa-relation-000017 C0_none: "The woman is holding a Wii remote. She's wearing a blue jacket over a yellow shirt with a "
+[56/60] gqa-relation-000017 C1_text: "She's holding a Wii remote. What do you think about her choice of remote?"
+[57/60] gqa-relation-000017 C2_audio: "She's holding a Wii remote. What do you think about that?"
+[58/60] gqa-relation-000009 C0_none: "The catcher is standing behind the batter. He's standing on the dirt of the baseball field"
+[59/60] gqa-relation-000009 C1_text: "The catcher is standing on the dirt of the baseball field. He's wearing a red and black un"
+[60/60] gqa-relation-000009 C2_audio: "The catcher is standing on the dirt of the baseball field. He's wearing a red and black un"
+extract 8/60
+extract 16/60
+extract 24/60
+extract 32/60
+extract 40/60
+extract 48/60
+extract 56/60
+extract 60/60
+
+branch                  C0_none               C1_text              C2_audio
+             correct% / target%    correct% / target%    correct% / target%
+existence        40 / 80  (n=5)        60 / 20  (n=5)        60 / 20  (n=5)
+count            60 / 60  (n=5)         40 / 0  (n=5)         20 / 0  (n=5)
+attribute         0 / 80  (n=5)          0 / 0  (n=5)         20 / 0  (n=5)
+relation         80 / 80  (n=5)        80 / 20  (n=5)        80 / 20  (n=5)
+ALL             45 / 75  (n=20)       45 / 10  (n=20)       45 / 10  (n=20)
+
+files: /home/vyvn/new/cross_multimodal_negation/experiments/h1/results/review_pilot20.csv (to check by hand)
+       /home/vyvn/new/cross_multimodal_negation/experiments/h1/results/answers_pilot20.jsonl /home/vyvn/new/cross_multimodal_negation/experiments/h1/results/scored_pilot20.jsonl
