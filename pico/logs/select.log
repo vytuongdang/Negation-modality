@@ -96,3 +96,117 @@ VAW: 701/950 images after 1206/5056 candidates; splits {'val': 135, 'test': 426,
 VAW: 727/950 images after 1254/5056 candidates; splits {'val': 135, 'test': 426, 'train': 166}; rejected {'blurry': 179, 'no_unit_left': 207, 'large_text_in_image': 73, 'black_and_white': 42, 'clipped': 14, 'too_dark_or_bright': 5, 'duplicate_across_sources': 6, 'near_duplicate': 1}
 VAW: 754/950 images after 1302/5056 candidates; splits {'val': 135, 'test': 426, 'train': 193}; rejected {'blurry': 187, 'no_unit_left': 216, 'large_text_in_image': 75, 'black_and_white': 44, 'clipped': 14, 'too_dark_or_bright': 5, 'duplicate_across_sources': 6, 'near_duplicate': 1}
 VAW: 777/950 images after 1351/5056 candidates; splits {'val': 135, 'test': 426, 'train': 216}; rejected {'blurry': 199, 'no_unit_left': 224, 'large_text_in_image': 79, 'black_and_white': 45, 'clipped': 14, 'too_dark_or_bright': 5, 'duplicate_across_sources': 7, 'near_duplicate': 1}
+VAW: 804/950 images after 1399/5056 candidates; splits {'val': 135, 'test': 426, 'train': 243}; rejected {'blurry': 206, 'no_unit_left': 228, 'large_text_in_image': 86, 'black_and_white': 47, 'clipped': 15, 'too_dark_or_bright': 5, 'duplicate_across_sources': 7, 'near_duplicate': 1}
+VAW: 828/950 images after 1448/5056 candidates; splits {'val': 135, 'test': 426, 'train': 267}; rejected {'blurry': 212, 'no_unit_left': 238, 'large_text_in_image': 94, 'black_and_white': 47, 'clipped': 15, 'too_dark_or_bright': 5, 'duplicate_across_sources': 8, 'near_duplicate': 1}
+VAW: 854/950 images after 1497/5056 candidates; splits {'val': 135, 'test': 426, 'train': 293}; rejected {'blurry': 220, 'no_unit_left': 249, 'large_text_in_image': 97, 'black_and_white': 47, 'clipped': 15, 'too_dark_or_bright': 5, 'duplicate_across_sources': 9, 'near_duplicate': 1}
+VAW: 878/950 images after 1546/5056 candidates; splits {'val': 135, 'test': 426, 'train': 317}; rejected {'blurry': 225, 'no_unit_left': 259, 'large_text_in_image': 106, 'black_and_white': 47, 'clipped': 15, 'too_dark_or_bright': 5, 'duplicate_across_sources': 10, 'near_duplicate': 1}
+VAW: 907/950 images after 1594/5056 candidates; splits {'val': 135, 'test': 426, 'train': 346}; rejected {'blurry': 233, 'no_unit_left': 265, 'large_text_in_image': 110, 'black_and_white': 47, 'clipped': 16, 'too_dark_or_bright': 5, 'duplicate_across_sources': 10, 'near_duplicate': 1}
+VAW: 934/950 images after 1644/5056 candidates; splits {'val': 135, 'test': 426, 'train': 373}; rejected {'blurry': 243, 'no_unit_left': 270, 'large_text_in_image': 113, 'black_and_white': 49, 'clipped': 16, 'too_dark_or_bright': 6, 'duplicate_across_sources': 12, 'near_duplicate': 1}
+VAW: 950/950 images after 1692/5056 candidates; splits {'val': 135, 'test': 426, 'train': 389}; rejected {'blurry': 244, 'no_unit_left': 275, 'large_text_in_image': 115, 'black_and_white': 49, 'clipped': 16, 'too_dark_or_bright': 6, 'duplicate_across_sources': 12, 'near_duplicate': 1}
+GQA: 30/1000000 images after 48/1118 candidates; splits {'val': 30}; rejected {'large_text_in_image': 3, 'no_unit_left': 9, 'blurry': 4, 'black_and_white': 1, 'too_dark_or_bright': 1}
+GQA: 62/1000000 images after 97/1118 candidates; splits {'val': 62}; rejected {'large_text_in_image': 8, 'no_unit_left': 14, 'blurry': 7, 'black_and_white': 4, 'too_dark_or_bright': 1, 'duplicate_across_sources': 1}
+GQA: 94/1000000 images after 147/1118 candidates; splits {'val': 90, 'train': 4}; rejected {'large_text_in_image': 9, 'no_unit_left': 22, 'blurry': 10, 'black_and_white': 7, 'too_dark_or_bright': 1, 'duplicate_across_sources': 3, 'clipped': 1}
+GQA: 124/1000000 images after 197/1118 candidates; splits {'val': 90, 'train': 34}; rejected {'large_text_in_image': 12, 'no_unit_left': 29, 'blurry': 15, 'black_and_white': 9, 'too_dark_or_bright': 2, 'duplicate_across_sources': 5, 'clipped': 1}
+GQA: 154/1000000 images after 248/1118 candidates; splits {'val': 90, 'train': 64}; rejected {'large_text_in_image': 16, 'no_unit_left': 35, 'blurry': 19, 'black_and_white': 11, 'too_dark_or_bright': 4, 'duplicate_across_sources': 8, 'clipped': 1}
+GQA: 187/1000000 images after 299/1118 candidates; splits {'val': 90, 'train': 97}; rejected {'large_text_in_image': 17, 'no_unit_left': 41, 'blurry': 24, 'black_and_white': 13, 'too_dark_or_bright': 5, 'duplicate_across_sources': 11, 'clipped': 1}
+GQA: 217/1000000 images after 349/1118 candidates; splits {'val': 90, 'train': 127}; rejected {'large_text_in_image': 19, 'no_unit_left': 46, 'blurry': 29, 'black_and_white': 17, 'too_dark_or_bright': 5, 'duplicate_across_sources': 13, 'clipped': 2, 'near_duplicate': 1}
+GQA: 251/1000000 images after 400/1118 candidates; splits {'val': 90, 'train': 161}; rejected {'large_text_in_image': 20, 'no_unit_left': 49, 'blurry': 35, 'black_and_white': 21, 'too_dark_or_bright': 5, 'duplicate_across_sources': 16, 'clipped': 2, 'near_duplicate': 1}
+GQA: 281/1000000 images after 449/1118 candidates; splits {'val': 90, 'train': 191}; rejected {'large_text_in_image': 22, 'no_unit_left': 58, 'blurry': 41, 'black_and_white': 22, 'too_dark_or_bright': 5, 'duplicate_across_sources': 17, 'clipped': 2, 'near_duplicate': 1}
+GQA: 306/1000000 images after 502/1118 candidates; splits {'val': 90, 'train': 216}; rejected {'large_text_in_image': 25, 'no_unit_left': 63, 'blurry': 48, 'black_and_white': 29, 'too_dark_or_bright': 6, 'duplicate_across_sources': 22, 'clipped': 2, 'near_duplicate': 1}
+GQA: 327/1000000 images after 552/1118 candidates; splits {'val': 90, 'train': 237}; rejected {'large_text_in_image': 30, 'no_unit_left': 73, 'blurry': 58, 'black_and_white': 31, 'too_dark_or_bright': 6, 'duplicate_across_sources': 24, 'clipped': 2, 'near_duplicate': 1}
+GQA: 354/1000000 images after 605/1118 candidates; splits {'val': 90, 'train': 264}; rejected {'large_text_in_image': 32, 'no_unit_left': 77, 'blurry': 67, 'black_and_white': 34, 'too_dark_or_bright': 7, 'duplicate_across_sources': 29, 'clipped': 4, 'near_duplicate': 1}
+GQA: 385/1000000 images after 655/1118 candidates; splits {'val': 90, 'train': 295}; rejected {'large_text_in_image': 33, 'no_unit_left': 84, 'blurry': 73, 'black_and_white': 36, 'too_dark_or_bright': 8, 'duplicate_across_sources': 31, 'clipped': 4, 'near_duplicate': 1}
+GQA: 418/1000000 images after 704/1118 candidates; splits {'val': 90, 'train': 328}; rejected {'large_text_in_image': 34, 'no_unit_left': 90, 'blurry': 78, 'black_and_white': 39, 'too_dark_or_bright': 8, 'duplicate_across_sources': 32, 'clipped': 4, 'near_duplicate': 1}
+GQA: 449/1000000 images after 754/1118 candidates; splits {'val': 90, 'train': 359}; rejected {'large_text_in_image': 37, 'no_unit_left': 94, 'blurry': 83, 'black_and_white': 42, 'too_dark_or_bright': 9, 'duplicate_across_sources': 34, 'clipped': 5, 'near_duplicate': 1}
+GQA: 474/1000000 images after 805/1118 candidates; splits {'val': 90, 'train': 384}; rejected {'large_text_in_image': 40, 'no_unit_left': 103, 'blurry': 89, 'black_and_white': 46, 'too_dark_or_bright': 9, 'duplicate_across_sources': 37, 'clipped': 6, 'near_duplicate': 1}
+GQA: 505/1000000 images after 855/1118 candidates; splits {'val': 90, 'train': 415}; rejected {'large_text_in_image': 41, 'no_unit_left': 107, 'blurry': 100, 'black_and_white': 47, 'too_dark_or_bright': 9, 'duplicate_across_sources': 39, 'clipped': 6, 'near_duplicate': 1}
+GQA: 537/1000000 images after 907/1118 candidates; splits {'val': 90, 'train': 447}; rejected {'large_text_in_image': 43, 'no_unit_left': 111, 'blurry': 106, 'black_and_white': 47, 'too_dark_or_bright': 10, 'duplicate_across_sources': 43, 'clipped': 8, 'near_duplicate': 2}
+GQA: 565/1000000 images after 955/1118 candidates; splits {'val': 90, 'train': 475}; rejected {'large_text_in_image': 47, 'no_unit_left': 116, 'blurry': 111, 'black_and_white': 53, 'too_dark_or_bright': 10, 'duplicate_across_sources': 43, 'clipped': 8, 'near_duplicate': 2}
+GQA: 591/1000000 images after 1003/1118 candidates; splits {'val': 90, 'train': 501}; rejected {'large_text_in_image': 50, 'no_unit_left': 121, 'blurry': 118, 'black_and_white': 59, 'too_dark_or_bright': 10, 'duplicate_across_sources': 43, 'clipped': 9, 'near_duplicate': 2}
+GQA: 621/1000000 images after 1055/1118 candidates; splits {'val': 90, 'train': 531}; rejected {'large_text_in_image': 54, 'no_unit_left': 127, 'blurry': 123, 'black_and_white': 60, 'too_dark_or_bright': 11, 'duplicate_across_sources': 47, 'clipped': 10, 'near_duplicate': 2}
+GQA: 651/1000000 images after 1107/1118 candidates; splits {'val': 90, 'train': 561}; rejected {'large_text_in_image': 57, 'no_unit_left': 135, 'blurry': 129, 'black_and_white': 61, 'too_dark_or_bright': 11, 'duplicate_across_sources': 51, 'clipped': 10, 'near_duplicate': 2}
+GQA: 654/1000000 images after 1118/1118 candidates; splits {'val': 90, 'train': 564}; rejected {'large_text_in_image': 58, 'no_unit_left': 137, 'blurry': 130, 'black_and_white': 64, 'too_dark_or_bright': 11, 'duplicate_across_sources': 52, 'clipped': 10, 'near_duplicate': 2}
+review page: /home/vyvn/new/cross_multimodal_negation/create_data/dataset/b1/review/review.html
+{
+ "COCO": {
+  "target": 950,
+  "taken": 950,
+  "candidates_seen": 1440,
+  "candidates_total": 2124,
+  "by_split": {
+   "val2017": 60,
+   "train2017": 890
+  },
+  "rejected": {
+   "blurry": 186,
+   "no_unit_left": 135,
+   "clipped": 12,
+   "large_text_in_image": 64,
+   "black_and_white": 33,
+   "too_dark_or_bright": 14,
+   "near_duplicate": 1
+  }
+ },
+ "CLEVR": {
+  "target": 600,
+  "taken": 600,
+  "candidates_seen": 624,
+  "candidates_total": 5751,
+  "by_split": {
+   "val": 600
+  },
+  "rejected": {}
+ },
+ "VAW": {
+  "target": 950,
+  "taken": 950,
+  "candidates_seen": 1692,
+  "candidates_total": 5056,
+  "by_split": {
+   "val": 135,
+   "test": 426,
+   "train": 389
+  },
+  "rejected": {
+   "blurry": 244,
+   "no_unit_left": 275,
+   "large_text_in_image": 115,
+   "black_and_white": 49,
+   "clipped": 16,
+   "too_dark_or_bright": 6,
+   "duplicate_across_sources": 12,
+   "near_duplicate": 1
+  }
+ },
+ "GQA": {
+  "target": 1000000,
+  "taken": 654,
+  "candidates_seen": 1118,
+  "candidates_total": 1118,
+  "by_split": {
+   "val": 90,
+   "train": 564
+  },
+  "rejected": {
+   "large_text_in_image": 58,
+   "no_unit_left": 137,
+   "blurry": 130,
+   "black_and_white": 64,
+   "too_dark_or_bright": 11,
+   "duplicate_across_sources": 52,
+   "clipped": 10,
+   "near_duplicate": 2
+  }
+ },
+ "units_by_branch": {
+  "COCO/existence": 924,
+  "COCO/existence_closed": 831,
+  "COCO/count": 526,
+  "CLEVR/attribute": 850,
+  "CLEVR/count": 600,
+  "VAW/attribute": 950,
+  "GQA/relation": 654
+ }
+}
+----- step 2 done in 5981s
+EXIT 0

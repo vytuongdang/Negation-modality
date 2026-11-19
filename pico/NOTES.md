@@ -1,32 +1,34 @@
 # Pico notes (memory across restarts)
 
 ## Now
-- RUNNING (started 2026-11-19 19:35): tmux `job-select` = `run_v2_all.sh select` (steps 0-2), log pico/logs/select.log
-  (ends with 'EXIT <code>'). Expected ~2 h. Next: review images (M1 step 2).
-- DONE 19:47: Qwen2.5-Omni-7B and 3B downloaded to HF cache.
-- WRITTEN (untested, needs dataset): experiments/common/omnilib.py (loader, batched Omni adapter, answer cache keyed
-  by input hash incl. max_new_tokens=100, s/answer + ETA in log) and experiments/h1_v2/run_h1v2.py = H1 CORE
-  (Vy 20:20): C0, T ("Q\n\nI"), A, V; one negative sample per unit (seeded draw for sweep units); --pilot 40 per
-  branch (=200 questions, 800 answers); --conds T_join C0_box and --forms only LATER, after H1 core is reported.
-  M2 order: pilot 200 on 7B (check by eye, measure s/answer, tell Vy ETA) -> full 7B -> report -> 3B.
-- WRITTEN + tested on fake data: experiments/h1_v2/analyze.py (tables, McNemar, image bootstrap, H4 Delta, plots).
-  Run it with ~/anaconda3/bin/python (base env has matplotlib; `negation` env has none; no installs needed).
-- WRITTEN (untested): experiments/common/tts_sentences.py: TTS of a sentence list into its OWN folder (for H2),
-  never deletes anything (tts_negation.py deletes per-sample wavs not in --src: do not use it for H2).
-
-## State at hand-over (2026-11-19, set up by Claude with Vy)
-- Dataset v2 code is new and only smoke-tested on ~10 images per source (B1 + image selection + visual render
-  worked). B2 / baseline / B3 / forms / TTS with the new code have NOT run yet: expect small bugs.
-- create_data/dataset/ holds only raw/ (annotations for every split). Everything else was deleted on purpose.
-- Targets (config.py): COCO 950, VAW 950, CLEVR 600, GQA all that pass (relation is scarce, ~450-600 expected).
-  Val first, train only to fill. B1 candidates seen in a test run: COCO 89 val + 2035 train; CLEVR 5751;
-  VAW 239 val + 719 test + 4098 train; GQA 141 val + 977 train. COCO accepted ~70% of candidates.
-- HF cache keeps Qwen3-8B, Qwen3-VL-8B, Qwen2.5-VL-3B, whisper-large-v3-turbo. Qwen-Omni must be downloaded.
-- Vy's decisions: strict filters kept even though most COCO images come from train2017 (contamination is
-  handled later by reporting val vs train separately). Pico reviews the selected images itself.
+- RUNNING (21:30): tmux `job-rest` = `run_v2_all.sh rest` on the 1,150-unit SUBSET (B2, B3, forms, export, visual,
+  TTS); log pico/logs/rest_subset.log, ends 'EXIT <code>'. Then: smoke test, H1 trial on 4 models.
+- Experiment code (untested): experiments/common/omnilib.py (Omni batched; MiniCPM-o, Phi-4 single, env omni_neg
+  with --generate_only, score in `negation` with --score_only), experiments/h1_v2/run_h1v2.py (H1 core C0/T/A/V,
+  --pilot N per branch, one negative per unit), experiments/h1_v2/analyze.py (run with ~/anaconda3/bin/python),
+  experiments/common/tts_sentences.py (H2 TTS into own folder).
+- T = "Q\n\nI" (Qwen template joins text blocks with nothing between). max_new_tokens 100. Cache key = input hash.
 
 ## Done
-(nothing yet)
+- Selection (steps 0-2) finished 21:21 (5981 s). Images: COCO 950 (val2017 60, train 890), CLEVR 600 (val),
+  VAW 950 (val 135, test 426, train 389), GQA 654 (val 90, train 564). Units 5,335: COCO existence 924,
+  existence_closed 831, count 526; CLEVR attribute 850, count 600; VAW attribute 950; GQA relation 654.
+  Rejections (COCO/VAW/GQA): blurry 186/244/130, no_unit_left (VLM check) 135/275/137, large text 64/115/58,
+  b&w 33/49/64, clipped, dark/bright, near-dup, cross-source dup 0/12/52.
+- Own review (contact sheets of 60 random accepted, 30 rejected; sheets in scratchpad, not kept):
+  accepted: 6/60 (10%) doubtful ground truth that passed the VLM check (VAW tail "brown" on a white horse; COCO
+  "banana" in a heavily filtered pear photo; dog only on a TV screen; VAW towel "blue"; multicolour umbrella
+  "yellow"; VAW "branch" target in a motorcycle photo). ~5 more odd but usable components (GQA redundant
+  relations eating/grazing on plant(s), "people holding onto boy", VAW "snow is snowy", "people are wearing black",
+  generic name "animal"). Image quality fine: no blurry/dark accepted; some small text (labels, hats "Krispy
+  Kreme"), a few filtered/vintage looks. CLEVR all correct (counts checked by eye).
+  rejected: sensible; strict (~4/30 look like false rejects: sharp-looking "blurry", small watermark "large text",
+  white-background "too bright"). Decision: NO filter change (problems are annotation errors, not image quality;
+  borderline 10%; experiments condition on the model's own C0, so a wrong target mostly drops out). Report as
+  limitation; B2 human-verify sample can estimate the GT error rate.
+- Subset (21:28): subset_units.py --per_branch 230 -> 1,150 units, 1,142 distinct images; by source COCO 579,
+  GQA 230, CLEVR 216, VAW 125; val-ish splits small (COCO val 36, GQA val 35, VAW val 15 + test 65, CLEVR val 216)
+  -> val vs train check will be weak on the subset.
 
 ## Vy's plan (Telegram 20:49, OVERRIDES 20:48) — FOLLOW THIS
 - When selection (steps 0-2) finishes: review images, then `cd create_data/src && python subset_units.py
