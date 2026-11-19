@@ -3,6 +3,10 @@
 ## Now
 - RUNNING (started 2026-11-19 19:35): tmux `job-select` = `run_v2_all.sh select` (steps 0-2), log pico/logs/select.log
   (ends with 'EXIT <code>'). Expected ~2 h. Next: review images (M1 step 2).
+- RUNNING: tmux `job-dl-omni` downloads Qwen2.5-Omni-7B then 3B into HF cache (log pico/logs/dl_omni.log, 'DL DONE').
+- WRITTEN (untested, needs dataset): experiments/common/omnilib.py (data loader, batched Omni adapter, answer cache
+  keyed by input hash, judge scoring) and experiments/h1_v2/run_h1v2.py (conditions C0, C0_box, T_join, T_sep, A, V;
+  forms T_sep/A/V; --pilot N per branch / --all).
 
 ## State at hand-over (2026-11-19, set up by Claude with Vy)
 - Dataset v2 code is new and only smoke-tested on ~10 images per source (B1 + image selection + visual render
@@ -17,6 +21,11 @@
 
 ## Done
 (nothing yet)
+
+## Decisions
+- T_sep = "Q\n\nI" (one text string with a blank line). Qwen2.5-Omni's chat template concatenates consecutive
+  text blocks with NOTHING in between, so two content blocks would give "Q.Do not..." (worse than T_join).
+- C0 answers are cached by input hash, so C0 is shared by template-sweep copies and by the forms of the same unit.
 
 ## Open problems / ideas
 - H1 confound from the pilot: text glued into the question vs audio as its own segment -> T_sep condition.
