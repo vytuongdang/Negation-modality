@@ -58,3 +58,4 @@ COCO: 950/950 images after 1440/2124 candidates; splits {'val2017': 60, 'train20
 CLEVR: 48/600 images after 48/5751 candidates; splits {'val': 48}; rejected {}
 CLEVR: 96/600 images after 96/5751 candidates; splits {'val': 96}; rejected {}
 CLEVR: 144/600 images after 144/5751 candidates; splits {'val': 144}; rejected {}
+CLEVR: 192/600 images after 192/5751 candidates; splits {'val': 192}; rejected {}

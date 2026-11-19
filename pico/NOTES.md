@@ -39,7 +39,8 @@
   Their adapters must be ported into omnilib (items API); run with --generate_only there, score in `negation`.
 - MiniCPM-o 2.6 + Phi-4-MM downloaded (20:20).
 
-## Reporting format (Vy 20:20): Telegram reports AND pico/status.txt in ENGLISH, short "-" items, one point each,
+## Reporting format (Vy 20:20/20:21): Telegram reports AND pico/status.txt in ENGLISH by default (Vietnamese
+  only if Vy explicitly asks), short "-" items, one point each,
   blank line between items, no tables, no bold.
 
 ## Paper
