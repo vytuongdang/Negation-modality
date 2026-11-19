@@ -1,7 +1,7 @@
 # Paper outline (draft, ACL 2027 via ARR; ARR deadline found by web search: 2027-01-04, verify on 2027.aclweb.org)
 
 1. Introduction — omni-models receive constraints by typing, speaking, showing; does a prohibition survive the
-   channel? Pilot surprise (audio obeyed better) → need controls (T_sep, C0_box, affirmative/exceptive, conflict).
+   channel? A fair comparison needs controls (T_sep, C0_box, affirmative/exceptive, conflict).
    Contributions: benchmark (C8), controlled channel comparison (C1-C2), negation-specificity test (C3-C4),
    conflict/dominance analysis (C5).
 2. Related work — negation in VLMs; negative instructions / pink elephant; typographic/visual instructions;

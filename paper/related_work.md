@@ -29,5 +29,6 @@
 - ALME (Billa), arXiv 2602.11488: text dominance in audio-text conflicts, 8 languages; tuning the LLM reduces it.
 - XModBench (ICLR 2026), arXiv 2510.15148: tri-modal consistency; largest gaps audio vs text.
 - OmniBench (NeurIPS 2025): open omni-models weak at tri-modal instruction following.
-- Relevance: prior work says TEXT dominates audio in content conflicts; our pilot found audio NEGATION obeyed
-  better than text. H2/H3-A test whether that is dominance or negation-specific. Strong framing point.
+- Relevance: prior work reports TEXT dominating audio in content conflicts. Whether negative instructions behave
+  the same across channels is open; H2 vs H3-A (with and without negation) is designed to tell dominance apart from
+  a negation-specific effect, in either direction.

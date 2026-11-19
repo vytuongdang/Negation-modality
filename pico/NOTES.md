@@ -45,6 +45,7 @@
 - C0 answers are cached by input hash, so C0 is shared by template-sweep copies and by the forms of the same unit.
 
 ## Open problems / ideas
-- H1 confound from the pilot: text glued into the question vs audio as its own segment -> T_sep condition.
+- Old pilot design confound (not a finding): text glued into the question vs audio as its own segment -> T_sep.
+- Vy 20:05: NO v2 results yet; keep every report/note/paper text neutral (no direction) until v2 results with CIs.
 - Telegram (pico/notify.py): 2026-11-19 19:40 not sent (topic not set up yet: Vy must /setup); report kept in
   pico/telegram_sent.log. Keep posting after every step anyway.
