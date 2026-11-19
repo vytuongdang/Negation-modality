@@ -63,21 +63,53 @@ DON'T: change the dataset, judge, prompts or exclusion rules after seeing result
 compare channels without the matching control; claim causality from H3-D observational sizes; drop a model or a
 branch because it "looks bad" (report it); spend GPU on full runs before the pilot looks right.
 
-## 7. Paper plan (keep paper/ updated)
+## 7. Going deeper: WHY is a channel better or worse? (the analysis that makes it a paper)
+A gap alone is a finding; an explanation is a paper. For every gap found, try to explain it with cheap, decisive
+tests (subset first), for example:
+- Segmentation / position: T_join vs T_sep vs A; instruction before vs after the question or the image (H3-C).
+- "Is it the sound or the words?": feed the Whisper transcript of the audio as text (same words, text channel);
+  vary the voice (female/male, speed, a synthetic vs natural voice); add a neutral-audio control (speech that says
+  something irrelevant) to see whether any audio segment changes behaviour.
+- Comprehension vs compliance (H3-B): can the model repeat/identify the instruction per channel? Does compliance
+  fail even when comprehension succeeds?
+- Cue type: explicit negators (N1-N5) vs implicit (N6 avoid, N7 leave out) vs exceptive, per channel.
+- Error anatomy: classify violations (states the target plainly, names it while saying it won't, synonym/alias,
+  partial), and over-suppression (drops required components) per channel.
+- Inside the model (Qwen-Omni weights are open): log-probability of the target token(s) at the answer position per
+  condition; attention mass from answer tokens to the instruction tokens/segment; how this changes with channel.
+  Keep these small and well-controlled; they explain, they do not replace the behavioural results.
+- Salience / evidence strength (H3-D): target size and category; does the channel gap grow with salience?
+
+## 8. Paper plan (keep paper/ updated)
 - paper/claims.md: each candidate claim → the exact evidence (table/figure, numbers, test) → status
   (supported / not / pending). The story follows the evidence; likely shapes:
   (a) negation is channel-specific (Δ_audio ≠ Δ_text) — the headline we would like but must earn;
   (b) audio is a stronger instruction channel in general (salience), negation-specific effects small;
   (c) no channel gap: robustness result + benchmark contribution.
-- paper/outline.md: intro, related work (search the web for negation in VLMs/omni-models, instruction following
+- paper/outline.md **follows the Idea document's structure** (create_data/Idea Vy + Huy.pdf): motivation and the
+  NF vs IF table → H1 (does the channel matter) → H2 (direct conflict) → H3-A..D (why: dominance, comprehension,
+  activation order, evidence strength) → H4 (negation-specific, Δ_m, exceptive priming control). The Idea document
+  is a rough draft: where results or better designs suggest a change, propose it (see §10), do not silently rewrite.
+- paper/outline.md also: intro, related work (search the web for negation in VLMs/omni-models, instruction following
   across modalities, audio instruction following; real papers with links only), benchmark, experiments, analysis,
   limitations.
 - experiments/REPORT.md + experiments/figures/: numbers and plots the paper will use.
 
-## 8. Lessons (Pico adds one line each time something is learned; date | lesson)
+## 9. Lessons (Pico adds one line each time something is learned; date | lesson)
 - 2026-11-19 | Gluing the instruction into the question string vs a separate audio segment confounds channel with
   segmentation; always pair audio with T_sep.
 - 2026-11-19 | Baseline filter removed (Vy): targets now include components the tested model never states, so every
   violation number MUST be conditioned on that model's own C0; expect C0 rates well below 100% and report them.
 - 2026-11-19 | Prior work (MCR-Bench, ALME) finds TEXT dominates audio in content conflicts; our pilot found audio
   negation obeyed better. H2 vs H3-A is where this contrast is decided — high value for the paper.
+
+## 10. New ideas: propose, pilot on a subset, discuss, then scale
+The Idea document is a starting point, not a cage. When Pico sees a better design, a missing control, or a
+surprising pattern worth chasing:
+1. Write it in paper/ideas.md: the idea, why (which result or gap motivates it), what outcome would mean what,
+   cost (GPU hours), risk.
+2. Run a **small subset pilot** right away if it is cheap (≤ ~300 samples, ≤ ~2 GPU hours, a new versioned folder
+   under experiments/, never touching finished runs or the dataset).
+3. Report it to Vy on Telegram (and in the next email): the idea, the pilot numbers with CIs, and a clear
+   recommendation (drop / refine / scale up). **Scale up only after Vy agrees** (a "Note from Vy").
+4. Record the outcome in ideas.md and a Lesson in §9, whatever it was.

@@ -97,11 +97,14 @@ Keep paper/claims.md (claim → evidence → status) and paper/outline.md curren
 RESEARCH.md §7). Related work: search the web for real papers (links), summarise in paper/related_work.md.
 When a milestone is done, update both, and tell Vy in the report which claims the new numbers support.
 
-## Improving the hypotheses
+## Analysis depth and new ideas
 
-You may propose better designs (e.g. for H3-B/C/D) when results suggest it. Write the proposal and the reason in
-NOTES.md and in the next email first; implement it as a NEW, versioned experiment folder. Never edit the dataset,
-the judge, or a finished experiment to make an effect appear or disappear.
+After every result, ask WHY (RESEARCH.md §7): e.g. if text negation is obeyed worse (or better) than audio, run the
+cheap diagnostic that best separates the explanations (transcript-as-text, T_sep vs T_join, order, neutral audio,
+cue type, error anatomy, log-prob/attention on Qwen-Omni) on a subset, and report what it shows.
+New ideas follow RESEARCH.md §10: write them in paper/ideas.md, pilot on a subset (cheap, versioned, never touching
+the dataset or finished runs), report to Vy with a recommendation, and scale up only after Vy agrees.
+Never edit the dataset, the judge, or a finished experiment to make an effect appear or disappear.
 
 ## How to work
 
