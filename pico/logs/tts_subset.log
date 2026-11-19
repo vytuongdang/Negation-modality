@@ -1,0 +1,344 @@
+3910 samples, 1330 unique negations (0 reused, 1330 new), voices: ['female', 'male']
+Sliding Window Attention is enabled but not implemented for `sdpa`; unexpected results may be encountered.
+/home/vyvn/anaconda3/envs/cosyvoice/lib/python3.10/site-packages/diffusers/models/lora.py:393: FutureWarning: `LoRACompatibleLinear` is deprecated and will be removed in version 1.0.0. Use of `LoRACompatibleLinear` is deprecated. Please switch to PEFT backend by installing PEFT: `pip install peft`.
+  deprecate("LoRACompatibleLinear", "1.0.0", deprecation_message)
+2026-11-19 21:55:23,326 INFO input frame rate=25
+/home/vyvn/anaconda3/envs/cosyvoice/lib/python3.10/site-packages/torch/nn/utils/weight_norm.py:28: UserWarning: torch.nn.utils.weight_norm is deprecated in favor of torch.nn.utils.parametrizations.weight_norm.
+  warnings.warn("torch.nn.utils.weight_norm is deprecated in favor of torch.nn.utils.parametrizations.weight_norm.")
+[1;31m2026-11-19 21:55:24.326754180 [E:onnxruntime:Default, provider_bridge_ort.cc:1744 TryGetProviderInfo_CUDA] /onnxruntime_src/onnxruntime/core/session/provider_bridge_ort.cc:1426 onnxruntime::Provider& onnxruntime::ProviderLibrary::Get() [ONNXRuntimeError] : 1 : FAIL : Failed to load library libonnxruntime_providers_cuda.so with error: libcublasLt.so.11: cannot open shared object file: No such file or directory
+[m
+[0;93m2026-11-19 21:55:24.326775651 [W:onnxruntime:Default, onnxruntime_pybind_state.cc:870 CreateExecutionProviderInstance] Failed to create CUDAExecutionProvider. Please reference https://onnxruntime.ai/docs/execution-providers/CUDA-ExecutionProvider.html#requirementsto ensure all dependencies are met.[m
+Downloading Model to directory: /home/vyvn/.cache/modelscope/hub/pengzhendong/wetext
+2026-11-19 21:55:24,580 DEBUG Starting new HTTPS connection (1): www.modelscope.cn:443
+2026-11-19 21:55:27,748 DEBUG https://www.modelscope.cn:443 "GET /api/v1/models/pengzhendong/wetext/revisions HTTP/1.1" 403 137
+2026-11-19 21:55:27,748 - modelscope - ERROR - Authentication token does not exist, 
+2026-11-19 21:55:27,748 INFO no frontend is avaliable
+2026-11-19 21:55:29,744 DEBUG Starting new HTTPS connection (1): huggingface.co:443
+2026-11-19 21:55:29,997 DEBUG https://huggingface.co:443 "HEAD /openai/whisper-large-v3-turbo/resolve/main/config.json HTTP/1.1" 307 0
+2026-11-19 21:55:30,010 DEBUG https://huggingface.co:443 "HEAD /api/resolve-cache/models/openai/whisper-large-v3-turbo/41f01f3fe87f28c78e2fbf8b568835947dd65ed9/config.json HTTP/1.1" 200 0
+2026-11-19 21:55:30,338 DEBUG https://huggingface.co:443 "HEAD /openai/whisper-large-v3-turbo/resolve/main/generation_config.json HTTP/1.1" 307 0
+2026-11-19 21:55:30,541 DEBUG https://huggingface.co:443 "HEAD /api/resolve-cache/models/openai/whisper-large-v3-turbo/41f01f3fe87f28c78e2fbf8b568835947dd65ed9/generation_config.json HTTP/1.1" 200 0
+2026-11-19 21:55:30,812 DEBUG https://huggingface.co:443 "HEAD /openai/whisper-large-v3-turbo/resolve/main/preprocessor_config.json HTTP/1.1" 307 0
+2026-11-19 21:55:31,020 DEBUG https://huggingface.co:443 "HEAD /api/resolve-cache/models/openai/whisper-large-v3-turbo/41f01f3fe87f28c78e2fbf8b568835947dd65ed9/preprocessor_config.json HTTP/1.1" 200 0
+Device set to use cuda:0
+  0%|          | 0/1 [00:00<?, ?it/s]2026-11-19 21:55:31,973 INFO synthesis text Avoid mentioning its material.
+2026-11-19 21:55:33,248 INFO yield speech len 2.68, rtf 0.47582939489563897
+100%|██████████| 1/1 [00:01<00:00,  1.32s/it]100%|██████████| 1/1 [00:01<00:00,  1.32s/it]
+/home/vyvn/anaconda3/envs/cosyvoice/lib/python3.10/site-packages/transformers/models/whisper/generation_whisper.py:573: FutureWarning: The input name `inputs` is deprecated. Please make sure to use `input_features` instead.
+  warnings.warn(
+You have passed language=en, but also have set `forced_decoder_ids` to [[1, None], [2, 50360]] which creates a conflict. `forced_decoder_ids` will be ignored in favor of language=en.
+  0%|          | 0/1 [00:00<?, ?it/s]2026-11-19 21:55:33,385 INFO synthesis text Avoid mentioning its color.
+2026-11-19 21:55:34,142 INFO yield speech len 2.36, rtf 0.32068975901199603
+100%|██████████| 1/1 [00:00<00:00,  1.25it/s]100%|██████████| 1/1 [00:00<00:00,  1.25it/s]
+  0%|          | 0/1 [00:00<?, ?it/s]2026-11-19 21:55:34,275 INFO synthesis text Answer without mentioning its color.
+2026-11-19 21:55:35,535 INFO yield speech len 4.8, rtf 0.26253268122673035
+100%|██████████| 1/1 [00:01<00:00,  1.30s/it]100%|██████████| 1/1 [00:01<00:00,  1.30s/it]
+  0%|          | 0/1 [00:00<?, ?it/s]2026-11-19 21:55:35,663 INFO synthesis text Answer without mentioning its color.
+2026-11-19 21:55:36,819 INFO yield speech len 4.4, rtf 0.2625916220925071
+100%|██████████| 1/1 [00:01<00:00,  1.20s/it]100%|██████████| 1/1 [00:01<00:00,  1.20s/it]
+  0%|          | 0/1 [00:00<?, ?it/s]2026-11-19 21:55:36,940 INFO synthesis text Answer without mentioning its color.
+2026-11-19 21:55:37,824 INFO yield speech len 3.12, rtf 0.2833477961711394
+100%|██████████| 1/1 [00:00<00:00,  1.08it/s]100%|██████████| 1/1 [00:00<00:00,  1.08it/s]
+  0%|          | 0/1 [00:00<?, ?it/s]2026-11-19 21:55:37,956 INFO synthesis text Leave its color out of your answer.
+2026-11-19 21:55:39,105 INFO yield speech len 4.28, rtf 0.26826819526814966
+100%|██████████| 1/1 [00:01<00:00,  1.19s/it]100%|██████████| 1/1 [00:01<00:00,  1.19s/it]
+  0%|          | 0/1 [00:00<?, ?it/s]2026-11-19 21:55:39,243 INFO synthesis text Never refer to its size.
+2026-11-19 21:55:40,041 INFO yield speech len 2.68, rtf 0.2978310656191698
+100%|██████████| 1/1 [00:00<00:00,  1.19it/s]100%|██████████| 1/1 [00:00<00:00,  1.19it/s]
+  0%|          | 0/1 [00:00<?, ?it/s]2026-11-19 21:55:40,173 INFO synthesis text Never refer to its material.
+2026-11-19 21:55:40,912 INFO yield speech len 2.48, rtf 0.2979220882538826
+100%|██████████| 1/1 [00:00<00:00,  1.28it/s]100%|██████████| 1/1 [00:00<00:00,  1.28it/s]
+  0%|          | 0/1 [00:00<?, ?it/s]2026-11-19 21:55:41,044 INFO synthesis text Do not mention its size.
+2026-11-19 21:55:41,762 INFO yield speech len 2.28, rtf 0.31500490088211863
+100%|██████████| 1/1 [00:00<00:00,  1.31it/s]100%|██████████| 1/1 [00:00<00:00,  1.31it/s]
+  0%|          | 0/1 [00:00<?, ?it/s]2026-11-19 21:55:41,885 INFO synthesis text Do not mention its size.
+2026-11-19 21:55:43,132 INFO yield speech len 4.8, rtf 0.2598614990711212
+100%|██████████| 1/1 [00:01<00:00,  1.29s/it]100%|██████████| 1/1 [00:01<00:00,  1.29s/it]
+  0%|          | 0/1 [00:00<?, ?it/s]2026-11-19 21:55:43,261 INFO synthesis text Do not mention its size.
+2026-11-19 21:55:43,932 INFO yield speech len 2.08, rtf 0.32284305645869327
+100%|██████████| 1/1 [00:00<00:00,  1.40it/s]100%|██████████| 1/1 [00:00<00:00,  1.40it/s]
+You seem to be using the pipelines sequentially on GPU. In order to maximize efficiency please use a dataset
+  0%|          | 0/1 [00:00<?, ?it/s]2026-11-19 21:55:44,067 INFO synthesis text Don't say anything about its size.
+2026-11-19 21:55:44,820 INFO yield speech len 2.28, rtf 0.330484854547601
+100%|██████████| 1/1 [00:00<00:00,  1.25it/s]100%|██████████| 1/1 [00:00<00:00,  1.25it/s]
+  0%|          | 0/1 [00:00<?, ?it/s]2026-11-19 21:55:44,957 INFO synthesis text Make no mention of its size.
+2026-11-19 21:55:46,088 INFO yield speech len 4.2, rtf 0.2692474637712751
+100%|██████████| 1/1 [00:01<00:00,  1.18s/it]100%|██████████| 1/1 [00:01<00:00,  1.18s/it]
+  0%|          | 0/1 [00:00<?, ?it/s]2026-11-19 21:55:46,224 INFO synthesis text Answer without mentioning its size.
+2026-11-19 21:55:47,024 INFO yield speech len 2.56, rtf 0.31271083280444145
+100%|██████████| 1/1 [00:00<00:00,  1.18it/s]100%|██████████| 1/1 [00:00<00:00,  1.18it/s]
+  0%|          | 0/1 [00:00<?, ?it/s]2026-11-19 21:55:47,159 INFO synthesis text Avoid mentioning its size.
+2026-11-19 21:55:48,016 INFO yield speech len 2.92, rtf 0.29341553988522046
+100%|██████████| 1/1 [00:00<00:00,  1.11it/s]100%|██████████| 1/1 [00:00<00:00,  1.11it/s]
+  0%|          | 0/1 [00:00<?, ?it/s]2026-11-19 21:55:48,147 INFO synthesis text Leave its size out of your answer.
+2026-11-19 21:55:49,066 INFO yield speech len 2.96, rtf 0.3104779365900401
+100%|██████████| 1/1 [00:00<00:00,  1.04it/s]100%|██████████| 1/1 [00:00<00:00,  1.04it/s]
+  0%|          | 0/1 [00:00<?, ?it/s]2026-11-19 21:55:49,206 INFO synthesis text Do not mention its color.
+2026-11-19 21:55:49,880 INFO yield speech len 1.92, rtf 0.3513551006714503
+100%|██████████| 1/1 [00:00<00:00,  1.39it/s]100%|██████████| 1/1 [00:00<00:00,  1.39it/s]
+  0%|          | 0/1 [00:00<?, ?it/s]2026-11-19 21:55:50,013 INFO synthesis text Don't say anything about its color.
+2026-11-19 21:55:50,766 INFO yield speech len 2.4, rtf 0.31354566415150964
+100%|██████████| 1/1 [00:00<00:00,  1.25it/s]100%|██████████| 1/1 [00:00<00:00,  1.25it/s]
+  0%|          | 0/1 [00:00<?, ?it/s]2026-11-19 21:55:50,894 INFO synthesis text Don't say anything about its material.
+2026-11-19 21:55:52,004 INFO yield speech len 4.24, rtf 0.26170245881350535
+100%|██████████| 1/1 [00:01<00:00,  1.15s/it]100%|██████████| 1/1 [00:01<00:00,  1.15s/it]
+  0%|          | 0/1 [00:00<?, ?it/s]2026-11-19 21:55:52,142 INFO synthesis text Do not mention its material.
+2026-11-19 21:55:52,846 INFO yield speech len 2.28, rtf 0.3089388211568197
+100%|██████████| 1/1 [00:00<00:00,  1.34it/s]100%|██████████| 1/1 [00:00<00:00,  1.34it/s]
+  0%|          | 0/1 [00:00<?, ?it/s]2026-11-19 21:55:52,978 INFO synthesis text Make no mention of its material.
+2026-11-19 21:55:53,729 INFO yield speech len 2.28, rtf 0.32940318709925603
+100%|██████████| 1/1 [00:00<00:00,  1.25it/s]100%|██████████| 1/1 [00:00<00:00,  1.25it/s]
+  0%|          | 0/1 [00:00<?, ?it/s]2026-11-19 21:55:53,867 INFO synthesis text Leave its material out of your answer.
+2026-11-19 21:55:54,744 INFO yield speech len 2.76, rtf 0.31780229098554974
+100%|██████████| 1/1 [00:00<00:00,  1.08it/s]100%|██████████| 1/1 [00:00<00:00,  1.08it/s]
+  0%|          | 0/1 [00:00<?, ?it/s]2026-11-19 21:55:54,882 INFO synthesis text Never refer to its color.
+2026-11-19 21:55:55,614 INFO yield speech len 2.2, rtf 0.33241683786565607
+100%|██████████| 1/1 [00:00<00:00,  1.29it/s]100%|██████████| 1/1 [00:00<00:00,  1.29it/s]
+  0%|          | 0/1 [00:00<?, ?it/s]2026-11-19 21:55:55,747 INFO synthesis text Make no mention of its color.
+2026-11-19 21:55:56,491 INFO yield speech len 2.4, rtf 0.30975927909215295
+100%|██████████| 1/1 [00:00<00:00,  1.27it/s]100%|██████████| 1/1 [00:00<00:00,  1.27it/s]
+20/1330 sentences, asr mismatches so far: 0
+  0%|          | 0/1 [00:00<?, ?it/s]2026-11-19 21:55:56,625 INFO synthesis text Answer without mentioning its material.
+2026-11-19 21:55:57,532 INFO yield speech len 2.92, rtf 0.31061858347017474
+100%|██████████| 1/1 [00:00<00:00,  1.05it/s]100%|██████████| 1/1 [00:00<00:00,  1.05it/s]
+  0%|          | 0/1 [00:00<?, ?it/s]2026-11-19 21:55:57,667 INFO synthesis text Don't say anything about the number of cubes.
+2026-11-19 21:55:58,835 INFO yield speech len 4.36, rtf 0.26784577500929524
+100%|██████████| 1/1 [00:01<00:00,  1.21s/it]100%|██████████| 1/1 [00:01<00:00,  1.21s/it]
+  0%|          | 0/1 [00:00<?, ?it/s]2026-11-19 21:55:58,977 INFO synthesis text Make no mention of the number of cubes.
+2026-11-19 21:56:00,109 INFO yield speech len 4.4, rtf 0.2573034438219937
+100%|██████████| 1/1 [00:01<00:00,  1.18s/it]100%|██████████| 1/1 [00:01<00:00,  1.18s/it]
+  0%|          | 0/1 [00:00<?, ?it/s]2026-11-19 21:56:00,248 INFO synthesis text Do not mention the number of cubes.
+2026-11-19 21:56:01,382 INFO yield speech len 4.28, rtf 0.2648664412097396
+100%|██████████| 1/1 [00:01<00:00,  1.18s/it]100%|██████████| 1/1 [00:01<00:00,  1.18s/it]
+  0%|          | 0/1 [00:00<?, ?it/s]2026-11-19 21:56:01,519 INFO synthesis text Avoid mentioning the number of cubes.
+2026-11-19 21:56:02,390 INFO yield speech len 2.8, rtf 0.31110124928610666
+100%|██████████| 1/1 [00:00<00:00,  1.09it/s]100%|██████████| 1/1 [00:00<00:00,  1.09it/s]
+  0%|          | 0/1 [00:00<?, ?it/s]2026-11-19 21:56:02,526 INFO synthesis text Avoid mentioning the number of cylinders.
+2026-11-19 21:56:03,652 INFO yield speech len 4.16, rtf 0.2706574132809272
+100%|██████████| 1/1 [00:01<00:00,  1.17s/it]100%|██████████| 1/1 [00:01<00:00,  1.17s/it]
+  0%|          | 0/1 [00:00<?, ?it/s]2026-11-19 21:56:03,790 INFO synthesis text Leave the number of spheres out of your answer.
+2026-11-19 21:56:04,625 INFO yield speech len 2.72, rtf 0.3069968784556669
+100%|██████████| 1/1 [00:00<00:00,  1.14it/s]100%|██████████| 1/1 [00:00<00:00,  1.14it/s]
+  0%|          | 0/1 [00:00<?, ?it/s]2026-11-19 21:56:04,759 INFO synthesis text Leave the number of spheres out of your answer.
+2026-11-19 21:56:05,721 INFO yield speech len 3.16, rtf 0.30468815489660334
+100%|██████████| 1/1 [00:01<00:00,  1.01s/it]100%|██████████| 1/1 [00:01<00:00,  1.01s/it]
+  0%|          | 0/1 [00:00<?, ?it/s]2026-11-19 21:56:05,864 INFO synthesis text Do not mention the number of spheres.
+2026-11-19 21:56:07,068 INFO yield speech len 4.72, rtf 0.2551771321539152
+100%|██████████| 1/1 [00:01<00:00,  1.25s/it]100%|██████████| 1/1 [00:01<00:00,  1.25s/it]
+  0%|          | 0/1 [00:00<?, ?it/s]2026-11-19 21:56:07,196 INFO synthesis text Don't say anything about the number of spheres.
+2026-11-19 21:56:08,123 INFO yield speech len 3.0, rtf 0.30889002482096356
+100%|██████████| 1/1 [00:00<00:00,  1.03it/s]100%|██████████| 1/1 [00:00<00:00,  1.03it/s]
+  0%|          | 0/1 [00:00<?, ?it/s]2026-11-19 21:56:08,265 INFO synthesis text Never refer to the number of spheres.
+2026-11-19 21:56:09,087 INFO yield speech len 2.52, rtf 0.32628471889193095
+100%|██████████| 1/1 [00:00<00:00,  1.15it/s]100%|██████████| 1/1 [00:00<00:00,  1.15it/s]
+  0%|          | 0/1 [00:00<?, ?it/s]2026-11-19 21:56:09,224 INFO synthesis text Make no mention of the number of spheres.
+2026-11-19 21:56:10,384 INFO yield speech len 4.32, rtf 0.2684764288089893
+100%|██████████| 1/1 [00:01<00:00,  1.20s/it]100%|██████████| 1/1 [00:01<00:00,  1.20s/it]
+  0%|          | 0/1 [00:00<?, ?it/s]2026-11-19 21:56:10,525 INFO synthesis text Answer without mentioning the number of spheres.
+2026-11-19 21:56:11,506 INFO yield speech len 3.24, rtf 0.30264685183395573
+100%|██████████| 1/1 [00:01<00:00,  1.03s/it]100%|██████████| 1/1 [00:01<00:00,  1.03s/it]
+  0%|          | 0/1 [00:00<?, ?it/s]2026-11-19 21:56:11,644 INFO synthesis text Avoid mentioning the number of spheres.
+2026-11-19 21:56:12,509 INFO yield speech len 2.88, rtf 0.3001795874701606
+100%|██████████| 1/1 [00:00<00:00,  1.10it/s]100%|██████████| 1/1 [00:00<00:00,  1.10it/s]
+  0%|          | 0/1 [00:00<?, ?it/s]2026-11-19 21:56:12,645 INFO synthesis text Make no mention of the number of cylinders.
+2026-11-19 21:56:13,871 INFO yield speech len 4.6, rtf 0.26656280393185827
+100%|██████████| 1/1 [00:01<00:00,  1.27s/it]100%|██████████| 1/1 [00:01<00:00,  1.27s/it]
+  0%|          | 0/1 [00:00<?, ?it/s]2026-11-19 21:56:14,002 INFO synthesis text Make no mention of the number of cylinders.
+2026-11-19 21:56:15,175 INFO yield speech len 4.56, rtf 0.257257620493571
+100%|██████████| 1/1 [00:01<00:00,  1.22s/it]100%|██████████| 1/1 [00:01<00:00,  1.22s/it]
+  0%|          | 0/1 [00:00<?, ?it/s]2026-11-19 21:56:15,313 INFO synthesis text Leave the number of cylinders out of your answer.
+2026-11-19 21:56:16,216 INFO yield speech len 3.04, rtf 0.2969386546235335
+100%|██████████| 1/1 [00:00<00:00,  1.05it/s]100%|██████████| 1/1 [00:00<00:00,  1.05it/s]
+  0%|          | 0/1 [00:00<?, ?it/s]2026-11-19 21:56:16,359 INFO synthesis text Answer without mentioning the number of cubes.
+2026-11-19 21:56:17,454 INFO yield speech len 4.24, rtf 0.25828165828057054
+100%|██████████| 1/1 [00:01<00:00,  1.14s/it]100%|██████████| 1/1 [00:01<00:00,  1.14s/it]
+  0%|          | 0/1 [00:00<?, ?it/s]2026-11-19 21:56:17,591 INFO synthesis text Do not mention the number of cylinders.
+2026-11-19 21:56:18,490 INFO yield speech len 2.92, rtf 0.3077535596612382
+100%|██████████| 1/1 [00:00<00:00,  1.06it/s]100%|██████████| 1/1 [00:00<00:00,  1.06it/s]
+  0%|          | 0/1 [00:00<?, ?it/s]2026-11-19 21:56:18,629 INFO synthesis text Leave the number of cubes out of your answer.
+2026-11-19 21:56:19,435 INFO yield speech len 2.44, rtf 0.3302393389529869
+100%|██████████| 1/1 [00:00<00:00,  1.18it/s]100%|██████████| 1/1 [00:00<00:00,  1.17it/s]
+  0%|          | 0/1 [00:00<?, ?it/s]2026-11-19 21:56:19,576 INFO synthesis text Never refer to the number of cubes.
+2026-11-19 21:56:20,414 INFO yield speech len 2.84, rtf 0.2952460671814395
+100%|██████████| 1/1 [00:00<00:00,  1.13it/s]100%|██████████| 1/1 [00:00<00:00,  1.13it/s]
+  0%|          | 0/1 [00:00<?, ?it/s]2026-11-19 21:56:20,551 INFO synthesis text Don't say anything about the number of cylinders.
+2026-11-19 21:56:21,667 INFO yield speech len 3.72, rtf 0.30003523313870994
+100%|██████████| 1/1 [00:01<00:00,  1.16s/it]100%|██████████| 1/1 [00:01<00:00,  1.16s/it]
+40/1330 sentences, asr mismatches so far: 0
+  0%|          | 0/1 [00:00<?, ?it/s]2026-11-19 21:56:21,809 INFO synthesis text Never refer to the number of cylinders.
+2026-11-19 21:56:22,628 INFO yield speech len 2.72, rtf 0.3010249313186196
+100%|██████████| 1/1 [00:00<00:00,  1.16it/s]100%|██████████| 1/1 [00:00<00:00,  1.16it/s]
+  0%|          | 0/1 [00:00<?, ?it/s]2026-11-19 21:56:22,766 INFO synthesis text Answer without mentioning the number of cylinders.
+2026-11-19 21:56:23,863 INFO yield speech len 4.24, rtf 0.2586546371567924
+100%|██████████| 1/1 [00:01<00:00,  1.14s/it]100%|██████████| 1/1 [00:01<00:00,  1.14s/it]
+  0%|          | 0/1 [00:00<?, ?it/s]2026-11-19 21:56:24,002 INFO synthesis text Make no mention of the number of bowls.
+2026-11-19 21:56:24,789 INFO yield speech len 2.56, rtf 0.30747344717383385
+100%|██████████| 1/1 [00:00<00:00,  1.20it/s]100%|██████████| 1/1 [00:00<00:00,  1.20it/s]
+  0%|          | 0/1 [00:00<?, ?it/s]2026-11-19 21:56:24,928 INFO synthesis text Never refer to the number of keyboards.
+2026-11-19 21:56:26,080 INFO yield speech len 4.36, rtf 0.2642049155104051
+100%|██████████| 1/1 [00:01<00:00,  1.20s/it]100%|██████████| 1/1 [00:01<00:00,  1.20s/it]
+  0%|          | 0/1 [00:00<?, ?it/s]2026-11-19 21:56:26,213 INFO synthesis text Never refer to the number of keyboards.
+2026-11-19 21:56:27,535 INFO yield speech len 5.08, rtf 0.26020398290138547
+100%|██████████| 1/1 [00:01<00:00,  1.37s/it]100%|██████████| 1/1 [00:01<00:00,  1.37s/it]
+  0%|          | 0/1 [00:00<?, ?it/s]2026-11-19 21:56:27,667 INFO synthesis text Never refer to the number of keyboards.
+2026-11-19 21:56:28,796 INFO yield speech len 4.28, rtf 0.2637418631081269
+100%|██████████| 1/1 [00:01<00:00,  1.17s/it]100%|██████████| 1/1 [00:01<00:00,  1.17s/it]
+  0%|          | 0/1 [00:00<?, ?it/s]2026-11-19 21:56:28,936 INFO synthesis text Never refer to the number of computer mice.
+2026-11-19 21:56:29,869 INFO yield speech len 3.08, rtf 0.3031719814647328
+100%|██████████| 1/1 [00:00<00:00,  1.02it/s]100%|██████████| 1/1 [00:00<00:00,  1.02it/s]
+  0%|          | 0/1 [00:00<?, ?it/s]2026-11-19 21:56:30,011 INFO synthesis text Never refer to the number of couches.
+2026-11-19 21:56:30,799 INFO yield speech len 2.56, rtf 0.3077344037592411
+100%|██████████| 1/1 [00:00<00:00,  1.20it/s]100%|██████████| 1/1 [00:00<00:00,  1.20it/s]
+  0%|          | 0/1 [00:00<?, ?it/s]2026-11-19 21:56:30,938 INFO synthesis text Avoid mentioning the number of horses.
+2026-11-19 21:56:32,172 INFO yield speech len 4.68, rtf 0.26355976732368147
+100%|██████████| 1/1 [00:01<00:00,  1.28s/it]100%|██████████| 1/1 [00:01<00:00,  1.28s/it]
+  0%|          | 0/1 [00:00<?, ?it/s]2026-11-19 21:56:32,306 INFO synthesis text Don't say anything about the number of cars.
+2026-11-19 21:56:33,223 INFO yield speech len 3.0, rtf 0.30561502774556476
+100%|██████████| 1/1 [00:00<00:00,  1.04it/s]100%|██████████| 1/1 [00:00<00:00,  1.04it/s]
+  0%|          | 0/1 [00:00<?, ?it/s]2026-11-19 21:56:33,366 INFO synthesis text Leave the number of refrigerators out of your answer.
+2026-11-19 21:56:34,336 INFO yield speech len 3.36, rtf 0.2887050310770671
+100%|██████████| 1/1 [00:01<00:00,  1.02s/it]100%|██████████| 1/1 [00:01<00:00,  1.02s/it]
+  0%|          | 0/1 [00:00<?, ?it/s]2026-11-19 21:56:34,480 INFO synthesis text Do not mention the number of apples.
+2026-11-19 21:56:35,599 INFO yield speech len 4.2, rtf 0.26638871147519066
+100%|██████████| 1/1 [00:01<00:00,  1.16s/it]100%|██████████| 1/1 [00:01<00:00,  1.16s/it]
+  0%|          | 0/1 [00:00<?, ?it/s]2026-11-19 21:56:35,738 INFO synthesis text Don't say anything about the number of apples.
+2026-11-19 21:56:36,992 INFO yield speech len 4.76, rtf 0.2634054472466477
+100%|██████████| 1/1 [00:01<00:00,  1.30s/it]100%|██████████| 1/1 [00:01<00:00,  1.30s/it]
+  0%|          | 0/1 [00:00<?, ?it/s]2026-11-19 21:56:37,133 INFO synthesis text Never refer to the number of apples.
+2026-11-19 21:56:37,995 INFO yield speech len 2.76, rtf 0.3124407236126886
+100%|██████████| 1/1 [00:00<00:00,  1.10it/s]100%|██████████| 1/1 [00:00<00:00,  1.10it/s]
+  0%|          | 0/1 [00:00<?, ?it/s]2026-11-19 21:56:38,131 INFO synthesis text Make no mention of the number of apples.
+2026-11-19 21:56:38,981 INFO yield speech len 2.64, rtf 0.32171480583422113
+100%|██████████| 1/1 [00:00<00:00,  1.12it/s]100%|██████████| 1/1 [00:00<00:00,  1.12it/s]
+  0%|          | 0/1 [00:00<?, ?it/s]2026-11-19 21:56:39,120 INFO synthesis text Answer without mentioning the number of apples.
+2026-11-19 21:56:40,330 INFO yield speech len 4.6, rtf 0.263009848801986
+100%|██████████| 1/1 [00:01<00:00,  1.25s/it]100%|██████████| 1/1 [00:01<00:00,  1.25s/it]
+  0%|          | 0/1 [00:00<?, ?it/s]2026-11-19 21:56:40,454 INFO synthesis text Answer without mentioning the number of apples.
+2026-11-19 21:56:41,584 INFO yield speech len 4.4, rtf 0.2569150924682617
+100%|██████████| 1/1 [00:01<00:00,  1.17s/it]100%|██████████| 1/1 [00:01<00:00,  1.17s/it]
+  0%|          | 0/1 [00:00<?, ?it/s]2026-11-19 21:56:41,721 INFO synthesis text Avoid mentioning the number of apples.
+2026-11-19 21:56:42,862 INFO yield speech len 4.28, rtf 0.26653353298935933
+100%|██████████| 1/1 [00:01<00:00,  1.19s/it]100%|██████████| 1/1 [00:01<00:00,  1.19s/it]
+  0%|          | 0/1 [00:00<?, ?it/s]2026-11-19 21:56:42,993 INFO synthesis text Avoid mentioning the number of apples.
+2026-11-19 21:56:44,190 INFO yield speech len 4.52, rtf 0.2648647907560906
+100%|██████████| 1/1 [00:01<00:00,  1.24s/it]100%|██████████| 1/1 [00:01<00:00,  1.24s/it]
+  0%|          | 0/1 [00:00<?, ?it/s]2026-11-19 21:56:44,325 INFO synthesis text Leave the number of apples out of your answer.
+2026-11-19 21:56:45,477 INFO yield speech len 4.36, rtf 0.26410090813943005
+100%|██████████| 1/1 [00:01<00:00,  1.20s/it]100%|██████████| 1/1 [00:01<00:00,  1.20s/it]
+  0%|          | 0/1 [00:00<?, ?it/s]2026-11-19 21:56:45,619 INFO synthesis text Do not mention the number of dogs.
+2026-11-19 21:56:46,736 INFO yield speech len 4.2, rtf 0.2658594222295852
+100%|██████████| 1/1 [00:01<00:00,  1.16s/it]100%|██████████| 1/1 [00:01<00:00,  1.16s/it]
+  0%|          | 0/1 [00:00<?, ?it/s]2026-11-19 21:56:46,874 INFO synthesis text Do not mention the number of handbags.
+2026-11-19 21:56:47,782 INFO yield speech len 3.16, rtf 0.28722271134581745
+100%|██████████| 1/1 [00:00<00:00,  1.05it/s]100%|██████████| 1/1 [00:00<00:00,  1.05it/s]
+  0%|          | 0/1 [00:00<?, ?it/s]2026-11-19 21:56:47,920 INFO synthesis text Never refer to the number of bowls.
+2026-11-19 21:56:48,764 INFO yield speech len 2.88, rtf 0.2929246260060204
+100%|██████████| 1/1 [00:00<00:00,  1.13it/s]100%|██████████| 1/1 [00:00<00:00,  1.13it/s]
+  0%|          | 0/1 [00:00<?, ?it/s]2026-11-19 21:56:48,899 INFO synthesis text Do not mention the number of bowls.
+2026-11-19 21:56:49,711 INFO yield speech len 2.48, rtf 0.32724738121032715
+100%|██████████| 1/1 [00:00<00:00,  1.17it/s]100%|██████████| 1/1 [00:00<00:00,  1.17it/s]
+  0%|          | 0/1 [00:00<?, ?it/s]2026-11-19 21:56:49,839 INFO synthesis text Do not mention the number of bowls.
+2026-11-19 21:56:50,685 INFO yield speech len 2.68, rtf 0.3158099615751807
+100%|██████████| 1/1 [00:00<00:00,  1.12it/s]100%|██████████| 1/1 [00:00<00:00,  1.12it/s]
+60/1330 sentences, asr mismatches so far: 0
+  0%|          | 0/1 [00:00<?, ?it/s]2026-11-19 21:56:50,822 INFO synthesis text Don't say anything about the number of bowls.
+2026-11-19 21:56:51,759 INFO yield speech len 3.2, rtf 0.2927161008119583
+100%|██████████| 1/1 [00:00<00:00,  1.02it/s]100%|██████████| 1/1 [00:00<00:00,  1.02it/s]
+  0%|          | 0/1 [00:00<?, ?it/s]2026-11-19 21:56:51,902 INFO synthesis text Answer without mentioning the number of bowls.
+2026-11-19 21:56:53,303 INFO yield speech len 5.4, rtf 0.2595059518460874
+100%|██████████| 1/1 [00:01<00:00,  1.45s/it]100%|██████████| 1/1 [00:01<00:00,  1.45s/it]
+  0%|          | 0/1 [00:00<?, ?it/s]2026-11-19 21:56:53,441 INFO synthesis text Avoid mentioning the number of bowls.
+2026-11-19 21:56:54,594 INFO yield speech len 4.36, rtf 0.2643538724391832
+100%|██████████| 1/1 [00:01<00:00,  1.20s/it]100%|██████████| 1/1 [00:01<00:00,  1.20s/it]
+  0%|          | 0/1 [00:00<?, ?it/s]2026-11-19 21:56:54,730 INFO synthesis text Leave the number of bowls out of your answer.
+2026-11-19 21:56:55,830 INFO yield speech len 4.24, rtf 0.25946801563478866
+100%|██████████| 1/1 [00:01<00:00,  1.14s/it]100%|██████████| 1/1 [00:01<00:00,  1.14s/it]
+  0%|          | 0/1 [00:00<?, ?it/s]2026-11-19 21:56:55,973 INFO synthesis text Make no mention of the number of sandwiches.
+2026-11-19 21:56:56,907 INFO yield speech len 3.08, rtf 0.3035429236176726
+100%|██████████| 1/1 [00:00<00:00,  1.02it/s]100%|██████████| 1/1 [00:00<00:00,  1.02it/s]
+  0%|          | 0/1 [00:00<?, ?it/s]2026-11-19 21:56:57,049 INFO synthesis text Answer without mentioning the number of cats.
+2026-11-19 21:56:57,999 INFO yield speech len 3.12, rtf 0.30473088606809956
+100%|██████████| 1/1 [00:00<00:00,  1.00it/s]100%|██████████| 1/1 [00:00<00:00,  1.00it/s]
+  0%|          | 0/1 [00:00<?, ?it/s]2026-11-19 21:56:58,138 INFO synthesis text Never refer to the number of trucks.
+2026-11-19 21:56:59,255 INFO yield speech len 4.2, rtf 0.2660159269968668
+100%|██████████| 1/1 [00:01<00:00,  1.16s/it]100%|██████████| 1/1 [00:01<00:00,  1.16s/it]
+  0%|          | 0/1 [00:00<?, ?it/s]2026-11-19 21:56:59,393 INFO synthesis text Leave the number of teddy bears out of your answer.
+2026-11-19 21:57:00,531 INFO yield speech len 4.28, rtf 0.26592885222390433
+100%|██████████| 1/1 [00:01<00:00,  1.18s/it]100%|██████████| 1/1 [00:01<00:00,  1.18s/it]
+  0%|          | 0/1 [00:00<?, ?it/s]2026-11-19 21:57:00,676 INFO synthesis text Do not mention the number of refrigerators.
+2026-11-19 21:57:01,776 INFO yield speech len 4.24, rtf 0.2593756284353868
+100%|██████████| 1/1 [00:01<00:00,  1.14s/it]100%|██████████| 1/1 [00:01<00:00,  1.14s/it]
+  0%|          | 0/1 [00:00<?, ?it/s]2026-11-19 21:57:01,916 INFO synthesis text Don't say anything about the number of refrigerators.
+2026-11-19 21:57:02,833 INFO yield speech len 3.0, rtf 0.30549367268880206
+100%|██████████| 1/1 [00:00<00:00,  1.04it/s]100%|██████████| 1/1 [00:00<00:00,  1.04it/s]
+  0%|          | 0/1 [00:00<?, ?it/s]2026-11-19 21:57:02,977 INFO synthesis text Never refer to the number of refrigerators.
+2026-11-19 21:57:03,908 INFO yield speech len 3.08, rtf 0.3023734340420017
+100%|██████████| 1/1 [00:00<00:00,  1.02it/s]100%|██████████| 1/1 [00:00<00:00,  1.02it/s]
+  0%|          | 0/1 [00:00<?, ?it/s]2026-11-19 21:57:04,048 INFO synthesis text Make no mention of the number of refrigerators.
+2026-11-19 21:57:05,016 INFO yield speech len 3.24, rtf 0.298806325888928
+100%|██████████| 1/1 [00:01<00:00,  1.01s/it]100%|██████████| 1/1 [00:01<00:00,  1.01s/it]
+  0%|          | 0/1 [00:00<?, ?it/s]2026-11-19 21:57:05,159 INFO synthesis text Answer without mentioning the number of refrigerators.
+2026-11-19 21:57:06,182 INFO yield speech len 3.44, rtf 0.2974384052808895
+100%|██████████| 1/1 [00:01<00:00,  1.07s/it]100%|██████████| 1/1 [00:01<00:00,  1.07s/it]
+  0%|          | 0/1 [00:00<?, ?it/s]2026-11-19 21:57:06,324 INFO synthesis text Avoid mentioning the number of refrigerators.
+2026-11-19 21:57:07,441 INFO yield speech len 4.12, rtf 0.27113475845855417
+100%|██████████| 1/1 [00:01<00:00,  1.16s/it]100%|██████████| 1/1 [00:01<00:00,  1.16s/it]
+  0%|          | 0/1 [00:00<?, ?it/s]2026-11-19 21:57:07,580 INFO synthesis text Never refer to the number of sheep.
+2026-11-19 21:57:08,388 INFO yield speech len 2.52, rtf 0.3207219025445363
+100%|██████████| 1/1 [00:00<00:00,  1.17it/s]100%|██████████| 1/1 [00:00<00:00,  1.17it/s]
+  0%|          | 0/1 [00:00<?, ?it/s]2026-11-19 21:57:08,525 INFO synthesis text Avoid mentioning the number of dining tables.
+2026-11-19 21:57:09,450 INFO yield speech len 3.2, rtf 0.28886042535305023
+100%|██████████| 1/1 [00:00<00:00,  1.03it/s]100%|██████████| 1/1 [00:00<00:00,  1.03it/s]
+  0%|          | 0/1 [00:00<?, ?it/s]2026-11-19 21:57:09,589 INFO synthesis text Leave the number of birds out of your answer.
+2026-11-19 21:57:10,487 INFO yield speech len 2.92, rtf 0.3076144277232967
+100%|██████████| 1/1 [00:00<00:00,  1.06it/s]100%|██████████| 1/1 [00:00<00:00,  1.06it/s]
+  0%|          | 0/1 [00:00<?, ?it/s]2026-11-19 21:57:10,630 INFO synthesis text Never refer to the number of sandwiches.
+2026-11-19 21:57:11,537 INFO yield speech len 2.96, rtf 0.30627693678881673
+100%|██████████| 1/1 [00:00<00:00,  1.05it/s]100%|██████████| 1/1 [00:00<00:00,  1.05it/s]
+  0%|          | 0/1 [00:00<?, ?it/s]2026-11-19 21:57:11,676 INFO synthesis text Don't say anything about the number of laptops.
+2026-11-19 21:57:12,859 INFO yield speech len 4.44, rtf 0.26656093898120226
+100%|██████████| 1/1 [00:01<00:00,  1.23s/it]100%|██████████| 1/1 [00:01<00:00,  1.23s/it]
+  0%|          | 0/1 [00:00<?, ?it/s]2026-11-19 21:57:12,998 INFO synthesis text Never refer to the number of teddy bears.
+2026-11-19 21:57:13,781 INFO yield speech len 2.56, rtf 0.30616428703069687
+100%|██████████| 1/1 [00:00<00:00,  1.21it/s]100%|██████████| 1/1 [00:00<00:00,  1.21it/s]
+  0%|          | 0/1 [00:00<?, ?it/s]2026-11-19 21:57:13,911 INFO synthesis text Never refer to the number of teddy bears.
+2026-11-19 21:57:14,850 INFO yield speech len 3.12, rtf 0.30096990939898366
+100%|██████████| 1/1 [00:00<00:00,  1.02it/s]100%|██████████| 1/1 [00:00<00:00,  1.02it/s]
+80/1330 sentences, asr mismatches so far: 0
+  0%|          | 0/1 [00:00<?, ?it/s]2026-11-19 21:57:14,990 INFO synthesis text Don't say anything about the number of TVs.
+2026-11-19 21:57:16,173 INFO yield speech len 4.44, rtf 0.2666419153814917
+100%|██████████| 1/1 [00:01<00:00,  1.23s/it]100%|██████████| 1/1 [00:01<00:00,  1.23s/it]
+  0%|          | 0/1 [00:00<?, ?it/s]2026-11-19 21:57:16,305 INFO synthesis text Don't say anything about the number of TVs.
+2026-11-19 21:57:17,462 INFO yield speech len 4.36, rtf 0.26533106051453753
+100%|██████████| 1/1 [00:01<00:00,  1.20s/it]100%|██████████| 1/1 [00:01<00:00,  1.20s/it]
+  0%|          | 0/1 [00:00<?, ?it/s]2026-11-19 21:57:17,604 INFO synthesis text Leave the number of handbags out of your answer.
+2026-11-19 21:57:18,548 INFO yield speech len 3.12, rtf 0.302582520705003
+100%|██████████| 1/1 [00:00<00:00,  1.01it/s]100%|██████████| 1/1 [00:00<00:00,  1.01it/s]
+  0%|          | 0/1 [00:00<?, ?it/s]2026-11-19 21:57:18,693 INFO synthesis text Answer without mentioning the number of motorcycles.
+2026-11-19 21:57:19,693 INFO yield speech len 3.56, rtf 0.2809746211834168
+100%|██████████| 1/1 [00:01<00:00,  1.04s/it]100%|██████████| 1/1 [00:01<00:00,  1.04s/it]
+  0%|          | 0/1 [00:00<?, ?it/s]2026-11-19 21:57:19,832 INFO synthesis text Avoid mentioning the number of hot dogs.
+2026-11-19 21:57:20,926 INFO yield speech len 4.24, rtf 0.2582061403202561
+100%|██████████| 1/1 [00:01<00:00,  1.14s/it]100%|██████████| 1/1 [00:01<00:00,  1.14s/it]
+  0%|          | 0/1 [00:00<?, ?it/s]2026-11-19 21:57:21,063 INFO synthesis text Avoid mentioning the number of microwaves.
+2026-11-19 21:57:22,161 INFO yield speech len 4.24, rtf 0.2589371969115059
+100%|██████████| 1/1 [00:01<00:00,  1.14s/it]100%|██████████| 1/1 [00:01<00:00,  1.14s/it]
+  0%|          | 0/1 [00:00<?, ?it/s]2026-11-19 21:57:22,298 INFO synthesis text Don't say anything about the number of beds.
+2026-11-19 21:57:23,165 INFO yield speech len 2.76, rtf 0.3140979918880739
+100%|██████████| 1/1 [00:00<00:00,  1.10it/s]100%|██████████| 1/1 [00:00<00:00,  1.10it/s]
+  0%|          | 0/1 [00:00<?, ?it/s]2026-11-19 21:57:23,307 INFO synthesis text Leave the number of cats out of your answer.
+2026-11-19 21:57:24,443 INFO yield speech len 4.4, rtf 0.25813747536052356
+100%|██████████| 1/1 [00:01<00:00,  1.18s/it]100%|██████████| 1/1 [00:01<00:00,  1.18s/it]
+  0%|          | 0/1 [00:00<?, ?it/s]2026-11-19 21:57:24,584 INFO synthesis text Never refer to the number of bottles.
+2026-11-19 21:57:25,501 INFO yield speech len 3.0, rtf 0.305484135945638
+100%|██████████| 1/1 [00:00<00:00,  1.04it/s]100%|██████████| 1/1 [00:00<00:00,  1.04it/s]
+  0%|          | 0/1 [00:00<?, ?it/s]2026-11-19 21:57:25,639 INFO synthesis text Leave the number of sandwiches out of your answer.
+2026-11-19 21:57:26,564 INFO yield speech len 3.2, rtf 0.2889630198478699
+100%|██████████| 1/1 [00:00<00:00,  1.03it/s]100%|██████████| 1/1 [00:00<00:00,  1.03it/s]
+  0%|          | 0/1 [00:00<?, ?it/s]2026-11-19 21:57:26,708 INFO synthesis text Leave the number of dogs out of your answer.
+2026-11-19 21:57:27,829 INFO yield speech len 4.2, rtf 0.2671056134360177
+100%|██████████| 1/1 [00:01<00:00,  1.17s/it]100%|██████████| 1/1 [00:01<00:00,  1.17s/it]
+  0%|          | 0/1 [00:00<?, ?it/s]2026-11-19 21:57:27,972 INFO synthesis text Don't say anything about the number of dogs.
+2026-11-19 21:57:29,066 INFO yield speech len 4.0, rtf 0.2735527753829956
+100%|██████████| 1/1 [00:01<00:00,  1.14s/it]100%|██████████| 1/1 [00:01<00:00,  1.14s/it]
+  0%|          | 0/1 [00:00<?, ?it/s]2026-11-19 21:57:29,211 INFO synthesis text Avoid mentioning the number of boats.

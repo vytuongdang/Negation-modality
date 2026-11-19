@@ -104,6 +104,7 @@ def main():
     print(f"{len(samples)} samples, {len(texts)} unique negations ({len(done)} reused, {len(new)} new), "
           f"voices: {list(VOICES)}", flush=True)
     if new:
+        SENT_DIR.mkdir(parents=True, exist_ok=True)
         with open(part, "w") as f:
             for m in manifest:
                 f.write(json.dumps(m) + "\n")

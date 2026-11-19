@@ -2,3 +2,59 @@
 ===== step 3: B2 components =====
 Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
 Loading weights:   0%|          | 0/399 [00:00<?, ?it/s]Loading weights:   0%|          | 1/399 [00:00<05:07,  1.30it/s]Loading weights:  15%|█▍        | 59/399 [00:00<00:04, 83.15it/s]Loading weights:  20%|██        | 80/399 [00:01<00:03, 101.95it/s]Loading weights:  25%|██▌       | 100/399 [00:01<00:02, 106.86it/s]Loading weights:  29%|██▉       | 117/399 [00:01<00:02, 106.10it/s]Loading weights:  34%|███▍      | 136/399 [00:01<00:02, 108.12it/s]Loading weights:  40%|███▉      | 158/399 [00:01<00:02, 115.72it/s]Loading weights:  43%|████▎     | 172/399 [00:01<00:01, 120.29it/s]Loading weights:  48%|████▊     | 191/399 [00:01<00:01, 117.93it/s]Loading weights:  51%|█████     | 204/399 [00:02<00:01, 120.45it/s]Loading weights:  56%|█████▌    | 224/399 [00:02<00:01, 121.62it/s]Loading weights:  61%|██████    | 243/399 [00:02<00:01, 134.73it/s]Loading weights:  65%|██████▍   | 258/399 [00:02<00:01, 119.52it/s]Loading weights:  70%|██████▉   | 279/399 [00:02<00:00, 125.17it/s]Loading weights:  73%|███████▎  | 292/399 [00:02<00:00, 122.53it/s]Loading weights:  78%|███████▊  | 312/399 [00:02<00:00, 125.28it/s]Loading weights:  81%|████████▏ | 325/399 [00:03<00:00, 125.15it/s]Loading weights:  86%|████████▌ | 342/399 [00:03<00:00, 136.04it/s]Loading weights:  89%|████████▉ | 356/399 [00:03<00:00, 121.99it/s]Loading weights:  95%|█████████▍| 378/399 [00:03<00:00, 131.45it/s]Loading weights:  98%|█████████▊| 392/399 [00:03<00:00, 121.74it/s]Loading weights: 100%|██████████| 399/399 [00:03<00:00, 111.54it/s]
+kept 1150/1150 units; {'llm_unparsed': 0}; human-verify sample: 114
+review files: dataset/b2/human_verify
+----- step 3 done in 1486s
+
+===== step 4: B3 negative instructions =====
+1840 samples from 1150 units; {'target_skipped_collision': 22}
+Counter({('COCO', 'existence'): 386, ('COCO', 'existence_closed'): 356, ('GQA', 'relation'): 332, ('COCO', 'count'): 203, ('VAW', 'attribute'): 203, ('CLEVR', 'count'): 195, ('CLEVR', 'attribute'): 165})
+Counter({'N7': 290, 'N2': 289, 'N6': 272, 'N1': 258, 'N5': 249, 'N4': 248, 'N3': 234})
+----- step 4 done in 0s
+
+===== step 5: affirmative + exceptive forms =====
+2070 form samples from 1150 units
+  ('attribute', 'affirmative') 230
+  ('attribute', 'exceptive') 230
+  ('count', 'affirmative') 230
+  ('count', 'exceptive') 230
+  ('existence', 'exceptive') 230
+  ('existence_closed', 'affirmative') 230
+  ('existence_closed', 'exceptive') 230
+  ('relation', 'affirmative') 230
+  ('relation', 'exceptive') 230
+  [attribute] Describe the sphere by its color, size, and material.  ->  Mention everything except its material.
+  [attribute] Describe the sphere by its color, size, and material.  ->  Mention only its color and its size.
+  [count] How many cubes, spheres, and cylinders are there?  ->  Mention everything except the number of cubes.
+  [count] How many cubes, spheres, and cylinders are there?  ->  Mention only the number of spheres and the number of cylinders.
+  [existence] What kitchen items are present in the image?  ->  Mention everything except the knife.
+  [existence] What accessories are present in the image?  ->  Mention everything except the handbag.
+  [existence_closed] Which of the following pieces of furniture are present in the image: bed, potted plant, couch, and chair?  ->  Mention everything except the chair.
+  [existence_closed] Which of the following pieces of furniture are present in the image: bed, potted plant, couch, and chair?  ->  Mention only the bed, the potted plant, and the couch.
+  [relation] For the teddy bear, say what it is leaning against and what it is leaning on.  ->  Mention everything except what it is leaning against.
+  [relation] For the teddy bear, say what it is leaning against and what it is leaning on.  ->  Mention only what it is leaning on.
+----- step 5 done in 0s
+
+===== step 6: export compact =====
+1840 compact samples -> /home/vyvn/new/cross_multimodal_negation/create_data/dataset/out/samples_compact.jsonl
+----- step 6 done in 0s
+
+===== step 7: visual channel =====
+500/3910 rendered
+1000/3910 rendered
+1500/3910 rendered
+2000/3910 rendered
+2500/3910 rendered
+3000/3910 rendered
+3500/3910 rendered
+3910 samples rendered; {'occludes_subject': 210, 'font_shrunk': 445}; forms: {'negative': 1840, 'exceptive': 1150, 'affirmative': 920}
+files: /home/vyvn/new/cross_multimodal_negation/create_data/dataset/visual /home/vyvn/new/cross_multimodal_negation/create_data/dataset/out/samples_compact_all.jsonl
+----- step 7 done in 128s
+3910 samples, 1330 unique negations (0 reused, 1330 new), voices: ['female', 'male']
+Traceback (most recent call last):
+  File "/home/vyvn/new/cross_multimodal_negation/create_data/src/tts_negation.py", line 183, in <module>
+    main()
+  File "/home/vyvn/new/cross_multimodal_negation/create_data/src/tts_negation.py", line 107, in main
+    with open(part, "w") as f:
+FileNotFoundError: [Errno 2] No such file or directory: '/home/vyvn/new/cross_multimodal_negation/create_data/dataset/audio/negation_sentences/manifest.partial.jsonl'
+EXIT 1

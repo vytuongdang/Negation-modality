@@ -1,8 +1,13 @@
 # Pico notes (memory across restarts)
 
 ## Now
-- RUNNING (21:30): tmux `job-rest` = `run_v2_all.sh rest` on the 1,150-unit SUBSET (B2, B3, forms, export, visual,
-  TTS); log pico/logs/rest_subset.log, ends 'EXIT <code>'. Then: smoke test, H1 trial on 4 models.
+- Subset build steps 3-7 DONE (log pico/logs/rest_subset.log): B2 kept 1150/1150 (1486 s, human-verify 114);
+  B3 1840 negative samples (1035 units + 115 sweep units x7; 22 target collisions skipped); by source/branch COCO
+  ex 386, ex_closed 356, count 203; GQA rel 332; VAW attr 203; CLEVR count 195, attr 165. Forms 2070 (exc 1150,
+  aff 920). Visual 3910 rendered, occludes_subject 210 (5.4%), font shrunk 445.
+- TTS crashed (bug: SENT_DIR not created before manifest.partial.jsonl) -> fixed in tts_negation.py (mkdir), rerun
+  RUNNING (21:57) in tmux `job-tts`, log pico/logs/tts_subset.log ('EXIT <code>'): 1330 unique sentences, ~1-2 s
+  each -> ~40 min. Then check ASR report, smoke test, H1 trial on 4 models.
 - Experiment code (untested): experiments/common/omnilib.py (Omni batched; MiniCPM-o, Phi-4 single, env omni_neg
   with --generate_only, score in `negation` with --score_only), experiments/h1_v2/run_h1v2.py (H1 core C0/T/A/V,
   --pilot N per branch, one negative per unit), experiments/h1_v2/analyze.py (run with ~/anaconda3/bin/python),
