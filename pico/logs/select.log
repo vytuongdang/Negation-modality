@@ -59,3 +59,36 @@ CLEVR: 48/600 images after 48/5751 candidates; splits {'val': 48}; rejected {}
 CLEVR: 96/600 images after 96/5751 candidates; splits {'val': 96}; rejected {}
 CLEVR: 144/600 images after 144/5751 candidates; splits {'val': 144}; rejected {}
 CLEVR: 192/600 images after 192/5751 candidates; splits {'val': 192}; rejected {}
+CLEVR: 240/600 images after 240/5751 candidates; splits {'val': 240}; rejected {}
+CLEVR: 288/600 images after 288/5751 candidates; splits {'val': 288}; rejected {}
+CLEVR: 336/600 images after 336/5751 candidates; splits {'val': 336}; rejected {}
+CLEVR: 384/600 images after 384/5751 candidates; splits {'val': 384}; rejected {}
+CLEVR: 432/600 images after 432/5751 candidates; splits {'val': 432}; rejected {}
+CLEVR: 480/600 images after 480/5751 candidates; splits {'val': 480}; rejected {}
+CLEVR: 528/600 images after 528/5751 candidates; splits {'val': 528}; rejected {}
+CLEVR: 576/600 images after 576/5751 candidates; splits {'val': 576}; rejected {}
+CLEVR: 600/600 images after 624/5751 candidates; splits {'val': 600}; rejected {}
+VAW: 28/950 images after 48/5056 candidates; splits {'val': 28}; rejected {'blurry': 5, 'no_unit_left': 8, 'large_text_in_image': 5, 'black_and_white': 2}
+VAW: 54/950 images after 96/5056 candidates; splits {'val': 54}; rejected {'blurry': 12, 'no_unit_left': 17, 'large_text_in_image': 8, 'black_and_white': 3, 'clipped': 1, 'too_dark_or_bright': 1}
+VAW: 76/950 images after 144/5056 candidates; splits {'val': 76}; rejected {'blurry': 19, 'no_unit_left': 31, 'large_text_in_image': 10, 'black_and_white': 5, 'clipped': 2, 'too_dark_or_bright': 1}
+VAW: 105/950 images after 192/5056 candidates; splits {'val': 105}; rejected {'blurry': 27, 'no_unit_left': 36, 'large_text_in_image': 15, 'black_and_white': 6, 'clipped': 2, 'too_dark_or_bright': 1}
+VAW: 135/950 images after 240/5056 candidates; splits {'val': 135}; rejected {'blurry': 33, 'no_unit_left': 44, 'large_text_in_image': 19, 'black_and_white': 6, 'clipped': 2, 'too_dark_or_bright': 1}
+VAW: 163/950 images after 288/5056 candidates; splits {'val': 135, 'test': 28}; rejected {'blurry': 39, 'no_unit_left': 51, 'large_text_in_image': 20, 'black_and_white': 11, 'clipped': 3, 'too_dark_or_bright': 1}
+VAW: 187/950 images after 337/5056 candidates; splits {'val': 135, 'test': 52}; rejected {'blurry': 47, 'no_unit_left': 60, 'large_text_in_image': 25, 'black_and_white': 13, 'clipped': 3, 'too_dark_or_bright': 1, 'duplicate_across_sources': 1}
+VAW: 217/950 images after 385/5056 candidates; splits {'val': 135, 'test': 82}; rejected {'blurry': 56, 'no_unit_left': 65, 'large_text_in_image': 26, 'black_and_white': 15, 'clipped': 4, 'too_dark_or_bright': 1, 'duplicate_across_sources': 1}
+VAW: 248/950 images after 434/5056 candidates; splits {'val': 135, 'test': 113}; rejected {'blurry': 60, 'no_unit_left': 71, 'large_text_in_image': 30, 'black_and_white': 16, 'clipped': 6, 'too_dark_or_bright': 1, 'duplicate_across_sources': 2}
+VAW: 280/950 images after 483/5056 candidates; splits {'val': 135, 'test': 145}; rejected {'blurry': 65, 'no_unit_left': 78, 'large_text_in_image': 34, 'black_and_white': 16, 'clipped': 6, 'too_dark_or_bright': 1, 'duplicate_across_sources': 3}
+VAW: 308/950 images after 531/5056 candidates; splits {'val': 135, 'test': 173}; rejected {'blurry': 71, 'no_unit_left': 88, 'large_text_in_image': 37, 'black_and_white': 17, 'clipped': 6, 'too_dark_or_bright': 1, 'duplicate_across_sources': 3}
+VAW: 333/950 images after 580/5056 candidates; splits {'val': 135, 'test': 198}; rejected {'blurry': 81, 'no_unit_left': 97, 'large_text_in_image': 40, 'black_and_white': 18, 'clipped': 6, 'too_dark_or_bright': 1, 'duplicate_across_sources': 4}
+VAW: 361/950 images after 628/5056 candidates; splits {'val': 135, 'test': 226}; rejected {'blurry': 89, 'no_unit_left': 105, 'large_text_in_image': 43, 'black_and_white': 19, 'clipped': 6, 'too_dark_or_bright': 1, 'duplicate_across_sources': 4}
+VAW: 389/950 images after 676/5056 candidates; splits {'val': 135, 'test': 254}; rejected {'blurry': 94, 'no_unit_left': 116, 'large_text_in_image': 44, 'black_and_white': 20, 'clipped': 7, 'too_dark_or_bright': 2, 'duplicate_across_sources': 4}
+VAW: 421/950 images after 724/5056 candidates; splits {'val': 135, 'test': 286}; rejected {'blurry': 101, 'no_unit_left': 121, 'large_text_in_image': 45, 'black_and_white': 22, 'clipped': 7, 'too_dark_or_bright': 3, 'duplicate_across_sources': 4}
+VAW: 449/950 images after 772/5056 candidates; splits {'val': 135, 'test': 314}; rejected {'blurry': 109, 'no_unit_left': 126, 'large_text_in_image': 46, 'black_and_white': 28, 'clipped': 7, 'too_dark_or_bright': 3, 'duplicate_across_sources': 4}
+VAW: 484/950 images after 820/5056 candidates; splits {'val': 135, 'test': 349}; rejected {'blurry': 113, 'no_unit_left': 131, 'large_text_in_image': 47, 'black_and_white': 30, 'clipped': 8, 'too_dark_or_bright': 3, 'duplicate_across_sources': 4}
+VAW: 512/950 images after 869/5056 candidates; splits {'val': 135, 'test': 377}; rejected {'blurry': 117, 'no_unit_left': 142, 'large_text_in_image': 49, 'black_and_white': 31, 'clipped': 9, 'too_dark_or_bright': 4, 'duplicate_across_sources': 5}
+VAW: 537/950 images after 917/5056 candidates; splits {'val': 135, 'test': 402}; rejected {'blurry': 124, 'no_unit_left': 151, 'large_text_in_image': 52, 'black_and_white': 35, 'clipped': 9, 'too_dark_or_bright': 4, 'duplicate_across_sources': 5}
+VAW: 564/950 images after 965/5056 candidates; splits {'val': 135, 'test': 426, 'train': 3}; rejected {'blurry': 131, 'no_unit_left': 161, 'large_text_in_image': 52, 'black_and_white': 38, 'clipped': 10, 'too_dark_or_bright': 4, 'duplicate_across_sources': 5}
+VAW: 590/950 images after 1014/5056 candidates; splits {'val': 135, 'test': 426, 'train': 29}; rejected {'blurry': 140, 'no_unit_left': 170, 'large_text_in_image': 55, 'black_and_white': 38, 'clipped': 10, 'too_dark_or_bright': 5, 'duplicate_across_sources': 6}
+VAW: 617/950 images after 1062/5056 candidates; splits {'val': 135, 'test': 426, 'train': 56}; rejected {'blurry': 145, 'no_unit_left': 177, 'large_text_in_image': 61, 'black_and_white': 40, 'clipped': 11, 'too_dark_or_bright': 5, 'duplicate_across_sources': 6}
+VAW: 650/950 images after 1110/5056 candidates; splits {'val': 135, 'test': 426, 'train': 89}; rejected {'blurry': 151, 'no_unit_left': 186, 'large_text_in_image': 61, 'black_and_white': 40, 'clipped': 11, 'too_dark_or_bright': 5, 'duplicate_across_sources': 6}
+VAW: 677/950 images after 1158/5056 candidates; splits {'val': 135, 'test': 426, 'train': 116}; rejected {'blurry': 159, 'no_unit_left': 194, 'large_text_in_image': 64, 'black_and_white': 41, 'clipped': 11, 'too_dark_or_bright': 5, 'duplicate_across_sources': 6, 'near_duplicate': 1}

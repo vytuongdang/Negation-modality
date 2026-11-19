@@ -28,7 +28,10 @@
 ## Done
 (nothing yet)
 
-## Vy's stage plan (Telegram 20:07) — FOLLOW THIS
+## Vy's stage plan (Telegram 20:07, order confirmed 20:48) — FOLLOW THIS
+- (1) FULL dataset v2 first (select, B2, B3, forms, export, visual, TTS), Telegram report after each step.
+  (2) Only then draw the 1,000-question subset and run models (smoke test first). (3) Stop, report with CIs.
+  NO model run before the full dataset is finished.
 - After dataset v2: smoke test (run_h1v2.py --pilot 2 = 10 questions), then H1 core on a 1,000-question subset
   (--pilot 200 = 200/branch) for 4 models: Qwen2.5-Omni-7B, -3B, MiniCPM-o 2.6, Phi-4-MM. STOP after the subset,
   report neutral results with CIs on Telegram. NO full-dataset run until Vy decides models/branches.
