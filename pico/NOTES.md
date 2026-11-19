@@ -7,6 +7,8 @@
 - WRITTEN (untested, needs dataset): experiments/common/omnilib.py (data loader, batched Omni adapter, answer cache
   keyed by input hash, judge scoring) and experiments/h1_v2/run_h1v2.py (conditions C0, C0_box, T_join, T_sep, A, V;
   forms T_sep/A/V; --pilot N per branch / --all).
+- WRITTEN (untested): experiments/common/tts_sentences.py: TTS of a sentence list into its OWN folder (for H2),
+  never deletes anything (tts_negation.py deletes per-sample wavs not in --src: do not use it for H2).
 
 ## State at hand-over (2026-11-19, set up by Claude with Vy)
 - Dataset v2 code is new and only smoke-tested on ~10 images per source (B1 + image selection + visual render
