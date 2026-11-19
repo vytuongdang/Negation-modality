@@ -1,7 +1,8 @@
 # Pico notes (memory across restarts)
 
 ## Now
-- Nothing running yet. Next: Milestone 1 step 1 (`cd create_data && bash run_v2_all.sh select`).
+- RUNNING (started 2026-11-19 19:35): tmux `job-select` = `run_v2_all.sh select` (steps 0-2), log pico/logs/select.log
+  (ends with 'EXIT <code>'). Expected ~2 h. Next: review images (M1 step 2).
 
 ## State at hand-over (2026-11-19, set up by Claude with Vy)
 - Dataset v2 code is new and only smoke-tested on ~10 images per source (B1 + image selection + visual render

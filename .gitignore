@@ -23,3 +23,4 @@ pico/note.txt
 pico/sleep_seconds
 pico/emails.log
 pico/session_id
+pico/telegram_sent.log

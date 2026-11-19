@@ -1,0 +1,27 @@
+
+===== step 0: download annotations =====
+COCO annotations
+VG image_data
+VAW
+GQA scene graphs
+GQA balanced questions
+CLEVR scenes/questions
+done
+----- step 0 done in 7s
+
+===== step 1: B1 candidates =====
+loading GQA scene graphs (train + val)
+COCO/val2017: 89 candidate images, {'existence': 91, 'existence_closed': 91, 'count': 71}; filtered: {'no_unit': 2381, 'license_noderivs': 1638, 'component_small_or_cut': 613, 'too_many_objects': 518, 'small_image': 63, 'kept': 89, 'crowd': 263}
+COCO/train2017: 2035 candidate images, {'existence': 2060, 'existence_closed': 2059, 'count': 1573}; filtered: {'too_many_objects': 12872, 'license_noderivs': 37837, 'crowd': 6111, 'no_unit': 57249, 'small_image': 1162, 'component_small_or_cut': 15500, 'kept': 2035}
+CLEVR/val: 5751 candidate images, {'attribute': 8087, 'count': 5751}; filtered: {'kept': 5751, 'too_many_objects': 7482, 'no_unit': 1767}
+VAW/val: 239 candidate images, {'attribute': 239}; filtered: {'no_scene_graph': 2169, 'lt2_slots': 1145, 'object_small_or_cut': 2016, 'too_many_objects': 3413, 'small_image': 608, 'name_not_unique': 2669, 'kept': 239}
+VAW/test: 719 candidate images, {'attribute': 719}; filtered: {'too_many_objects': 9007, 'lt2_slots': 2860, 'name_not_unique': 6769, 'small_image': 1410, 'object_small_or_cut': 5113, 'no_scene_graph': 5873, 'kept': 719}
+VAW/train: 4098 candidate images, {'attribute': 4098}; filtered: {'small_image': 10097, 'no_scene_graph': 38915, 'lt2_slots': 19736, 'object_small_or_cut': 35292, 'too_many_objects': 58525, 'name_not_unique': 49696, 'kept': 4098}
+GQA/val: 141 candidate images, {'relation': 141}; filtered: {'lt2_relations': 3842, 'name_not_unique': 1488, 'subject_small_or_cut': 8760, 'too_many_objects': 16118, 'small_image': 1853, 'kept': 141}
+GQA/train: 977 candidate images, {'relation': 977}; filtered: {'name_not_unique': 10838, 'subject_small_or_cut': 61869, 'too_many_objects': 115622, 'small_image': 12387, 'lt2_relations': 26737, 'kept': 977}
+14049 candidate images -> /home/vyvn/new/cross_multimodal_negation/create_data/dataset/b1/candidates.jsonl
+----- step 1 done in 64s
+
+===== step 2: image selection =====
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/750 [00:00<?, ?it/s]Loading weights:   0%|          | 1/750 [00:00<01:34,  7.91it/s]Loading weights:  11%|█         | 83/750 [00:00<00:01, 421.05it/s]Loading weights:  18%|█▊        | 138/750 [00:00<00:01, 458.39it/s]Loading weights:  26%|██▌       | 193/750 [00:00<00:01, 480.30it/s]Loading weights:  33%|███▎      | 248/750 [00:00<00:01, 492.63it/s]Loading weights:  40%|████      | 303/750 [00:00<00:00, 504.31it/s]Loading weights:  47%|████▋     | 356/750 [00:00<00:00, 511.49it/s]Loading weights:  76%|███████▋  | 573/750 [00:00<00:00, 1021.47it/s]Loading weights: 100%|██████████| 750/750 [00:00<00:00, 831.87it/s] 

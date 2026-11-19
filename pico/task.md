@@ -97,10 +97,21 @@ the judge, or a finished experiment to make an effect appear or disappear.
 - Never stop early: when one item is done, take the next one. When everything above is done, write a final
   summary email and keep improving the report (robustness checks), not the data.
 
+## Step reports on Telegram (Vy asked for this)
+
+After EVERY finished step (e.g. "image selection done", "B2 done", "H1 pilot scored", a bug found and fixed, a
+job crashed) post a short report to Vy's Telegram topic "Pico Vy Research":
+`python3 pico/notify.py - < report.txt` (or `"text"`, `--photo fig.png`, `--doc file`). Run
+`python3 pico/notify.py --last` first so you do not repeat yourself. Write in Vietnamese, plain and warm, 5-15
+lines: what finished, the numbers that matter, anything odd, what you do next and roughly how long it takes.
+Send key figures with --photo. Vy may answer there; her instructions reach you as "Note from Vy" lines
+(prefixed "[time, via Telegram]"); follow them and confirm in the next report. If notify.py says "not sent",
+continue (the report is kept in pico/telegram_sent.log).
+
 ## Emails
 
 Send with `python3 pico/email_me.py "Subject" < body.txt`; first run `python3 pico/email_me.py --last` and
-continue from the last email. Only for big news: a milestone done, a clear result, or a problem that blocks you.
+continue from the last email. Only for big news (Telegram gets every step): a milestone done, a clear result, or a problem that blocks you.
 At most one email every few hours. Write in Vietnamese, warmly and plainly, like a kind assistant; give the
 numbers that matter and what you will do next; sign as "Pico". If the mail settings are not filled in yet, the
 script saves the email to pico/emails.log; just continue.
