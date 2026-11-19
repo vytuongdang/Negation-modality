@@ -28,7 +28,9 @@
 
 ## Paper
 - ACL 2027 ARR deadline: 2027-01-04 (web search 2026-11-19; verify on 2027.aclweb.org). ~6.5 weeks.
-- paper/claims.md, paper/outline.md, paper/related_work.md created 2026-11-19. Read pico/RESEARCH.md each session.
+- paper/claims.md, paper/outline.md, paper/related_work.md, paper/ideas.md (I1 neutral audio, I2 comprehension
+  probe, I3 target log-prob, I4 position) created 2026-11-19. Read pico/RESEARCH.md each session (§7 WHY, §10 ideas:
+  pilot ≤300 samples, report to Vy, scale only after Vy agrees). Paper follows Idea-doc structure (H1,H2,H3-A..D,H4).
 
 ## Vy's changes (19:42)
 - Reference-model baseline step REMOVED from the pipeline. Steps now: 0 ann, 1 B1, 2 select, 3 B2, 4 B3 (reads
