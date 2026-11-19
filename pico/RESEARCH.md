@@ -77,3 +77,7 @@ branch because it "looks bad" (report it); spend GPU on full runs before the pil
 ## 8. Lessons (Pico adds one line each time something is learned; date | lesson)
 - 2026-11-19 | Gluing the instruction into the question string vs a separate audio segment confounds channel with
   segmentation; always pair audio with T_sep.
+- 2026-11-19 | Baseline filter removed (Vy): targets now include components the tested model never states, so every
+  violation number MUST be conditioned on that model's own C0; expect C0 rates well below 100% and report them.
+- 2026-11-19 | Prior work (MCR-Bench, ALME) finds TEXT dominates audio in content conflicts; our pilot found audio
+  negation obeyed better. H2 vs H3-A is where this contrast is decided — high value for the paper.

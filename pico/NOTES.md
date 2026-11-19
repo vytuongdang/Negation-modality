@@ -26,6 +26,10 @@
 ## Done
 (nothing yet)
 
+## Paper
+- ACL 2027 ARR deadline: 2027-01-04 (web search 2026-11-19; verify on 2027.aclweb.org). ~6.5 weeks.
+- paper/claims.md, paper/outline.md, paper/related_work.md created 2026-11-19. Read pico/RESEARCH.md each session.
+
 ## Vy's changes (19:42)
 - Reference-model baseline step REMOVED from the pipeline. Steps now: 0 ann, 1 B1, 2 select, 3 B2, 4 B3 (reads
   b2/units.jsonl, target drawn among ALL components), 5 forms, 6 export, 7 visual (+TTS). Experiments condition on
