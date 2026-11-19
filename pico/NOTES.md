@@ -4,9 +4,11 @@
 - RUNNING (started 2026-11-19 19:35): tmux `job-select` = `run_v2_all.sh select` (steps 0-2), log pico/logs/select.log
   (ends with 'EXIT <code>'). Expected ~2 h. Next: review images (M1 step 2).
 - DONE 19:47: Qwen2.5-Omni-7B and 3B downloaded to HF cache.
-- WRITTEN (untested, needs dataset): experiments/common/omnilib.py (data loader, batched Omni adapter, answer cache
-  keyed by input hash, judge scoring) and experiments/h1_v2/run_h1v2.py (conditions C0, C0_box, T_join, T_sep, A, V;
-  forms T_sep/A/V; --pilot N per branch / --all).
+- WRITTEN (untested, needs dataset): experiments/common/omnilib.py (loader, batched Omni adapter, answer cache keyed
+  by input hash incl. max_new_tokens=100, s/answer + ETA in log) and experiments/h1_v2/run_h1v2.py = H1 CORE
+  (Vy 20:20): C0, T ("Q\n\nI"), A, V; one negative sample per unit (seeded draw for sweep units); --pilot 40 per
+  branch (=200 questions, 800 answers); --conds T_join C0_box and --forms only LATER, after H1 core is reported.
+  M2 order: pilot 200 on 7B (check by eye, measure s/answer, tell Vy ETA) -> full 7B -> report -> 3B.
 - WRITTEN + tested on fake data: experiments/h1_v2/analyze.py (tables, McNemar, image bootstrap, H4 Delta, plots).
   Run it with ~/anaconda3/bin/python (base env has matplotlib; `negation` env has none; no installs needed).
 - WRITTEN (untested): experiments/common/tts_sentences.py: TTS of a sentence list into its OWN folder (for H2),

@@ -9,7 +9,7 @@ Definitions (per model):
                     template tables use every sample.
   C0-mentioned      primary samples whose C0 answer states the target (there is something to suppress).
   violation rate    P(target stated | condition), among C0-mentioned.
-  F_form,m          1 - violation rate of that form in channel m (T_sep = text, A = audio, V = visual).
+  F_form,m          1 - violation rate of that form in channel m (T = text, A = audio, V = visual).
   Delta_m (H4)      F_aff,m - F_neg,m on units that have an affirmative form (all but open existence).
   McNemar           exact two-sided, on paired outcomes (target stated yes/no) of the same samples.
   Bootstrap CI      95% percentile interval, 2000 resamples of IMAGES (all samples of an image move together).
@@ -27,9 +27,10 @@ HERE = Path(__file__).resolve().parent
 RESULTS = HERE / "results"
 FIGS = HERE.parent / "figures"
 BRANCHES = ["existence", "existence_closed", "count", "attribute", "relation"]
-NEG_CONDS = ["T_join", "T_sep", "A", "V"]
-CHANNELS = {"T_sep": "text", "A": "audio", "V": "visual"}
-PAIRS = [("T_join", "T_sep"), ("T_sep", "A"), ("T_sep", "V"), ("A", "V")]
+ALL_CONDS = ["T", "A", "V", "T_join"]   # those present in the scored file are used
+NEG_CONDS = ALL_CONDS
+CHANNELS = {"T": "text", "A": "audio", "V": "visual"}
+PAIRS = [("T", "A"), ("T", "V"), ("A", "V"), ("T_join", "T")]
 N_BOOT = 2000
 
 
@@ -119,34 +120,41 @@ def diff_stat(md, a, b, form_a="negative", form_b="negative"):
 
 
 def section_model(name, md, out, rng, figs):
+    global NEG_CONDS
+    present = {r["condition"] for r in md.rows}
+    NEG_CONDS = [c for c in ALL_CONDS if c in present]
+    box = ["C0_box"] if "C0_box" in present else []
     w = out.append
     w(f"\n## {name}\n")
     n_units = len(md.primary)
     w(f"Primary negative samples (one per unit): {n_units}; C0 states the target in {len(md.c0m)} "
       f"({100 * len(md.c0m) / max(1, n_units):.1f}%).\n")
     # C0 vs C0_box: does the empty box change what is said?
+    if not box:
+        w(f"Target stated without instruction (C0): {pct(md.rate(md.primary, 'C0')[0])}%.\n")
     a = sum(1 for s in md.primary if md.outcome(s, "C0") and md.outcome(s, "C0_box") is False)
     b = sum(1 for s in md.primary if md.outcome(s, "C0") is False and md.outcome(s, "C0_box"))
     r0, _ = md.rate(md.primary, "C0")
     rb, nb = md.rate(md.primary, "C0_box")
-    w(f"Target stated without instruction: C0 {pct(r0)}%, C0_box {pct(rb)}% (n={nb}; discordant {a} vs {b}, "
+    if box:
+        w(f"Target stated without instruction: C0 {pct(r0)}%, C0_box {pct(rb)}% (n={nb}; discordant {a} vs {b}, "
       f"McNemar p={mcnemar(a, b):.3g}).\n")
 
     w("\n### Violation rate (%) among C0-mentioned, negative form\n")
-    w("| branch | n | " + " | ".join(NEG_CONDS) + " | C0_box |")
-    w("|---|---|" + "---|" * (len(NEG_CONDS) + 1))
+    w("| branch | n | " + " | ".join(NEG_CONDS + box) + " |")
+    w("|---|---|" + "---|" * (len(NEG_CONDS) + len(box)))
     for br in BRANCHES + ["ALL"]:
         sids = [s for s in md.c0m if br == "ALL" or md.neg[s]["branch"] == br]
         if not sids:
             continue
-        cells = [pct(md.rate(sids, c)[0]) for c in NEG_CONDS + ["C0_box"]]
+        cells = [pct(md.rate(sids, c)[0]) for c in NEG_CONDS + box]
         w(f"| {br} | {len(sids)} | " + " | ".join(cells) + " |")
 
     w("\n### Paired comparisons (C0-mentioned, negative form)\n")
     w("| pair | violation A | violation B | A-B (pp) | 95% CI (image bootstrap) | only A violates | only B "
       "violates | McNemar p |")
     w("|---|---|---|---|---|---|---|---|")
-    for x, y in PAIRS:
+    for x, y in [p for p in PAIRS if p[0] in NEG_CONDS and p[1] in NEG_CONDS]:
         sids = [s for s in md.c0m if md.outcome(s, x) is not None and md.outcome(s, y) is not None]
         if not sids:
             continue
@@ -182,7 +190,7 @@ def section_model(name, md, out, rng, figs):
     by_field("template (every sample, sweep copies included)", "template_id", allc0)
     by_field("voice", "voice", md.c0m, ["A"])
     by_field("asr_ok", "asr_ok", md.c0m, ["A"])
-    by_field("occludes_subject", "occludes_subject", md.c0m, ["V", "C0_box"])
+    by_field("occludes_subject", "occludes_subject", md.c0m, ["V"] + box)
 
     # H4
     w("\n### H4: forms (C0-mentioned units that have the form)\n")
@@ -217,8 +225,8 @@ def section_model(name, md, out, rng, figs):
             lo, hi = bootstrap(sids, md.image, delta(c), rng)
             cells.append(f"{100 * v:+.1f} [{100 * lo:+.1f}, {100 * hi:+.1f}]" if v is not None else "-")
         for c in ("A", "V"):
-            v = dd(c, "T_sep")(sids)
-            lo, hi = bootstrap(sids, md.image, dd(c, "T_sep"), rng)
+            v = dd(c, "T")(sids)
+            lo, hi = bootstrap(sids, md.image, dd(c, "T"), rng)
             cells.append(f"{100 * v:+.1f} [{100 * lo:+.1f}, {100 * hi:+.1f}]" if v is not None else "-")
         w(f"| Delta ({form[:3]} - neg), n={len(sids)} | " + " | ".join(cells) + " |")
     figs[name] = md

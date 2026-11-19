@@ -1,22 +1,25 @@
-"""H1 on dataset v2: does the channel carrying a negative instruction (text / audio / written in the image) change
-how well an omni-model follows it? (experiments/h1/run_h1.py is the v1 pilot runner, kept unchanged.)
+"""H1 on dataset v2: the same negative instruction through text, audio, or written in the image.
+(experiments/h1/run_h1.py is the v1 pilot runner on the old dataset, kept unchanged.)
 
-Conditions per NEGATIVE sample (input order always image -> question -> instruction):
-    C0      original image + question                          (does the model state the target unprompted?)
-    C0_box  box image (same empty box as V) + question         (control for the pixels the text box hides)
-    T_join  question and instruction in one string: "Q I"      (as in the v1 pilot)
-    T_sep   question, blank line, instruction: "Q\\n\\nI"     (Qwen's chat template joins text blocks with
-                                                               nothing in between, so the break is explicit)
-    A       question + spoken instruction (audio segment after the question)
-    V       image with the written instruction + question
-EXCEPTIVE and AFFIRMATIVE samples (H4): T_sep, A, V (their C0 is the C0 of the paired negative sample, same input).
+H1 core (Vy, 2026-11-19), input order always image -> question -> instruction, one negative sample per question
+(for template-sweep units one of the 7 copies is drawn, seeded), max_new_tokens 100:
+    C0   original image + question                         (does the model state the target unprompted?)
+    T    question, blank line, instruction: "Q\\n\\nI"     (instruction as its own text block; Qwen's chat
+                                                           template joins text blocks with nothing in between,
+                                                           so the break is explicit)
+    A    question + spoken instruction (audio segment after the question)
+    V    image with the written instruction + question
+Later conditions, only with --conds (after H1 core is reported):
+    T_join   question and instruction in one string "Q I"
+    C0_box   box image (same empty box as V) + question
+H4 forms (exceptive / affirmative) with --forms: T, A, V on the form samples of the selected units.
 
-    python run_h1v2.py --model qwen2.5-omni-7b --pilot 40      # 40 units per branch, + their forms
-    python run_h1v2.py --model qwen2.5-omni-7b --all           # whole dataset
+    python run_h1v2.py --model qwen2.5-omni-7b --pilot 40      # 40 questions per branch (200)
+    python run_h1v2.py --model qwen2.5-omni-7b --all           # every question
     python run_h1v2.py ... --score_only                        # judge cached answers only
 
-Outputs in results/<model>/: answers.jsonl (cache, every run), scored_<tag>.jsonl (one row per sample x
-condition), review_<tag>.csv. Judge cache: results/judge.jsonl (shared by models).
+Outputs in results/<model>/: answers.jsonl (cache keyed by input hash, shared by every run), scored_<tag>.jsonl
+(one row per sample x condition), review_<tag>.csv. Judge cache: results/judge.jsonl (shared by models).
 """
 import argparse
 import csv
@@ -31,8 +34,9 @@ sys.path.insert(0, str(HERE.parent / "common"))
 from omnilib import (BRANCHES, MODELS, AnswerCache, clean, input_key, judge_rows, load_dataset,  # noqa: E402
                      split_group)
 
-NEG_CONDS = ["C0", "C0_box", "T_join", "T_sep", "A", "V"]
-FORM_CONDS = ["T_sep", "A", "V"]
+CORE = ["C0", "T", "A", "V"]
+EXTRA = ["T_join", "C0_box"]
+FORM_CONDS = ["T", "A", "V"]
 RESULTS = HERE / "results"
 
 
@@ -45,7 +49,7 @@ def inputs(s, cond):
         return s["box_image"], [("text", q)]
     if cond == "T_join":
         return s["image"], [("text", f"{q} {i}")]
-    if cond == "T_sep":
+    if cond == "T":
         return s["image"], [("text", f"{q}\n\n{i}")]
     if cond == "A":
         return s["image"], [("text", q), ("audio", s["negation_audio"])]
@@ -54,26 +58,31 @@ def inputs(s, cond):
     raise ValueError(cond)
 
 
-def conditions(s):
-    return NEG_CONDS if s["form"] == "negative" else FORM_CONDS
+def one_per_unit(data, seed):
+    """One negative sample per unit: the only one, or a seeded draw among the template-sweep copies."""
+    by_unit = defaultdict(list)
+    for s in data.values():
+        if s["form"] == "negative":
+            by_unit[s["unit_id"]].append(s)
+    out = []
+    for u in sorted(by_unit):
+        group = sorted(by_unit[u], key=lambda s: s["id"])
+        out.append(group[0] if len(group) == 1 else random.Random(f"{seed}-{u}").choice(group))
+    return out
 
 
 def select(data, pilot, seed):
-    """pilot=None: everything. Otherwise `pilot` units per branch (sources round-robin, distinct images, no
-    template-sweep units, audio that passed the ASR check), each with its negative sample and its forms."""
+    """pilot=None: every unit. Otherwise `pilot` units per branch, sources round-robin, distinct images, audio that
+    passed the ASR check."""
+    negs = one_per_unit(data, seed)
     if pilot is None:
-        return list(data.values())
+        return negs
     rng = random.Random(seed)
-    negs = [s for s in data.values() if s["form"] == "negative" and not s["template_sweep"] and s["asr_ok"]]
-    forms = defaultdict(list)
-    for s in data.values():
-        if s["form"] != "negative":
-            forms[s["pair_of"]].append(s)
     chosen = []
     for b in BRANCHES:
         by_src = defaultdict(list)
         for s in negs:
-            if s["branch"] == b:
+            if s["branch"] == b and s["asr_ok"]:
                 by_src[s["source"]].append(s)
         pools = [rng.sample(v, len(v)) for _, v in sorted(by_src.items())]
         picked, images, k = [], set(), 0
@@ -86,8 +95,7 @@ def select(data, pilot, seed):
                     images.add(s["image"])
                     picked.append(s)
                     break
-        for s in picked:
-            chosen += [s] + forms.get(s["id"], [])
+        chosen += picked
     return chosen
 
 
@@ -103,46 +111,54 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--model", default="qwen2.5-omni-7b", choices=list(MODELS))
     g = ap.add_mutually_exclusive_group(required=True)
-    g.add_argument("--pilot", type=int, help="units per branch")
+    g.add_argument("--pilot", type=int, help="questions per branch")
     g.add_argument("--all", action="store_true")
+    ap.add_argument("--conds", nargs="*", default=CORE, choices=CORE + EXTRA)
+    ap.add_argument("--forms", action="store_true", help="also the exceptive / affirmative forms (H4): T, A, V")
     ap.add_argument("--seed", type=int, default=42)
     ap.add_argument("--batch_size", type=int, default=4)
     ap.add_argument("--score_only", action="store_true")
     ap.add_argument("--generate_only", action="store_true")
     args = ap.parse_args()
 
-    tag = "all" if args.all else f"pilot{args.pilot}"
+    tag = ("all" if args.all else f"pilot{args.pilot}") + ("_forms" if args.forms else "")
     out = RESULTS / args.model
     out.mkdir(parents=True, exist_ok=True)
     data = load_dataset()
     samples = select(data, None if args.all else args.pilot, args.seed)
-    print(f"{len(samples)} samples ({sum(s['form'] == 'negative' for s in samples)} negative)")
+    plan = [(s, c) for s in samples for c in args.conds]
+    if args.forms:
+        forms = defaultdict(list)
+        for s in data.values():
+            if s["form"] != "negative":
+                forms[s["pair_of"]].append(s)
+        plan += [(f, c) for s in samples for f in forms.get(s["id"], []) for c in FORM_CONDS]
+    print(f"{len(samples)} questions, {len(plan)} answers planned; by branch: "
+          + ", ".join(f"{b}={sum(s['branch'] == b for s in samples)}" for b in BRANCHES), flush=True)
     cache = AnswerCache(out / "answers.jsonl")
-    jobs = [(*inputs(s, c), c) for s in samples for c in conditions(s)]
     if not args.score_only:
-        cache.generate(args.model, jobs, batch_size=args.batch_size)
+        cache.generate(args.model, [(*inputs(s, c), c) for s, c in plan], batch_size=args.batch_size)
     if args.generate_only:
         return
 
     rows = []
-    for s in samples:
-        for c in conditions(s):
-            img, items = inputs(s, c)
-            raw = cache.get(input_key(args.model, img, items))
-            if raw is None:
-                continue
-            rows.append({"sample_id": s["id"], "pair_of": s["pair_of"], "unit_id": s["unit_id"], "image": s["image"], "form": s["form"],
-                         "condition": c, "branch": s["branch"], "source": s["source"], "split": s["split"],
-                         "split_group": split_group(s["split"]), "template_id": s["template_id"],
-                         "template_sweep": s["template_sweep"], "voice": s["voice"], "asr_ok": s["asr_ok"],
-                         "occludes_subject": s["occludes_subject"], "question": s["question"],
-                         "negation": s["negation"], "target": s["target"], "components": s["components"],
-                         "answer": clean(raw), "raw_answer": raw})
+    for s, c in plan:
+        img, items = inputs(s, c)
+        raw = cache.get(input_key(args.model, img, items))
+        if raw is None:
+            continue
+        rows.append({"sample_id": s["id"], "pair_of": s["pair_of"], "unit_id": s["unit_id"], "image": s["image"],
+                     "form": s["form"], "condition": c, "branch": s["branch"], "source": s["source"],
+                     "split": s["split"], "split_group": split_group(s["split"]), "template_id": s["template_id"],
+                     "template_sweep": s["template_sweep"], "voice": s["voice"], "asr_ok": s["asr_ok"],
+                     "occludes_subject": s["occludes_subject"], "question": s["question"],
+                     "negation": s["negation"], "target": s["target"], "components": s["components"],
+                     "answer": clean(raw), "raw_answer": raw, "_s": s})
     judge_rows(rows, RESULTS / "judge.jsonl")
-    by_id = {s["id"]: s for s in samples}
     for r in rows:
-        r.update(score(by_id[r["sample_id"]], r["mentioned"], r["condition"]))
-        r["regex_target_mentioned"] = any(r["mentioned_regex"][c] for c in by_id[r["sample_id"]]["expected"]["forbidden"])
+        s = r.pop("_s")
+        r.update(score(s, r["mentioned"], r["condition"]))
+        r["regex_target_mentioned"] = any(r["mentioned_regex"][c] for c in s["expected"]["forbidden"])
     with open(out / f"scored_{tag}.jsonl", "w") as f:
         for r in rows:
             f.write(json.dumps({k: v for k, v in r.items() if k != "components"}, ensure_ascii=False) + "\n")
@@ -152,26 +168,25 @@ def main():
                     "target_mentioned", "regex_target_mentioned", "judge_source", "required_recall"])
         for r in rows:
             comps = {c["id"]: c for c in r["components"]}
-            stated = ", ".join(comps[c]["text"] if comps[c]["type"] != "existence" else comps[c]["subject"]
-                               for c, v in r["mentioned"].items() if v)
+            name = lambda c: comps[c]["subject"] if comps[c]["type"] == "existence" else comps[c]["text"]
             w.writerow([r["sample_id"], r["form"], r["condition"], r["question"],
-                        "" if r["condition"].startswith("C0") else r["negation"], r["answer"], stated,
-                        comps[r["target"]]["text"], int(r["target_mentioned"]), int(r["regex_target_mentioned"]),
-                        r["judge_source"], round(r["required_recall"], 2)])
-    # quick table: violation rate among samples whose C0 answer states the target
+                        "" if r["condition"].startswith("C0") else r["negation"], r["answer"],
+                        ", ".join(name(c) for c, v in r["mentioned"].items() if v), name(r["target"]),
+                        int(r["target_mentioned"]), int(r["regex_target_mentioned"]), r["judge_source"],
+                        round(r["required_recall"], 2)])
+    # quick table: violation rate among questions whose C0 answer states the target
     c0 = {r["pair_of"] for r in rows if r["condition"] == "C0" and r["target_mentioned"]}
-    print(f"\nviolation % among C0-mentioned ({len(c0)} negative samples), by form x condition x branch")
-    for form in ("negative", "exceptive", "affirmative"):
-        conds = NEG_CONDS[1:] if form == "negative" else FORM_CONDS
-        print(f"\n{form:<16}" + "".join(f"{c:>9}" for c in conds))
-        for b in BRANCHES + ["ALL"]:
-            cells = []
-            for c in conds:
-                rs = [r for r in rows if r["form"] == form and r["condition"] == c and r["pair_of"] in c0
-                      and (b == "ALL" or r["branch"] == b)]
-                cells.append(f"{100 * sum(r['target_mentioned'] for r in rs) / len(rs):>6.0f}/{len(rs):<2}"
-                             if rs else f"{'-':>9}")
-            print(f"{b:<16}" + "".join(f"{x:>9}" for x in cells))
+    n0 = sum(1 for r in rows if r["condition"] == "C0")
+    print(f"\nC0 states the target in {len(c0)}/{n0} questions")
+    conds = [c for c in args.conds if c != "C0"]
+    print(f"violation % among C0-mentioned (n), negative form\n{'branch':<18}" + "".join(f"{c:>12}" for c in conds))
+    for b in BRANCHES + ["ALL"]:
+        cells = []
+        for c in conds:
+            rs = [r for r in rows if r["form"] == "negative" and r["condition"] == c and r["pair_of"] in c0
+                  and (b == "ALL" or r["branch"] == b)]
+            cells.append(f"{100 * sum(r['target_mentioned'] for r in rs) / len(rs):.0f} ({len(rs)})" if rs else "-")
+        print(f"{b:<18}" + "".join(f"{x:>12}" for x in cells))
     dis = sum(r["target_mentioned"] != r["regex_target_mentioned"] for r in rows)
     print(f"\nregex disagrees with judge on the target in {dis}/{len(rows)} rows")
     print(f"files: {out / f'scored_{tag}.jsonl'} {out / f'review_{tag}.csv'}")

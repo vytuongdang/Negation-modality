@@ -9,6 +9,7 @@ import hashlib
 import json
 import re
 import sys
+import time
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -26,7 +27,7 @@ MODELS = {
 QWEN_SYSTEM = ("You are Qwen, a virtual human developed by the Qwen Team, Alibaba Group, capable of perceiving "
                "auditory and visual inputs, as well as generating text and speech.")
 MAX_SIDE = 1024
-MAX_NEW_TOKENS = 256
+MAX_NEW_TOKENS = 100  # answers are short lists (Vy, 2026-11-19)
 IM_END = 151645  # <|im_end|>
 BRANCHES = ["existence", "existence_closed", "count", "attribute", "relation"]
 
@@ -163,6 +164,7 @@ class AnswerCache:
             return
         todo.sort(key=lambda j: (j[3], j[1]))
         model = load_model(model_key)
+        t0, n_done = time.time(), 0
         with open(self.path, "a") as f:
             for i in range(0, len(todo), batch_size):
                 chunk = todo[i:i + batch_size]
@@ -179,8 +181,13 @@ class AnswerCache:
                     self.d[k] = r
                     f.write(json.dumps(r, ensure_ascii=False) + "\n")
                 f.flush()
+                n_done += len(chunk)
                 if (i // batch_size) % max(1, log_every // batch_size) == 0:
-                    print(f"[{i + len(chunk)}/{len(todo)}] {chunk[0][3]}: {answers[0][:100]!r}", flush=True)
+                    sec = (time.time() - t0) / n_done
+                    print(f"[{i + len(chunk)}/{len(todo)}] {sec:.2f} s/answer, ETA {sec * (len(todo) - n_done) / 3600:.1f} h"
+                          f" | {chunk[0][3]}: {answers[0][:100]!r}", flush=True)
+        print(f"generated {n_done} answers in {time.time() - t0:.0f} s "
+              f"({(time.time() - t0) / max(1, n_done):.2f} s/answer)", flush=True)
         model.close()
 
 
