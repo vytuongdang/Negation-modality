@@ -36,14 +36,15 @@ written in the image — and if not, is the gap about negation or about the chan
   control for category or manipulate).
 - **H4 (negation specificity):** Δ_m with affirmative forms, exceptive as the priming control. Affirmatives exist only
   where the question already names every option/slot (existence_closed, count, attribute, relation).
-All hypotheses are **two-sided**: the pilot found audio negation obeyed *better* than text for 3 of 4 models.
+All hypotheses are **two-sided**: no direction is established yet. Nothing is concluded before dataset v2 results.
 
-## 4. What we know so far
-- Pilot (old dataset, 435 samples, text glued to the question): violation among C0-mentioned, text vs audio:
-  MiniCPM-o 50% vs 26%, Qwen-Omni-3B 64% vs 47%, Qwen-Omni-7B 13% vs 7% (all p < .01), Phi-4-MM 30% vs 35% (n.s.).
-  Required-component recall did not drop under audio (≈0.77), so it is not over-suppression.
-- Possible explanations to test, not assume: audio is a separate, salient segment (T_sep tests it); the audio
-  instruction comes last in the input (order); priming by the target word (exceptive tests it).
+## 4. What we know so far: nothing conclusive yet
+- No result on dataset v2 exists. Do not state or assume any direction (text better / audio better) anywhere — in
+  notes, reports, the paper draft, or Telegram — until v2 results with confidence intervals support it.
+- The old pilot (a different, smaller dataset of 435 samples, no longer used) is only a hint about *what to
+  control*, not a finding: there the text instruction was glued into the question while audio came as a separate
+  segment, so channel and segmentation were confounded (hence T_sep). Its numbers are in
+  experiments/h1/results_pilot_v1 if a sanity comparison is ever needed; do not cite them as results.
 
 ## 5. Known confounds and how we handle them
 - Affirmative leaks the answer in open existence → no affirmative there (closed-set existence instead).

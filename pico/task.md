@@ -21,9 +21,10 @@ channel effect, not a negation effect. Key quantities:
 - the exceptive form ("Mention everything except X") separates "the word not" from "naming the target".
 Design documents: create_data/Idea Vy + Huy.pdf (H1, H2, H3-A..D, H4) and
 create_data/Quy trình tạo dataset Component-Level Negation VQA Benchmark.pdf (dataset v2, the pipeline you run).
-Earlier pilot (old dataset, 4 models): audio negation was obeyed BETTER than text for 3 of 4 models
-(experiments/h1/results_pilot_v1). In that pilot the text instruction was glued into the question string while
-audio was a separate segment, a confound to control (condition T_sep below). Keep the hypotheses two-sided.
+No result on dataset v2 exists yet: do not assume or state any direction (text better or audio better) until
+v2 results with confidence intervals show it. An old pilot on a different dataset only showed a design confound
+(text glued into the question vs audio as its own segment), which condition T_sep controls. Keep every hypothesis
+two-sided.
 
 ## Milestone 1: dataset v2 (do this first)
 
