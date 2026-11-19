@@ -2,7 +2,7 @@
 # Dataset v2.
 #   bash run_v2_all.sh select   # steps 0-2: annotations, B1 candidates, image selection -> stop, open
 #                               #   dataset/b1/review/review.html and check it
-#   bash run_v2_all.sh rest     # steps 3-8 (B2, baseline, B3, forms, export, visual) + TTS for every form
+#   bash run_v2_all.sh rest     # steps 3-7 (B2, B3, forms, export, visual) + TTS for every form
 set -e
 cd "$(dirname "$0")/src"
 export PYTHONNOUSERSITE=1

@@ -1,8 +1,7 @@
 """B3 (step 5): pick one component as the negation target and build the text negation instruction.
 
-Input: dataset/b2/units_baseline.jsonl (after the baseline step). The target is drawn (seeded) only among the
-unit's eligible_targets: components every reference model states without negation, with enough of the rest
-stated too. Output: dataset/out/samples.jsonl (final negative samples, doc schema).
+Input: dataset/b2/units.jsonl. The target is drawn (seeded) uniformly among the unit's components (all of them
+VLM-checked in step 2), skipping alias collisions. Output: dataset/out/samples.jsonl (doc schema).
 
 Fixed templates only (7 frames, doc section 6); question first, negation right after, in one text turn.
 A seeded subset of units is expanded to all 7 templates to measure sensitivity to wording.
@@ -115,8 +114,7 @@ def build_sample(unit, target_id, tid, seed, sweep):
             "auto_check": "pass",
             "human_verify_selected": unit["b2"]["human_verify_selected"],
             "human_verified": False,
-            "baseline": unit.get("baseline", {}),
-            "baseline_eligible_targets": unit.get("eligible_targets"),
+            "baseline": {},
         },
         "extra": extra,
     }
@@ -129,7 +127,7 @@ def auto_check(s):
 
 
 def main():
-    units = read_jsonl(B2_DIR / "units_baseline.jsonl")
+    units = read_jsonl(B2_DIR / "units.jsonl")
     rng = random.Random(SEED)
     sweep_ids = set(rng.sample([u["unit_id"] for u in units], round(len(units) * FULL_TEMPLATE_SUBSET_RATE)))
 
@@ -140,7 +138,7 @@ def main():
             continue
         seed = zlib.crc32(f"{SEED}-{u['unit_id']}".encode())
         urng = random.Random(seed)
-        order = [c["id"] for c in u["components"] if c["id"] in u.get("eligible_targets", [c["id"]])]
+        order = [c["id"] for c in u["components"]]
         urng.shuffle(order)
         # first target in seeded order whose surface forms do not collide with a required component
         target_id = None

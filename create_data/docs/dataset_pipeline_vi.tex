@@ -142,17 +142,9 @@ câu hỏi còn dưới 2 component thì bỏ. Tên thay thế chung giữa hai 
 chia đều theo (nguồn, nhánh), ra \f{b2/human\_verify/} để người kiểm tra; nhánh có tỷ lệ lỗi > 5\% thì sửa
 prompt hoặc bộ lọc rồi chạy lại.
 
-\section{Baseline với model tham chiếu (bước 4)}
-\new{Chạy trước B3} (v1 chạy sau). Qwen2.5-VL-3B và Qwen3-VL-8B trả lời câu hỏi gốc, không có chỉ dẫn. LLM
-judge (Qwen3-8B, tập đóng) xác định câu trả lời nêu những component nào; regex là ý kiến thứ hai, chỗ hai bên
-lệch nhau thì judge chạy lại ở chế độ thinking.
-Một component là \textbf{đích hợp lệ} khi \emph{mọi} model tham chiếu đều nêu nó và mỗi model nêu ít nhất một
-nửa các component còn lại. Câu hỏi không có đích hợp lệ thì bỏ. Kết quả lưu ở \f{b2/units\_baseline.jsonl};
-báo cáo tên thay thế ở \f{out/alias\_report.csv}.
-
-\section{B3: chỉ dẫn phủ định (bước 5)}
+\section{B3: chỉ dẫn phủ định (bước 4)}
 \begin{enumerate}
-\item \textbf{Chọn đích} ngẫu nhiên (có seed) trong các đích hợp lệ; bỏ đích có tên thay thế trùng component
+\item \textbf{Chọn đích} ngẫu nhiên đều (có seed) trong các component của câu hỏi (đều đã được VLM kiểm tra); bỏ đích có tên thay thế trùng component
   khác (ví dụ dog và hot dog), và bỏ câu hỏi existence\_closed nếu tên object nhiễu trùng tên thay thế của
   object có thật.
 \item \textbf{Viết chỉ dẫn} bằng 1 trong 7 template cố định (có seed, lưu ID); 10\% câu hỏi được sinh đủ 7
@@ -175,7 +167,7 @@ N7 & loại trừ, không có từ phủ định & Leave \{X\} out of your answe
 \{X\}: existence ``the dog''; count ``the number of dogs''; attribute ``its color'' (cấm \emph{slot}, không nêu
 giá trị); relation ``what she is wearing''. Đầu ra: \f{out/samples.jsonl}.
 
-\section{Dạng ngoại trừ và khẳng định cho H4 (bước 6)}
+\section{Dạng ngoại trừ và khẳng định cho H4 (bước 5)}
 Mỗi câu hỏi có thêm một bản \textbf{ngoại trừ} và (khi không lộ đáp án) một bản \textbf{khẳng định}, cùng đích,
 cùng đáp án kỳ vọng, nối với bản phủ định qua \f{pair\_of}.
 \begin{longtable}{p{2.6cm}p{5.4cm}p{7.4cm}}
@@ -196,7 +188,7 @@ tin. Ngoại trừ tách ``chữ not'' khỏi ``việc gọi tên đích'' (lexi
 \section{Ba kênh truyền chỉ dẫn}
 \begin{itemize}
 \item \textbf{Text:} câu chỉ dẫn (\f{negation}) ghép ngay sau câu hỏi khi chạy thí nghiệm.
-\item \textbf{Visual (bước 8):} câu chỉ dẫn được \textbf{ghi ngay trong ảnh gốc}, chữ đen DejaVu Sans trên khung
+\item \textbf{Visual (bước 7):} câu chỉ dẫn được \textbf{ghi ngay trong ảnh gốc}, chữ đen DejaVu Sans trên khung
   trắng trong suốt nhẹ, cỡ chữ ≈ 4\% chiều rộng ảnh. Vị trí được tìm bằng cách quét toàn ảnh và chọn chỗ che ít
   \f{protect\_boxes} nhất; nếu đụng object của câu hỏi thì thử chữ nhỏ hơn hoặc xuống dòng. Mỗi sample có thêm
   một \textbf{ảnh đối chứng} cùng khung, cùng vị trí nhưng không có chữ, để so với điều kiện không chỉ dẫn chỉ khác
@@ -219,7 +211,7 @@ tin. Ngoại trừ tách ``chữ not'' khỏi ``việc gọi tên đích'' (lexi
   (phủ định, ngoại trừ hoặc khẳng định) với câu hỏi, chỉ dẫn, đường dẫn audio, ảnh visual, ảnh đối chứng, các
   component bắt buộc và bị cấm\\
 \f{out/samples.jsonl}, \f{out/samples\_forms.jsonl} & bản ghi đầy đủ theo schema (annotation ID, bbox, tên thay
-  thế, kết quả VLM, baseline từng model)\\
+  thế, kết quả kiểm tra VLM)\\
 \f{b1/review/review.html}, \f{b2/human\_verify/} & trang duyệt ảnh, mẫu kiểm tra 10\%\\
 \bottomrule
 \end{longtable}
@@ -239,13 +231,18 @@ Ví dụ một dòng của file chính:
 Trong bản ghi đầy đủ, \f{negation.modality} và \f{negation.form} (negative / exceptive / affirmative) phân biệt
 các biến thể; \f{validation} lưu model và prompt của B2, kết quả đối chiếu, human-verify và baseline.
 
+\textbf{Không có bước baseline bằng model tham chiếu} (khác v1): ground truth đã được VLM kiểm tra ở bước 2, và
+khi thí nghiệm, tỷ lệ vi phạm chỉ tính trên các sample mà chính model được đo nêu đích lúc không có chỉ dẫn (điều
+kiện C0). Lọc theo model khác chỉ làm dataset nghiêng về đích ``dễ nói'' và tốn 6--7 giờ GPU. (\f{baseline.py}
+vẫn được giữ lại nhưng không chạy.)
+
 \section{Cách chạy}
 \begin{Verbatim}[fontsize=\small,frame=single]
 cd create_data
 bash run_v2_all.sh select   # bước 0-2, rồi dừng: mở dataset/b1/review/review.html
-bash run_v2_all.sh rest     # bước 3-8 + TTS (env cosyvoice)
+bash run_v2_all.sh rest     # bước 3-7 + TTS (env cosyvoice)
 \end{Verbatim}
-Từng bước: \f{python3 run\_pipeline.py --step5}, \f{--from\_step 3}, \f{--to\_step 2}. Mọi ngưỡng nằm trong
+Từng bước: \f{python3 run\_pipeline.py --step4}, \f{--from\_step 3}, \f{--to\_step 2}. Mọi ngưỡng nằm trong
 \f{src/config.py}.
 
 \section{Danh sách kiểm tra trước khi phát hành, rủi ro}
@@ -253,7 +250,7 @@ Từng bước: \f{python3 run\_pipeline.py --step5}, \f{--from\_step 3}, \f{--t
 \item Mọi sample có ≥ 2 component và đúng một đích; mọi component trỏ về ID annotation gốc.
 \item Tỷ lệ lỗi human-verify của từng nhánh dưới 5\%; thống kê phân bố nhánh, nguồn, split, đích.
 \item Không trùng ảnh giữa các nhánh ngoài chủ đích; license từng ảnh được lưu, không có ảnh NoDerivs.
-\item \textbf{Rủi ro:} lọc bằng model (VLM, baseline) có thể nghiêng dataset về ảnh dễ với model, và ảnh ít đồ
+\item \textbf{Rủi ro:} lọc bằng model (kiểm tra VLM) có thể nghiêng dataset về ảnh dễ với model, và ảnh ít đồ
   vật làm tăng nguy cơ ceiling --- mọi điểm số được lưu để phân tích và báo cáo. Ảnh train của COCO/VG có thể
   đã nằm trong dữ liệu huấn luyện của model (cả val cũng vậy); câu hỏi và chỉ dẫn là mới, và split được lưu để so
   val với train. Câu hỏi sinh từ template nên cần báo cáo theo template.

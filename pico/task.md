@@ -30,7 +30,7 @@ create_data/dataset/raw. Steps:
    Write what you saw in NOTES.md: share of bad images (blurry, wrong ground truth, cluttered, text in image),
    counts per source and split. If more than ~10% of accepted units look bad, you may tune the *image* filters in
    config.py and re-run step 2 (no experiment exists yet, so this is fine). Record every change.
-3. `bash run_v2_all.sh rest` (B2, baseline, B3, forms, export, visual, TTS). About 12-15 hours.
+3. `bash run_v2_all.sh rest` (B2, B3, forms, export, visual, TTS; the reference-model baseline step was removed on 2026-11-19). About 7-9 hours.
 4. Check the output: counts per branch/source/split/form; every sample has audio, a visual image and a box
    image; ASR mismatches; how often occludes_subject is true; open 20 visual images and listen to nothing (you
    cannot), but read the ASR report. Fix bugs if any step fails (the code is new; read tracebacks, fix, re-run

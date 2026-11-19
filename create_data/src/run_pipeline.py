@@ -2,7 +2,7 @@
 
     python3 run_pipeline.py --to_step 2        # annotations, B1 candidates, image selection -> stop for review
     python3 run_pipeline.py --from_step 3      # B2 ... visual (after the review page is approved)
-    python3 run_pipeline.py --step5 --step6    # only selected steps
+    python3 run_pipeline.py --step4 --step5    # only selected steps
 
 Steps:
     0  download annotations (every split in config.SPLITS)
@@ -10,11 +10,12 @@ Steps:
     2  image selection: download val first, train only to fill; pixel checks, text space, VLM checks
        -> dataset/b1/review/review.html (human look before going on)
     3  B2   components, aliases, 10% human-verify sample (local LLM)
-    4  baseline: reference models answer each question without negation; eligible targets
-    5  B3   negative instruction (7 templates) -> dataset/out/samples.jsonl
-    6  affirmative + exceptive forms (H4) -> dataset/out/samples_forms.jsonl
-    7  export compact negative file
-    8  visual channel: instruction written inside the image -> dataset/out/samples_compact_all.jsonl
+    4  B3   negative instruction (7 templates) -> dataset/out/samples.jsonl
+    5  affirmative + exceptive forms (H4) -> dataset/out/samples_forms.jsonl
+    6  export compact negative file
+    7  visual channel: instruction written inside the image -> dataset/out/samples_compact_all.jsonl
+(No reference-model baseline step since 2026-11-19: ground truth is checked by the VLM in step 2, and the
+experiments condition on each tested model's own no-instruction answer. baseline.py is kept, unused.)
 then, in the cosyvoice env, TTS for every form (run_v2_all.sh does both).
 """
 import argparse
@@ -27,11 +28,10 @@ STEPS = {
     1: ("B1 candidates", "b1_ground_truth"),
     2: ("image selection", "select_images"),
     3: ("B2 components", "b2_components"),
-    4: ("baseline (reference models)", "baseline"),
-    5: ("B3 negative instructions", "b3_negation"),
-    6: ("affirmative + exceptive forms", "b3_forms"),
-    7: ("export compact", "export_compact"),
-    8: ("visual channel", "render_visual"),
+    4: ("B3 negative instructions", "b3_negation"),
+    5: ("affirmative + exceptive forms", "b3_forms"),
+    6: ("export compact", "export_compact"),
+    7: ("visual channel", "render_visual"),
 }
 
 

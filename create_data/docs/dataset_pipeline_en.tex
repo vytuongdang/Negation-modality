@@ -18,7 +18,7 @@ Oct 21, 2026 version (kept in \f{create\_data/archive/}). Code: \f{create\_data/
 (2) Strict image filters: sharp, few objects, large and uncut components, no NoDerivs licenses, room for text.
 (3) A VLM check of every component's ground truth.
 (4) New \f{existence\_closed} branch; COCO count questions name the kinds.
-(5) The baseline runs before B3; targets are drawn only among components every reference model states.
+(5) No reference-model baseline filter (the VLM checks ground truth; experiments condition on the tested model's own no-instruction answer).
 (6) Three instruction forms: negative, exceptive, affirmative.
 (7) Three channels: text, audio (TTS), visual (instruction written inside the image).}}
 
@@ -115,14 +115,8 @@ Components come from the annotation; Qwen3-8B adds aliases and reviews atomicity
 source annotation ID (any split used); shared aliases are removed. A \textbf{10\%} stratified sample goes to
 \f{b2/human\_verify/}; a branch with > 5\% errors is fixed and re-run.
 
-\section{Baseline on reference models (step 4)}
-\new{Now before B3.} Qwen2.5-VL-3B and Qwen3-VL-8B answer the plain question; the Qwen3-8B judge (closed set,
-regex second opinion, thinking pass where they disagree) marks the stated components. A component is an
-\textbf{eligible target} when every reference model states it and each states at least half of the others.
-Units without one are dropped. Output: \f{b2/units\_baseline.jsonl}, \f{out/alias\_report.csv}.
-
-\section{B3: negative instructions (step 5)}
-Target drawn (seeded) among eligible targets, skipping alias collisions (dog vs hot dog; closed-set distractor
+\section{B3: negative instructions (step 4)}
+Target drawn uniformly (seeded) among the unit's VLM-checked components, skipping alias collisions (dog vs hot dog; closed-set distractor
 names that are aliases of a present object). One of 7 fixed templates per unit (seeded); 10\% of units get all 7.
 \begin{longtable}{p{1cm}p{4.6cm}p{5.4cm}}
 \toprule
@@ -140,7 +134,7 @@ N7 & exclusion, no negator & Leave \{X\} out of your answer.\\
 \{X\}: ``the dog'', ``the number of dogs'', ``its color'' (the slot, never the value), ``what she is wearing''.
 Output: \f{out/samples.jsonl}.
 
-\section{Exceptive and affirmative forms for H4 (step 6)}
+\section{Exceptive and affirmative forms for H4 (step 5)}
 Same target and expected answer as the negative sample (linked by \f{pair\_of}).
 \begin{longtable}{p{2.6cm}p{5.4cm}p{7.6cm}}
 \toprule
@@ -161,7 +155,7 @@ Output: \f{out/samples\_forms.jsonl}.
 \section{Channels}
 \begin{itemize}
 \item \textbf{Text:} the instruction follows the question at evaluation time.
-\item \textbf{Visual (step 8):} the instruction is written \textbf{inside the original image}: black DejaVu Sans on
+\item \textbf{Visual (step 7):} the instruction is written \textbf{inside the original image}: black DejaVu Sans on
   a slightly transparent white box, font ≈ 4\% of the image width, placed where it covers the fewest protected
   boxes (smaller font / more lines are tried before touching the question's objects). A \textbf{control image}
   has the same box at the same place without text. Stored: \f{text\_box}, font size, \f{subject\_frac\_covered},
@@ -180,16 +174,19 @@ Output: \f{out/samples\_forms.jsonl}.
 \f{audio/negation/\{sample\_id\}.wav} & spoken instruction\\
 \f{out/samples\_compact\_all\_\allowbreak audio.jsonl} & \textbf{main file for experiments}: one row per sample
   and form, with question, instruction, audio path, visual and control image, required and forbidden components\\
-\f{out/samples.jsonl}, \f{out/samples\_forms.jsonl} & full records (annotation IDs, boxes, aliases, VLM checks,
-  per-model baseline); \f{negation.form} = negative / exceptive / affirmative\\
+\f{out/samples.jsonl}, \f{out/samples\_forms.jsonl} & full records (annotation IDs, boxes, aliases, VLM checks); \f{negation.form} = negative / exceptive / affirmative\\
 \bottomrule
 \end{longtable}
+
+\textbf{No reference-model baseline step} (unlike v1): the VLM already checks ground truth in step 2, and the
+experiments compute violation only on samples whose target the tested model states without instruction (C0).
+Filtering by other models would bias toward ``easy to say'' targets and cost 6--7 GPU hours.
 
 \section{How to run}
 \begin{Verbatim}[fontsize=\small,frame=single]
 cd create_data
 bash run_v2_all.sh select   # steps 0-2, then stop: open dataset/b1/review/review.html
-bash run_v2_all.sh rest     # steps 3-8 + TTS (cosyvoice env)
+bash run_v2_all.sh rest     # steps 3-7 + TTS (cosyvoice env)
 \end{Verbatim}
 
 \section{Release checklist and risks}
@@ -197,7 +194,7 @@ bash run_v2_all.sh rest     # steps 3-8 + TTS (cosyvoice env)
 \item ≥ 2 components and exactly one target per sample; every component maps to a source annotation ID.
 \item Per-branch human-verify error rate below 5\%; distributions by branch, source, split and target reported.
 \item No unintended image overlap; every image's license stored; no NoDerivs images.
-\item \textbf{Risks:} model-based filters (VLM check, baseline) may bias toward images that are easy for models,
+\item \textbf{Risks:} the model-based filter (VLM check) may bias toward images that are easy for models,
   and uncluttered images raise the ceiling risk; all scores are stored for analysis. COCO/VG images (val and
   train) may be in VLM training data; questions and instructions are new, and the split is stored so val and
   train can be compared. Template-generated questions are reported per template.

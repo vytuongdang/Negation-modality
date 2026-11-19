@@ -1,4 +1,4 @@
-"""Step 4 (doc section 7): baseline run of every question WITHOUT negation on the reference models.
+"""NOT PART OF THE PIPELINE since 2026-11-19 (kept for reference / optional use). Formerly step 4: baseline run of every question WITHOUT negation on the reference models.
 
 Runs per unit, before B3, so B3 can pick its target only among components the reference models really state
 (v2; v1 ran after B3 and dropped samples whose random target nobody mentioned).
