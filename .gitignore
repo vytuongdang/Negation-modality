@@ -24,3 +24,5 @@ pico/sleep_seconds
 pico/emails.log
 pico/session_id
 pico/telegram_sent.log
+pico/status.txt
+pico/heartbeat.log

@@ -97,6 +97,17 @@ the judge, or a finished experiment to make an effect appear or disappear.
 - Never stop early: when one item is done, take the next one. When everything above is done, write a final
   summary email and keep improving the report (robustness checks), not the data.
 
+## Status file for the hourly heartbeat (Vy asked for this)
+
+A separate script (pico/heartbeat.py, tmux "pico-heartbeat") posts a short status to Telegram every hour and
+alerts at once on low disk, a dead or silent runner, or a Claude usage limit. It reads **pico/status.txt**:
+rewrite that file at every step, 2-4 short lines in Vietnamese, e.g.
+  Bước: chọn ảnh (M1 bước 1) · COCO 420/950, VAW 0/950, GQA 0, CLEVR 0
+  Còn lại: khoảng 1 giờ 30 phút cho bước này, khoảng 8 giờ cho cả dataset
+  Tiếp theo: tự duyệt ảnh
+Estimate the remaining time from the actual speed in the job logs, not from guesses. If disk gets low, free
+space only inside the project (e.g. images_rejected/, caches you created) and say so; never delete raw/.
+
 ## Step reports on Telegram (Vy asked for this)
 
 After EVERY finished step (e.g. "image selection done", "B2 done", "H1 pilot scored", a bug found and fixed, a

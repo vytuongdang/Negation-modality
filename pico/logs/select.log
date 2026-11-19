@@ -28,3 +28,5 @@ Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF
 COCO: 34/950 images after 48/2124 candidates; splits {'val2017': 34}; rejected {'blurry': 8, 'no_unit_left': 2, 'clipped': 1, 'large_text_in_image': 1, 'black_and_white': 2}
 COCO: 64/950 images after 96/2124 candidates; splits {'val2017': 60, 'train2017': 4}; rejected {'blurry': 18, 'no_unit_left': 6, 'clipped': 1, 'large_text_in_image': 3, 'black_and_white': 3, 'too_dark_or_bright': 1}
 COCO: 104/950 images after 144/2124 candidates; splits {'val2017': 60, 'train2017': 44}; rejected {'blurry': 19, 'no_unit_left': 10, 'clipped': 1, 'large_text_in_image': 4, 'black_and_white': 4, 'too_dark_or_bright': 2}
+COCO: 139/950 images after 192/2124 candidates; splits {'val2017': 60, 'train2017': 79}; rejected {'blurry': 27, 'no_unit_left': 11, 'clipped': 1, 'large_text_in_image': 7, 'black_and_white': 5, 'too_dark_or_bright': 2}
+COCO: 173/950 images after 240/2124 candidates; splits {'val2017': 60, 'train2017': 113}; rejected {'blurry': 31, 'no_unit_left': 17, 'clipped': 1, 'large_text_in_image': 9, 'black_and_white': 6, 'too_dark_or_bright': 3}
