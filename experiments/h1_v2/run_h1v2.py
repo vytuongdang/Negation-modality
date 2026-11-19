@@ -131,7 +131,7 @@ def main():
             raw = cache.get(input_key(args.model, img, items))
             if raw is None:
                 continue
-            rows.append({"sample_id": s["id"], "pair_of": s["pair_of"], "unit_id": s["unit_id"], "form": s["form"],
+            rows.append({"sample_id": s["id"], "pair_of": s["pair_of"], "unit_id": s["unit_id"], "image": s["image"], "form": s["form"],
                          "condition": c, "branch": s["branch"], "source": s["source"], "split": s["split"],
                          "split_group": split_group(s["split"]), "template_id": s["template_id"],
                          "template_sweep": s["template_sweep"], "voice": s["voice"], "asr_ok": s["asr_ok"],
