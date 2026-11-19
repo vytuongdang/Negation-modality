@@ -28,6 +28,16 @@
 ## Done
 (nothing yet)
 
+## Vy's stage plan (Telegram 20:07) — FOLLOW THIS
+- After dataset v2: smoke test (run_h1v2.py --pilot 2 = 10 questions), then H1 core on a 1,000-question subset
+  (--pilot 200 = 200/branch) for 4 models: Qwen2.5-Omni-7B, -3B, MiniCPM-o 2.6, Phi-4-MM. STOP after the subset,
+  report neutral results with CIs on Telegram. NO full-dataset run until Vy decides models/branches.
+- Gemma-3n-E4B offered as optional 5th (gated). Told Vy 20:0x.
+- MiniCPM-o / Phi-4 need old transformers (4.44.2): env omni_old is broken (no `requests`). Cloning it into a NEW
+  env `omni_neg` (+ pip install requests inside it) in tmux job-env, log pico/logs/env_clone.log ('ENV OK').
+  Their adapters must be ported into omnilib (items API); run with --generate_only there, score in `negation`.
+- Downloading MiniCPM-o 2.6 + Phi-4-MM: tmux job-dl-2, log pico/logs/dl_2.log ('DL DONE').
+
 ## Paper
 - ACL 2027 ARR deadline: 2027-01-04 (web search 2026-11-19; verify on 2027.aclweb.org). ~6.5 weeks.
 - paper/claims.md, paper/outline.md, paper/related_work.md, paper/ideas.md (I1 neutral audio, I2 comprehension
