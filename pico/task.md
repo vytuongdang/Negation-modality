@@ -80,7 +80,7 @@ Same analysis style, appended to REPORT.md.
   session exists, and wakes early when Vy sends a note.
 - Read logs and files with tail/head/grep, never print whole large files or long outputs; batch several small
   actions into one step; do not re-read files you already summarised in NOTES.md.
-- Keep NOTES.md complete enough to resume from it: the runner starts a fresh session every 25 steps.
+- Keep NOTES.md complete enough to resume from it: the runner starts a fresh session every 100 steps.
 - If Claude reports a usage limit the runner backs off by itself and the heartbeat tells Vy; just continue after.
 
 ## Improving the hypotheses

@@ -26,3 +26,4 @@ pico/session_id
 pico/telegram_sent.log
 pico/status.txt
 pico/heartbeat.log
+pico/steps_per_session

@@ -8,12 +8,12 @@
 #   - pause between steps: pico/sleep_seconds if Pico wrote one (30..3600, used once); otherwise 10 min while a
 #     GPU job (tmux session job-*) runs, 30 s when Pico is working interactively;
 #   - Claude usage limit: back off 15 -> 30 -> 60 min instead of retrying every 30 s (the heartbeat tells Vy);
-#   - a fresh session every STEPS_PER_SESSION steps (long sessions make every step expensive); Pico's memory is
+#   - a fresh session every STEPS_PER_SESSION steps (100; change it in pico/steps_per_session) (long sessions make every step expensive); Pico's memory is
 #     pico/NOTES.md, so nothing is lost.
 cd "$(dirname "$0")/.." || exit 1
 LOG=pico/run.log
 FLAGS="--dangerously-skip-permissions"
-STEPS_PER_SESSION=25
+STEPS_PER_SESSION=100   # default; pico/steps_per_session overrides it (read every step, no restart needed)
 LIMIT_RE='usage limit|limit reached|rate limit|resets at|out of extra usage'
 
 run_claude() {   # run one claude -p call, log it, return 2 on a usage limit
@@ -38,6 +38,7 @@ backoff=0
 if [ -s pico/session_id ]; then SID=$(cat pico/session_id); STEP=0; echo "=== $(date) resume $SID" >> $LOG
 else new_session; fi
 while [ ! -e pico/stop ]; do
+  [ -s pico/steps_per_session ] && STEPS_PER_SESSION=$(cat pico/steps_per_session)
   if [ "$STEP" -ge "$STEPS_PER_SESSION" ]; then new_session; continue; fi
   msg="Continue the task from where you are. Read pico/NOTES.md and pico/task.md if unsure."
   note=""

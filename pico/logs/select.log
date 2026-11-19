@@ -31,3 +31,4 @@ COCO: 104/950 images after 144/2124 candidates; splits {'val2017': 60, 'train201
 COCO: 139/950 images after 192/2124 candidates; splits {'val2017': 60, 'train2017': 79}; rejected {'blurry': 27, 'no_unit_left': 11, 'clipped': 1, 'large_text_in_image': 7, 'black_and_white': 5, 'too_dark_or_bright': 2}
 COCO: 173/950 images after 240/2124 candidates; splits {'val2017': 60, 'train2017': 113}; rejected {'blurry': 31, 'no_unit_left': 17, 'clipped': 1, 'large_text_in_image': 9, 'black_and_white': 6, 'too_dark_or_bright': 3}
 COCO: 208/950 images after 288/2124 candidates; splits {'val2017': 60, 'train2017': 148}; rejected {'blurry': 38, 'no_unit_left': 19, 'clipped': 1, 'large_text_in_image': 10, 'black_and_white': 8, 'too_dark_or_bright': 4}
+COCO: 245/950 images after 336/2124 candidates; splits {'val2017': 60, 'train2017': 185}; rejected {'blurry': 40, 'no_unit_left': 25, 'clipped': 1, 'large_text_in_image': 11, 'black_and_white': 10, 'too_dark_or_bright': 4}
