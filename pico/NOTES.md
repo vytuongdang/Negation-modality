@@ -34,9 +34,13 @@
   report neutral results with CIs on Telegram. NO full-dataset run until Vy decides models/branches.
 - Gemma-3n-E4B offered as optional 5th (gated). Told Vy 20:0x.
 - MiniCPM-o / Phi-4 need old transformers (4.44.2): env omni_old is broken (no `requests`). Cloning it into a NEW
-  env `omni_neg` (+ pip install requests inside it) in tmux job-env, log pico/logs/env_clone.log ('ENV OK').
+  env `omni_neg`: DONE 20:22 (clone + pip-installed the missing deps inside it: requests, tqdm, safetensors, einops,
+  psutil, filelock, regex, numba, cffi, jinja2, mpmath<1.4...). transformers 4.44.2, CUDA ok.
   Their adapters must be ported into omnilib (items API); run with --generate_only there, score in `negation`.
-- Downloading MiniCPM-o 2.6 + Phi-4-MM: tmux job-dl-2, log pico/logs/dl_2.log ('DL DONE').
+- MiniCPM-o 2.6 + Phi-4-MM downloaded (20:20).
+
+## Reporting format (Vy 20:20): Telegram reports AND pico/status.txt in ENGLISH, short "-" items, one point each,
+  blank line between items, no tables, no bold.
 
 ## Paper
 - ACL 2027 ARR deadline: 2027-01-04 (web search 2026-11-19; verify on 2027.aclweb.org). ~6.5 weeks.

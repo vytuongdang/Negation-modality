@@ -1,1 +1,140 @@
 Retrieving notices: - \ | / - \ | done
+Source:      /home/vyvn/anaconda3/envs/omni_old
+Destination: /home/vyvn/anaconda3/envs/omni_neg
+Packages: 32
+Files: 30135
+
+Downloading and Extracting Packages: ...working... done
+
+## Package Plan ##
+
+  environment location: /home/vyvn/anaconda3/envs/omni_neg
+
+  added / updated specs:
+    - defaults/linux-64::_libgcc_mutex==0.1=main
+    - defaults/linux-64::_openmp_mutex==5.1=52_gnu
+    - defaults/linux-64::bzip2==1.0.8=h5eee18b_6
+    - defaults/linux-64::ld_impl_linux-64==2.44=h9e0c5a2_3
+    - defaults/linux-64::libexpat==2.9.0=h7354ed3_0
+    - defaults/linux-64::libffi==3.4.8=h06d3fd0_3
+    - defaults/linux-64::libgcc-ng==15.2.0=h166f726_8
+    - defaults/linux-64::libgcc==15.2.0=h69a1729_8
+    - defaults/linux-64::libnsl==2.0.0=h5eee18b_0
+    - defaults/linux-64::libstdcxx==15.2.0=h39759b7_8
+    - defaults/linux-64::libuuid==1.41.5=h5eee18b_0
+    - defaults/linux-64::libxcb==1.17.0=h9b100fa_0
+    - defaults/linux-64::libzlib==1.3.2=h47b2149_0
+    - defaults/linux-64::ncurses==6.6=hfaaeb4e_0
+    - defaults/linux-64::openssl==3.5.9=h1b28b03_0
+    - defaults/linux-64::packaging==26.3=py310h06a4308_0
+    - defaults/linux-64::pthread-stubs==0.3=h47b2149_2
+    - defaults/linux-64::python==3.10.22=hd9cb797_1
+    - defaults/linux-64::readline==8.3=hc2a1206_0
+    - defaults/linux-64::setuptools==84.2.1=py310h06a4308_0
+    - defaults/linux-64::sqlite==3.53.4=h795bf6d_0
+    - defaults/linux-64::tk==8.6.15=h54e0aa7_0
+    - defaults/linux-64::wheel==0.48.0=py310h06a4308_0
+    - defaults/linux-64::xorg-libx11==1.8.14=h65de747_0
+    - defaults/linux-64::xorg-libxau==1.0.12=h9b100fa_0
+    - defaults/linux-64::xorg-libxdmcp==1.1.5=h9b100fa_0
+    - defaults/linux-64::xorg-xorgproto==2025.1=h47b2149_0
+    - defaults/linux-64::xz==5.8.4=h140a991_0
+    - defaults/linux-64::zlib==1.3.2=h47b2149_0
+    - defaults/noarch::ca-certificates==2026.10.20=h59cdc77_1
+    - defaults/noarch::pip==26.2.2=pyhc872135_0
+    - defaults/noarch::tzdata==2026c=he532380_0
+
+
+The following NEW packages will be INSTALLED:
+
+  _libgcc_mutex      pkgs/main/linux-64::_libgcc_mutex-0.1-main 
+  _openmp_mutex      pkgs/main/linux-64::_openmp_mutex-5.1-52_gnu 
+  bzip2              pkgs/main/linux-64::bzip2-1.0.8-h5eee18b_6 
+  ca-certificates    pkgs/main/noarch::ca-certificates-2026.10.20-h59cdc77_1 
+  ld_impl_linux-64   pkgs/main/linux-64::ld_impl_linux-64-2.44-h9e0c5a2_3 
+  libexpat           pkgs/main/linux-64::libexpat-2.9.0-h7354ed3_0 
+  libffi             pkgs/main/linux-64::libffi-3.4.8-h06d3fd0_3 
+  libgcc             pkgs/main/linux-64::libgcc-15.2.0-h69a1729_8 
+  libgcc-ng          pkgs/main/linux-64::libgcc-ng-15.2.0-h166f726_8 
+  libnsl             pkgs/main/linux-64::libnsl-2.0.0-h5eee18b_0 
+  libstdcxx          pkgs/main/linux-64::libstdcxx-15.2.0-h39759b7_8 
+  libuuid            pkgs/main/linux-64::libuuid-1.41.5-h5eee18b_0 
+  libxcb             pkgs/main/linux-64::libxcb-1.17.0-h9b100fa_0 
+  libzlib            pkgs/main/linux-64::libzlib-1.3.2-h47b2149_0 
+  ncurses            pkgs/main/linux-64::ncurses-6.6-hfaaeb4e_0 
+  openssl            pkgs/main/linux-64::openssl-3.5.9-h1b28b03_0 
+  packaging          pkgs/main/linux-64::packaging-26.3-py310h06a4308_0 
+  pip                pkgs/main/noarch::pip-26.2.2-pyhc872135_0 
+  pthread-stubs      pkgs/main/linux-64::pthread-stubs-0.3-h47b2149_2 
+  python             pkgs/main/linux-64::python-3.10.22-hd9cb797_1 
+  readline           pkgs/main/linux-64::readline-8.3-hc2a1206_0 
+  setuptools         pkgs/main/linux-64::setuptools-84.2.1-py310h06a4308_0 
+  sqlite             pkgs/main/linux-64::sqlite-3.53.4-h795bf6d_0 
+  tk                 pkgs/main/linux-64::tk-8.6.15-h54e0aa7_0 
+  tzdata             pkgs/main/noarch::tzdata-2026c-he532380_0 
+  wheel              pkgs/main/linux-64::wheel-0.48.0-py310h06a4308_0 
+  xorg-libx11        pkgs/main/linux-64::xorg-libx11-1.8.14-h65de747_0 
+  xorg-libxau        pkgs/main/linux-64::xorg-libxau-1.0.12-h9b100fa_0 
+  xorg-libxdmcp      pkgs/main/linux-64::xorg-libxdmcp-1.1.5-h9b100fa_0 
+  xorg-xorgproto     pkgs/main/linux-64::xorg-xorgproto-2025.1-h47b2149_0 
+  xz                 pkgs/main/linux-64::xz-5.8.4-h140a991_0 
+  zlib               pkgs/main/linux-64::zlib-1.3.2-h47b2149_0 
+
+
+
+Downloading and Extracting Packages: ...working... done
+Preparing transaction: - done
+Verifying transaction: | / - \ | / done
+Executing transaction: \ | / - \ | / - done
+#
+# To activate this environment, use
+#
+#     $ conda activate omni_neg
+#
+# To deactivate an active environment, use
+#
+#     $ conda deactivate
+
+Collecting requests
+  Using cached requests-2.34.2-py3-none-any.whl.metadata (4.8 kB)
+Collecting charset_normalizer<4,>=2 (from requests)
+  Using cached charset_normalizer-3.5.2-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (46 kB)
+Collecting idna<4,>=2.5 (from requests)
+  Using cached idna-3.20-py3-none-any.whl.metadata (7.2 kB)
+Collecting urllib3<3,>=1.26 (from requests)
+  Using cached urllib3-2.8.0-py3-none-any.whl.metadata (7.4 kB)
+Collecting certifi>=2023.5.7 (from requests)
+  Downloading certifi-2026.10.23-py3-none-any.whl.metadata (2.5 kB)
+Using cached requests-2.34.2-py3-none-any.whl (73 kB)
+Using cached charset_normalizer-3.5.2-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (271 kB)
+Using cached idna-3.20-py3-none-any.whl (69 kB)
+Using cached urllib3-2.8.0-py3-none-any.whl (135 kB)
+Downloading certifi-2026.10.23-py3-none-any.whl (135 kB)
+Installing collected packages: urllib3, idna, charset_normalizer, certifi, requests
+
+ERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.
+huggingface-hub 0.36.2 requires filelock, which is not installed.
+huggingface-hub 0.36.2 requires hf-xet<2.0.0,>=1.1.3; platform_machine == "x86_64" or platform_machine == "amd64" or platform_machine == "arm64" or platform_machine == "aarch64", which is not installed.
+huggingface-hub 0.36.2 requires tqdm>=4.42.1, which is not installed.
+huggingface-hub 0.36.2 requires typing-extensions>=3.7.4.3, which is not installed.
+transformers 4.44.2 requires filelock, which is not installed.
+transformers 4.44.2 requires regex!=2019.12.17, which is not installed.
+transformers 4.44.2 requires safetensors>=0.4.1, which is not installed.
+transformers 4.44.2 requires tqdm>=4.27, which is not installed.
+Successfully installed certifi-2026.10.23 charset_normalizer-3.5.2 idna-3.20 requests-2.34.2 urllib3-2.8.0
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+  File "/home/vyvn/anaconda3/envs/omni_neg/lib/python3.10/site-packages/transformers/__init__.py", line 26, in <module>
+    from . import dependency_versions_check
+  File "/home/vyvn/anaconda3/envs/omni_neg/lib/python3.10/site-packages/transformers/dependency_versions_check.py", line 16, in <module>
+    from .utils.versions import require_version, require_version_core
+  File "/home/vyvn/anaconda3/envs/omni_neg/lib/python3.10/site-packages/transformers/utils/__init__.py", line 18, in <module>
+    from huggingface_hub import get_full_repo_name  # for backward compatibility
+  File "/home/vyvn/anaconda3/envs/omni_neg/lib/python3.10/site-packages/huggingface_hub/__init__.py", line 1044, in __getattr__
+    submod = importlib.import_module(submod_path)
+  File "/home/vyvn/anaconda3/envs/omni_neg/lib/python3.10/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "/home/vyvn/anaconda3/envs/omni_neg/lib/python3.10/site-packages/huggingface_hub/hf_api.py", line 52, in <module>
+    from tqdm.auto import tqdm as base_tqdm
+ModuleNotFoundError: No module named 'tqdm'
+Error importing huggingface_hub.hf_api: No module named 'tqdm'
