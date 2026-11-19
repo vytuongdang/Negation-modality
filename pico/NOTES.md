@@ -5,10 +5,19 @@
   B3 1840 negative samples (1035 units + 115 sweep units x7; 22 target collisions skipped); by source/branch COCO
   ex 386, ex_closed 356, count 203; GQA rel 332; VAW attr 203; CLEVR count 195, attr 165. Forms 2070 (exc 1150,
   aff 920). Visual 3910 rendered, occludes_subject 210 (5.4%), font shrunk 445.
-- TTS crashed (bug: SENT_DIR not created before manifest.partial.jsonl) -> fixed in tts_negation.py (mkdir), rerun
-  RUNNING (21:57) in tmux `job-tts`, log pico/logs/tts_subset.log ('EXIT <code>'): 1330 unique sentences, ~1-2 s
-  each -> ~40 min. Then check ASR report, smoke test, H1 trial on 4 models.
-- Experiment code (untested): experiments/common/omnilib.py (Omni batched; MiniCPM-o, Phi-4 single, env omni_neg
+- TTS DONE 22:28: 1330 sentences (665 female); 33 (2.5%) ASR mismatches flagged asr_ok=false: 14 riding->"writing"
+  (ambiguous for Whisper, maybe also for models), 8 trailing junk syllables ("bus paw", "car sap", "remote Kassel"),
+  6 spelling variants (hair drier/dryer, onto/on to), 2 dropped "Answer", 3 other. All 3910 samples have audio,
+  visual and box image (checked). Pilot/trial selection uses asr_ok units only.
+- Smoke test (--pilot 2, 40 answers) OK for all 4 models; answers and judge scores checked by eye: correct.
+  Speeds: Qwen-7B 0.69 s/answer (batch 4), MiniCPM-o 1.64, Phi-4 0.89 (batch 1). Phi-4 needs transformers 4.48.2
+  (tokenizer fails in 4.44) -> NEW env `omni_phi` (clone of omni_neg + transformers 4.48.2). MiniCPM-o in omni_neg.
+  Smoke-level observation only (n=8-9): V violations high in all models; MiniCPM-o A once listed absent options.
+- RUNNING (22:45): tmux `job-h1trial` = experiments/h1_v2/run_trial.sh (Qwen-7B, Qwen-3B full; MiniCPM-o gen in
+  omni_neg, Phi-4 gen in omni_phi, then their scoring in negation). Log pico/logs/h1_trial.log ('TRIAL DONE').
+  ~3960 answers per model. ETA: Qwen-7B ~0.7 h + judge, 3B ~0.5 h, MiniCPM ~1.8 h, Phi ~1 h, scoring ~? -> ~5 h.
+  Then: analyze.py --tag pilot200 (base anaconda python), Telegram report with CIs, STOP for Vy.
+- Experiment code (smoke-tested): experiments/common/omnilib.py (Omni batched; MiniCPM-o, Phi-4 single, env omni_neg
   with --generate_only, score in `negation` with --score_only), experiments/h1_v2/run_h1v2.py (H1 core C0/T/A/V,
   --pilot N per branch, one negative per unit), experiments/h1_v2/analyze.py (run with ~/anaconda3/bin/python),
   experiments/common/tts_sentences.py (H2 TTS into own folder).
