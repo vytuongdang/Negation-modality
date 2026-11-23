@@ -106,7 +106,8 @@ subject). Propose the exact H3-A wording to Vy in Telegram before generating aud
 - H3-C: the negation BEFORE the image vs after it (Idea doc: "negation first" vs "target first"). Needs the
   adapters to accept the main image at a position other than first. Conditions T_first / A_first (text or
   audio instruction, then image, then question) vs T / A; for the visual channel use V_card placed before
-  the image. T_pre / A_pre (instruction between image and question) are NOT H3-C.
+  the image. T_pre / A_pre (instruction between image and question) are NOT H3-C. Pilot size when approved:
+  200 questions, 5 models.
 - H3-D: analysis only: violation vs the forbidden component's `area_ratio` (tertiles; also normalised by the
   C0 mention rate). Note the dataset filter keeps components >= 3% of the image, so "weak evidence" is limited.
 
