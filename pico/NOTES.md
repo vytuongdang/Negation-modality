@@ -124,3 +124,35 @@
   Resume command (answers are cached, finished ones are skipped): cd experiments/h1_v2 && tmux new -d -s job-h1sepv2 "bash run_trial.sh > ../../pico/logs/h1_trial_sepv2.log 2>&1"
   NOTE: results/qwen2.5-omni-3b|minicpm-o-2.6|phi-4-mm/scored_pilot200.jsonl may still hold the OLD-setup scores until the rerun finishes.
 - Runner stopped (pico/stop, tmux pico killed). Extra conditions (T_pre, A_pre, V_card, OCR_V, OCR_card) are prepared, not run.
+- 2026-11-23 judge fixes PREPARED (commit above, not run; Vy approves runs): judge.py retries unparseable thinking replies with 4096 tokens, else judge_source=think_error (was silently "fast"; 152/2269 thinking replies had no JSON). run_h1v2 adds target_label (STATE/META/DENY/NONE, LLM label pass only for rows where regex names the target but judge says compliant) + strict_violation; analyze.py prints a strict robustness table. human_check.py: sample 300 blind (model x C0/T/A/V) -> annotate -> kappa. Re-scoring needs only `--score_only` per model (judge cache: only retries + labels are new).
+- 2026-11-23 count rule PREPARED (not run): run_h1v2.count_rule - bare-number answers in the count branch are scored by rule (a total that includes the forbidden objects = STATE; both readings = AMBIG, judge kept). On the old trial it changes only Phi-4: 73 rows compliant -> violation, 51 AMBIG. Vy's human check (67 items): agreement 92.5%, kappa 0.83; judge misses bare answers ("Cart") because it never sees the question -> judge v3 with the question is proposed, not done.
+- 2026-11-23 DONE (Vy: drop them): COCO double labels (same object, two categories, IoU>0.7), e.g. pizza+sandwich on image 391106; ~121/945 COCO samples involve such a pair (hot dog/sandwich 33, backpack/handbag 19, chair/couch 14, car/truck 12, bowl/cup 11). Proposed filter: drop when the boxes overlap >0.7 AND share a supercategory.
+  -> 66/579 COCO units in create_data/dataset/out/excluded_double_label.jsonl; load_dataset() skips them, run_h1v2 keeps the old selection minus them (pilot200: 944 questions), analyze.py drops them from old scored files; B1 filter DOUBLE_LABEL_IOU for rebuilds.
+- 2026-11-23 PREPARED: answers that hit 100 tokens are regenerated with 256 (omnilib.LONG_NEW_TOKENS, AnswerCache.final); old trial: ~307 MiniCPM, 33 Qwen-7B.
+- 2026-11-23 PREPARED: judge v3 = judge reads the question (create_data/src/judge.py PROMPT_V3, key v3; experiments pass (components, answer, question)); needs a full re-judge (~1 h GPU per model). Check against Vy's 67 labels: human_check.py score --tag pilot200_sepv1 --judge_tag <new tag> <Vy sheet>.
+- 2026-11-23 Vy DECIDED: primary metric = violation = ANY mention of the forbidden thing (STATE / META / DENY: stated, named to exclude, denied or a different value), because we measure negation compliance; leak (= correct fact) is secondary. Code ready (run_h1v2 fields violation/leak/target_label; analyze uses violation; label pass runs on every judge-compliant row).
+- 2026-11-23 Vy DECIDED: drop unavoidable overlaps. create_data/src/flag_excluded_units.py -> dataset/out/excluded_units.jsonl (replaces excluded_double_label.jsonl): 79/1150 units = double_label 66, part_whole 9 (keyboard in laptop, microwave in oven), attr_overlap 4 (pattern texture with color). Now 1071 questions; pilot200 = 932. Runs at the end of run_v2_all.sh rest.
+- 2026-11-23 Vy DECIDED: keep template N3 ('Never refer to') in all main numbers and report it separately (analyze.py table with / without N3); worth a paragraph in the paper (wording effect).
+- 2026-11-23 Vy: primary violation broken down by kind for the analysis: STATE / META / DENY (absent/false) / WRONG (different value); analyze.py tables 'Violation by kind' (overall, by branch, paired diffs by kind). Label prompt label-v4.
+
+## >>> CURRENT STATE 2026-11-23 19:15 (read this first) <<<
+- Runner restarted by Claude at Vy's request. NOTHING is running on the GPU. Do NOT start any GPU job until Vy approves it in Telegram (Vy's rule: code may be prepared, runs only after Vy says OK).
+- All fixes below are committed and NOT run yet: T as its own item (ITEM_SEP), 256-token regeneration of cut answers, judge v3 (reads the question), thinking retry + think_error flag, count rule for bare numbers, primary metric = violation = any mention split into 4 kinds STATE/META/DENY/WRONG (leak = STATE, secondary), N3 kept + reported separately, 79 units excluded (excluded_units.jsonl; pilot = 932 questions), new conditions T_pre/A_pre/V_card/OCR_V/OCR_card ready, human_check.py + HTML page (Vy labelled 67 items of the old trial: 92.5% agree, kappa 0.83).
+- Models: keep all 4 AND add InternOmni (OpenGVLab/InternOmni, InternLM2.5-7B + Whisper encoder, ~8B, fits 24 GB). Vy decided 2026-11-23. Download running in tmux dl-internomni (log pico/logs/dl_internomni.log); adapter not written yet.
+- Old trial results = "pilot v1" (results/<model>/scored_pilot200_sepv1.jsonl): history only, NOT main numbers.
+- PLAN awaiting Vy's OK, in order:
+  1. Pilot v2: finish T/A for qwen-3b / minicpm / phi with the new setup (qwen-7b done), regenerate cut answers (256), re-judge all 4 models (judge v3 + count rule + kinds), analyze.py, check judge v3 against Vy's 67 labels (human_check.py score --judge_tag). ~4-5 GPU h. Run as ONE tmux job-* script; sleep until ~1 h before its ETA.
+  2. InternOmni: adapter + 10-question smoke test, then pilot C0/T/A/V.
+     ADAPTER PREPARED 2026-11-23 20:xx (omnilib.InternOmni, key `internomni`), NOT run on GPU. Env `omni_intern`
+     (clone of omni_neg + sentencepiece, timm; transformers 4.44.2). fp16, eager attention (Turing; repo lacks
+     flash_attention.py -> omnilib.internomni_local_dir builds experiments/common/models/internomni with weight
+     symlinks + stub, and pre-copies code into the HF modules cache because tf 4.44 skips nested relative imports).
+     Prompt = model's internlm2-chat template with its default (Chinese) system prompt, "<image>\n" + items joined
+     by ITEM_SEP; 6 tiles + thumbnail at 448 (config max_dynamic_patch); one audio per prompt. CPU check OK: C0/T/A/
+     V_card prompts correct, 1792 img tokens, ~67 audio tokens. Smoke (after Vy OK): cd experiments/h1_v2 &&
+     PYTHONNOUSERSITE=1 ~/anaconda3/envs/omni_intern/bin/python -u run_h1v2.py --model internomni --pilot 2
+     --generate_only --batch_size 1 ; then score with `negation` env --score_only. Watch fp16 overflow (garbage
+     text) and VRAM (17.5 GB weights).
+  3. Controls pilot (5 models): OCR_V, OCR_card, C0_box, V_card, T_pre, A_pre.
+  4. Human check (Vy 300, Huy 100 overlap) on pilot v2.
+  5. Later: full dataset build (~2.5k images); Qwen3-Omni on a second server / rented GPU.

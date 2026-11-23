@@ -24,6 +24,7 @@ MODELS = {
     "gemma-3n-e4b": "google/gemma-3n-E4B-it",
     "minicpm-o-2.6": "openbmb/MiniCPM-o-2_6",
     "phi-4-mm": "microsoft/Phi-4-multimodal-instruct",
+    "internomni": "OpenGVLab/InternOmni",
 }
 QWEN_SYSTEM = ("You are Qwen, a virtual human developed by the Qwen Team, Alibaba Group, capable of perceiving "
                "auditory and visual inputs, as well as generating text and speech.")
@@ -213,6 +214,137 @@ class Phi4MM(_Single):
         return self.processor.batch_decode(out[:, enc["input_ids"].shape[1]:], skip_special_tokens=True)[0].strip()
 
 
+def internomni_local_dir(repo):
+    """The InternOmni repo code does `from .flash_attention import FlashAttention` in a try block, but the file is
+    not in the repo, so transformers' remote-code loader fails. Load from a project folder of symlinks to the HF
+    snapshot plus a stub flash_attention.py that raises ImportError -> has_flash_attn = False (eager attention,
+    which TITAN RTX / Turing needs anyway). Folder: experiments/common/models/internomni (git-ignored)."""
+    from huggingface_hub import snapshot_download
+    snap = Path(snapshot_download(repo, local_files_only=True))
+    local = ROOT / "experiments" / "common" / "models" / "internomni"
+    local.mkdir(parents=True, exist_ok=True)
+    import shutil
+    for f in snap.iterdir():   # weights as symlinks; code/config copied (symlinked code breaks relative imports)
+        link = local / f.name
+        if f.suffix == ".safetensors":
+            if not link.exists():
+                link.symlink_to(f.resolve())
+        else:
+            shutil.copyfile(f, link)
+    (local / "flash_attention.py").write_text(
+        "raise ImportError('flash-attention disabled for InternOmni (stub, see omnilib.internomni_local_dir)')\n")
+    # transformers 4.44 copies only the direct relative imports of a local module (not nested ones such as
+    # configuration_internlm2): put every code file into the dynamic-module folder up front
+    from transformers.utils import HF_MODULES_CACHE
+    mods = Path(HF_MODULES_CACHE) / "transformers_modules" / local.name
+    mods.mkdir(parents=True, exist_ok=True)
+    (mods / "__init__.py").touch()
+    for f in local.glob("*.py"):
+        shutil.copyfile(f, mods / f.name)
+    return str(local)
+
+
+class InternOmni(_Single):
+    """OpenGVLab/InternOmni (InternViT + Whisper-large-v3 encoder + InternLM2.5-7B), remote code. Env `omni_intern`
+    (clone of omni_neg + sentencepiece, timm), run with --generate_only, score in `negation`. Added 2026-11-23 (Vy).
+    Prompt in the model's own internlm2-chat template: "<image>\n" then the items joined with ITEM_SEP, where an
+    audio item is "<audio>" and a second image "<image>" (each expanded to its context tokens). fp16 and no
+    flash-attention (TITAN RTX = Turing). Tiles: max_dynamic_patch from config (6) + thumbnail, 448 px."""
+
+    device = "cuda"
+
+    def tokenizer(self):
+        return self.tok
+
+    def __init__(self, name):
+        import sys as _sys
+        import torch
+        from transformers import AutoConfig, AutoTokenizer, WhisperFeatureExtractor
+        from transformers.dynamic_module_utils import get_class_from_dynamic_module
+        self.torch = torch
+        name = internomni_local_dir(name)
+        cls = get_class_from_dynamic_module("modeling_internvl_audio.InternVLChatAudioModel", name)
+        cfg = AutoConfig.from_pretrained(name, trust_remote_code=True)
+        self.model = cls.from_pretrained(name, config=cfg, torch_dtype=torch.float16,
+                                         low_cpu_mem_usage=True).eval().cuda()
+        self.tok = AutoTokenizer.from_pretrained(name, trust_remote_code=True, use_fast=False)
+        self.fe = WhisperFeatureExtractor.from_pretrained(name)
+        self.max_num = cfg.max_dynamic_patch
+        conv = _sys.modules[type(self.model).__module__].get_conv_template(self.model.template)
+        self.conv = conv
+        self.eos = self.tok.convert_tokens_to_ids(conv.sep.strip())
+        self.img_ctx = self.tok.convert_tokens_to_ids("<IMG_CONTEXT>")
+        self.aud_ctx = self.tok.convert_tokens_to_ids("<AUDIO_CONTEXT>")
+        self.model.img_context_token_id, self.model.audio_context_token_id = self.img_ctx, self.aud_ctx
+
+    def _pixels(self, path):
+        import torchvision.transforms as T
+        from torchvision.transforms.functional import InterpolationMode
+        img, size = load_image(path), 448
+        w, h = img.size
+        ratios = sorted({(i, j) for n in range(1, self.max_num + 1) for i in range(1, n + 1)
+                         for j in range(1, n + 1) if i * j <= self.max_num}, key=lambda r: r[0] * r[1])
+        best, best_diff = (1, 1), float("inf")    # = InternVL find_closest_aspect_ratio
+        for r in ratios:
+            d = abs(w / h - r[0] / r[1])
+            if d < best_diff:
+                best, best_diff = r, d
+            elif d == best_diff and w * h > 0.5 * size * size * r[0] * r[1]:
+                best = r
+        tw, th = size * best[0], size * best[1]
+        big = img.resize((tw, th))
+        tiles = [big.crop((x * size, y * size, (x + 1) * size, (y + 1) * size))
+                 for y in range(best[1]) for x in range(best[0])]
+        if len(tiles) != 1:
+            tiles.append(img.resize((size, size)))
+        tf = T.Compose([T.Resize((size, size), interpolation=InterpolationMode.BICUBIC), T.ToTensor(),
+                        T.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225))])
+        return self.torch.stack([tf(t) for t in tiles])
+
+    def _audio(self, path):
+        wav = load_audio(path)[:480000]
+        mel_len = len(wav) // 160
+        after_cnn = (mel_len + 2 - 2 - 1) // 1 + 1          # conv1: pad 1, kernel 3, stride 1
+        after_cnn = (after_cnn + 2 - 2 - 1) // 2 + 1        # conv2: pad 1, kernel 3, stride 2
+        n_tok = (after_cnn - 2) // 2 + 1
+        feats = self.fe(wav, sampling_rate=16000, return_tensors="pt")["input_features"]
+        return feats, after_cnn, n_tok
+
+    def answer(self, image_path, items, max_new_tokens=MAX_NEW_TOKENS):
+        torch = self.torch
+        pix, parts, audio = [self._pixels(image_path)], [], None
+        for t, v in items:
+            if t == "text":
+                parts.append(v)
+            elif t == "image":
+                pix.append(self._pixels(v))
+                parts.append("<image>")
+            else:
+                assert audio is None, "InternOmni adapter: one audio item per prompt"
+                audio = self._audio(v)
+                parts.append("<audio>")
+        conv = self.conv.copy()
+        conv.system_message = self.model.system_message
+        conv.append_message(conv.roles[0], "<image>\n" + ITEM_SEP.join(parts))
+        conv.append_message(conv.roles[1], None)
+        query = conv.get_prompt()
+        for p in pix:
+            query = query.replace("<image>", "<img>" + "<IMG_CONTEXT>" * (self.model.num_image_token * len(p))
+                                  + "</img>", 1)
+        kw = {}
+        if audio is not None:
+            feats, after_cnn, n_tok = audio
+            query = query.replace("<audio>", "<audio>" + "<AUDIO_CONTEXT>" * n_tok + "</audio>", 1)
+            kw = dict(audio_values=feats.to(self.device, dtype=torch.float16),
+                      audio_len_after_cnn=torch.tensor([after_cnn]), audio_token_num=torch.tensor([n_tok]))
+        enc = self.tok(query, return_tensors="pt")
+        with torch.no_grad():
+            out = self.model.generate(pixel_values=torch.cat(pix).to(self.device, dtype=torch.float16),
+                                      input_ids=enc["input_ids"].to(self.device), attention_mask=enc["attention_mask"].to(self.device),
+                                      max_new_tokens=max_new_tokens, do_sample=False, eos_token_id=self.eos, **kw)
+        return self.tok.batch_decode(out, skip_special_tokens=True)[0].split(self.conv.sep.strip())[0].strip()
+
+
 def load_tokenizer(key):
     """Tokenizer only (no weights): to count answer tokens when nothing has to be generated."""
     from transformers import AutoTokenizer
@@ -226,6 +358,8 @@ def load_model(key):
         return MiniCPMo(MODELS[key])
     if key.startswith("phi-4"):
         return Phi4MM(MODELS[key])
+    if key == "internomni":
+        return InternOmni(MODELS[key])
     raise NotImplementedError(f"{key}: adapter not ported yet (see experiments/h1/run_h1.py)")
 
 
