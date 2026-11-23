@@ -172,6 +172,21 @@ def section_model(name, md, out, rng, figs):
         w(f"| {x} vs {y} | {pct(md.rate(sids, x)[0])} | {pct(md.rate(sids, y)[0])} | {100 * d:+.1f} | "
           f"[{100 * lo:+.1f}, {100 * hi:+.1f}] | {ox} | {oy} | {mcnemar(ox, oy):.3g} |")
 
+    # robustness (Vy, 2026-11-23): N3 "Never refer to ..." is kept in every main number and reported here:
+    # the same paired comparisons with and without N3 questions, plus N3 alone
+    tid = lambda sid: md.neg[sid].get("template_id")
+    w("\n### Template N3 (\"Never refer to ...\"): paired comparisons with / without it\n")
+    w("| pair | subset | n | A-B (pp) | 95% CI (image bootstrap) |")
+    w("|---|---|---|---|---|")
+    for x, y in [p for p in PAIRS if p[0] in NEG_CONDS and p[1] in NEG_CONDS]:
+        for label, keep in (("all", lambda sid: True), ("without N3", lambda sid: tid(sid) != "N3"),
+                            ("N3 only", lambda sid: tid(sid) == "N3")):
+            sids = [s for s in md.c0m if keep(s) and md.outcome(s, x) is not None and md.outcome(s, y) is not None]
+            if len(sids) >= 10:
+                st = diff_stat(md, x, y)
+                lo, hi = bootstrap(sids, md.image, st, rng)
+                w(f"| {x} vs {y} | {label} | {len(sids)} | {100 * st(sids):+.1f} | [{100 * lo:+.1f}, {100 * hi:+.1f}] |")
+
     if any("leak" in r for r in md.rows):
         # secondary metric: only the CORRECT forbidden fact counts ("leak"); label counts explain the gap
         w("\n### Primary (any mention) vs leak (correct fact only), C0-mentioned, negative form\n")
