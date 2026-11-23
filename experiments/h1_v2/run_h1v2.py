@@ -79,6 +79,32 @@ def inputs(s, cond):
     raise ValueError(cond)
 
 
+NUM_WORDS = {w: i for i, w in enumerate("zero one two three four five six seven eight nine ten eleven twelve".split())}
+
+
+def count_rule(s, answer):
+    """Count branch, answers that are only a number ("3", "1."): which counts could it be? (Vy, 2026-11-23)
+    A total that INCLUDES the forbidden objects reveals them (1 cube + 1 sphere + 1 cylinder, spheres forbidden:
+    "3" counted the sphere, "2" did not). -> "STATE" (only violating readings), "NONE" (only compliant readings),
+    "AMBIG" (both, e.g. "1" with 1 pizza and 1 sandwich), or None (not a bare number / no reading matches)."""
+    if s["branch"] != "count":
+        return None
+    m = re.fullmatch(r"(?:the answer is\s*)?([a-z]+|\d+)\.?", answer.strip().lower())
+    if not m:
+        return None
+    n = int(m.group(1)) if m.group(1).isdigit() else NUM_WORDS.get(m.group(1))
+    if n is None:
+        return None
+    comps = {c["id"]: c for c in s["components"] if c["type"] == "count"}
+    forb = [comps[c]["value"] for c in s["expected"]["forbidden"] if c in comps]
+    req = [comps[c]["value"] for c in s["expected"]["required"] if c in comps]
+    total = sum(c["value"] for c in comps.values())
+    violating = {total} | set(forb)
+    compliant = {total - sum(forb)} | set(req)
+    v, c = n in violating, n in compliant
+    return "AMBIG" if v and c else "STATE" if v else "NONE" if c else None
+
+
 def ocr_score(answer, truth):
     """Normalised exact match + character similarity of a copied instruction."""
     norm = lambda x: re.sub(r"[^a-z0-9 ]", "", x.lower().replace("\u2019", "'").replace("'", "")).split()
@@ -206,11 +232,17 @@ def main():
         s = r.pop("_s")
         r.update(score(s, r["mentioned"], r["condition"]))
         r["regex_target_mentioned"] = any(r["mentioned_regex"][c] for c in s["expected"]["forbidden"])
+        # bare-number answers in the count branch: the total rule overrides the judge (AMBIG keeps the judge, flagged)
+        r["count_rule"] = count_rule(s, r["answer"])
+        if r["count_rule"] in ("STATE", "NONE"):
+            r["target_mentioned"] = r["count_rule"] == "STATE"
+            r["correct"] = r["all_required"] and (r["target_mentioned"] if r["condition"].startswith("C0")
+                                                  else not r["target_mentioned"])
     # strict-violation robustness check (2026-11-23): answers the judge counts as compliant although they NAME the
     # target ("excluding the carrot", "there is no knife") get a STATE / META / DENY / NONE label;
     # strict_violation = the target is stated, named to exclude it, or denied.
     from judge import Judge
-    named = [r for r in rows if not r["target_mentioned"] and r["regex_target_mentioned"]]
+    named = [r for r in rows if not r["target_mentioned"] and r["regex_target_mentioned"] and not r["count_rule"]]
     if named:
         j = Judge(RESULTS / "judge.jsonl")
         comp = lambda r: next(c for c in r["components"] if c["id"] == r["target"])
@@ -219,6 +251,8 @@ def main():
         for r, lab in zip(named, labels):
             r["target_label"] = lab or "NONE"
     for r in rows:
+        if r["count_rule"] in ("STATE", "NONE"):
+            r["target_label"] = r["count_rule"]
         r.setdefault("target_label", "STATE" if r["target_mentioned"] else "NONE")
         r["strict_violation"] = r["target_label"] in ("STATE", "META", "DENY")
     flagged = [r for r in rows if r["judge_source"] == "think_error"]
