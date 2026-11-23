@@ -90,6 +90,30 @@ def alerts(s):
     return out
 
 
+ERR_RE = re.compile(r"\bFAILED\b|Traceback \(most recent call last\)|CUDA out of memory|OutOfMemoryError|Killed\b")
+_seen_errors = {}   # log file -> number of error lines already reported
+
+
+def job_errors():
+    """New error lines in job logs (pico/logs/*.log changed in the last day): one Telegram alert per new error,
+    so a crashed GPU job is reported at once instead of when Pico next wakes up (Vy, 2026-11-23)."""
+    out = []
+    for log in sorted((PICO / "logs").glob("*.log")):
+        if time.time() - log.stat().st_mtime > 86400:
+            continue
+        lines = log.read_text(errors="replace").splitlines()
+        hits = [i for i, l in enumerate(lines) if ERR_RE.search(l)]
+        first = log not in _seen_errors
+        new = [] if first else hits[_seen_errors[log]:]
+        _seen_errors[log] = len(hits)
+        if new:
+            i = new[0]
+            ctx = " | ".join(l.strip()[:160] for l in lines[max(0, i - 1):i + 3] if l.strip())
+            out.append(f"🚨 Lỗi trong job ({log.name}, {len(new)} dòng lỗi mới): {ctx}\n"
+                       f"Pico sẽ xem lúc thức dậy; muốn nó xem ngay thì nhắn trong topic này.")
+    return out
+
+
 def report(s):
     status = "\n".join(tail(PICO / "status.txt", 6)) or "(Pico chưa ghi status.txt)"
     jobs = [x for x in s["sessions"] if x.startswith("job-")]
@@ -101,6 +125,7 @@ def report(s):
 
 def main():
     active, last_report = {}, 0.0
+    job_errors()   # remember errors already in the logs, alert only on new ones
     while True:
         try:
             s = check()
@@ -113,6 +138,8 @@ def main():
                 send({"disk": "✅ Ổ đĩa ổn trở lại.", "runner": "✅ Pico chạy lại rồi.",
                       "stale": "✅ Pico ghi log trở lại.", "limit": "✅ Quota Claude đã hồi, Pico chạy tiếp."}[k])
                 del active[k]
+            for msg in job_errors():
+                send(msg)
             if time.time() - last_report >= REPORT_MIN * 60:
                 send(report(s))
                 last_report = time.time()
