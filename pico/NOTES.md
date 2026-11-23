@@ -146,6 +146,10 @@
 - Stage 2 RUNNING since 07:07: tmux job-internomni = experiments/h1_v2/run_internomni.sh (gen omni_intern 3692 answers
   ~1.4 s -> ~1.5 h, then judge in negation ~1.5-2.5 h), log pico/logs/internomni_pilot.log ('TRIAL DONE' / 'TRIAL STOPPED').
   ETA ~10:30-11:00. Then analyze.py (adds internomni), short Stage 2 report, then Stage 3 per PLAN.md.
+- Stage 3 runner PREPARED 08:15 (not run): experiments/h1_v2/run_stage3.sh = smoke --pilot 2 of COMP_T/A/V C0_box OCR_V
+  for all 5 models, then per model: COMP (comp_pilot200.jsonl), C0_box+OCR_V, --forms (H4). Launch when Stage 2 is done:
+  cd experiments/h1_v2 && tmux new -d -s job-stage3 "bash run_stage3.sh > ../../pico/logs/stage3.log 2>&1" ; ~12-14 h.
+  Analysis then: analyze.py --tag pilot200 (H4 section) + analyze_comp.py --tag pilot200 + OCR summary.
 
 ## >>> CURRENT STATE 2026-11-23 19:15 (read this first) <<<
 - Runner restarted by Claude at Vy's request. NOTHING is running on the GPU. Do NOT start any GPU job until Vy approves it in Telegram (Vy's rule: code may be prepared, runs only after Vy says OK).
