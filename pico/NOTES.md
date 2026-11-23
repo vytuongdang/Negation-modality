@@ -1,6 +1,11 @@
 # Pico notes (memory across restarts)
 
 ## Now
+- VY RULE (2026-11-23): code may be prepared, but NOTHING runs on the GPU until Vy explicitly says OK.
+  Prepared, NOT run (commit a5da851): extra conds T_pre, A_pre, V_card (instruction on a white card = 2nd image),
+  OCR_V, OCR_card (string match -> results/<model>/ocr_<tag>.jsonl). --conds runs write scored_<tag>_<conds>.jsonl
+  and add cached C0. No GPU smoke test yet (Phi-4 2-image prompt untested). Default conds = core, input keys
+  unchanged, so the running sepv2 trial is unaffected (checked diff).
 - 2026-11-23 17:1x: RUNNING tmux job-h1sepv2 = experiments/h1_v2/run_trial.sh (Vy-approved T/A same setup,
   ITEM_SEP='\n', see pico/note.txt 17:05 + commit 0326287). Only T and A regenerate (2000 answers/model) + judge.
   Log pico/logs/h1_trial_sepv2.log ('TRIAL DONE'). ETA ~4-5 h (~22:00). Old numbers kept: results/*/scored_pilot200_sepv1.jsonl,
