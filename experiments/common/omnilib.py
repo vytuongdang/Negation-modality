@@ -29,6 +29,8 @@ QWEN_SYSTEM = ("You are Qwen, a virtual human developed by the Qwen Team, Alibab
                "auditory and visual inputs, as well as generating text and speech.")
 MAX_SIDE = 1024
 MAX_NEW_TOKENS = 100  # answers are short lists (Vy, 2026-11-19)
+LONG_NEW_TOKENS = 256  # answers that hit MAX_NEW_TOKENS are generated again with this budget (Vy, 2026-11-23)
+CUT_MARGIN = 3         # an answer this close to MAX_NEW_TOKENS (re-tokenized) counts as cut
 ITEM_SEP = "\n"   # between the items after the image, in every model: Qwen / Phi join with it here, MiniCPM-o's
                    # chat() already joins content strings with "\n" (2026-11-23, Vy: T and A must be set up the same)
 IM_END = 151645  # <|im_end|>
@@ -120,6 +122,9 @@ class Omni:
                     {"role": "user", "content": content}]
         return self.processor.apply_chat_template(messages, add_generation_prompt=True, tokenize=False)
 
+    def tokenizer(self):
+        return self.processor.tokenizer
+
     def answer_batch(self, jobs, max_new_tokens=MAX_NEW_TOKENS):
         """jobs: [(image_path, items)] -> [answer]"""
         texts = [self.prompt(items) for _, items in jobs]
@@ -152,6 +157,10 @@ class _Single:
 class MiniCPMo(_Single):
     """MiniCPM-o 2.6, remote code (needs transformers 4.44: env `omni_neg`, run with --generate_only, score in
     `negation` with --score_only). TTS head not loaded. Content: image, then items in order."""
+
+    def tokenizer(self):
+        return self.tok
+
     def __init__(self, name):
         import torch
         from transformers import AutoModel, AutoTokenizer
@@ -171,6 +180,10 @@ class MiniCPMo(_Single):
 
 class Phi4MM(_Single):
     """Phi-4-multimodal-instruct, remote code (env `omni_neg`, as MiniCPM-o). Prompt: image, then items in order."""
+
+    def tokenizer(self):
+        return self.processor.tokenizer
+
     def __init__(self, name):
         import torch
         from transformers import AutoModelForCausalLM, AutoProcessor, GenerationConfig
@@ -200,6 +213,12 @@ class Phi4MM(_Single):
         return self.processor.batch_decode(out[:, enc["input_ids"].shape[1]:], skip_special_tokens=True)[0].strip()
 
 
+def load_tokenizer(key):
+    """Tokenizer only (no weights): to count answer tokens when nothing has to be generated."""
+    from transformers import AutoTokenizer
+    return AutoTokenizer.from_pretrained(MODELS[key], trust_remote_code=True)
+
+
 def load_model(key):
     if key.startswith("qwen2.5-omni"):
         return Omni(MODELS[key])
@@ -221,6 +240,10 @@ def input_key(model, image, items, max_new_tokens=MAX_NEW_TOKENS):
 
 
 class AnswerCache:
+    """Answers keyed by input_key. Every job is first generated with MAX_NEW_TOKENS; answers that hit that limit
+    (cut mid-sentence, mostly MiniCPM-o's step-by-step answers) are generated again with LONG_NEW_TOKENS and
+    stored under their own key; final() returns the long answer when there is one (Vy, 2026-11-23). Greedy
+    decoding, so the long answer starts with the same text as the cut one."""
     def __init__(self, path):
         self.path = Path(path)
         self.path.parent.mkdir(parents=True, exist_ok=True)
@@ -230,20 +253,12 @@ class AnswerCache:
         r = self.d.get(k)
         return None if r is None else r["answer"]
 
-    def generate(self, model_key, jobs, batch_size=4, log_every=20):
-        """jobs: [(image_rel, items, tag)] with image_rel relative to DATA and audio paths relative to DATA.
-        Generates every uncached job (grouped by tag so a batch has the same input shape)."""
-        todo, seen = [], set()
-        for img, items, tag in jobs:
-            k = input_key(model_key, img, items)
-            if k not in self.d and k not in seen:
-                seen.add(k)
-                todo.append((k, img, items, tag))
-        print(f"{len(todo)} answers to generate ({len(jobs)} jobs)", flush=True)
-        if not todo:
-            return
-        todo.sort(key=lambda j: (j[3], j[1]))
-        model = load_model(model_key)
+    def final(self, model_key, img, items):
+        """The answer to use: the LONG_NEW_TOKENS one if the first answer was cut, else the first one."""
+        long = self.get(input_key(model_key, img, items, LONG_NEW_TOKENS))
+        return long if long is not None else self.get(input_key(model_key, img, items))
+
+    def _run(self, model, model_key, todo, max_new_tokens, batch_size, log_every):
         t0, n_done = time.time(), 0
         with open(self.path, "a") as f:
             for i in range(0, len(todo), batch_size):
@@ -251,13 +266,13 @@ class AnswerCache:
                 abs_jobs = [(DATA / img, [(t, str(DATA / v) if t in ("audio", "image") else v) for t, v in items])
                             for _, img, items, _ in chunk]
                 try:
-                    answers = model.answer_batch(abs_jobs)
+                    answers = model.answer_batch(abs_jobs, max_new_tokens)
                 except model.torch.cuda.OutOfMemoryError:
                     model.torch.cuda.empty_cache()
-                    answers = [model.answer_batch([j])[0] for j in abs_jobs]
+                    answers = [model.answer_batch([j], max_new_tokens)[0] for j in abs_jobs]
                 for (k, img, items, tag), a in zip(chunk, answers):
                     r = {"key": k, "model": model_key, "image": str(img), "items": [list(x) for x in items],
-                         "tag": tag, "answer": a}
+                         "tag": tag, "max_new_tokens": max_new_tokens, "answer": a}
                     self.d[k] = r
                     f.write(json.dumps(r, ensure_ascii=False) + "\n")
                 f.flush()
@@ -266,9 +281,44 @@ class AnswerCache:
                     sec = (time.time() - t0) / n_done
                     print(f"[{i + len(chunk)}/{len(todo)}] {sec:.2f} s/answer, ETA {sec * (len(todo) - n_done) / 3600:.1f} h"
                           f" | {chunk[0][3]}: {answers[0][:100]!r}", flush=True)
-        print(f"generated {n_done} answers in {time.time() - t0:.0f} s "
+        print(f"generated {n_done} answers ({max_new_tokens} tokens max) in {time.time() - t0:.0f} s "
               f"({(time.time() - t0) / max(1, n_done):.2f} s/answer)", flush=True)
-        model.close()
+
+    def generate(self, model_key, jobs, batch_size=4, log_every=20):
+        """jobs: [(image_rel, items, tag)] with image_rel relative to DATA and audio paths relative to DATA.
+        Generates every uncached job (grouped by tag so a batch has the same input shape), then regenerates the
+        ones that hit MAX_NEW_TOKENS with LONG_NEW_TOKENS."""
+        todo, seen = [], set()
+        for img, items, tag in jobs:
+            k = input_key(model_key, img, items)
+            if k not in self.d and k not in seen:
+                seen.add(k)
+                todo.append((k, img, items, tag))
+        print(f"{len(todo)} answers to generate ({len(jobs)} jobs)", flush=True)
+        model = None
+        if todo:
+            todo.sort(key=lambda j: (j[3], j[1]))
+            model = load_model(model_key)
+            self._run(model, model_key, todo, MAX_NEW_TOKENS, batch_size, log_every)
+        # answers cut at MAX_NEW_TOKENS: count output tokens with the model's own tokenizer
+        tok = model.tokenizer() if model is not None else load_tokenizer(model_key)
+        cut, seen = [], set()
+        for img, items, tag in jobs:
+            k = input_key(model_key, img, items)
+            kl = input_key(model_key, img, items, LONG_NEW_TOKENS)
+            a = self.get(k)
+            if a is None or kl in self.d or kl in seen:
+                continue
+            if len(tok(a, add_special_tokens=False)["input_ids"]) >= MAX_NEW_TOKENS - CUT_MARGIN:
+                seen.add(kl)
+                cut.append((kl, img, items, tag))
+        print(f"{len(cut)} answers hit {MAX_NEW_TOKENS} tokens -> regenerate with {LONG_NEW_TOKENS}", flush=True)
+        if cut:
+            cut.sort(key=lambda j: (j[3], j[1]))
+            model = model or load_model(model_key)
+            self._run(model, model_key, cut, LONG_NEW_TOKENS, batch_size, log_every)
+        if model is not None:
+            model.close()
 
 
 # ---------------------------------------------------------------- scoring

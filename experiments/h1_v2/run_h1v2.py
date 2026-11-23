@@ -205,7 +205,7 @@ def main():
     rows = []
     for s, c in plan:
         img, items = inputs(s, c)
-        raw = cache.get(input_key(args.model, img, items))
+        raw = cache.final(args.model, img, items)   # the 256-token answer if the 100-token one was cut
         if raw is None:
             continue
         rows.append({"sample_id": s["id"], "pair_of": s["pair_of"], "unit_id": s["unit_id"], "image": s["image"],
