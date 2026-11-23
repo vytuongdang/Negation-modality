@@ -206,13 +206,33 @@ def main():
         s = r.pop("_s")
         r.update(score(s, r["mentioned"], r["condition"]))
         r["regex_target_mentioned"] = any(r["mentioned_regex"][c] for c in s["expected"]["forbidden"])
+    # strict-violation robustness check (2026-11-23): answers the judge counts as compliant although they NAME the
+    # target ("excluding the carrot", "there is no knife") get a STATE / META / DENY / NONE label;
+    # strict_violation = the target is stated, named to exclude it, or denied.
+    from judge import Judge
+    named = [r for r in rows if not r["target_mentioned"] and r["regex_target_mentioned"]]
+    if named:
+        j = Judge(RESULTS / "judge.jsonl")
+        comp = lambda r: next(c for c in r["components"] if c["id"] == r["target"])
+        labels = j.label_target([(comp(r), r["answer"]) for r in named])
+        j.close()
+        for r, lab in zip(named, labels):
+            r["target_label"] = lab or "NONE"
+    for r in rows:
+        r.setdefault("target_label", "STATE" if r["target_mentioned"] else "NONE")
+        r["strict_violation"] = r["target_label"] in ("STATE", "META", "DENY")
+    flagged = [r for r in rows if r["judge_source"] == "think_error"]
+    if flagged:
+        print(f"WARNING: {len(flagged)} rows where the thinking judge gave no JSON even with the retry budget; "
+              f"they keep the fast verdict and are listed in review_{tag}.csv (judge_source=think_error)")
     with open(out / f"scored_{tag}.jsonl", "w") as f:
         for r in rows:
             f.write(json.dumps({k: v for k, v in r.items() if k != "components"}, ensure_ascii=False) + "\n")
     with open(out / f"review_{tag}.csv", "w", newline="", encoding="utf-8-sig") as f:
         w = csv.writer(f)
         w.writerow(["sample_id", "form", "condition", "question", "negation", "answer", "stated", "target",
-                    "target_mentioned", "regex_target_mentioned", "judge_source", "required_recall"])
+                    "target_mentioned", "regex_target_mentioned", "judge_source", "target_label",
+                    "strict_violation", "required_recall"])
         for r in rows:
             comps = {c["id"]: c for c in r["components"]}
             name = lambda c: comps[c]["subject"] if comps[c]["type"] == "existence" else comps[c]["text"]
@@ -220,6 +240,7 @@ def main():
                         "" if r["condition"].startswith("C0") else r["negation"], r["answer"],
                         ", ".join(name(c) for c, v in r["mentioned"].items() if v), name(r["target"]),
                         int(r["target_mentioned"]), int(r["regex_target_mentioned"]), r["judge_source"],
+                        r["target_label"], int(r["strict_violation"]),
                         round(r["required_recall"], 2)])
     # quick table: violation rate among questions whose C0 answer states the target
     c0 = {r["pair_of"] for r in rows if r["condition"] == "C0" and r["target_mentioned"]}

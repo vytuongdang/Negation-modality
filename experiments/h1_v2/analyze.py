@@ -109,9 +109,9 @@ def bootstrap(sids, group, stat, rng):
     return vals[int(0.025 * len(vals))], vals[int(0.975 * len(vals)) - 1]
 
 
-def diff_stat(md, a, b, form_a="negative", form_b="negative"):
+def diff_stat(md, a, b, form_a="negative", form_b="negative", field="target_mentioned"):
     def f(sids):
-        pa = [(md.outcome(s, a, form_a), md.outcome(s, b, form_b)) for s in sids]
+        pa = [(md.outcome(s, a, form_a, field), md.outcome(s, b, form_b, field)) for s in sids]
         pa = [(x, y) for x, y in pa if x is not None and y is not None]
         return mean(x - y for x, y in pa) if pa else None
     return f
@@ -162,6 +162,31 @@ def section_model(name, md, out, rng, figs):
         lo, hi = bootstrap(sids, md.image, diff_stat(md, x, y), rng)
         w(f"| {x} vs {y} | {pct(md.rate(sids, x)[0])} | {pct(md.rate(sids, y)[0])} | {100 * d:+.1f} | "
           f"[{100 * lo:+.1f}, {100 * hi:+.1f}] | {ox} | {oy} | {mcnemar(ox, oy):.3g} |")
+
+    if any("strict_violation" in r for r in md.rows):
+        # robustness (2026-11-23): strict = the target is stated, OR named only to exclude it (META), OR denied (DENY)
+        w("\n### Robustness: strict violation (%) = STATE + META + DENY, C0-mentioned, negative form\n")
+        w("| condition | lenient (judge) | strict | STATE | META | DENY |")
+        w("|---|---|---|---|---|---|")
+        for c in NEG_CONDS:
+            rs = [md.by.get((s, c)) for s in md.c0m]
+            rs = [r for r in rs if r is not None and "target_label" in r]
+            if rs:
+                n = len(rs)
+                cnt = lambda lab: sum(r["target_label"] == lab for r in rs)
+                w(f"| {c} | {pct(md.rate(md.c0m, c)[0])} | {pct(md.rate(md.c0m, c, field='strict_violation')[0])} | "
+                  f"{cnt('STATE')} | {cnt('META')} | {cnt('DENY')} |  ")
+        w("\n| pair (strict) | A-B (pp) | 95% CI (image bootstrap) |")
+        w("|---|---|---|")
+        for x, y in [p for p in PAIRS if p[0] in NEG_CONDS and p[1] in NEG_CONDS]:
+            sids = [s for s in md.c0m if md.outcome(s, x, field="strict_violation") is not None
+                    and md.outcome(s, y, field="strict_violation") is not None]
+            if sids:
+                st = diff_stat(md, x, y, field="strict_violation")
+                lo, hi = bootstrap(sids, md.image, st, rng)
+                w(f"| {x} vs {y} | {100 * st(sids):+.1f} | [{100 * lo:+.1f}, {100 * hi:+.1f}] |")
+        flagged = sum(r.get("judge_source") == "think_error" for r in md.rows)
+        w(f"\nRows where the thinking judge gave no JSON (fast verdict kept, need human check): {flagged}\n")
 
     w("\n### Required recall (over-suppression), C0-mentioned primary samples\n")
     w("| branch | C0 | " + " | ".join(NEG_CONDS) + " |")

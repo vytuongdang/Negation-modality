@@ -5,7 +5,9 @@ for experiments; the regex matcher in mention.py is kept as a second opinion.
     j = Judge(cache_path)                       # model loads lazily, only if something is not cached
     res = j.judge([(components, answer), ...], regex=[{"C1": True, ...}, ...])
     # -> [{"C1": True, "C2": False, ...} or None if the reply cannot be parsed]
-    j.last_source                               # per job: "fast", "think" (adjudicated) or "error"
+    j.last_source                               # per job: "fast", "think" (adjudicated), "think_error"
+                                                #   (thinking never gave JSON: fast value kept, FLAGGED) or "error"
+    labels = j.label_target([(component, answer), ...])   # -> "STATE" / "META" / "DENY" / "NONE" per job
     j.close()
 
 Closed set: the judge only says which of the listed facts the answer states (no free-form grading).
@@ -13,13 +15,19 @@ Two passes: a fast pass (no thinking) on every job; where `regex` is given and d
 any component, a second pass with Qwen3 thinking enabled decides (the fast pass misses e.g. "matte" = rubber,
 the regex misses paraphrases and hits subject words). Results are cached by (pass, prompt version, facts,
 answer) in a JSONL file, so re-running is free.
+If a thinking reply has no parseable JSON (it ran out of tokens: 152/2269 with the old 1500-token budget), it is
+retried once with THINK_RETRY_TOKENS; if that fails too the job is marked "think_error" instead of silently
+passing as "fast" (fix 2026-11-23).
 """
 import hashlib
 import json
+import re
 from pathlib import Path
 
 JUDGE_MODEL = "Qwen/Qwen3-8B"
 PROMPT_VERSION = "v2"
+THINK_TOKENS = 1500         # first thinking try (cache key unchanged, so old replies are reused)
+THINK_RETRY_TOKENS = 4096   # retry for replies that did not reach the JSON
 
 PROMPT = """Below is an answer about an image, and a numbered list of facts.
 Which facts does the answer state? Rules:
@@ -44,6 +52,24 @@ Facts:
 Reply with JSON only, e.g. {{"stated": [1, 3]}} or {{"stated": []}}."""
 
 
+LABEL_VERSION = "label-v1"
+LABEL_PROMPT = """Below is an answer about an image, and one fact X.
+X: {fact}
+
+How does the answer treat X? Reply with exactly one word:
+STATE - the answer says X is true / present, even if it also says it will not talk about it
+        ("there's a horse too, but I won't mention it").
+META  - the answer names X only to exclude it or to say it will not talk about it, without saying X is true
+        ("besides the bed, there is a chair", "excluding the suitcase", "I won't mention the color").
+DENY  - the answer says X is false / absent, or gives a different value ("there is no knife").
+NONE  - the answer does not refer to X at all.
+
+Answer:
+\"\"\"{answer}\"\"\"
+
+Reply with one word: STATE, META, DENY or NONE."""
+
+
 def fact_text(c):
     return f"there is a {c['subject']} in the image" if c["type"] == "existence" else c["text"]
 
@@ -53,9 +79,10 @@ def build_prompt(comps, answer):
     return PROMPT.format(answer=answer, facts=facts)
 
 
-def key(comps, answer, thinking=False):
+def key(comps, answer, thinking=False, budget=THINK_TOKENS):
     payload = json.dumps([PROMPT_VERSION, JUDGE_MODEL, [fact_text(c) for c in comps], answer]
-                         + (["think"] if thinking else []), ensure_ascii=False)
+                         + (["think"] if thinking else [])
+                         + ([f"think-{budget}"] if thinking and budget != THINK_TOKENS else []), ensure_ascii=False)
     return hashlib.sha1(payload.encode()).hexdigest()
 
 
@@ -82,8 +109,8 @@ class Judge:
                         self.cache[r["key"]] = r
         self.llm = None
 
-    def _run(self, jobs, thinking, progress):
-        keys = [key(c, a, thinking) for c, a in jobs]
+    def _run(self, jobs, thinking, progress, budget=THINK_TOKENS):
+        keys = [key(c, a, thinking, budget) for c, a in jobs]
         todo = list({k: (c, a) for k, (c, a) in zip(keys, jobs) if k not in self.cache}.items())
         if todo:
             if self.llm is None:
@@ -94,11 +121,12 @@ class Judge:
             for i in range(0, len(todo), step):
                 chunk = todo[i:i + step]
                 replies = self.llm.chat([build_prompt(c, a) for _, (c, a) in chunk],
-                                        max_new_tokens=1500 if thinking else 40, batch_size=self.batch_size,
+                                        max_new_tokens=budget if thinking else 40, batch_size=self.batch_size,
                                         thinking=thinking)
                 with open(self.cache_path, "a") as f:
                     for (k, (c, a)), reply in zip(chunk, replies):
-                        r = {"key": k, "thinking": thinking, "answer": a, "facts": [fact_text(x) for x in c],
+                        r = {"key": k, "thinking": thinking, "budget": budget if thinking else 40, "answer": a,
+                             "facts": [fact_text(x) for x in c],
                              "reply": reply.strip()}
                         self.cache[k] = r
                         f.write(json.dumps(r, ensure_ascii=False) + "\n")
@@ -116,9 +144,44 @@ class Judge:
             idx = [i for i, (v, r) in enumerate(zip(fast, regex)) if v is None or v != r]
             if idx:
                 slow = self._run([jobs[i] for i in idx], True, progress)
+                retry = [i for i, v in zip(idx, slow) if v is None]
+                if retry:   # thinking ran out of tokens before the JSON: once more with a larger budget
+                    again = dict(zip(retry, self._run([jobs[i] for i in retry], True, progress, THINK_RETRY_TOKENS)))
+                    slow = [again.get(i, v) for i, v in zip(idx, slow)]
                 for i, v in zip(idx, slow):
                     if v is not None:
                         out[i], self.last_source[i] = v, "think"
+                    elif out[i] is not None:
+                        self.last_source[i] = "think_error"   # fast value kept but flagged for human review
+        return out
+
+    def label_target(self, jobs, progress=True):
+        """jobs: [(component, answer)] -> "STATE" / "META" / "DENY" / "NONE" per job (None if unparseable).
+        For answers that name the forbidden component (strict-violation robustness check, 2026-11-23)."""
+        keys = [hashlib.sha1(json.dumps([LABEL_VERSION, JUDGE_MODEL, fact_text(c), a], ensure_ascii=False)
+                             .encode()).hexdigest() for c, a in jobs]
+        todo = list({k: (c, a) for k, (c, a) in zip(keys, jobs) if k not in self.cache}.items())
+        if todo:
+            if self.llm is None:
+                from llm import LocalLLM
+                self.llm = LocalLLM(JUDGE_MODEL)
+            step = self.batch_size * 8
+            for i in range(0, len(todo), step):
+                chunk = todo[i:i + step]
+                replies = self.llm.chat([LABEL_PROMPT.format(fact=fact_text(c), answer=a) for _, (c, a) in chunk],
+                                        max_new_tokens=20, batch_size=self.batch_size, thinking=False)
+                with open(self.cache_path, "a") as f:
+                    for (k, (c, a)), reply in zip(chunk, replies):
+                        r = {"key": k, "label_pass": LABEL_VERSION, "answer": a, "fact": fact_text(c),
+                             "reply": reply.strip()}
+                        self.cache[k] = r
+                        f.write(json.dumps(r, ensure_ascii=False) + "\n")
+                if progress:
+                    print(f"label {min(i + step, len(todo))}/{len(todo)}", flush=True)
+        out = []
+        for k in keys:
+            m = re.search(r"\b(STATE|META|DENY|NONE)\b", self.cache[k]["reply"].upper())
+            out.append(m.group(1) if m else None)
         return out
 
     def close(self):
