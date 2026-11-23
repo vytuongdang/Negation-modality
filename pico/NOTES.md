@@ -1,6 +1,11 @@
 # Pico notes (memory across restarts)
 
 ## Now
+- 2026-11-23 17:1x: RUNNING tmux job-h1sepv2 = experiments/h1_v2/run_trial.sh (Vy-approved T/A same setup,
+  ITEM_SEP='\n', see pico/note.txt 17:05 + commit 0326287). Only T and A regenerate (2000 answers/model) + judge.
+  Log pico/logs/h1_trial_sepv2.log ('TRIAL DONE'). ETA ~4-5 h (~22:00). Old numbers kept: results/*/scored_pilot200_sepv1.jsonl,
+  review_*_sepv1.csv, analysis_pilot200_sepv1.md, figures/*_sepv1.png. When done: analyze.py --tag pilot200
+  (~/anaconda3/bin/python), short neutral Telegram report new T vs A per model with CIs next to old ones, then STOP for Vy.
 - WAITING FOR VY (since 2026-11-23). H1 trial done + analysed + reported (Telegram 11-23). Do nothing until a
   "Note from Vy": each step only write 3600 into pico/sleep_seconds. Proposed next (needs Vy OK): comprehension
   probe per channel (ideas I2) + C0_box control on ~200 questions.
