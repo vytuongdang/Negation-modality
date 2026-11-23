@@ -1,6 +1,17 @@
 # Pico notes (memory across restarts)
 
 ## Now
+- WAITING FOR VY (since 2026-11-23). H1 trial done + analysed + reported (Telegram 11-23). Do nothing until a
+  "Note from Vy": each step only write 3600 into pico/sleep_seconds. Proposed next (needs Vy OK): comprehension
+  probe per channel (ideas I2) + C0_box control on ~200 questions.
+- H1 trial result (subset, analyze.py fixed so all 1,000 primary samples count; was 913 due to sweep-unit bug):
+  violation among C0-mentioned (C0 ~80%, n~800/model), T / A / V:
+  Qwen-7B 9.7 / 6.0 / 82.2 (T-A +3.7 [+1.9,+5.7]); Qwen-3B 54.0 / 44.8 / 86.2 (+9.1 [+6.3,+12.2]);
+  MiniCPM-o 46.8 / 20.4 / 93.2 (+26.4 [+22.7,+30.2]); Phi-4 22.8 / 44.6 / 86.5 (-21.7 [-25.1,-18.2]).
+  Phi-4 count: required recall 80% -> 22% (T), 34% (A) = over-suppression. Val/train confounded with source.
+  Files: experiments/h1_v2/analysis_pilot200.md, experiments/REPORT.md, experiments/figures/h1v2_violation_pilot200.png.
+- Trial finished 2026-11-20 09:06 (log pico/logs/h1_trial.log). Runner was stopped 11-20 01:03 to 11-23 16:40.
+
 - Subset build steps 3-7 DONE (log pico/logs/rest_subset.log): B2 kept 1150/1150 (1486 s, human-verify 114);
   B3 1840 negative samples (1035 units + 115 sweep units x7; 22 target collisions skipped); by source/branch COCO
   ex 386, ex_closed 356, count 203; GQA rel 332; VAW attr 203; CLEVR count 195, attr 165. Forms 2070 (exc 1150,
@@ -13,7 +24,7 @@
   Speeds: Qwen-7B 0.69 s/answer (batch 4), MiniCPM-o 1.64, Phi-4 0.89 (batch 1). Phi-4 needs transformers 4.48.2
   (tokenizer fails in 4.44) -> NEW env `omni_phi` (clone of omni_neg + transformers 4.48.2). MiniCPM-o in omni_neg.
   Smoke-level observation only (n=8-9): V violations high in all models; MiniCPM-o A once listed absent options.
-- RUNNING (22:45): tmux `job-h1trial` = experiments/h1_v2/run_trial.sh (Qwen-7B, Qwen-3B full; MiniCPM-o gen in
+- DONE: tmux `job-h1trial` = experiments/h1_v2/run_trial.sh (Qwen-7B, Qwen-3B full; MiniCPM-o gen in
   omni_neg, Phi-4 gen in omni_phi, then their scoring in negation). Log pico/logs/h1_trial.log ('TRIAL DONE').
   ~3960 answers per model. Judge ~1 h/model (fast 45 min + thinking pass on ~16% disagreements). ETA all ~07:00 11-20.
   Then: analyze.py --tag pilot200 (base anaconda python), Telegram report with CIs, STOP for Vy.

@@ -117,3 +117,6 @@ surprising pattern worth chasing:
 3. Report it to Vy on Telegram (and in the next email): the idea, the pilot numbers with CIs, and a clear
    recommendation (drop / refine / scale up). **Scale up only after Vy agrees** (a "Note from Vy").
 4. Record the outcome in ideas.md and a Lesson in §9, whatever it was.
+- 2026-11-23 | H1 trial: the T vs A gap changes sign across models (Phi-4 opposite to Qwen/MiniCPM), so any
+  channel claim must be per model; V violation 82-93% everywhere needs a reading-vs-obeying test before any claim.
+- 2026-11-23 | Check the n in every analysis table against the design (913 vs 1,000 revealed a selection bug).

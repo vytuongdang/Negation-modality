@@ -2,11 +2,11 @@
 
 | # | claim | evidence needed | status |
 |---|---|---|---|
-| C1 | Omni-models' compliance with "do not mention X" differs by channel (text / audio / in-image). | H1 v2: violation among C0-mentioned, T_sep vs A vs V, McNemar + image bootstrap, per model | pending (no v2 result) |
+| C1 | Omni-models' compliance with "do not mention X" differs by channel (text / audio / in-image). | H1 v2: violation among C0-mentioned, T_sep vs A vs V, McNemar + image bootstrap, per model | partly: trial (1,000 q, 4 models) shows within-model channel gaps with CIs excluding 0; T vs A sign is model-dependent; V 82-93% in all (cause unknown: reading vs obeying). Full run + H4 pending |
 | C2 | How the text instruction is segmented (glued to the question vs its own block) changes compliance. | T_join vs T_sep paired; A vs T_sep | pending |
 | C3 | The channel gap is negation-specific (polarity × channel interaction). | H4: Δ_audio − Δ_text (and visual) with CIs, affirmative units | pending |
 | C4 | Naming the target (priming) rather than the word "not" drives violations. | exceptive vs negative per channel | pending |
 | C5 | Under direct text/audio conflict, the channel that wins depends on polarity (not plain dominance). | H2 vs H3-A, both orders | pending |
-| C6 | Effects are not over-suppression. | required recall per condition | pending |
+| C6 | Effects are not over-suppression. | required recall per condition | partly: recall unchanged except Phi-4 count (80→22% under T) |
 | C7 | Results hold on val (non-train) images. | split table | pending |
 | C8 | Benchmark contribution: component-level negation VQA with paired text/audio/visual instructions. | dataset v2 stats | pending (M1 running) |
