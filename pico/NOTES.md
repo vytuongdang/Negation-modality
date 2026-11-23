@@ -156,3 +156,7 @@
   3. Controls pilot (5 models): OCR_V, OCR_card, C0_box, V_card, T_pre, A_pre.
   4. Human check (Vy 300, Huy 100 overlap) on pilot v2.
   5. Later: full dataset build (~2.5k images); Qwen3-Omni on a second server / rented GPU.
+- 2026-11-23 Vy: Idea doc check -> plan must follow H1-H4. H2 and H3-A are REQUIRED and extended to all 3 channel pairs (text-audio, text-visual, audio-visual, both directions; 12 conditions; pilot 200 first). H3-B = multiple-choice comprehension per channel (Idea format). H3-C = negation BEFORE the image vs after. H3-D = analysis by target area (no new run). H4 forms are in the dataset already. Visual = typographic text (Vy's decision vs the Idea's prohibition sign) - state it in the paper. Do NOT drop the visual channel or Phi-4 because of their results.
+- 2026-11-23 Vy: voices stay 2 (female/male CosyVoice2 clones) for main results. LATER (stage 6, not now): voice robustness subset - real voices (Vy + Huy ~100 sentences) and maybe a child voice (~200, only from a dataset with a clear licence; never record children).
+- 2026-11-23 Vy: InternOmni is NOT urgent ("cứ từ từ"); Vy may run new models on a B200. Plan: this server runs the 4 current models for stages 1,3,4,5; InternOmni + Qwen3-Omni (bf16, fits on B200) run together on the B200 later. Prepare adapters + env spec + one run script so the B200 run is copy-and-run (code/data via git + rsync). Keep the InternOmni download (dl-internomni) for local adapter tests.
+- 2026-11-23 Detailed approved plan in pico/PLAN.md (follow it when Vy says 'Duyệt, làm theo pico/PLAN.md').
