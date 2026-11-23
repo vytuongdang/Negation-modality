@@ -42,8 +42,8 @@ create_data/dataset/raw. Steps:
    image; ASR mismatches; how often occludes_subject is true; open 20 visual images and listen to nothing (you
    cannot), but read the ASR report. Fix bugs if any step fails (the code is new; read tracebacks, fix, re-run
    only that step).
-5. Update create_data/src/README.md, create_data/docs/*.tex (then `bash create_data/docs/build.sh`) and
-   RUN_COMMANDS.pdf content if the pipeline changed, with the final numbers.
+5. Update create_data/src/README.md, create_data/docs/*.tex (then `bash create_data/docs/build.sh`)
+   if the pipeline changed, with the final numbers (RUN_COMMANDS.pdf is archived; README.md is the run guide).
 6. Email Vy: dataset done, numbers, anything odd.
 
 ## Milestone 2: H1 on dataset v2 (keep it simple first: Vy, 2026-11-19)

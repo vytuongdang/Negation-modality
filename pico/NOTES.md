@@ -117,3 +117,10 @@
 - job-h1trial was NOT stopped and keeps running overnight: Qwen-7B done; Qwen-3B at 3644/4000 answers at 01:30; then judge, MiniCPM-o, Phi-4. Check `tail pico/logs/h1_trial.log`.
 - Runner auto-restarts 10:00 (systemd timer pico-restart-10h -> pico/restart_at_10.sh). First step then: check job, update NOTES, one short Telegram report, continue H1 trial plan.
 - New quota rules (Vy): runner = Opus 5.5 --effort medium; 10 steps per session; while a GPU job runs, sleep until ~1 h before its ETA, never check more often than every 3 h (sleep_seconds max 43200). Heartbeat reports every 3 h. Telegram bot + email = Sonnet 5.5 medium.
+
+## State 2026-11-23 17:35 (Claude in Vy's terminal)
+- Vy: STOP everything; discuss first what to run, run only after Vy approves.
+- job-h1sepv2 (rerun of pilot200 T/A with the ITEM_SEP / T-own-item setup) was killed during qwen2.5-omni-3b generation (~550/2000). qwen2.5-omni-7b finished and is scored: T 11% / A 7% / V 82% (old setup 9.7 / 6.0 / 82.2). Old results kept as results/<model>/scored_pilot200_sepv1.jsonl.
+  Resume command (answers are cached, finished ones are skipped): cd experiments/h1_v2 && tmux new -d -s job-h1sepv2 "bash run_trial.sh > ../../pico/logs/h1_trial_sepv2.log 2>&1"
+  NOTE: results/qwen2.5-omni-3b|minicpm-o-2.6|phi-4-mm/scored_pilot200.jsonl may still hold the OLD-setup scores until the rerun finishes.
+- Runner stopped (pico/stop, tmux pico killed). Extra conditions (T_pre, A_pre, V_card, OCR_V, OCR_card) are prepared, not run.

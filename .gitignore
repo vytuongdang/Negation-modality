@@ -14,7 +14,7 @@ __pycache__/
 .venv/
 venvs/
 # experiment artefacts that are big or regenerated
-experiments/**/answers_*.jsonl
+experiments/**/answers*.jsonl
 experiments/**/judge*.jsonl
 # Pico runtime
 pico/run.log
@@ -28,3 +28,6 @@ pico/status.txt
 pico/heartbeat.log
 pico/steps_per_session
 pico/new_session
+# backups
+*.bak
+*.bak_*
