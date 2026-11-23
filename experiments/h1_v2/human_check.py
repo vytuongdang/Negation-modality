@@ -8,7 +8,8 @@
 2) Annotators fill the column `human_label` with one of
        STATE  the answer says the forbidden fact is true / present (even if it adds that it won't talk about it)
        META   names it only to exclude it / to say it won't talk about it ("besides the bed", "excluding X")
-       DENY   says it is false / absent, or gives a different value ("there is no knife")
+       DENY   says it is absent / false ("there is no knife")
+       WRONG  gives a different value for the same thing ("2 cylinders" when there are 3)
        NONE   does not refer to it
    Two annotators: copy the sheet, fill `human_label` in each, pass both files to `score`.
    Easier: a one-file labelling page with the images built in (labels saved in the browser, Export CSV):
@@ -32,7 +33,7 @@ RESULTS = HERE / "results"
 OUT = HERE / "human_check"
 MODELS = ["qwen2.5-omni-7b", "qwen2.5-omni-3b", "minicpm-o-2.6", "phi-4-mm"]
 CONDS = ["C0", "T", "A", "V"]
-LABELS = ["STATE", "META", "DENY", "NONE"]
+LABELS = ["STATE", "META", "DENY", "WRONG", "NONE"]
 
 
 def load(model, tag):

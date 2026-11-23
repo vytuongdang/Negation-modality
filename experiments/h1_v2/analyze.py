@@ -188,26 +188,45 @@ def section_model(name, md, out, rng, figs):
                 w(f"| {x} vs {y} | {label} | {len(sids)} | {100 * st(sids):+.1f} | [{100 * lo:+.1f}, {100 * hi:+.1f}] |")
 
     if any("leak" in r for r in md.rows):
-        # secondary metric: only the CORRECT forbidden fact counts ("leak"); label counts explain the gap
-        w("\n### Primary (any mention) vs leak (correct fact only), C0-mentioned, negative form\n")
-        w("| condition | violation (primary) | leak | STATE | META | DENY |")
-        w("|---|---|---|---|---|---|")
+        # breakdown of the primary violation by kind (Vy, 2026-11-23); the four kinds add up to the violation rate
+        kinds = ["STATE", "META", "DENY", "WRONG"]
+        share = lambda rs, lab: pct(sum(r.get("target_label") == lab for r in rs) / len(rs)) if rs else "-"
+        w("\n### Violation by kind (% of C0-mentioned; the kinds add up to the violation), negative form\n")
+        w("STATE = says the forbidden fact · META = names it to exclude it · DENY = says it is absent / false · "
+          "WRONG = gives a different value.\n")
+        w("| condition | violation | " + " | ".join(kinds) + " | leak (= STATE) |")
+        w("|---|---|" + "---|" * (len(kinds) + 1))
         for c in NEG_CONDS:
-            rs = [md.by.get((s, c)) for s in md.c0m]
-            rs = [r for r in rs if r is not None and "target_label" in r]
+            rs = [r for r in (md.by.get((s, c)) for s in md.c0m) if r is not None and "target_label" in r]
             if rs:
-                cnt = lambda lab: sum(r["target_label"] == lab for r in rs)
-                w(f"| {c} | {pct(md.rate(md.c0m, c)[0])} | {pct(md.rate(md.c0m, c, field='leak')[0])} | "
-                  f"{cnt('STATE')} | {cnt('META')} | {cnt('DENY')} |")
-        w("\n| pair (leak) | A-B (pp) | 95% CI (image bootstrap) |")
-        w("|---|---|---|")
-        for x, y in [p for p in PAIRS if p[0] in NEG_CONDS and p[1] in NEG_CONDS]:
-            sids = [s for s in md.c0m if md.outcome(s, x, field="leak") is not None
-                    and md.outcome(s, y, field="leak") is not None]
+                w(f"| {c} | {pct(md.rate(md.c0m, c)[0])} | " + " | ".join(share(rs, k) for k in kinds)
+                  + f" | {pct(md.rate(md.c0m, c, field='leak')[0])} |")
+        w("\nBy branch (STATE / META / DENY / WRONG, %):\n")
+        w("| branch | n | " + " | ".join(NEG_CONDS) + " |")
+        w("|---|---|" + "---|" * len(NEG_CONDS))
+        for br in BRANCHES:
+            sids = [s for s in md.c0m if md.neg[s]["branch"] == br]
             if sids:
-                st = diff_stat(md, x, y, field="leak")
+                cells = []
+                for c in NEG_CONDS:
+                    rs = [r for r in (md.by.get((s, c)) for s in sids) if r is not None and "target_label" in r]
+                    cells.append(" / ".join(share(rs, k) for k in kinds))
+                w(f"| {br} | {len(sids)} | " + " | ".join(cells) + " |")
+        w("\nPaired differences by kind (A-B, pp, 95% CI image bootstrap):\n")
+        w("| pair | " + " | ".join(kinds + ["leak"]) + " |")
+        w("|---|" + "---|" * (len(kinds) + 1))
+        for r0 in md.rows:
+            if "target_label" in r0:
+                for k in kinds:
+                    r0[f"is_{k}"] = r0["target_label"] == k
+        for x, y in [p for p in PAIRS if p[0] in NEG_CONDS and p[1] in NEG_CONDS]:
+            sids = [s for s in md.c0m if md.outcome(s, x) is not None and md.outcome(s, y) is not None]
+            cells = []
+            for f in [f"is_{k}" for k in kinds] + ["leak"]:
+                st = diff_stat(md, x, y, field=f)
                 lo, hi = bootstrap(sids, md.image, st, rng)
-                w(f"| {x} vs {y} | {100 * st(sids):+.1f} | [{100 * lo:+.1f}, {100 * hi:+.1f}] |")
+                cells.append(f"{100 * st(sids):+.1f} [{100 * lo:+.1f}, {100 * hi:+.1f}]")
+            w(f"| {x} vs {y} | " + " | ".join(cells) + " |")
         flagged = sum(r.get("judge_source") == "think_error" for r in md.rows)
         amb = sum(r.get("count_rule") == "AMBIG" for r in md.rows)
         w(f"\nFlagged for a human check: thinking judge gave no JSON {flagged}; ambiguous bare-number counts {amb}.\n")

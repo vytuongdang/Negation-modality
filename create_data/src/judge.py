@@ -8,7 +8,7 @@ for experiments; the regex matcher in mention.py is kept as a second opinion.
     # -> [{"C1": True, "C2": False, ...} or None if the reply cannot be parsed]
     j.last_source                               # per job: "fast", "think" (adjudicated), "think_error"
                                                 #   (thinking never gave JSON: fast value kept, FLAGGED) or "error"
-    labels = j.label_target([(component, answer), ...])   # -> "STATE" / "META" / "DENY" / "NONE" per job
+    labels = j.label_target([(component, answer, question), ...])   # -> STATE / META / DENY / WRONG / NONE
     j.close()
 
 Closed set: the judge only says which of the listed facts the answer states (no free-form grading).
@@ -57,7 +57,7 @@ Facts:
 Reply with JSON only, e.g. {{"stated": [1, 3]}} or {{"stated": []}}."""
 
 
-LABEL_VERSION = "label-v3"
+LABEL_VERSION = "label-v4"
 LABEL_PROMPT = """Below is a question about an image, the answer a model gave, and one fact X.
 The model had been told NOT to mention X. The question is only there so you can read short answers
 ("Cart" to "what is the horse pulling?").
@@ -68,8 +68,9 @@ STATE - the answer says X is true / present, even if it also says it will not ta
         ("there's a horse too, but I won't mention it").
 META  - the answer names X's object or value only to exclude it, without saying it is true
         ("besides the bed, there is a chair", "excluding the suitcase").
-DENY  - the answer says X is false / absent, or gives a different value for the same thing
-        ("there is no knife"; "2 cylinders" when X is "there are 3 cylinders"; "small" when X is "cube is large").
+DENY  - the answer says X's object is absent or X is false ("there is no knife", "the cube is not large").
+WRONG - the answer gives a DIFFERENT value for the same thing ("2 cylinders" when X is "there are 3 cylinders";
+        "small" when X is "cube is large"; "standing on the sand" when X is "standing on grass").
 NONE  - the answer does not refer to X. Words that appear only in the question do not count, and talking about
         the instruction without naming X's object or value ("I won't mention its color") is NONE.
 
@@ -79,7 +80,7 @@ Question:
 Answer:
 \"\"\"{answer}\"\"\"
 
-Reply with one word: STATE, META, DENY or NONE."""
+Reply with one word: STATE, META, DENY, WRONG or NONE."""
 
 
 PROMPT_V3 = """Below is a question about an image, the answer a model gave, and a numbered list of facts.
@@ -202,7 +203,7 @@ class Judge:
         return out
 
     def label_target(self, jobs, progress=True):
-        """jobs: [(component, answer, question)] -> "STATE" / "META" / "DENY" / "NONE" per job (None if
+        """jobs: [(component, answer, question)] -> "STATE" / "META" / "DENY" / "WRONG" / "NONE" per job (None if
         unparseable).
         For answers that name the forbidden component (strict-violation robustness check, 2026-11-23)."""
         keys = [hashlib.sha1(json.dumps([LABEL_VERSION, JUDGE_MODEL, fact_text(c), a, q], ensure_ascii=False)
@@ -228,7 +229,7 @@ class Judge:
                     print(f"label {min(i + step, len(todo))}/{len(todo)}", flush=True)
         out = []
         for k in keys:
-            m = re.search(r"\b(STATE|META|DENY|NONE)\b", self.cache[k]["reply"].upper())
+            m = re.search(r"\b(STATE|META|DENY|WRONG|NONE)\b", self.cache[k]["reply"].upper())
             out.append(m.group(1) if m else None)
         return out
 

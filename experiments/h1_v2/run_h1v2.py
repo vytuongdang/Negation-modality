@@ -79,6 +79,7 @@ def inputs(s, cond):
     raise ValueError(cond)
 
 
+VIOLATION_TYPES = ("STATE", "META", "DENY", "WRONG")   # kinds of violation (primary metric = any of them)
 NUM_WORDS = {w: i for i, w in enumerate("zero one two three four five six seven eight nine ten eleven twelve".split())}
 
 
@@ -242,8 +243,9 @@ def main():
                                                   else not r["target_mentioned"])
     # PRIMARY METRIC (Vy, 2026-11-23): we measure whether the model obeys the negation, so a violation is ANY
     # mention of the forbidden thing: the fact itself (STATE), naming it to exclude it (META, "besides the bed"),
-    # or a denial / different value (DENY, "there is no knife", "2 cylinders" when there are 3).
-    #   violation = STATE / META / DENY   (primary)      leak = target_mentioned (the correct fact; secondary)
+    # a denial (DENY, "there is no knife") or a different value (WRONG, "2 cylinders" when there are 3).
+    #   violation = STATE / META / DENY / WRONG (primary; target_label says which kind, for the breakdown)
+    #   leak = target_mentioned (the correct fact; secondary)
     # Every row the judge counts as compliant gets a label from the label pass (count-branch bare numbers are
     # decided by count_rule); rows the judge counts as stating the fact are STATE.
     from judge import Judge
@@ -264,7 +266,7 @@ def main():
             r["target_label"] = "STATE"
         r.setdefault("target_label", "NONE")
         r["leak"] = r["target_mentioned"]
-        r["violation"] = r["target_label"] in ("STATE", "META", "DENY")
+        r["violation"] = r["target_label"] in VIOLATION_TYPES
         r["strict_violation"] = r["violation"]   # older name, kept for analyze.py / human_check.py
     flagged = [r for r in rows if r["judge_source"] == "think_error"]
     if flagged:
@@ -292,7 +294,7 @@ def main():
     n0 = sum(1 for r in rows if r["condition"] == "C0")
     print(f"\nC0 states the target in {len(c0)}/{n0} questions")
     conds = [c for c in conds if c != "C0" and c not in OCR]
-    print(f"violation % (any mention: STATE/META/DENY) among C0-mentioned (n), negative form\n{'branch':<18}" + "".join(f"{c:>12}" for c in conds))
+    print(f"violation % (any mention: STATE/META/DENY/WRONG) among C0-mentioned (n), negative form\n{'branch':<18}" + "".join(f"{c:>12}" for c in conds))
     for b in BRANCHES + ["ALL"]:
         cells = []
         for c in conds:
