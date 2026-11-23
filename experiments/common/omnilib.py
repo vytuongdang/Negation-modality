@@ -28,6 +28,8 @@ QWEN_SYSTEM = ("You are Qwen, a virtual human developed by the Qwen Team, Alibab
                "auditory and visual inputs, as well as generating text and speech.")
 MAX_SIDE = 1024
 MAX_NEW_TOKENS = 100  # answers are short lists (Vy, 2026-11-19)
+ITEM_SEP = "\n"   # between the items after the image, in every model: Qwen / Phi join with it here, MiniCPM-o's
+                   # chat() already joins content strings with "\n" (2026-11-23, Vy: T and A must be set up the same)
 IM_END = 151645  # <|im_end|>
 BRANCHES = ["existence", "existence_closed", "count", "attribute", "relation"]
 
@@ -103,7 +105,11 @@ class Omni:
             name, dtype=torch.float16).to("cuda").eval()
 
     def prompt(self, items):
-        content = [{"type": "image"}] + [{"type": t, **({"text": v} if t == "text" else {})} for t, v in items]
+        content = [{"type": "image"}]
+        for k, (t, v) in enumerate(items):   # items joined by exactly "\n", the same in every adapter (ITEM_SEP)
+            if k:
+                content.append({"type": "text", "text": ITEM_SEP})
+            content.append({"type": t, **({"text": v} if t == "text" else {})})
         messages = [{"role": "system", "content": [{"type": "text", "text": QWEN_SYSTEM}]},
                     {"role": "user", "content": content}]
         return self.processor.apply_chat_template(messages, add_generation_prompt=True, tokenize=False)
@@ -175,7 +181,7 @@ class Phi4MM(_Single):
             else:
                 audios.append((load_audio(v), 16000))
                 parts.append(f"<|audio_{len(audios)}|>")
-        prompt = f"<|user|><|image_1|>{''.join(parts)}<|end|><|assistant|>"
+        prompt = f"<|user|><|image_1|>{ITEM_SEP.join(parts)}<|end|><|assistant|>"
         kw = {"audios": audios} if audios else {}
         enc = self.processor(text=prompt, images=[load_image(image_path)], return_tensors="pt", **kw).to("cuda")
         with self.torch.no_grad():
@@ -197,7 +203,10 @@ def load_model(key):
 # ---------------------------------------------------------------- answer cache
 
 def input_key(model, image, items, max_new_tokens=MAX_NEW_TOKENS):
-    payload = json.dumps([model, str(image), [list(i) for i in items], max_new_tokens], ensure_ascii=False)
+    key = [model, str(image), [list(i) for i in items], max_new_tokens]
+    if len(items) > 1:   # prompts with several items render differently since ITEM_SEP (2026-11-23): new cache keys
+        key.append("sep-v2")
+    payload = json.dumps(key, ensure_ascii=False)
     return hashlib.sha1(payload.encode()).hexdigest()
 
 

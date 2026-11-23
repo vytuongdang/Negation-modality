@@ -4,9 +4,8 @@
 H1 core (Vy, 2026-11-19), input order always image -> question -> instruction, one negative sample per question
 (for template-sweep units one of the 7 copies is drawn, seeded), max_new_tokens 100:
     C0   original image + question                         (does the model state the target unprompted?)
-    T    question, blank line, instruction: "Q\\n\\nI"     (instruction as its own text block; Qwen's chat
-                                                           template joins text blocks with nothing in between,
-                                                           so the break is explicit)
+    T    question + written instruction as its own text item, after the question (exactly like the audio in A;
+         every adapter joins items with omnilib.ITEM_SEP = "\n")
     A    question + spoken instruction (audio segment after the question)
     V    image with the written instruction + question
 Later conditions, only with --conds (after H1 core is reported):
@@ -50,7 +49,7 @@ def inputs(s, cond):
     if cond == "T_join":
         return s["image"], [("text", f"{q} {i}")]
     if cond == "T":
-        return s["image"], [("text", f"{q}\n\n{i}")]
+        return s["image"], [("text", q), ("text", i)]   # own item, exactly like the audio in A (Vy, 2026-11-23)
     if cond == "A":
         return s["image"], [("text", q), ("audio", s["negation_audio"])]
     if cond == "V":
