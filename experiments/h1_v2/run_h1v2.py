@@ -11,6 +11,13 @@ H1 core (Vy, 2026-11-19), input order always image -> question -> instruction, o
 Later conditions, only with --conds (after H1 core is reported):
     T_join   question and instruction in one string "Q I"
     C0_box   box image (same empty box as V) + question
+    T_pre    instruction text item BEFORE the question                (order: matches V, where it comes first)
+    A_pre    instruction audio item BEFORE the question
+    V_card   question, then the instruction on a separate white card image (same slot as T / A;
+             cards from common/render_cards.py)
+    OCR_V    V image + "copy the text in the white box"   (can the model read V at all? like the ASR check)
+    OCR_card original image + card + "copy the text in the second image"
+             OCR conditions are scored by string match with the instruction, not by the judge.
 H4 forms (exceptive / affirmative) with --forms: T, A, V on the form samples of the selected units.
 
     python run_h1v2.py --model qwen2.5-omni-7b --pilot 40      # 40 questions per branch (200)
@@ -22,19 +29,24 @@ Outputs in results/<model>/: answers.jsonl (cache keyed by input hash, shared by
 """
 import argparse
 import csv
+import difflib
 import json
 import random
+import re
 import sys
 from collections import defaultdict
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE.parent / "common"))
+from render_cards import card_rel  # noqa: E402
 from omnilib import (BRANCHES, MODELS, AnswerCache, clean, input_key, judge_rows, load_dataset,  # noqa: E402
                      split_group)
 
 CORE = ["C0", "T", "A", "V"]
-EXTRA = ["T_join", "C0_box"]
+EXTRA = ["T_join", "C0_box", "T_pre", "A_pre", "V_card", "OCR_V", "OCR_card"]
+OCR = {"OCR_V": "What does the text in the white box say? Copy it exactly, and say nothing else.",
+       "OCR_card": "What does the text in the second image say? Copy it exactly, and say nothing else."}
 FORM_CONDS = ["T", "A", "V"]
 RESULTS = HERE / "results"
 
@@ -54,7 +66,24 @@ def inputs(s, cond):
         return s["image"], [("text", q), ("audio", s["negation_audio"])]
     if cond == "V":
         return s["negation_image"], [("text", q)]
+    if cond == "T_pre":
+        return s["image"], [("text", i), ("text", q)]
+    if cond == "A_pre":
+        return s["image"], [("audio", s["negation_audio"]), ("text", q)]
+    if cond == "V_card":
+        return s["image"], [("text", q), ("image", card_rel(i))]
+    if cond == "OCR_V":
+        return s["negation_image"], [("text", OCR[cond])]
+    if cond == "OCR_card":
+        return s["image"], [("text", OCR[cond]), ("image", card_rel(i))]
     raise ValueError(cond)
+
+
+def ocr_score(answer, truth):
+    """Normalised exact match + character similarity of a copied instruction."""
+    norm = lambda x: re.sub(r"[^a-z0-9 ]", "", x.lower().replace("\u2019", "'").replace("'", "")).split()
+    a, t = " ".join(norm(answer)), " ".join(norm(truth))
+    return {"ocr_exact": a == t, "ocr_sim": round(difflib.SequenceMatcher(None, a, t).ratio(), 3)}
 
 
 def one_per_unit(data, seed):
@@ -121,11 +150,16 @@ def main():
     args = ap.parse_args()
 
     tag = ("all" if args.all else f"pilot{args.pilot}") + ("_forms" if args.forms else "")
+    if args.conds != CORE:   # extra conditions get their own files, so they never overwrite the core results
+        tag += "_" + "-".join(args.conds)
     out = RESULTS / args.model
     out.mkdir(parents=True, exist_ok=True)
     data = load_dataset()
     samples = select(data, None if args.all else args.pilot, args.seed)
-    plan = [(s, c) for s in samples for c in args.conds]
+    conds = list(args.conds)
+    if "C0" not in conds and any(c not in OCR for c in conds):
+        conds = ["C0"] + conds   # violation is counted among C0-mentioned questions; C0 answers are cached
+    plan = [(s, c) for s in samples for c in conds]
     if args.forms:
         forms = defaultdict(list)
         for s in data.values():
@@ -153,6 +187,20 @@ def main():
                      "occludes_subject": s["occludes_subject"], "question": s["question"],
                      "negation": s["negation"], "target": s["target"], "components": s["components"],
                      "answer": clean(raw), "raw_answer": raw, "_s": s})
+    ocr_rows = [r for r in rows if r["condition"] in OCR]
+    rows = [r for r in rows if r["condition"] not in OCR]
+    if ocr_rows:
+        with open(out / f"ocr_{tag}.jsonl", "w") as f:
+            for r in ocr_rows:
+                r.pop("_s")
+                r.update(ocr_score(r["answer"], r["negation"]))
+                f.write(json.dumps({k: v for k, v in r.items() if k != "components"}, ensure_ascii=False) + "\n")
+        for c in sorted({r["condition"] for r in ocr_rows}):
+            rs = [r for r in ocr_rows if r["condition"] == c]
+            print(f"{c}: exact copy {100 * sum(r['ocr_exact'] for r in rs) / len(rs):.1f}%, mean similarity "
+                  f"{sum(r['ocr_sim'] for r in rs) / len(rs):.3f} (n={len(rs)}) -> {out / f'ocr_{tag}.jsonl'}")
+    if not rows:
+        return
     judge_rows(rows, RESULTS / "judge.jsonl")
     for r in rows:
         s = r.pop("_s")
@@ -177,7 +225,7 @@ def main():
     c0 = {r["pair_of"] for r in rows if r["condition"] == "C0" and r["target_mentioned"]}
     n0 = sum(1 for r in rows if r["condition"] == "C0")
     print(f"\nC0 states the target in {len(c0)}/{n0} questions")
-    conds = [c for c in args.conds if c != "C0"]
+    conds = [c for c in conds if c != "C0" and c not in OCR]
     print(f"violation % among C0-mentioned (n), negative form\n{'branch':<18}" + "".join(f"{c:>12}" for c in conds))
     for b in BRANCHES + ["ALL"]:
         cells = []

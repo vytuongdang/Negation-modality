@@ -1,6 +1,7 @@
 """Shared code for the dataset-v2 experiments (H1 v2, H2): data loading, model adapters, answer cache, scoring.
 
-A model input is an image path plus an ordered list of items after it: ("text", str) or ("audio", wav path).
+A model input is an image path plus an ordered list of items after it: ("text", str), ("audio", wav path) or
+("image", path) (a second image, e.g. the V_card instruction card).
 Input order is always image first, then the items in the given order. Answers are cached in a JSONL file keyed by
 sha1(model, image, items, max_new_tokens), so identical inputs (e.g. C0 shared by template-sweep copies and by
 the exceptive / affirmative forms of one unit) are generated once and every run is resumable.
@@ -109,7 +110,7 @@ class Omni:
         for k, (t, v) in enumerate(items):   # items joined by exactly "\n", the same in every adapter (ITEM_SEP)
             if k:
                 content.append({"type": "text", "text": ITEM_SEP})
-            content.append({"type": t, **({"text": v} if t == "text" else {})})
+            content.append({"type": t, **({"text": v} if t == "text" else {})})   # "image" / "audio": placeholders
         messages = [{"role": "system", "content": [{"type": "text", "text": QWEN_SYSTEM}]},
                     {"role": "user", "content": content}]
         return self.processor.apply_chat_template(messages, add_generation_prompt=True, tokenize=False)
@@ -117,7 +118,7 @@ class Omni:
     def answer_batch(self, jobs, max_new_tokens=MAX_NEW_TOKENS):
         """jobs: [(image_path, items)] -> [answer]"""
         texts = [self.prompt(items) for _, items in jobs]
-        images = [load_image(p) for p, _ in jobs]
+        images = [load_image(x) for p, items in jobs for x in [p] + [v for t, v in items if t == "image"]]
         audios = [load_audio(v) for _, items in jobs for t, v in items if t == "audio"]
         kw = {"audio": audios, "sampling_rate": 16000} if audios else {}
         enc = self.processor(text=texts, images=images, return_tensors="pt", padding=True, **kw).to("cuda")
@@ -156,7 +157,8 @@ class MiniCPMo(_Single):
         self.tok = AutoTokenizer.from_pretrained(name, trust_remote_code=True)
 
     def answer(self, image_path, items, max_new_tokens=MAX_NEW_TOKENS):
-        content = [load_image(image_path)] + [v if t == "text" else load_audio(v) for t, v in items]
+        media = {"text": lambda v: v, "audio": load_audio, "image": load_image}
+        content = [load_image(image_path)] + [media[t](v) for t, v in items]
         with self.torch.no_grad():
             return self.model.chat(msgs=[{"role": "user", "content": content}], tokenizer=self.tok, sampling=False,
                                    max_new_tokens=max_new_tokens).strip()
@@ -174,16 +176,19 @@ class Phi4MM(_Single):
         self.gen_cfg = GenerationConfig.from_pretrained(name)
 
     def answer(self, image_path, items, max_new_tokens=MAX_NEW_TOKENS):
-        parts, audios = [], []
+        parts, audios, images = [], [], [load_image(image_path)]
         for t, v in items:
             if t == "text":
                 parts.append(v)
+            elif t == "image":
+                images.append(load_image(v))
+                parts.append(f"<|image_{len(images)}|>")
             else:
                 audios.append((load_audio(v), 16000))
                 parts.append(f"<|audio_{len(audios)}|>")
         prompt = f"<|user|><|image_1|>{ITEM_SEP.join(parts)}<|end|><|assistant|>"
         kw = {"audios": audios} if audios else {}
-        enc = self.processor(text=prompt, images=[load_image(image_path)], return_tensors="pt", **kw).to("cuda")
+        enc = self.processor(text=prompt, images=images, return_tensors="pt", **kw).to("cuda")
         with self.torch.no_grad():
             out = self.model.generate(**enc, max_new_tokens=max_new_tokens, do_sample=False,
                                       generation_config=self.gen_cfg)
@@ -238,7 +243,7 @@ class AnswerCache:
         with open(self.path, "a") as f:
             for i in range(0, len(todo), batch_size):
                 chunk = todo[i:i + batch_size]
-                abs_jobs = [(DATA / img, [(t, str(DATA / v) if t == "audio" else v) for t, v in items])
+                abs_jobs = [(DATA / img, [(t, str(DATA / v) if t in ("audio", "image") else v) for t, v in items])
                             for _, img, items, _ in chunk]
                 try:
                     answers = model.answer_batch(abs_jobs)
