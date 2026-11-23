@@ -275,8 +275,8 @@ def main():
     todo = [r for r in rows if not r["target_mentioned"] and not r["count_rule"]]
     if todo:
         j = Judge(RESULTS / "judge.jsonl")
-        comp = lambda r: next(c for c in r["components"] if c["id"] == r["target"])
-        labels = j.label_target([(comp(r), r["answer"], r["question"]) for r in todo])
+        target_comp = lambda r: next(c for c in r["components"] if c["id"] == r["target"])
+        labels = j.label_target([(target_comp(r), r["answer"], r["question"]) for r in todo])
         j.close()
         for r, lab in zip(todo, labels):
             r["target_label"] = lab or "NONE"

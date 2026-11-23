@@ -120,3 +120,6 @@ surprising pattern worth chasing:
 - 2026-11-23 | H1 trial: the T vs A gap changes sign across models (Phi-4 opposite to Qwen/MiniCPM), so any
   channel claim must be per model; V violation 82-93% everywhere needs a reading-vs-obeying test before any claim.
 - 2026-11-23 | Check the n in every analysis table against the design (913 vs 1,000 revealed a selection bug).
+- 2026-11-23 | Never edit a script that a running job will start again later (run_trial.sh re-imports
+  run_h1v2.py per model): a new module name `comp` clashed with a local lambda and crashed 3 of 4 models, and the
+  runner hid it behind "TRIAL DONE". Runner scripts must stop on the first failure; new code goes in only between jobs.

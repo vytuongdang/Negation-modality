@@ -179,3 +179,11 @@
 - Vy RULE 2026-11-23 20:01 (REPLACES the 19:45 rule): NO event-by-event Telegram. Progress only via hourly
   heartbeat + pico/status.txt. Telegram report only: one short report per finished stage (incl. CODE ONLY stages
   when code is ready), plus urgent only (crash / job stopped, quota nearly out, decision needed from Vy).
+- 2026-11-23 20:10 heartbeat now alerts Vy at once on new error lines in pico/logs/*.log (FAILED/Traceback/OOM/Killed); Claude edited pico/heartbeat.py only.
+- 2026-11-23 22:29 CRASH (Vy woke me 22:57): Stage 1 qwen-3b / minicpm / phi failed with UnboundLocalError 'comp'
+  (my H3-B edit at ~20:00 while the job ran: module `comp` vs local lambda `comp` in main). qwen-7b finished
+  (scored_pilot200.jsonl 22:29, log pico/logs/pilot2v2_run1_qwen7b.log; took 2h40, mostly judge). FIX: lambda
+  renamed target_comp; run_trial.sh takes a model list and exits 1 ("TRIAL STOPPED") on the first failure.
+  Smoke --pilot 2 OK in negation / omni_neg / omni_phi + score_only. RESTARTED 22:59: job-pilot2v2 =
+  run_trial.sh qwen2.5-omni-3b minicpm-o-2.6 phi-4-mm, log pico/logs/pilot2v2.log. ETA ~08:30 11-24 (3 x ~2.5 h
+  judge + gen). Vy: check often enough that a crash idles the GPU at most 1 h -> sleep 3600 per check while running.
