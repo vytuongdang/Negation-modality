@@ -148,7 +148,7 @@
      flash_attention.py -> omnilib.internomni_local_dir builds experiments/common/models/internomni with weight
      symlinks + stub, and pre-copies code into the HF modules cache because tf 4.44 skips nested relative imports).
      Prompt = model's internlm2-chat template with its default (Chinese) system prompt, "<image>\n" + items joined
-     by ITEM_SEP; 6 tiles + thumbnail at 448 (config max_dynamic_patch); one audio per prompt. CPU check OK: C0/T/A/
+     by ITEM_SEP; 6 tiles + thumbnail at 448 (config max_dynamic_patch); one audio per prompt. Weights downloaded (17 GB). CPU check OK: C0/T/A/
      V_card prompts correct, 1792 img tokens, ~67 audio tokens. Smoke (after Vy OK): cd experiments/h1_v2 &&
      PYTHONNOUSERSITE=1 ~/anaconda3/envs/omni_intern/bin/python -u run_h1v2.py --model internomni --pilot 2
      --generate_only --batch_size 1 ; then score with `negation` env --score_only. Watch fp16 overflow (garbage
