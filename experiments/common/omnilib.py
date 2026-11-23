@@ -42,17 +42,22 @@ def read_jsonl(path):
 
 # ---------------------------------------------------------------- data
 
-def load_dataset():
+def load_dataset(keep_double_labels=False):
     """Every sample of dataset v2 with audio: compact row merged with the full record (components, expected,
-    split) and the ASR flag of its audio. -> {sample_id: dict}"""
+    split) and the ASR flag of its audio. -> {sample_id: dict}
+    Units listed in out/excluded_double_label.jsonl (create_data/src/flag_double_labels.py) are left out."""
     full = {s["sample_id"]: s for s in read_jsonl(OUT / "samples.jsonl")}
     forms = OUT / "samples_forms.jsonl"
     if forms.exists():
         full.update({s["sample_id"]: s for s in read_jsonl(forms)})
     asr = {m["text"]: m for m in read_jsonl(DATA / "audio" / "negation_sentences" / "manifest.jsonl")}
+    excl = OUT / "excluded_double_label.jsonl"   # COCO units with one object labelled twice (Vy, 2026-11-23)
+    dropped = {r["unit_id"] for r in read_jsonl(excl)} if excl.exists() and not keep_double_labels else set()
     out = {}
     for r in read_jsonl(OUT / "samples_compact_all_audio.jsonl"):
         s = full[r["id"]]
+        if s["validation"]["unit_id"] in dropped:
+            continue
         m = asr.get(r["negation"], {})
         out[r["id"]] = {
             "id": r["id"], "image": r["image"], "question": r["question"], "negation": r["negation"],

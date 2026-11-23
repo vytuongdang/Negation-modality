@@ -180,8 +180,10 @@ def main():
         tag += "_" + "-".join(args.conds)
     out = RESULTS / args.model
     out.mkdir(parents=True, exist_ok=True)
-    data = load_dataset()
-    samples = select(data, None if args.all else args.pilot, args.seed)
+    # select on the full dataset, then drop double-labelled units: the selection stays the same as before the
+    # exclusion list existed, so cached answers are reused and runs stay comparable (2026-11-23)
+    data_all, data = load_dataset(keep_double_labels=True), load_dataset()
+    samples = [s for s in select(data_all, None if args.all else args.pilot, args.seed) if s["id"] in data]
     conds = list(args.conds)
     if "C0" not in conds and any(c not in OCR for c in conds):
         conds = ["C0"] + conds   # violation is counted among C0-mentioned questions; C0 answers are cached

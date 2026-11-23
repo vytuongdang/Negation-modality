@@ -42,6 +42,9 @@ MIN_SHORT_SIDE = 300          # px (VG images are mostly 500x333 / 500x375)
 MAX_OBJECTS = {"COCO": 10, "VG": 10, "CLEVR": 6}   # COCO instances / VG "things" (b1.NOT_CLUTTER not counted) / CLEVR
 MIN_RELATION_OBJECT_RATIO = 0.01  # relation: the related object (cup, phone...) only needs 1%; the subject needs 3%
 COCO_EXCLUDED_LICENSES = {3, 6}    # NoDerivs (the visual channel writes on the image = a derivative work)
+DOUBLE_LABEL_IOU = 0.7        # COCO: two boxes of DIFFERENT categories of the SAME supercategory overlapping this
+                              # much = one object labelled twice (pizza+sandwich, backpack+handbag): unit dropped
+                              # (Vy, 2026-11-23)
 N_DISTRACTORS = 2             # absent same-supercategory categories in a closed-set existence question
 
 # ---------------------------------------------------------------- step 2: pixel-level filters

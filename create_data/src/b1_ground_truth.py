@@ -26,7 +26,7 @@ import re
 import zlib
 from collections import Counter, defaultdict
 
-from config import (B1_DIR, BORDER_PX, COCO_EXCLUDED_LICENSES, MAX_COMPONENTS, MAX_COUNT, MAX_OBJECTS,
+from config import (B1_DIR, BORDER_PX, COCO_EXCLUDED_LICENSES, DOUBLE_LABEL_IOU, MAX_COMPONENTS, MAX_COUNT, MAX_OBJECTS,
                     MIN_AREA_RATIO, MIN_COMPONENTS, MIN_COUNT_INSTANCE_RATIO, MIN_RELATION_OBJECT_RATIO, MIN_SHORT_SIDE,
                     N_DISTRACTORS, OTHER_WEIGHT, RAW, SEED, SPLITS, URLS)
 from utils import write_jsonl
@@ -121,6 +121,23 @@ def visible_ok(x, y, w, h, W, H):
     return area_ratio(w, h, W, H) >= MIN_AREA_RATIO and not touches_border(x, y, w, h, W, H)
 
 
+def iou(a, b):
+    ax, ay, aw, ah = a
+    bx, by, bw, bh = b
+    ix = max(0, min(ax + aw, bx + bw) - max(ax, bx))
+    iy = max(0, min(ay + ah, by + bh) - max(ay, by))
+    inter = ix * iy
+    return inter / (aw * ah + bw * bh - inter) if inter else 0.0
+
+
+def double_labelled(by_cat):
+    """by_cat: {category name: [annotations]} of ONE supercategory. -> [(cat_a, cat_b)] pairs where one object
+    seems labelled twice: boxes of two different categories with IoU > DOUBLE_LABEL_IOU."""
+    flat = [(n, a["bbox"]) for n, v in by_cat.items() for a in v]
+    return sorted({tuple(sorted((n1, n2))) for i, (n1, b1) in enumerate(flat) for n2, b2 in flat[i + 1:]
+                   if n1 != n2 and iou(b1, b2) > DOUBLE_LABEL_IOU})
+
+
 def rbox(b):
     return [round(float(t), 1) for t in b]
 
@@ -174,6 +191,9 @@ def b1_coco(split):
         units = []
         for sc, by_cat in groups.items():
             if sc not in SUPERCAT_NOUN or not (MIN_COMPONENTS <= len(by_cat) <= MAX_COMPONENTS):
+                continue
+            if double_labelled(by_cat):   # one object with two category labels: ground truth is wrong
+                stats["double_label"] += 1
                 continue
             # every category must have a clearly visible (largest) instance
             largest = {n: max(v, key=lambda x: x["area"]) for n, v in by_cat.items()}
