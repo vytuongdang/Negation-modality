@@ -11,6 +11,8 @@
        DENY   says it is false / absent, or gives a different value ("there is no knife")
        NONE   does not refer to it
    Two annotators: copy the sheet, fill `human_label` in each, pass both files to `score`.
+   Easier: a one-file labelling page with the images built in (labels saved in the browser, Export CSV):
+       python human_check.py html --tag pilot200          -> human_check/label_<tag>.html
 3) score: kappa judge vs human (binary violation = STATE; strict = STATE/META/DENY), per channel and overall,
    plus human-human kappa when two sheets are given.
        python human_check.py score --tag pilot200 human_check/sheet_pilot200_A.csv [human_check/sheet_pilot200_B.csv]
@@ -75,6 +77,29 @@ def sample(args):
           f"judge sources in the sample: {dict(src)}")
 
 
+def html(args):
+    """Self-contained labelling page: images embedded (downscaled JPEG), blind like the CSV sheet."""
+    import base64
+    import io
+    from PIL import Image
+    from omnilib import DATA
+    with open(OUT / f"sheet_{args.tag}.csv", encoding="utf-8-sig") as f:
+        items = list(csv.DictReader(f))
+    for it in items:
+        img = Image.open(DATA / it["image"]).convert("RGB")
+        img.thumbnail((args.max_side, args.max_side))
+        buf = io.BytesIO()
+        img.save(buf, "JPEG", quality=80)
+        it["img"] = "data:image/jpeg;base64," + base64.b64encode(buf.getvalue()).decode()
+        it.pop("human_label", None)
+        it.pop("comment", None)
+    page = (HERE / "human_check_template.html").read_text()
+    page = page.replace("/*DATA*/[]", json.dumps(items, ensure_ascii=False)).replace('/*TAG*/""', json.dumps(args.tag))
+    path = OUT / f"label_{args.tag}.html"
+    path.write_text(page)
+    print(f"{len(items)} items -> {path} ({path.stat().st_size / 1e6:.1f} MB)")
+
+
 def kappa(a, b):
     n = len(a)
     if not n:
@@ -132,11 +157,14 @@ def main():
     a.add_argument("--tag", default="pilot200")
     a.add_argument("--n", type=int, default=300)
     a.add_argument("--seed", type=int, default=7)
+    h = sub.add_parser("html")
+    h.add_argument("--tag", default="pilot200")
+    h.add_argument("--max_side", type=int, default=640)
     b = sub.add_parser("score")
     b.add_argument("--tag", default="pilot200")
     b.add_argument("sheets", nargs="+")
     args = ap.parse_args()
-    sample(args) if args.cmd == "sample" else score(args)
+    {"sample": sample, "html": html, "score": score}[args.cmd](args)
 
 
 if __name__ == "__main__":

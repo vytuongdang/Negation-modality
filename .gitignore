@@ -31,3 +31,4 @@ pico/new_session
 # backups
 *.bak
 *.bak_*
+experiments/h1_v2/human_check/label_*.html
