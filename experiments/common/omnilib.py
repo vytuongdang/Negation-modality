@@ -339,7 +339,7 @@ def judge_rows(rows, judge_cache):
     from judge import Judge
     regex = [regex_hits(r["components"], r["answer"]) for r in rows]
     judge = Judge(judge_cache)
-    llm = judge.judge([(r["components"], r["answer"]) for r in rows], regex=regex)
+    llm = judge.judge([(r["components"], r["answer"], r["question"]) for r in rows], regex=regex)   # v3 prompt
     src = judge.last_source
     judge.close()
     for r, rg, lm, s in zip(rows, regex, llm, src):

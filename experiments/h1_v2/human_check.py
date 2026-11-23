@@ -123,6 +123,18 @@ def read_sheet(path):
 
 def score(args):
     key = {int(json.loads(l)["item"]): json.loads(l) for l in open(OUT / f"key_{args.tag}.jsonl")}
+    if args.judge_tag:   # compare the human labels with a NEWER scoring of the same answers (e.g. judge v3)
+        for i, k in key.items():
+            f = RESULTS / k["model"] / f"scored_{args.judge_tag}.jsonl"
+            new = getattr(score, "_cache", {}).get(f)
+            if new is None:
+                new = {(r["sample_id"], r["condition"]): r for r in map(json.loads, open(f))}
+                score._cache = {**getattr(score, "_cache", {}), f: new}
+            r = new.get((k["sample_id"], k["condition"]))
+            if r is not None:
+                k.update(judge_violation=r["target_mentioned"], judge_label=r.get("target_label"),
+                         judge_source=r.get("judge_source"))
+        print(f"judge verdicts taken from scored_{args.judge_tag}.jsonl")
     h = read_sheet(args.sheets[0])
     items = sorted(i for i in h if i in key)
     print(f"{len(items)} labelled items of {len(key)}")
@@ -162,6 +174,7 @@ def main():
     h.add_argument("--max_side", type=int, default=640)
     b = sub.add_parser("score")
     b.add_argument("--tag", default="pilot200")
+    b.add_argument("--judge_tag", help="take the judge verdicts from scored_<judge_tag>.jsonl instead of the key")
     b.add_argument("sheets", nargs="+")
     args = ap.parse_args()
     {"sample": sample, "html": html, "score": score}[args.cmd](args)

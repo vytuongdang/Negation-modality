@@ -248,7 +248,7 @@ def main():
     if named:
         j = Judge(RESULTS / "judge.jsonl")
         comp = lambda r: next(c for c in r["components"] if c["id"] == r["target"])
-        labels = j.label_target([(comp(r), r["answer"]) for r in named])
+        labels = j.label_target([(comp(r), r["answer"], r["question"]) for r in named])
         j.close()
         for r, lab in zip(named, labels):
             r["target_label"] = lab or "NONE"
