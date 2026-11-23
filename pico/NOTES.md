@@ -176,6 +176,6 @@
   letters balanced A320/B306/C306 on the pilot), scored by letter -> results/<m>/comp_<tag>_COMP_T-COMP_A-COMP_V.jsonl;
   analyze_comp.py --tag pilot200 -> analysis_comp_pilot200.md. Run: --pilot 200 --conds COMP_T COMP_A COMP_V
   (smoke with --pilot 2 first). H4 = --forms (exists). Controls = --conds C0_box OCR_V.
-- Vy RULE 2026-11-23 19:45: Telegram report (short, neutral, "-" items, blank line between) after each step AND at
-  once on: error/crash, job stop/restart/kill, bug found/fixed, plan/design change (+why), unexpected result (CIs),
-  decision needed, long delay or quota running out. Do not wait for the stage end.
+- Vy RULE 2026-11-23 20:01 (REPLACES the 19:45 rule): NO event-by-event Telegram. Progress only via hourly
+  heartbeat + pico/status.txt. Telegram report only: one short report per finished stage (incl. CODE ONLY stages
+  when code is ready), plus urgent only (crash / job stopped, quota nearly out, decision needed from Vy).
