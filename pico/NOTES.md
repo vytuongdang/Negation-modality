@@ -135,6 +135,18 @@
 - 2026-11-23 Vy DECIDED: keep template N3 ('Never refer to') in all main numbers and report it separately (analyze.py table with / without N3); worth a paragraph in the paper (wording effect).
 - 2026-11-23 Vy: primary violation broken down by kind for the analysis: STATE / META / DENY (absent/false) / WRONG (different value); analyze.py tables 'Violation by kind' (overall, by branch, paired diffs by kind). Label prompt label-v4.
 
+## >>> STATE 2026-11-24 07:20 (Pico) <<<
+- Stage 1 DONE (TRIAL DONE 06:09). analyze.py -> experiments/h1_v2/analysis_pilot200.md, REPORT.md section "H1 pilot v2",
+  figure h1v2_violation_pilot200.png. Violation among C0-mentioned (n 772-799), T/A/V: Qwen-7B 17.2/13.0/88.9
+  (T-A +4.2 [+1.6,+6.6]); Qwen-3B 63.0/51.1/91.7 (+11.9 [+8.5,+15.5]); MiniCPM 51.1/31.2/95.2 (+20.0 [+16.2,+23.8]);
+  Phi-4 26.0/40.9/91.3 (-14.9 [-19.2,-10.8]). V mostly STATE. Phi-4 count recall 74 -> 7% T. Same T-A signs as v1.
+- human_check.py --judge_tag FIXED: drops labelled items whose answer was regenerated (18 of 67; T/A were redone).
+  Judge v3 vs Vy on 49 identical answers: kappa 0.83, 93.9% (3 disagreements: WRONG count "2 spheres" missed,
+  "table" vs "dining table" in C0, one FP). Old judge on all 67 with new metric: kappa 0.76.
+- Stage 2 RUNNING since 07:07: tmux job-internomni = experiments/h1_v2/run_internomni.sh (gen omni_intern 3692 answers
+  ~1.4 s -> ~1.5 h, then judge in negation ~1.5-2.5 h), log pico/logs/internomni_pilot.log ('TRIAL DONE' / 'TRIAL STOPPED').
+  ETA ~10:30-11:00. Then analyze.py (adds internomni), short Stage 2 report, then Stage 3 per PLAN.md.
+
 ## >>> CURRENT STATE 2026-11-23 19:15 (read this first) <<<
 - Runner restarted by Claude at Vy's request. NOTHING is running on the GPU. Do NOT start any GPU job until Vy approves it in Telegram (Vy's rule: code may be prepared, runs only after Vy says OK).
 - All fixes below are committed and NOT run yet: T as its own item (ITEM_SEP), 256-token regeneration of cut answers, judge v3 (reads the question), thinking retry + think_error flag, count rule for bare numbers, primary metric = violation = any mention split into 4 kinds STATE/META/DENY/WRONG (leak = STATE, secondary), N3 kept + reported separately, 79 units excluded (excluded_units.jsonl; pilot = 932 questions), new conditions T_pre/A_pre/V_card/OCR_V/OCR_card ready, human_check.py + HTML page (Vy labelled 67 items of the old trial: 92.5% agree, kappa 0.83).

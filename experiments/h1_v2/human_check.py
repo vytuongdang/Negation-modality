@@ -135,12 +135,22 @@ def score(args):
                 score._cache = {**getattr(score, "_cache", {}), f: new}
             r = new.get((k["sample_id"], k["condition"]))
             if r is not None:
+                k["new_answer"] = r.get("answer")
                 k.update(judge_violation=r.get("violation", r["target_mentioned"]), judge_leak=r["target_mentioned"],
                          judge_label=r.get("target_label"),
                          judge_source=r.get("judge_source"))
         print(f"judge verdicts taken from scored_{args.judge_tag}.jsonl")
     h = read_sheet(args.sheets[0])
     items = sorted(i for i in h if i in key)
+    if args.judge_tag:   # only answers that are still identical: regenerated answers were never labelled
+        import csv
+        # the answers shown to the labeller are in the blank sheet sheet_<tag>.csv
+        sheet_ans = {int(r["item"]): r["answer"] for r in csv.DictReader(open(OUT / f"sheet_{args.tag}.csv", encoding="utf-8-sig"))}
+        stale = [i for i in items if key[i].get("new_answer") != sheet_ans.get(i)]
+        if stale:
+            print(f"{len(stale)} labelled items dropped: answer regenerated since labelling (by condition: "
+                  f"{dict(Counter(key[i]['condition'] for i in stale))})")
+        items = [i for i in items if i not in stale]
     print(f"{len(items)} labelled items of {len(key)}")
     by = defaultdict(list)
     for i in items:

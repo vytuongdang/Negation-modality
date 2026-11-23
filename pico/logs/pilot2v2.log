@@ -1,1 +1,676 @@
 === qwen2.5-omni-3b 2026. 11. 23. (월) 22:58:22 KST
+932 questions, 3728 answers planned; by branch: existence=175, existence_closed=174, count=186, attribute=197, relation=200
+1217 answers to generate (3728 jobs)
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[transformers] Model config: tts_text_start_token_id must be `None` or an integer within the vocabulary (between 0 and 8447), got 151860. This may result in unexpected behavior.
+[transformers] Model config: tts_text_end_token_id must be `None` or an integer within the vocabulary (between 0 and 8447), got 151861. This may result in unexpected behavior.
+[transformers] Model config: tts_text_pad_token_id must be `None` or an integer within the vocabulary (between 0 and 8447), got 151859. This may result in unexpected behavior.
+[transformers] Model config: vision_start_token_id must be `None` or an integer within the vocabulary (between 0 and 8447), got 151652. This may result in unexpected behavior.
+[transformers] Model config: vision_end_token_id must be `None` or an integer within the vocabulary (between 0 and 8447), got 151653. This may result in unexpected behavior.
+[transformers] Model config: audio_start_token_id must be `None` or an integer within the vocabulary (between 0 and 8447), got 151647. This may result in unexpected behavior.
+[transformers] Model config: audio_end_token_id must be `None` or an integer within the vocabulary (between 0 and 8447), got 151648. This may result in unexpected behavior.
+Fetching 3 files:   0%|          | 0/3 [00:00<?, ?it/s]Fetching 3 files: 100%|██████████| 3/3 [00:00<00:00, 1643.32it/s]
+Loading weights:   0%|          | 0/1442 [00:00<?, ?it/s]Loading weights:  14%|█▍        | 202/1442 [00:00<00:00, 1964.26it/s]Loading weights:  28%|██▊       | 399/1442 [00:00<00:00, 1849.89it/s]Loading weights:  41%|████      | 585/1442 [00:00<00:01, 824.65it/s] Loading weights:  49%|████▉     | 708/1442 [00:00<00:01, 729.05it/s]Loading weights:  56%|█████▌    | 805/1442 [00:01<00:00, 657.13it/s]Loading weights:  61%|██████▏   | 886/1442 [00:01<00:00, 639.53it/s]Loading weights:  68%|██████▊   | 980/1442 [00:01<00:00, 701.13it/s]Loading weights:  79%|███████▉  | 1146/1442 [00:01<00:00, 912.67it/s]Loading weights:  93%|█████████▎| 1334/1442 [00:01<00:00, 1141.31it/s]Loading weights: 100%|██████████| 1442/1442 [00:01<00:00, 952.48it/s] 
+[transformers] [1mQwen2_5OmniThinkerForConditionalGeneration LOAD REPORT[0m from: Qwen/Qwen2.5-Omni-3B
+Key                                                                                                      | Status     |  | 
+---------------------------------------------------------------------------------------------------------+------------+--+-
+token2wav.code2wav_bigvgan_model.resblocks.{0...17}.activations.{0, 1, 2, 3, 4, 5}.act.beta              | UNEXPECTED |  | 
+token2wav.code2wav_bigvgan_model.resblocks.{0...17}.activations.{0, 1, 2, 3, 4, 5}.act.alpha             | UNEXPECTED |  | 
+talker.model.layers.{0...23}.mlp.down_proj.weight                                                        | UNEXPECTED |  | 
+token2wav.code2wav_bigvgan_model.resblocks.{0...17}.convs2.{0, 1, 2}.weight                              | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.transformer_blocks.{0...21}.ff.ff.{0, 3}.bias                               | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.transformer_blocks.{0...21}.ff.ff.{0, 3}.weight                             | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.transformer_blocks.{0...21}.attn.to_out.0.bias                              | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.blocks.{1, 2, 3}.tdnn1.conv.bias                    | UNEXPECTED |  | 
+talker.model.layers.{0...23}.post_attention_layernorm.weight                                             | UNEXPECTED |  | 
+talker.model.layers.{0...23}.self_attn.o_proj.weight                                                     | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.transformer_blocks.{0...21}.attn.to_k.bias                                  | UNEXPECTED |  | 
+token2wav.code2wav_bigvgan_model.resblocks.{0...17}.convs2.{0, 1, 2}.bias                                | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.transformer_blocks.{0...21}.attn.to_v.weight                                | UNEXPECTED |  | 
+token2wav.code2wav_bigvgan_model.resblocks.{0...17}.convs1.{0, 1, 2}.bias                                | UNEXPECTED |  | 
+talker.model.layers.{0...23}.mlp.up_proj.weight                                                          | UNEXPECTED |  | 
+talker.model.layers.{0...23}.self_attn.k_proj.bias                                                       | UNEXPECTED |  | 
+talker.model.layers.{0...23}.self_attn.q_proj.weight                                                     | UNEXPECTED |  | 
+token2wav.code2wav_bigvgan_model.resblocks.{0...17}.convs1.{0, 1, 2}.weight                              | UNEXPECTED |  | 
+talker.model.layers.{0...23}.self_attn.q_proj.bias                                                       | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.transformer_blocks.{0...21}.attn_norm.linear.weight                         | UNEXPECTED |  | 
+token2wav.code2wav_bigvgan_model.ups.{0, 1, 2, 3, 4, 5}.0.bias                                           | UNEXPECTED |  | 
+talker.model.layers.{0...23}.self_attn.v_proj.bias                                                       | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.blocks.{1, 2, 3}.res2net_block.blocks.0.conv.bias   | UNEXPECTED |  | 
+talker.model.layers.{0...23}.mlp.gate_proj.weight                                                        | UNEXPECTED |  | 
+talker.model.layers.{0...23}.self_attn.k_proj.weight                                                     | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.blocks.{1, 2, 3}.se_block.conv2.bias                | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.transformer_blocks.{0...21}.attn.to_q.bias                                  | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.transformer_blocks.{0...21}.attn.to_k.weight                                | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.norm_out.linear.bias                                                        | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.transformer_blocks.{0...21}.attn.to_q.weight                                | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.time_embed.time_mlp.{0, 2}.bias                                             | UNEXPECTED |  | 
+talker.model.layers.{0...23}.self_attn.v_proj.weight                                                     | UNEXPECTED |  | 
+talker.model.layers.{0...23}.input_layernorm.weight                                                      | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.transformer_blocks.{0...21}.attn_norm.linear.bias                           | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.transformer_blocks.{0...21}.attn.to_v.bias                                  | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.transformer_blocks.{0...21}.attn.to_out.0.weight                            | UNEXPECTED |  | 
+token2wav.code2wav_bigvgan_model.conv_post.weight                                                        | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.fc.weight                                           | UNEXPECTED |  | 
+token2wav.code2wav_bigvgan_model.activation_post.act.beta                                                | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.mfa.conv.bias                                       | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.blocks.{1, 2, 3}.tdnn1.conv.weight                  | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.asp.tdnn.conv.weight                                | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.blocks.{1, 2, 3}.se_block.conv2.weight              | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.time_embed.time_mlp.{0, 2}.weight                                           | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.asp.tdnn.conv.bias                                  | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.blocks.{1, 2, 3}.tdnn2.conv.weight                  | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.blocks.0.conv.weight                                | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.mfa.conv.weight                                     | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.blocks.{1, 2, 3}.tdnn2.conv.bias                    | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.proj_out.bias                                                               | UNEXPECTED |  | 
+token2wav.code2wav_bigvgan_model.ups.{0, 1, 2, 3, 4, 5}.0.weight                                         | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.norm_out.linear.weight                                                      | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.asp.conv.bias                                       | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.blocks.{1, 2, 3}.se_block.conv1.bias                | UNEXPECTED |  | 
+talker.model.norm.weight                                                                                 | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.blocks.{1, 2, 3}.res2net_block.blocks.0.conv.weight | UNEXPECTED |  | 
+talker.thinker_to_talker_proj.bias                                                                       | UNEXPECTED |  | 
+token2wav.code2wav_bigvgan_model.activation_post.act.alpha                                               | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.proj.weight                                                     | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.asp.conv.weight                                     | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.fc.bias                                             | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.blocks.{1, 2, 3}.se_block.conv1.weight              | UNEXPECTED |  | 
+talker.thinker_to_talker_proj.weight                                                                     | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.proj_out.weight                                                             | UNEXPECTED |  | 
+token2wav.code2wav_bigvgan_model.conv_pre.weight                                                         | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.text_embed.codec_embed.weight                                               | UNEXPECTED |  | 
+token2wav.code2wav_bigvgan_model.conv_pre.bias                                                           | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.rotary_embed.inv_freq                                                       | UNEXPECTED |  | 
+talker.model.embed_tokens.weight                                                                         | UNEXPECTED |  | 
+talker.codec_head.weight                                                                                 | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.blocks.0.conv.bias                                  | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.proj.bias                                                       | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+[4/1217] 0.75 s/answer, ETA 0.3 h | A: "The street light is silver in color. It's relatively tall and has a rectangular shape. It's quite la"
+[24/1217] 0.44 s/answer, ETA 0.1 h | A: "She's holding a surfboard. And she's standing in the sand. What do you think about her?"
+[44/1217] 0.42 s/answer, ETA 0.1 h | A: "The hat is gray in color. It looks like it's made of a woven material, probably something like wool "
+[64/1217] 0.40 s/answer, ETA 0.1 h | A: 'The child is sitting on a bed. The bed has a colorful floral pattern. What do you think about the be'
+[84/1217] 0.39 s/answer, ETA 0.1 h | A: "The baby is standing beside the ocean. He's wearing a pair of blue swim trunks with colorful designs"
+[104/1217] 0.39 s/answer, ETA 0.1 h | A: "She's lying on a bench. And she's resting her head on her knees. What do you think about that?"
+[124/1217] 0.39 s/answer, ETA 0.1 h | A: "The field is green and it looks like it's been well - maintained. There are some trees in the backgr"
+[144/1217] 0.39 s/answer, ETA 0.1 h | A: "Well, he's in a state of action. He's standing on a surfboard, riding a wave. His body is leaning fo"
+[164/1217] 0.39 s/answer, ETA 0.1 h | A: "The wing is large. It's got a white color on the top and blue on the bottom. It's really long and st"
+[184/1217] 0.39 s/answer, ETA 0.1 h | A: "He's riding on a green train. He's wearing a blue shirt. So, what do you think about trains?"
+[204/1217] 0.40 s/answer, ETA 0.1 h | A: "The rock is large. It's pretty big, you know? It's hard to say exactly how big it is without more de"
+[224/1217] 0.39 s/answer, ETA 0.1 h | A: 'The shirt is white. It has a colorful design on it. What do you think about the design?'
+[244/1217] 0.40 s/answer, ETA 0.1 h | A: "He's balancing on a surfboard. And he's wearing a pair of colorful striped swim trunks. So, what do "
+[264/1217] 0.40 s/answer, ETA 0.1 h | A: "The boy is sitting on a wooden bench. He's wearing a striped shirt with a collar, a black cap, and s"
+[284/1217] 0.40 s/answer, ETA 0.1 h | A: "The plate is white and made of paper. Well, that's about it. If you have any other questions about t"
+[304/1217] 0.41 s/answer, ETA 0.1 h | T: 'There are three cylinders and one cube. So, there are a total of four objects. If you have any other'
+[324/1217] 0.40 s/answer, ETA 0.1 h | T: "There's one cube, one sphere, and two cylinders. So, that's a total of three different shapes. If yo"
+[344/1217] 0.40 s/answer, ETA 0.1 h | T: "There's one cube and five cylinders. So, in total, there are six objects. If you have any other ques"
+[364/1217] 0.39 s/answer, ETA 0.1 h | T: "There's one cube, two spheres, and two cylinders. If you have any other questions about this image, "
+[384/1217] 0.39 s/answer, ETA 0.1 h | T: "There's one cube, one sphere, and one cylinder. So, in total, there are three objects. If you have a"
+[404/1217] 0.39 s/answer, ETA 0.1 h | T: "The sphere is gray in color. It's small in size. And it looks like it's made of a matte material. If"
+[424/1217] 0.39 s/answer, ETA 0.1 h | T: "There are 3 cubes, 1 cylinder, and 0 spheres. So that's 3 cubes and 1 cylinder. If you have any othe"
+[444/1217] 0.39 s/answer, ETA 0.1 h | T: "The cylinder is red in color. It's a bit bigger than the other objects in the image. It looks like i"
+[464/1217] 0.38 s/answer, ETA 0.1 h | T: 'There are two cubes and one sphere. So, in total, there are three objects. If you have any other que'
+[484/1217] 0.38 s/answer, ETA 0.1 h | T: "The cylinder is cyan in color. It's a large cylinder. It looks like it's made of a matte material. S"
+[504/1217] 0.38 s/answer, ETA 0.1 h | T: "There's a horse in the image. What else do you see in the picture?"
+[524/1217] 0.39 s/answer, ETA 0.1 h | T: "Well, I can't really see the accessories clearly in this image. But if you're looking for things lik"
+[544/1217] 0.39 s/answer, ETA 0.1 h | T: "Well, in the image, there's a wine glass. But there's no knife, spoon, or bottle. So, the answer is "
+[564/1217] 0.39 s/answer, ETA 0.1 h | T: 'There are two chairs and one dining table in the image. So, there are a total of three pieces of fur'
+[584/1217] 0.39 s/answer, ETA 0.1 h | T: 'Banana. So, what do you think about the image?'
+[604/1217] 0.39 s/answer, ETA 0.1 h | T: "Well, in the image, there's a cup, a fork, and a spoon. There's no bottle in the image. So, that's i"
+[624/1217] 0.40 s/answer, ETA 0.1 h | T: 'There are two cats in the image. So, there are two cats and no dogs. If you have any other questions'
+[644/1217] 0.40 s/answer, ETA 0.1 h | T: "Well, in the image, there's a baseball glove. But among the options you've given, skis and kite are "
+[664/1217] 0.40 s/answer, ETA 0.1 h | T: "There's a car in the image. So, that's one. There's no bicycle or truck in the image. If you have an"
+[684/1217] 0.40 s/answer, ETA 0.1 h | T: 'There are two horses in the image. So, there are no sheep in this image. If you have any other quest'
+[704/1217] 0.40 s/answer, ETA 0.1 h | T: "Well, in the image, there's a laptop. That's the main electronic device. So, that's it. If you have "
+[724/1217] 0.40 s/answer, ETA 0.1 h | T: "Well, in the image, there's a cup of coffee and a donut. That's about it. So, what do you think abou"
+[744/1217] 0.41 s/answer, ETA 0.1 h | T: 'There is one fork and one knife in the image. The fork is on the left side of the plate, and the kni'
+[764/1217] 0.41 s/answer, ETA 0.1 h | T: "Well, in the image, there's a sandwich. But there's no banana or donut. So, the answer is just the s"
+[784/1217] 0.41 s/answer, ETA 0.0 h | T: "Well, in the image, there's a laptop. So, that's one of the electronic devices present. But there's "
+[804/1217] 0.41 s/answer, ETA 0.0 h | T: "Chair, potted plant. There's no toilet or bed in the image. So, that's it. If you have any other que"
+[824/1217] 0.41 s/answer, ETA 0.0 h | T: "In the image, there's a car and a bus. So, the vehicles present are a car and a bus. What else do yo"
+[844/1217] 0.41 s/answer, ETA 0.0 h | T: "Well, there's an umbrella in the image. It's white and it's being used to protect the person sitting"
+[864/1217] 0.41 s/answer, ETA 0.0 h | T: "Well, there's a teddy bear sitting on the table. There's also a Buddha statue. And there are some ph"
+[884/1217] 0.41 s/answer, ETA 0.0 h | T: "Well, there's a chair in the image. That's the only piece of furniture I can see. What else are you "
+[904/1217] 0.41 s/answer, ETA 0.0 h | T: "Well, in the image, you can see broccoli and hot dog. There's no pizza or carrot in there. So, that'"
+[924/1217] 0.41 s/answer, ETA 0.0 h | T: "Hmm, let's see. In the image, there's a donkey and a horse. So, the animals present are donkey and h"
+[944/1217] 0.41 s/answer, ETA 0.0 h | T: "He's standing in front of a black pickup truck. He's wearing a beige jacket and a cap. What do you t"
+[964/1217] 0.41 s/answer, ETA 0.0 h | T: "She's playing frisbee. She's standing on grass. She's throwing a frisbee. So, what do you think abou"
+[984/1217] 0.41 s/answer, ETA 0.0 h | T: "He's standing next to a trailer. He's wearing blue overalls. So, what else do you want to know about"
+[1004/1217] 0.41 s/answer, ETA 0.0 h | T: "He's holding an orange umbrella. He's looking in through a window. And he's standing on a cobbleston"
+[1024/1217] 0.41 s/answer, ETA 0.0 h | T: "He's holding a pink tennis racket. And he's standing against a wall with some graffiti on it. What d"
+[1044/1217] 0.41 s/answer, ETA 0.0 h | T: "Well, it's a rectangular shape. But I can't really describe its color without seeing it. So, what el"
+[1064/1217] 0.40 s/answer, ETA 0.0 h | T: "She's leading a cow. She's wearing a white shirt, white pants, and a black belt. What do you think a"
+[1084/1217] 0.40 s/answer, ETA 0.0 h | T: "The toilet is white and it's sitting on the ground with its lid open. It looks like it's just sittin"
+[1104/1217] 0.40 s/answer, ETA 0.0 h | T: "He's holding a bag. And he's riding a bicycle. So, what do you think about that?"
+[1124/1217] 0.40 s/answer, ETA 0.0 h | T: 'They are skiing in the snow. They are wearing a red jacket, black shorts, and blue ski boots. And th'
+[1144/1217] 0.40 s/answer, ETA 0.0 h | T: "The spectators are sitting on the grass. They're watching the frisbee game. If you want to know more"
+[1164/1217] 0.40 s/answer, ETA 0.0 h | T: "The water looks clear and has a light brownish - green color. It's not very deep, just a shallow str"
+[1184/1217] 0.40 s/answer, ETA 0.0 h | T: "The container is clear. It's rectangular in shape. It's a nice, simple container. What do you think "
+[1204/1217] 0.40 s/answer, ETA 0.0 h | T: "She's riding a dolphin. And she's wearing a wetsuit. So, what do you think about that?"
+generated 1217 answers (100 tokens max) in 486 s (0.40 s/answer)
+8 answers hit 100 tokens -> regenerate with 256
+[4/8] 0.73 s/answer, ETA 0.0 h | C0: "Well, from what I can see, there are a few accessories in the image. There's a laptop, which is an a"
+generated 8 answers (256 tokens max) in 6 s (0.73 s/answer)
+Loading weights:   0%|          | 0/399 [00:00<?, ?it/s]Loading weights:   0%|          | 1/399 [00:00<01:11,  5.58it/s]Loading weights:  20%|██        | 81/399 [00:00<00:00, 351.48it/s]Loading weights:  32%|███▏      | 127/399 [00:00<00:01, 208.64it/s]Loading weights:  40%|███▉      | 159/399 [00:00<00:01, 228.89it/s]Loading weights:  48%|████▊     | 191/399 [00:00<00:00, 241.92it/s]Loading weights:  55%|█████▌    | 221/399 [00:01<00:01, 150.18it/s]Loading weights:  61%|██████    | 244/399 [00:01<00:01, 153.95it/s]Loading weights:  66%|██████▋   | 265/399 [00:01<00:00, 161.56it/s]Loading weights:  71%|███████▏  | 285/399 [00:01<00:00, 162.50it/s]Loading weights:  76%|███████▌  | 304/399 [00:01<00:00, 166.14it/s]Loading weights:  84%|████████▎ | 334/399 [00:01<00:00, 188.86it/s]Loading weights:  89%|████████▉ | 355/399 [00:01<00:00, 187.02it/s]Loading weights:  94%|█████████▍| 375/399 [00:02<00:00, 168.74it/s]Loading weights:  98%|█████████▊| 393/399 [00:02<00:00, 157.25it/s]Loading weights: 100%|██████████| 399/399 [00:02<00:00, 179.49it/s]
+judge 64/3348
+judge 128/3348
+judge 192/3348
+judge 256/3348
+judge 320/3348
+judge 384/3348
+judge 448/3348
+judge 512/3348
+judge 576/3348
+judge 640/3348
+judge 704/3348
+judge 768/3348
+judge 832/3348
+judge 896/3348
+judge 960/3348
+judge 1024/3348
+judge 1088/3348
+judge 1152/3348
+judge 1216/3348
+judge 1280/3348
+judge 1344/3348
+judge 1408/3348
+judge 1472/3348
+judge 1536/3348
+judge 1600/3348
+judge 1664/3348
+judge 1728/3348
+judge 1792/3348
+judge 1856/3348
+judge 1920/3348
+judge 1984/3348
+judge 2048/3348
+judge 2112/3348
+judge 2176/3348
+judge 2240/3348
+judge 2304/3348
+judge 2368/3348
+judge 2432/3348
+judge 2496/3348
+judge 2560/3348
+judge 2624/3348
+judge 2688/3348
+judge 2752/3348
+judge 2816/3348
+judge 2880/3348
+judge 2944/3348
+judge 3008/3348
+judge 3072/3348
+judge 3136/3348
+judge 3200/3348
+judge 3264/3348
+judge 3328/3348
+judge 3348/3348
+judge (thinking) 64/711
+judge (thinking) 128/711
+judge (thinking) 192/711
+judge (thinking) 256/711
+judge (thinking) 320/711
+judge (thinking) 384/711
+judge (thinking) 448/711
+judge (thinking) 512/711
+judge (thinking) 576/711
+judge (thinking) 640/711
+judge (thinking) 704/711
+judge (thinking) 711/711
+judge (thinking) 43/43
+Loading weights:   0%|          | 0/399 [00:00<?, ?it/s]Loading weights:   0%|          | 1/399 [00:00<01:40,  3.95it/s]Loading weights:  26%|██▌       | 103/399 [00:00<00:00, 353.92it/s]Loading weights:  39%|███▉      | 157/399 [00:00<00:00, 415.04it/s]Loading weights:  53%|█████▎    | 211/399 [00:00<00:00, 443.34it/s]Loading weights:  66%|██████▌   | 264/399 [00:00<00:00, 451.31it/s]Loading weights:  81%|████████  | 322/399 [00:00<00:00, 489.52it/s]Loading weights:  94%|█████████▍| 375/399 [00:00<00:00, 435.15it/s]Loading weights: 100%|██████████| 399/399 [00:00<00:00, 400.61it/s]
+label 64/1349
+label 128/1349
+label 192/1349
+label 256/1349
+label 320/1349
+label 384/1349
+label 448/1349
+label 512/1349
+label 576/1349
+label 640/1349
+label 704/1349
+label 768/1349
+label 832/1349
+label 896/1349
+label 960/1349
+label 1024/1349
+label 1088/1349
+label 1152/1349
+label 1216/1349
+label 1280/1349
+label 1344/1349
+label 1349/1349
+WARNING: 17 rows where the thinking judge gave no JSON even with the retry budget; they keep the fast verdict and are listed in review_pilot200.csv (judge_source=think_error)
+
+C0 states the target in 799/932 questions
+violation % (any mention: STATE/META/DENY/WRONG) among C0-mentioned (n), negative form
+branch                       T           A           V
+existence             20 (139)    27 (139)    98 (139)
+existence_closed      47 (172)    48 (172)    99 (172)
+count                 88 (163)    71 (163)    90 (163)
+attribute             67 (160)    48 (160)    85 (160)
+relation              87 (165)    59 (165)    88 (165)
+ALL                   63 (799)    51 (799)    92 (799)
+
+regex disagrees with judge on the target in 274/3728 rows
+files: /home/vyvn/new/cross_multimodal_negation/experiments/h1_v2/results/qwen2.5-omni-3b/scored_pilot200.jsonl /home/vyvn/new/cross_multimodal_negation/experiments/h1_v2/results/qwen2.5-omni-3b/review_pilot200.csv
+=== minicpm-o-2.6 2026. 11. 24. (화) 01:42:47 KST
+932 questions, 3728 answers planned; by branch: existence=175, existence_closed=174, count=186, attribute=197, relation=200
+1846 answers to generate (3728 jobs)
+/home/vyvn/anaconda3/envs/omni_neg/lib/python3.10/site-packages/transformers/models/auto/image_processing_auto.py:513: FutureWarning: The image_processor_class argument is deprecated and will be removed in v4.42. Please use `slow_image_processor_class`, or `fast_image_processor_class` instead
+  warnings.warn(
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:01<00:03,  1.07s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:02<00:02,  1.04s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:03<00:01,  1.01s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:04<00:00,  1.10s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:04<00:00,  1.07s/it]
+Some weights of the model checkpoint at openbmb/MiniCPM-o-2_6 were not used when initializing MiniCPMO: ['tts.dvae.coef', 'tts.dvae.decoder.conv_in.0.bias', 'tts.dvae.decoder.conv_in.0.weight', 'tts.dvae.decoder.conv_in.2.bias', 'tts.dvae.decoder.conv_in.2.weight', 'tts.dvae.decoder.conv_out.weight', 'tts.dvae.decoder.decoder_block.0.coef', 'tts.dvae.decoder.decoder_block.0.dwconv.bias', 'tts.dvae.decoder.decoder_block.0.dwconv.weight', 'tts.dvae.decoder.decoder_block.0.norm.bias', 'tts.dvae.decoder.decoder_block.0.norm.weight', 'tts.dvae.decoder.decoder_block.0.pwconv1.bias', 'tts.dvae.decoder.decoder_block.0.pwconv1.weight', 'tts.dvae.decoder.decoder_block.0.pwconv2.bias', 'tts.dvae.decoder.decoder_block.0.pwconv2.weight', 'tts.dvae.decoder.decoder_block.1.coef', 'tts.dvae.decoder.decoder_block.1.dwconv.bias', 'tts.dvae.decoder.decoder_block.1.dwconv.weight', 'tts.dvae.decoder.decoder_block.1.norm.bias', 'tts.dvae.decoder.decoder_block.1.norm.weight', 'tts.dvae.decoder.decoder_block.1.pwconv1.bias', 'tts.dvae.decoder.decoder_block.1.pwconv1.weight', 'tts.dvae.decoder.decoder_block.1.pwconv2.bias', 'tts.dvae.decoder.decoder_block.1.pwconv2.weight', 'tts.dvae.decoder.decoder_block.10.coef', 'tts.dvae.decoder.decoder_block.10.dwconv.bias', 'tts.dvae.decoder.decoder_block.10.dwconv.weight', 'tts.dvae.decoder.decoder_block.10.norm.bias', 'tts.dvae.decoder.decoder_block.10.norm.weight', 'tts.dvae.decoder.decoder_block.10.pwconv1.bias', 'tts.dvae.decoder.decoder_block.10.pwconv1.weight', 'tts.dvae.decoder.decoder_block.10.pwconv2.bias', 'tts.dvae.decoder.decoder_block.10.pwconv2.weight', 'tts.dvae.decoder.decoder_block.11.coef', 'tts.dvae.decoder.decoder_block.11.dwconv.bias', 'tts.dvae.decoder.decoder_block.11.dwconv.weight', 'tts.dvae.decoder.decoder_block.11.norm.bias', 'tts.dvae.decoder.decoder_block.11.norm.weight', 'tts.dvae.decoder.decoder_block.11.pwconv1.bias', 'tts.dvae.decoder.decoder_block.11.pwconv1.weight', 'tts.dvae.decoder.decoder_block.11.pwconv2.bias', 'tts.dvae.decoder.decoder_block.11.pwconv2.weight', 'tts.dvae.decoder.decoder_block.2.coef', 'tts.dvae.decoder.decoder_block.2.dwconv.bias', 'tts.dvae.decoder.decoder_block.2.dwconv.weight', 'tts.dvae.decoder.decoder_block.2.norm.bias', 'tts.dvae.decoder.decoder_block.2.norm.weight', 'tts.dvae.decoder.decoder_block.2.pwconv1.bias', 'tts.dvae.decoder.decoder_block.2.pwconv1.weight', 'tts.dvae.decoder.decoder_block.2.pwconv2.bias', 'tts.dvae.decoder.decoder_block.2.pwconv2.weight', 'tts.dvae.decoder.decoder_block.3.coef', 'tts.dvae.decoder.decoder_block.3.dwconv.bias', 'tts.dvae.decoder.decoder_block.3.dwconv.weight', 'tts.dvae.decoder.decoder_block.3.norm.bias', 'tts.dvae.decoder.decoder_block.3.norm.weight', 'tts.dvae.decoder.decoder_block.3.pwconv1.bias', 'tts.dvae.decoder.decoder_block.3.pwconv1.weight', 'tts.dvae.decoder.decoder_block.3.pwconv2.bias', 'tts.dvae.decoder.decoder_block.3.pwconv2.weight', 'tts.dvae.decoder.decoder_block.4.coef', 'tts.dvae.decoder.decoder_block.4.dwconv.bias', 'tts.dvae.decoder.decoder_block.4.dwconv.weight', 'tts.dvae.decoder.decoder_block.4.norm.bias', 'tts.dvae.decoder.decoder_block.4.norm.weight', 'tts.dvae.decoder.decoder_block.4.pwconv1.bias', 'tts.dvae.decoder.decoder_block.4.pwconv1.weight', 'tts.dvae.decoder.decoder_block.4.pwconv2.bias', 'tts.dvae.decoder.decoder_block.4.pwconv2.weight', 'tts.dvae.decoder.decoder_block.5.coef', 'tts.dvae.decoder.decoder_block.5.dwconv.bias', 'tts.dvae.decoder.decoder_block.5.dwconv.weight', 'tts.dvae.decoder.decoder_block.5.norm.bias', 'tts.dvae.decoder.decoder_block.5.norm.weight', 'tts.dvae.decoder.decoder_block.5.pwconv1.bias', 'tts.dvae.decoder.decoder_block.5.pwconv1.weight', 'tts.dvae.decoder.decoder_block.5.pwconv2.bias', 'tts.dvae.decoder.decoder_block.5.pwconv2.weight', 'tts.dvae.decoder.decoder_block.6.coef', 'tts.dvae.decoder.decoder_block.6.dwconv.bias', 'tts.dvae.decoder.decoder_block.6.dwconv.weight', 'tts.dvae.decoder.decoder_block.6.norm.bias', 'tts.dvae.decoder.decoder_block.6.norm.weight', 'tts.dvae.decoder.decoder_block.6.pwconv1.bias', 'tts.dvae.decoder.decoder_block.6.pwconv1.weight', 'tts.dvae.decoder.decoder_block.6.pwconv2.bias', 'tts.dvae.decoder.decoder_block.6.pwconv2.weight', 'tts.dvae.decoder.decoder_block.7.coef', 'tts.dvae.decoder.decoder_block.7.dwconv.bias', 'tts.dvae.decoder.decoder_block.7.dwconv.weight', 'tts.dvae.decoder.decoder_block.7.norm.bias', 'tts.dvae.decoder.decoder_block.7.norm.weight', 'tts.dvae.decoder.decoder_block.7.pwconv1.bias', 'tts.dvae.decoder.decoder_block.7.pwconv1.weight', 'tts.dvae.decoder.decoder_block.7.pwconv2.bias', 'tts.dvae.decoder.decoder_block.7.pwconv2.weight', 'tts.dvae.decoder.decoder_block.8.coef', 'tts.dvae.decoder.decoder_block.8.dwconv.bias', 'tts.dvae.decoder.decoder_block.8.dwconv.weight', 'tts.dvae.decoder.decoder_block.8.norm.bias', 'tts.dvae.decoder.decoder_block.8.norm.weight', 'tts.dvae.decoder.decoder_block.8.pwconv1.bias', 'tts.dvae.decoder.decoder_block.8.pwconv1.weight', 'tts.dvae.decoder.decoder_block.8.pwconv2.bias', 'tts.dvae.decoder.decoder_block.8.pwconv2.weight', 'tts.dvae.decoder.decoder_block.9.coef', 'tts.dvae.decoder.decoder_block.9.dwconv.bias', 'tts.dvae.decoder.decoder_block.9.dwconv.weight', 'tts.dvae.decoder.decoder_block.9.norm.bias', 'tts.dvae.decoder.decoder_block.9.norm.weight', 'tts.dvae.decoder.decoder_block.9.pwconv1.bias', 'tts.dvae.decoder.decoder_block.9.pwconv1.weight', 'tts.dvae.decoder.decoder_block.9.pwconv2.bias', 'tts.dvae.decoder.decoder_block.9.pwconv2.weight', 'tts.dvae.downsample_conv.0.bias', 'tts.dvae.downsample_conv.0.weight', 'tts.dvae.downsample_conv.2.bias', 'tts.dvae.downsample_conv.2.weight', 'tts.dvae.encoder.conv_in.0.bias', 'tts.dvae.encoder.conv_in.0.weight', 'tts.dvae.encoder.conv_in.2.bias', 'tts.dvae.encoder.conv_in.2.weight', 'tts.dvae.encoder.conv_out.weight', 'tts.dvae.encoder.decoder_block.0.coef', 'tts.dvae.encoder.decoder_block.0.dwconv.bias', 'tts.dvae.encoder.decoder_block.0.dwconv.weight', 'tts.dvae.encoder.decoder_block.0.norm.bias', 'tts.dvae.encoder.decoder_block.0.norm.weight', 'tts.dvae.encoder.decoder_block.0.pwconv1.bias', 'tts.dvae.encoder.decoder_block.0.pwconv1.weight', 'tts.dvae.encoder.decoder_block.0.pwconv2.bias', 'tts.dvae.encoder.decoder_block.0.pwconv2.weight', 'tts.dvae.encoder.decoder_block.1.coef', 'tts.dvae.encoder.decoder_block.1.dwconv.bias', 'tts.dvae.encoder.decoder_block.1.dwconv.weight', 'tts.dvae.encoder.decoder_block.1.norm.bias', 'tts.dvae.encoder.decoder_block.1.norm.weight', 'tts.dvae.encoder.decoder_block.1.pwconv1.bias', 'tts.dvae.encoder.decoder_block.1.pwconv1.weight', 'tts.dvae.encoder.decoder_block.1.pwconv2.bias', 'tts.dvae.encoder.decoder_block.1.pwconv2.weight', 'tts.dvae.encoder.decoder_block.10.coef', 'tts.dvae.encoder.decoder_block.10.dwconv.bias', 'tts.dvae.encoder.decoder_block.10.dwconv.weight', 'tts.dvae.encoder.decoder_block.10.norm.bias', 'tts.dvae.encoder.decoder_block.10.norm.weight', 'tts.dvae.encoder.decoder_block.10.pwconv1.bias', 'tts.dvae.encoder.decoder_block.10.pwconv1.weight', 'tts.dvae.encoder.decoder_block.10.pwconv2.bias', 'tts.dvae.encoder.decoder_block.10.pwconv2.weight', 'tts.dvae.encoder.decoder_block.11.coef', 'tts.dvae.encoder.decoder_block.11.dwconv.bias', 'tts.dvae.encoder.decoder_block.11.dwconv.weight', 'tts.dvae.encoder.decoder_block.11.norm.bias', 'tts.dvae.encoder.decoder_block.11.norm.weight', 'tts.dvae.encoder.decoder_block.11.pwconv1.bias', 'tts.dvae.encoder.decoder_block.11.pwconv1.weight', 'tts.dvae.encoder.decoder_block.11.pwconv2.bias', 'tts.dvae.encoder.decoder_block.11.pwconv2.weight', 'tts.dvae.encoder.decoder_block.2.coef', 'tts.dvae.encoder.decoder_block.2.dwconv.bias', 'tts.dvae.encoder.decoder_block.2.dwconv.weight', 'tts.dvae.encoder.decoder_block.2.norm.bias', 'tts.dvae.encoder.decoder_block.2.norm.weight', 'tts.dvae.encoder.decoder_block.2.pwconv1.bias', 'tts.dvae.encoder.decoder_block.2.pwconv1.weight', 'tts.dvae.encoder.decoder_block.2.pwconv2.bias', 'tts.dvae.encoder.decoder_block.2.pwconv2.weight', 'tts.dvae.encoder.decoder_block.3.coef', 'tts.dvae.encoder.decoder_block.3.dwconv.bias', 'tts.dvae.encoder.decoder_block.3.dwconv.weight', 'tts.dvae.encoder.decoder_block.3.norm.bias', 'tts.dvae.encoder.decoder_block.3.norm.weight', 'tts.dvae.encoder.decoder_block.3.pwconv1.bias', 'tts.dvae.encoder.decoder_block.3.pwconv1.weight', 'tts.dvae.encoder.decoder_block.3.pwconv2.bias', 'tts.dvae.encoder.decoder_block.3.pwconv2.weight', 'tts.dvae.encoder.decoder_block.4.coef', 'tts.dvae.encoder.decoder_block.4.dwconv.bias', 'tts.dvae.encoder.decoder_block.4.dwconv.weight', 'tts.dvae.encoder.decoder_block.4.norm.bias', 'tts.dvae.encoder.decoder_block.4.norm.weight', 'tts.dvae.encoder.decoder_block.4.pwconv1.bias', 'tts.dvae.encoder.decoder_block.4.pwconv1.weight', 'tts.dvae.encoder.decoder_block.4.pwconv2.bias', 'tts.dvae.encoder.decoder_block.4.pwconv2.weight', 'tts.dvae.encoder.decoder_block.5.coef', 'tts.dvae.encoder.decoder_block.5.dwconv.bias', 'tts.dvae.encoder.decoder_block.5.dwconv.weight', 'tts.dvae.encoder.decoder_block.5.norm.bias', 'tts.dvae.encoder.decoder_block.5.norm.weight', 'tts.dvae.encoder.decoder_block.5.pwconv1.bias', 'tts.dvae.encoder.decoder_block.5.pwconv1.weight', 'tts.dvae.encoder.decoder_block.5.pwconv2.bias', 'tts.dvae.encoder.decoder_block.5.pwconv2.weight', 'tts.dvae.encoder.decoder_block.6.coef', 'tts.dvae.encoder.decoder_block.6.dwconv.bias', 'tts.dvae.encoder.decoder_block.6.dwconv.weight', 'tts.dvae.encoder.decoder_block.6.norm.bias', 'tts.dvae.encoder.decoder_block.6.norm.weight', 'tts.dvae.encoder.decoder_block.6.pwconv1.bias', 'tts.dvae.encoder.decoder_block.6.pwconv1.weight', 'tts.dvae.encoder.decoder_block.6.pwconv2.bias', 'tts.dvae.encoder.decoder_block.6.pwconv2.weight', 'tts.dvae.encoder.decoder_block.7.coef', 'tts.dvae.encoder.decoder_block.7.dwconv.bias', 'tts.dvae.encoder.decoder_block.7.dwconv.weight', 'tts.dvae.encoder.decoder_block.7.norm.bias', 'tts.dvae.encoder.decoder_block.7.norm.weight', 'tts.dvae.encoder.decoder_block.7.pwconv1.bias', 'tts.dvae.encoder.decoder_block.7.pwconv1.weight', 'tts.dvae.encoder.decoder_block.7.pwconv2.bias', 'tts.dvae.encoder.decoder_block.7.pwconv2.weight', 'tts.dvae.encoder.decoder_block.8.coef', 'tts.dvae.encoder.decoder_block.8.dwconv.bias', 'tts.dvae.encoder.decoder_block.8.dwconv.weight', 'tts.dvae.encoder.decoder_block.8.norm.bias', 'tts.dvae.encoder.decoder_block.8.norm.weight', 'tts.dvae.encoder.decoder_block.8.pwconv1.bias', 'tts.dvae.encoder.decoder_block.8.pwconv1.weight', 'tts.dvae.encoder.decoder_block.8.pwconv2.bias', 'tts.dvae.encoder.decoder_block.8.pwconv2.weight', 'tts.dvae.encoder.decoder_block.9.coef', 'tts.dvae.encoder.decoder_block.9.dwconv.bias', 'tts.dvae.encoder.decoder_block.9.dwconv.weight', 'tts.dvae.encoder.decoder_block.9.norm.bias', 'tts.dvae.encoder.decoder_block.9.norm.weight', 'tts.dvae.encoder.decoder_block.9.pwconv1.bias', 'tts.dvae.encoder.decoder_block.9.pwconv1.weight', 'tts.dvae.encoder.decoder_block.9.pwconv2.bias', 'tts.dvae.encoder.decoder_block.9.pwconv2.weight', 'tts.dvae.out_conv.weight', 'tts.dvae.vq_layer.quantizer.rvqs.0.project_in.bias', 'tts.dvae.vq_layer.quantizer.rvqs.0.project_in.weight', 'tts.dvae.vq_layer.quantizer.rvqs.0.project_out.bias', 'tts.dvae.vq_layer.quantizer.rvqs.0.project_out.weight', 'tts.dvae.vq_layer.quantizer.rvqs.1.project_in.bias', 'tts.dvae.vq_layer.quantizer.rvqs.1.project_in.weight', 'tts.dvae.vq_layer.quantizer.rvqs.1.project_out.bias', 'tts.dvae.vq_layer.quantizer.rvqs.1.project_out.weight', 'tts.emb_code.0.weight', 'tts.emb_code.1.weight', 'tts.emb_code.2.weight', 'tts.emb_code.3.weight', 'tts.emb_text.weight', 'tts.head_code.0.parametrizations.weight.original0', 'tts.head_code.0.parametrizations.weight.original1', 'tts.head_code.1.parametrizations.weight.original0', 'tts.head_code.1.parametrizations.weight.original1', 'tts.head_code.2.parametrizations.weight.original0', 'tts.head_code.2.parametrizations.weight.original1', 'tts.head_code.3.parametrizations.weight.original0', 'tts.head_code.3.parametrizations.weight.original1', 'tts.model.embed_tokens.weight', 'tts.model.layers.0.input_layernorm.weight', 'tts.model.layers.0.mlp.down_proj.weight', 'tts.model.layers.0.mlp.gate_proj.weight', 'tts.model.layers.0.mlp.up_proj.weight', 'tts.model.layers.0.post_attention_layernorm.weight', 'tts.model.layers.0.self_attn.k_proj.weight', 'tts.model.layers.0.self_attn.o_proj.weight', 'tts.model.layers.0.self_attn.q_proj.weight', 'tts.model.layers.0.self_attn.v_proj.weight', 'tts.model.layers.1.input_layernorm.weight', 'tts.model.layers.1.mlp.down_proj.weight', 'tts.model.layers.1.mlp.gate_proj.weight', 'tts.model.layers.1.mlp.up_proj.weight', 'tts.model.layers.1.post_attention_layernorm.weight', 'tts.model.layers.1.self_attn.k_proj.weight', 'tts.model.layers.1.self_attn.o_proj.weight', 'tts.model.layers.1.self_attn.q_proj.weight', 'tts.model.layers.1.self_attn.v_proj.weight', 'tts.model.layers.10.input_layernorm.weight', 'tts.model.layers.10.mlp.down_proj.weight', 'tts.model.layers.10.mlp.gate_proj.weight', 'tts.model.layers.10.mlp.up_proj.weight', 'tts.model.layers.10.post_attention_layernorm.weight', 'tts.model.layers.10.self_attn.k_proj.weight', 'tts.model.layers.10.self_attn.o_proj.weight', 'tts.model.layers.10.self_attn.q_proj.weight', 'tts.model.layers.10.self_attn.v_proj.weight', 'tts.model.layers.11.input_layernorm.weight', 'tts.model.layers.11.mlp.down_proj.weight', 'tts.model.layers.11.mlp.gate_proj.weight', 'tts.model.layers.11.mlp.up_proj.weight', 'tts.model.layers.11.post_attention_layernorm.weight', 'tts.model.layers.11.self_attn.k_proj.weight', 'tts.model.layers.11.self_attn.o_proj.weight', 'tts.model.layers.11.self_attn.q_proj.weight', 'tts.model.layers.11.self_attn.v_proj.weight', 'tts.model.layers.12.input_layernorm.weight', 'tts.model.layers.12.mlp.down_proj.weight', 'tts.model.layers.12.mlp.gate_proj.weight', 'tts.model.layers.12.mlp.up_proj.weight', 'tts.model.layers.12.post_attention_layernorm.weight', 'tts.model.layers.12.self_attn.k_proj.weight', 'tts.model.layers.12.self_attn.o_proj.weight', 'tts.model.layers.12.self_attn.q_proj.weight', 'tts.model.layers.12.self_attn.v_proj.weight', 'tts.model.layers.13.input_layernorm.weight', 'tts.model.layers.13.mlp.down_proj.weight', 'tts.model.layers.13.mlp.gate_proj.weight', 'tts.model.layers.13.mlp.up_proj.weight', 'tts.model.layers.13.post_attention_layernorm.weight', 'tts.model.layers.13.self_attn.k_proj.weight', 'tts.model.layers.13.self_attn.o_proj.weight', 'tts.model.layers.13.self_attn.q_proj.weight', 'tts.model.layers.13.self_attn.v_proj.weight', 'tts.model.layers.14.input_layernorm.weight', 'tts.model.layers.14.mlp.down_proj.weight', 'tts.model.layers.14.mlp.gate_proj.weight', 'tts.model.layers.14.mlp.up_proj.weight', 'tts.model.layers.14.post_attention_layernorm.weight', 'tts.model.layers.14.self_attn.k_proj.weight', 'tts.model.layers.14.self_attn.o_proj.weight', 'tts.model.layers.14.self_attn.q_proj.weight', 'tts.model.layers.14.self_attn.v_proj.weight', 'tts.model.layers.15.input_layernorm.weight', 'tts.model.layers.15.mlp.down_proj.weight', 'tts.model.layers.15.mlp.gate_proj.weight', 'tts.model.layers.15.mlp.up_proj.weight', 'tts.model.layers.15.post_attention_layernorm.weight', 'tts.model.layers.15.self_attn.k_proj.weight', 'tts.model.layers.15.self_attn.o_proj.weight', 'tts.model.layers.15.self_attn.q_proj.weight', 'tts.model.layers.15.self_attn.v_proj.weight', 'tts.model.layers.16.input_layernorm.weight', 'tts.model.layers.16.mlp.down_proj.weight', 'tts.model.layers.16.mlp.gate_proj.weight', 'tts.model.layers.16.mlp.up_proj.weight', 'tts.model.layers.16.post_attention_layernorm.weight', 'tts.model.layers.16.self_attn.k_proj.weight', 'tts.model.layers.16.self_attn.o_proj.weight', 'tts.model.layers.16.self_attn.q_proj.weight', 'tts.model.layers.16.self_attn.v_proj.weight', 'tts.model.layers.17.input_layernorm.weight', 'tts.model.layers.17.mlp.down_proj.weight', 'tts.model.layers.17.mlp.gate_proj.weight', 'tts.model.layers.17.mlp.up_proj.weight', 'tts.model.layers.17.post_attention_layernorm.weight', 'tts.model.layers.17.self_attn.k_proj.weight', 'tts.model.layers.17.self_attn.o_proj.weight', 'tts.model.layers.17.self_attn.q_proj.weight', 'tts.model.layers.17.self_attn.v_proj.weight', 'tts.model.layers.18.input_layernorm.weight', 'tts.model.layers.18.mlp.down_proj.weight', 'tts.model.layers.18.mlp.gate_proj.weight', 'tts.model.layers.18.mlp.up_proj.weight', 'tts.model.layers.18.post_attention_layernorm.weight', 'tts.model.layers.18.self_attn.k_proj.weight', 'tts.model.layers.18.self_attn.o_proj.weight', 'tts.model.layers.18.self_attn.q_proj.weight', 'tts.model.layers.18.self_attn.v_proj.weight', 'tts.model.layers.19.input_layernorm.weight', 'tts.model.layers.19.mlp.down_proj.weight', 'tts.model.layers.19.mlp.gate_proj.weight', 'tts.model.layers.19.mlp.up_proj.weight', 'tts.model.layers.19.post_attention_layernorm.weight', 'tts.model.layers.19.self_attn.k_proj.weight', 'tts.model.layers.19.self_attn.o_proj.weight', 'tts.model.layers.19.self_attn.q_proj.weight', 'tts.model.layers.19.self_attn.v_proj.weight', 'tts.model.layers.2.input_layernorm.weight', 'tts.model.layers.2.mlp.down_proj.weight', 'tts.model.layers.2.mlp.gate_proj.weight', 'tts.model.layers.2.mlp.up_proj.weight', 'tts.model.layers.2.post_attention_layernorm.weight', 'tts.model.layers.2.self_attn.k_proj.weight', 'tts.model.layers.2.self_attn.o_proj.weight', 'tts.model.layers.2.self_attn.q_proj.weight', 'tts.model.layers.2.self_attn.v_proj.weight', 'tts.model.layers.3.input_layernorm.weight', 'tts.model.layers.3.mlp.down_proj.weight', 'tts.model.layers.3.mlp.gate_proj.weight', 'tts.model.layers.3.mlp.up_proj.weight', 'tts.model.layers.3.post_attention_layernorm.weight', 'tts.model.layers.3.self_attn.k_proj.weight', 'tts.model.layers.3.self_attn.o_proj.weight', 'tts.model.layers.3.self_attn.q_proj.weight', 'tts.model.layers.3.self_attn.v_proj.weight', 'tts.model.layers.4.input_layernorm.weight', 'tts.model.layers.4.mlp.down_proj.weight', 'tts.model.layers.4.mlp.gate_proj.weight', 'tts.model.layers.4.mlp.up_proj.weight', 'tts.model.layers.4.post_attention_layernorm.weight', 'tts.model.layers.4.self_attn.k_proj.weight', 'tts.model.layers.4.self_attn.o_proj.weight', 'tts.model.layers.4.self_attn.q_proj.weight', 'tts.model.layers.4.self_attn.v_proj.weight', 'tts.model.layers.5.input_layernorm.weight', 'tts.model.layers.5.mlp.down_proj.weight', 'tts.model.layers.5.mlp.gate_proj.weight', 'tts.model.layers.5.mlp.up_proj.weight', 'tts.model.layers.5.post_attention_layernorm.weight', 'tts.model.layers.5.self_attn.k_proj.weight', 'tts.model.layers.5.self_attn.o_proj.weight', 'tts.model.layers.5.self_attn.q_proj.weight', 'tts.model.layers.5.self_attn.v_proj.weight', 'tts.model.layers.6.input_layernorm.weight', 'tts.model.layers.6.mlp.down_proj.weight', 'tts.model.layers.6.mlp.gate_proj.weight', 'tts.model.layers.6.mlp.up_proj.weight', 'tts.model.layers.6.post_attention_layernorm.weight', 'tts.model.layers.6.self_attn.k_proj.weight', 'tts.model.layers.6.self_attn.o_proj.weight', 'tts.model.layers.6.self_attn.q_proj.weight', 'tts.model.layers.6.self_attn.v_proj.weight', 'tts.model.layers.7.input_layernorm.weight', 'tts.model.layers.7.mlp.down_proj.weight', 'tts.model.layers.7.mlp.gate_proj.weight', 'tts.model.layers.7.mlp.up_proj.weight', 'tts.model.layers.7.post_attention_layernorm.weight', 'tts.model.layers.7.self_attn.k_proj.weight', 'tts.model.layers.7.self_attn.o_proj.weight', 'tts.model.layers.7.self_attn.q_proj.weight', 'tts.model.layers.7.self_attn.v_proj.weight', 'tts.model.layers.8.input_layernorm.weight', 'tts.model.layers.8.mlp.down_proj.weight', 'tts.model.layers.8.mlp.gate_proj.weight', 'tts.model.layers.8.mlp.up_proj.weight', 'tts.model.layers.8.post_attention_layernorm.weight', 'tts.model.layers.8.self_attn.k_proj.weight', 'tts.model.layers.8.self_attn.o_proj.weight', 'tts.model.layers.8.self_attn.q_proj.weight', 'tts.model.layers.8.self_attn.v_proj.weight', 'tts.model.layers.9.input_layernorm.weight', 'tts.model.layers.9.mlp.down_proj.weight', 'tts.model.layers.9.mlp.gate_proj.weight', 'tts.model.layers.9.mlp.up_proj.weight', 'tts.model.layers.9.post_attention_layernorm.weight', 'tts.model.layers.9.self_attn.k_proj.weight', 'tts.model.layers.9.self_attn.o_proj.weight', 'tts.model.layers.9.self_attn.q_proj.weight', 'tts.model.layers.9.self_attn.v_proj.weight', 'tts.model.norm.weight', 'tts.projector.linear1.bias', 'tts.projector.linear1.weight', 'tts.projector.linear2.bias', 'tts.projector.linear2.weight']
+- This IS expected if you are initializing MiniCPMO from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing MiniCPMO from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+The `seen_tokens` attribute is deprecated and will be removed in v4.41. Use the `cache_position` model input instead.
+[1/1846] 2.67 s/answer, ETA 1.4 h | A: 'The sphere in the image is red and appears to be small in size.'
+[21/1846] 1.49 s/answer, ETA 0.8 h | A: 'The cube is yellow in color and appears to be made of a reflective or metallic material, giving it a'
+[41/1846] 1.66 s/answer, ETA 0.8 h | A: 'The cube is small in size and has a purple color.'
+[61/1846] 1.56 s/answer, ETA 0.8 h | A: 'The sphere in the image is small in size and has a blue color.'
+[81/1846] 1.55 s/answer, ETA 0.8 h | A: 'There is one sphere and two cylinders in the image.'
+[101/1846] 1.53 s/answer, ETA 0.7 h | A: 'The cube in the image is large and appears to be made of a matte material, possibly plastic or rubbe'
+[121/1846] 1.57 s/answer, ETA 0.8 h | A: 'The cylinder in the image is purple and appears to be made of a shiny, reflective material, likely m'
+[141/1846] 1.58 s/answer, ETA 0.7 h | A: 'The sphere is green in color and appears to be made of a smooth, possibly rubber-like material.'
+[161/1846] 1.60 s/answer, ETA 0.7 h | A: 'There are two cubes and two cylinders in the image.'
+[181/1846] 1.59 s/answer, ETA 0.7 h | A: 'There is one green cube in the image.'
+[201/1846] 1.60 s/answer, ETA 0.7 h | A: 'chair, couch'
+[221/1846] 1.64 s/answer, ETA 0.7 h | A: 'In the image, there is a white mug with a green and black polka dot pattern. Above the mug, there ar'
+[241/1846] 1.65 s/answer, ETA 0.7 h | A: 'Carrot and hot dog are present in the image.'
+[261/1846] 1.68 s/answer, ETA 0.7 h | A: 'There is one car and one motorcycle in the image.'
+[281/1846] 1.70 s/answer, ETA 0.7 h | A: 'There is a dog in the image.'
+[301/1846] 1.73 s/answer, ETA 0.7 h | A: 'The kitchen items present in the image, excluding the spoon, are: 1. A plate with food (containing r'
+[321/1846] 1.75 s/answer, ETA 0.7 h | A: 'There is one refrigerator and one sink in the image.'
+[341/1846] 1.77 s/answer, ETA 0.7 h | A: 'The image contains a truck. There are no motorcycles or bicycles visible in the scene.'
+[361/1846] 1.80 s/answer, ETA 0.7 h | A: 'cat'
+[381/1846] 1.82 s/answer, ETA 0.7 h | A: 'The electronic device present in the image is a laptop. There is no mouse, remote, or cell phone vis'
+[401/1846] 1.83 s/answer, ETA 0.7 h | A: 'In the image, there is a train car present. It appears to be a flatbed type of car, which is commonl'
+[421/1846] 1.85 s/answer, ETA 0.7 h | A: 'There is one chair in the image.'
+[441/1846] 1.87 s/answer, ETA 0.7 h | A: 'The kitchen items present in the image are a wine glass and a spoon. There is no cup visible in the '
+[461/1846] 1.87 s/answer, ETA 0.7 h | A: "There is one bottle in the image. It's a water bottle placed in a holder on the table next to the la"
+[481/1846] 1.87 s/answer, ETA 0.7 h | A: 'There is one dog and one cat in the image.'
+[501/1846] 1.86 s/answer, ETA 0.7 h | A: 'There are two zebras in the image.'
+[521/1846] 1.87 s/answer, ETA 0.7 h | A: 'In the image, there is a dining table with a glass top. On the table, there are two vases, one of wh'
+[541/1846] 1.86 s/answer, ETA 0.7 h | A: 'The image contains a refrigerator. There is no sink, microwave, or oven visible in the image.'
+[561/1846] 1.87 s/answer, ETA 0.7 h | A: 'The image contains a fork, which is a common kitchen utensil used for eating or serving food. There '
+[581/1846] 1.87 s/answer, ETA 0.7 h | A: 'There are no other pieces of furniture visible in the image besides the dining table.'
+[601/1846] 1.89 s/answer, ETA 0.7 h | A: 'In the image, there is a cup, a bottle, and a pair of scissors. However, there is no fork or spoon v'
+[621/1846] 1.89 s/answer, ETA 0.6 h | A: 'The vehicles present in the image are a fire truck and a car. There is no bus, airplane, or truck vi'
+[641/1846] 1.89 s/answer, ETA 0.6 h | A: 'The man is wearing a green jacket.'
+[661/1846] 1.87 s/answer, ETA 0.6 h | A: 'The boy is standing in a grassy area, likely a baseball field, and appears to be in the process of s'
+[681/1846] 1.85 s/answer, ETA 0.6 h | A: 'The woman is standing on skis.'
+[701/1846] 1.83 s/answer, ETA 0.6 h | A: 'The woman is wearing a maroon tank top and white shorts.'
+[721/1846] 1.81 s/answer, ETA 0.6 h | A: 'The batter is holding a baseball bat. They are playing baseball.'
+[741/1846] 1.79 s/answer, ETA 0.5 h | A: 'The pan is black and appears to be of a medium size, suitable for individual servings.'
+[761/1846] 1.78 s/answer, ETA 0.5 h | A: 'The giraffe is brown and white.'
+[781/1846] 1.77 s/answer, ETA 0.5 h | A: 'The person is wearing a black shirt and black shorts. They appear to be engaged in a water sport, li'
+[801/1846] 1.76 s/answer, ETA 0.5 h | A: 'There is a white horse in the image.'
+[821/1846] 1.75 s/answer, ETA 0.5 h | A: 'The mirror is rectangular in shape and appears to have a smooth, reflective surface. It is mounted o'
+[841/1846] 1.74 s/answer, ETA 0.5 h | A: 'The tail of the horse is black.'
+[861/1846] 1.73 s/answer, ETA 0.5 h | A: 'The elephant in the image is gray and appears to be walking or moving through the grassy area. It ha'
+[881/1846] 1.72 s/answer, ETA 0.5 h | A: 'The person is wearing a red hoodie and dark pants. They are performing a trick on a skateboard.'
+[901/1846] 1.71 s/answer, ETA 0.4 h | A: 'The man is holding a magazine.'
+[921/1846] 1.71 s/answer, ETA 0.4 h | A: 'The gravel is brown in color.'
+[941/1846] 1.71 s/answer, ETA 0.4 h | T: 'The cube is green in color and appears to be of medium size compared to the other objects in the ima'
+[961/1846] 1.72 s/answer, ETA 0.4 h | T: 'The cylinder in the image is blue and appears to be made of a shiny, reflective material, likely met'
+[981/1846] 1.73 s/answer, ETA 0.4 h | T: 'In the image, there is one cube and one sphere. The cube is purple, and the sphere is red.'
+[1001/1846] 1.73 s/answer, ETA 0.4 h | T: 'The cylinder is yellow and appears to be made of a shiny, reflective material, suggesting it might b'
+[1021/1846] 1.73 s/answer, ETA 0.4 h | T: 'There is one cube in the image.'
+[1041/1846] 1.74 s/answer, ETA 0.4 h | T: 'There is one sphere and one cylinder in the image.'
+[1061/1846] 1.74 s/answer, ETA 0.4 h | T: 'The cylinder in the image is red in color. It appears to be small in size, comparable to the other o'
+[1081/1846] 1.75 s/answer, ETA 0.4 h | T: 'To determine the number of cubes, spheres, and cylinders in the image, we need to carefully observe '
+[1101/1846] 1.75 s/answer, ETA 0.4 h | T: 'There are two spheres in the image.'
+[1121/1846] 1.76 s/answer, ETA 0.4 h | T: 'The animals present in the image are a zebra and an ostrich. There is no cow or horse visible in the'
+[1141/1846] 1.75 s/answer, ETA 0.3 h | T: 'There is one banana visible in the image, and it appears to be inside a bun, resembling a sandwich. '
+[1161/1846] 1.76 s/answer, ETA 0.3 h | T: 'The animals present in the image are giraffe and zebra. There are no sheep or cows visible in the im'
+[1181/1846] 1.76 s/answer, ETA 0.3 h | T: 'The kitchen items present in the image are a wine glass and a cup. There is no spoon visible in the '
+[1201/1846] 1.76 s/answer, ETA 0.3 h | T: 'There is a dog present in the image.'
+[1221/1846] 1.75 s/answer, ETA 0.3 h | T: 'There are three books in the image.'
+[1241/1846] 1.75 s/answer, ETA 0.3 h | T: 'There is one handbag and one umbrella in the image.'
+[1261/1846] 1.75 s/answer, ETA 0.3 h | T: 'In the image, besides the handbag, there is an umbrella being held by the person.'
+[1281/1846] 1.75 s/answer, ETA 0.3 h | T: 'The animals present in the image are a dog and a horse. There is no zebra or cow visible in the phot'
+[1301/1846] 1.75 s/answer, ETA 0.3 h | T: 'The foods present in the image are a sandwich, banana, and orange. There is no carrot visible in the'
+[1321/1846] 1.75 s/answer, ETA 0.3 h | T: 'There is one cat in the image.'
+[1341/1846] 1.75 s/answer, ETA 0.2 h | T: 'The image contains a variety of foods, including:\n\n1. Cherry tomatoes\n2. Broccoli\n3. Green beans\n4. '
+[1361/1846] 1.75 s/answer, ETA 0.2 h | T: 'The pieces of furniture present in the image are a potted plant and a toilet. There is no dining tab'
+[1381/1846] 1.75 s/answer, ETA 0.2 h | T: 'The vehicles present in the image are a car and a bicycle. There is no motorcycle or airplane visibl'
+[1401/1846] 1.75 s/answer, ETA 0.2 h | T: 'There is a microwave oven present in the image.'
+[1421/1846] 1.75 s/answer, ETA 0.2 h | T: 'The image contains a variety of foods, including broccoli, a red bell pepper, eggs, and what appears'
+[1441/1846] 1.75 s/answer, ETA 0.2 h | T: 'In the image, there is a baseball bat and a necklace. The baseball bat is being held over the person'
+[1461/1846] 1.75 s/answer, ETA 0.2 h | T: 'In the image, there is a car present. There is no boat, truck, or bicycle visible in the scene. The '
+[1481/1846] 1.75 s/answer, ETA 0.2 h | T: 'In the image, there is a bicycle present. The other vehicles mentioned, such as a train, truck, and '
+[1501/1846] 1.75 s/answer, ETA 0.2 h | T: 'There is one umbrella in the image.'
+[1521/1846] 1.75 s/answer, ETA 0.2 h | T: 'The indoor objects present in the image, excluding the teddy bear, are a book and a pillow. There is'
+[1541/1846] 1.75 s/answer, ETA 0.1 h | T: 'There is one laptop and one TV in the image.'
+[1561/1846] 1.75 s/answer, ETA 0.1 h | T: 'The passenger is wearing a gray hoodie and a red beanie. They are sitting on a bench.'
+[1581/1846] 1.74 s/answer, ETA 0.1 h | T: 'The girl is standing in a grassy field.'
+[1601/1846] 1.73 s/answer, ETA 0.1 h | T: 'The man is standing on a baseball mound.'
+[1621/1846] 1.72 s/answer, ETA 0.1 h | T: 'The batter is wearing a uniform and a helmet.'
+[1641/1846] 1.71 s/answer, ETA 0.1 h | T: 'The girl is sitting on a bus seat and appears to be using a laptop.'
+[1661/1846] 1.70 s/answer, ETA 0.1 h | T: 'The box is made of wood and appears to be of a medium size, suitable for storing shoes or other smal'
+[1681/1846] 1.69 s/answer, ETA 0.1 h | T: 'The man is leaning on the side of a truck, and he is holding a can of beer.'
+[1701/1846] 1.68 s/answer, ETA 0.1 h | T: 'The bus in the image is a large vehicle, typical of those used for transporting students. It appears'
+[1721/1846] 1.68 s/answer, ETA 0.1 h | T: 'The vase is made of a sturdy material, likely stone or concrete, and features intricate carvings and'
+[1741/1846] 1.67 s/answer, ETA 0.0 h | T: 'The batter is standing on home plate.'
+[1761/1846] 1.66 s/answer, ETA 0.0 h | T: 'The girl is wearing a colorful raincoat with a hood and polka dot leggings. She is also wearing pink'
+[1781/1846] 1.65 s/answer, ETA 0.0 h | T: 'The boy is wearing a white t-shirt and dark pants.'
+[1801/1846] 1.65 s/answer, ETA 0.0 h | T: 'The person is standing on a beach, walking towards the ocean.'
+[1821/1846] 1.64 s/answer, ETA 0.0 h | T: 'The baby is looking at a laptop.'
+[1841/1846] 1.64 s/answer, ETA 0.0 h | T: 'The building is made of brick.'
+generated 1846 answers (100 tokens max) in 3017 s (1.63 s/answer)
+274 answers hit 100 tokens -> regenerate with 256
+[1/274] 5.58 s/answer, ETA 0.4 h | A: "To determine the number of cubes, spheres, and cylinders in the image, let's analyze each shape indi"
+[21/274] 5.15 s/answer, ETA 0.4 h | A: 'The cat in the image is a medium to large-sized cat with a fluffy coat. It is sitting inside a small'
+[41/274] 4.98 s/answer, ETA 0.3 h | C0: "To determine the number of cubes, spheres, and cylinders in the image, let's analyze each object pre"
+[61/274] 5.02 s/answer, ETA 0.3 h | C0: "To determine the number of cubes and spheres in the image, let's analyze the objects present:\n\n1. **"
+[81/274] 4.99 s/answer, ETA 0.3 h | C0: "To determine the number of cubes, spheres, and cylinders in the image, let's analyze each shape indi"
+[101/274] 4.97 s/answer, ETA 0.2 h | C0: "To determine the number of cubes, spheres, and cylinders in the image, let's analyze each shape indi"
+[121/274] 4.99 s/answer, ETA 0.2 h | C0: "To determine the number of cubes, spheres, and cylinders in the image, let's analyze each shape indi"
+[141/274] 5.00 s/answer, ETA 0.2 h | T: 'To determine the number of cubes and cylinders in the image, we need to carefully count each object.'
+[161/274] 5.03 s/answer, ETA 0.2 h | T: "To determine the number of cubes, spheres, and cylinders in the image, let's analyze each shape indi"
+[181/274] 4.96 s/answer, ETA 0.1 h | V: "To determine the number of spheres and cylinders in the image, let's analyze the objects present:\n\n1"
+[201/274] 4.95 s/answer, ETA 0.1 h | V: "To determine the number of cubes, spheres, and cylinders in the image, let's analyze each object pre"
+[221/274] 4.94 s/answer, ETA 0.1 h | V: "To determine the number of cubes and cylinders in the image, let's analyze the objects present:\n\n1. "
+[241/274] 4.95 s/answer, ETA 0.0 h | V: "To determine the number of cubes, spheres, and cylinders in the image, let's analyze each type of ob"
+[261/274] 4.97 s/answer, ETA 0.0 h | V: "To determine the number of cubes, spheres, and cylinders in the image, let's analyze each type of ob"
+generated 274 answers (256 tokens max) in 1366 s (4.98 s/answer)
+932 questions, 3728 answers planned; by branch: existence=175, existence_closed=174, count=186, attribute=197, relation=200
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/399 [00:00<?, ?it/s]Loading weights:   0%|          | 1/399 [00:00<00:49,  7.99it/s]Loading weights:  18%|█▊        | 72/399 [00:00<00:00, 369.10it/s]Loading weights:  31%|███▏      | 125/399 [00:00<00:00, 426.08it/s]Loading weights:  45%|████▌     | 181/399 [00:00<00:00, 475.52it/s]Loading weights:  58%|█████▊    | 232/399 [00:00<00:00, 484.29it/s]Loading weights:  71%|███████▏  | 285/399 [00:00<00:00, 499.16it/s]Loading weights:  84%|████████▍ | 336/399 [00:00<00:00, 488.75it/s]Loading weights:  97%|█████████▋| 386/399 [00:00<00:00, 475.31it/s]Loading weights: 100%|██████████| 399/399 [00:00<00:00, 455.79it/s]
+judge 64/3025
+judge 128/3025
+judge 192/3025
+judge 256/3025
+judge 320/3025
+judge 384/3025
+judge 448/3025
+judge 512/3025
+judge 576/3025
+judge 640/3025
+judge 704/3025
+judge 768/3025
+judge 832/3025
+judge 896/3025
+judge 960/3025
+judge 1024/3025
+judge 1088/3025
+judge 1152/3025
+judge 1216/3025
+judge 1280/3025
+judge 1344/3025
+judge 1408/3025
+judge 1472/3025
+judge 1536/3025
+judge 1600/3025
+judge 1664/3025
+judge 1728/3025
+judge 1792/3025
+judge 1856/3025
+judge 1920/3025
+judge 1984/3025
+judge 2048/3025
+judge 2112/3025
+judge 2176/3025
+judge 2240/3025
+judge 2304/3025
+judge 2368/3025
+judge 2432/3025
+judge 2496/3025
+judge 2560/3025
+judge 2624/3025
+judge 2688/3025
+judge 2752/3025
+judge 2816/3025
+judge 2880/3025
+judge 2944/3025
+judge 3008/3025
+judge 3025/3025
+judge (thinking) 64/575
+judge (thinking) 128/575
+judge (thinking) 192/575
+judge (thinking) 256/575
+judge (thinking) 320/575
+judge (thinking) 384/575
+judge (thinking) 448/575
+judge (thinking) 512/575
+judge (thinking) 575/575
+judge (thinking) 18/18
+Loading weights:   0%|          | 0/399 [00:00<?, ?it/s]Loading weights:   0%|          | 1/399 [00:00<01:18,  5.08it/s]Loading weights:  20%|██        | 81/399 [00:00<00:00, 333.85it/s]Loading weights:  34%|███▍      | 136/399 [00:00<00:00, 396.84it/s]Loading weights:  46%|████▌     | 184/399 [00:00<00:00, 422.54it/s]Loading weights:  59%|█████▉    | 237/399 [00:00<00:00, 452.59it/s]Loading weights:  75%|███████▍  | 298/399 [00:00<00:00, 499.60it/s]Loading weights:  88%|████████▊ | 351/399 [00:00<00:00, 447.83it/s]Loading weights: 100%|██████████| 399/399 [00:00<00:00, 454.94it/s]Loading weights: 100%|██████████| 399/399 [00:00<00:00, 413.56it/s]
+label 64/1417
+label 128/1417
+label 192/1417
+label 256/1417
+label 320/1417
+label 384/1417
+label 448/1417
+label 512/1417
+label 576/1417
+label 640/1417
+label 704/1417
+label 768/1417
+label 832/1417
+label 896/1417
+label 960/1417
+label 1024/1417
+label 1088/1417
+label 1152/1417
+label 1216/1417
+label 1280/1417
+label 1344/1417
+label 1408/1417
+label 1417/1417
+WARNING: 7 rows where the thinking judge gave no JSON even with the retry budget; they keep the fast verdict and are listed in review_pilot200.csv (judge_source=think_error)
+
+C0 states the target in 786/932 questions
+violation % (any mention: STATE/META/DENY/WRONG) among C0-mentioned (n), negative form
+branch                       T           A           V
+existence             45 (143)    38 (143)    97 (143)
+existence_closed      86 (172)    58 (172)    99 (172)
+count                 58 (179)    27 (179)    98 (179)
+attribute             31 (138)    17 (138)    92 (138)
+relation              29 (154)    12 (154)    90 (154)
+ALL                   51 (786)    31 (786)    95 (786)
+
+regex disagrees with judge on the target in 267/3728 rows
+files: /home/vyvn/new/cross_multimodal_negation/experiments/h1_v2/results/minicpm-o-2.6/scored_pilot200.jsonl /home/vyvn/new/cross_multimodal_negation/experiments/h1_v2/results/minicpm-o-2.6/review_pilot200.csv
+=== phi-4-mm 2026. 11. 24. (화) 04:44:41 KST
+932 questions, 3728 answers planned; by branch: existence=175, existence_closed=174, count=186, attribute=197, relation=200
+1846 answers to generate (3728 jobs)
+/home/vyvn/anaconda3/envs/omni_phi/lib/python3.10/site-packages/transformers/models/auto/image_processing_auto.py:590: FutureWarning: The image_processor_class argument is deprecated and will be removed in v4.42. Please use `slow_image_processor_class`, or `fast_image_processor_class` instead
+  warnings.warn(
+Using a slow image processor as `use_fast` is unset and a slow processor was saved with this model. `use_fast=True` will be the default behavior in v4.48, even if the model was saved with a slow processor. This will result in minor differences in outputs. You'll still be able to use a slow processor with `use_fast=False`.
+/home/vyvn/.cache/huggingface/modules/transformers_modules/microsoft/Phi-4-multimodal-instruct/93f923e1a7727d1c4f446756212d9d3e8fcc5d81/speech_conformer_encoder.py:2774: FutureWarning: Please specify CheckpointImpl.NO_REENTRANT as CheckpointImpl.REENTRANT will soon be removed as the default and eventually deprecated.
+  lambda i: encoder_checkpoint_wrapper(
+Loading checkpoint shards:   0%|          | 0/3 [00:00<?, ?it/s]Loading checkpoint shards:  33%|███▎      | 1/3 [00:01<00:03,  1.79s/it]Loading checkpoint shards:  67%|██████▋   | 2/3 [00:03<00:01,  1.64s/it]Loading checkpoint shards: 100%|██████████| 3/3 [00:03<00:00,  1.15s/it]Loading checkpoint shards: 100%|██████████| 3/3 [00:03<00:00,  1.30s/it]
+/home/vyvn/anaconda3/envs/omni_phi/lib/python3.10/site-packages/torch/utils/checkpoint.py:87: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
+  warnings.warn(
+[1/1846] 0.97 s/answer, ETA 0.5 h | A: 'The sphere is small and metallic.'
+[21/1846] 0.57 s/answer, ETA 0.3 h | A: 'The cube is yellow and appears to be made of metal.'
+[41/1846] 0.58 s/answer, ETA 0.3 h | A: 'The cube is purple and small.'
+[61/1846] 0.57 s/answer, ETA 0.3 h | A: 'The sphere is small, blue, and appears to be made of a soft material.'
+[81/1846] 0.56 s/answer, ETA 0.3 h | A: '3'
+[101/1846] 0.57 s/answer, ETA 0.3 h | A: 'The cube is large and made of rubber.'
+[121/1846] 0.58 s/answer, ETA 0.3 h | A: 'The cylinder is purple and appears to be made of metal.'
+[141/1846] 0.58 s/answer, ETA 0.3 h | A: 'The sphere is large, green, and made of rubber.'
+[161/1846] 0.58 s/answer, ETA 0.3 h | A: '3'
+[181/1846] 0.58 s/answer, ETA 0.3 h | A: '2'
+[201/1846] 0.58 s/answer, ETA 0.3 h | A: 'chair, couch'
+[221/1846] 0.60 s/answer, ETA 0.3 h | A: 'The image features a white mug and a spoon.'
+[241/1846] 0.63 s/answer, ETA 0.3 h | A: 'carrot'
+[261/1846] 0.64 s/answer, ETA 0.3 h | A: 'two'
+[281/1846] 0.65 s/answer, ETA 0.3 h | A: 'dog'
+[301/1846] 0.66 s/answer, ETA 0.3 h | A: 'Knife and fork'
+[321/1846] 0.66 s/answer, ETA 0.3 h | A: '1'
+[341/1846] 0.68 s/answer, ETA 0.3 h | A: 'In the image, there is an airplane, a truck, and a motorcycle. The airplane is parked at the airport'
+[361/1846] 0.69 s/answer, ETA 0.3 h | A: 'The animals present in the image are a cat and a dog.'
+[381/1846] 0.70 s/answer, ETA 0.3 h | A: 'The electronic devices present in the image are a laptop and a mouse.'
+[401/1846] 0.71 s/answer, ETA 0.3 h | A: 'There are two vehicles present in the image: a train and a truck.'
+[421/1846] 0.72 s/answer, ETA 0.3 h | A: 'There is one bed in the image.'
+[441/1846] 0.73 s/answer, ETA 0.3 h | A: 'The image contains a wine glass and a bottle.'
+[461/1846] 0.73 s/answer, ETA 0.3 h | A: 'There is only one bottle in the image.'
+[481/1846] 0.74 s/answer, ETA 0.3 h | A: '2'
+[501/1846] 0.75 s/answer, ETA 0.3 h | A: 'zebra'
+[521/1846] 0.75 s/answer, ETA 0.3 h | A: 'The image features a dining table with chairs, a vase, and a window.'
+[541/1846] 0.75 s/answer, ETA 0.3 h | A: 'The image shows a refrigerator and a sink, but there is no microwave or oven visible.'
+[561/1846] 0.76 s/answer, ETA 0.3 h | A: 'A fork is present in the image.'
+[581/1846] 0.76 s/answer, ETA 0.3 h | A: 'There is a dining table and a chair in the image.'
+[601/1846] 0.76 s/answer, ETA 0.3 h | A: 'The image does not contain a spoon.'
+[621/1846] 0.77 s/answer, ETA 0.3 h | A: 'The vehicles present in the image are a bus, a car, and a truck.'
+[641/1846] 0.77 s/answer, ETA 0.3 h | A: 'Green'
+[661/1846] 0.77 s/answer, ETA 0.3 h | A: 'The boy is holding a baseball bat and standing in a baseball field.'
+[681/1846] 0.77 s/answer, ETA 0.2 h | A: 'The woman is standing on skis.'
+[701/1846] 0.77 s/answer, ETA 0.2 h | A: 'The woman is wearing a pink tank top and a black jacket.'
+[721/1846] 0.77 s/answer, ETA 0.2 h | A: 'The batter is holding a baseball bat and playing baseball.'
+[741/1846] 0.77 s/answer, ETA 0.2 h | A: 'Small'
+[761/1846] 0.76 s/answer, ETA 0.2 h | A: 'Brown'
+[781/1846] 0.76 s/answer, ETA 0.2 h | A: 'A bald man'
+[801/1846] 0.76 s/answer, ETA 0.2 h | A: 'The horse is white and is standing.'
+[821/1846] 0.76 s/answer, ETA 0.2 h | A: 'The mirror is oval-shaped, large, and has a smooth texture.'
+[841/1846] 0.76 s/answer, ETA 0.2 h | A: 'Black'
+[861/1846] 0.76 s/answer, ETA 0.2 h | A: 'The elephant is gray and is standing in the grass.'
+[881/1846] 0.76 s/answer, ETA 0.2 h | A: 'The person is wearing a red shirt and black shorts.'
+[901/1846] 0.76 s/answer, ETA 0.2 h | A: 'The man is holding a newspaper and sitting on a bench.'
+[921/1846] 0.76 s/answer, ETA 0.2 h | A: 'Brown'
+[941/1846] 0.75 s/answer, ETA 0.2 h | T: 'Green, large, metal'
+[961/1846] 0.75 s/answer, ETA 0.2 h | T: 'The cylinder is blue and metallic.'
+[981/1846] 0.74 s/answer, ETA 0.2 h | T: '2'
+[1001/1846] 0.73 s/answer, ETA 0.2 h | T: 'The cylinder is yellow and appears to be made of metal.'
+[1021/1846] 0.73 s/answer, ETA 0.2 h | T: '4.'
+[1041/1846] 0.72 s/answer, ETA 0.2 h | T: '3.'
+[1061/1846] 0.72 s/answer, ETA 0.2 h | T: 'The cylinder is red and small.'
+[1081/1846] 0.71 s/answer, ETA 0.2 h | T: '3'
+[1101/1846] 0.71 s/answer, ETA 0.1 h | T: '3'
+[1121/1846] 0.70 s/answer, ETA 0.1 h | T: 'zebra'
+[1141/1846] 0.70 s/answer, ETA 0.1 h | T: '1'
+[1161/1846] 0.70 s/answer, ETA 0.1 h | T: 'giraffe, sheep, cow'
+[1181/1846] 0.69 s/answer, ETA 0.1 h | T: 'wine glass, cup'
+[1201/1846] 0.69 s/answer, ETA 0.1 h | T: 'Dog'
+[1221/1846] 0.69 s/answer, ETA 0.1 h | T: '3'
+[1241/1846] 0.69 s/answer, ETA 0.1 h | T: '1'
+[1261/1846] 0.69 s/answer, ETA 0.1 h | T: 'Umbrella'
+[1281/1846] 0.68 s/answer, ETA 0.1 h | T: 'dog'
+[1301/1846] 0.68 s/answer, ETA 0.1 h | T: 'banana, orange'
+[1321/1846] 0.68 s/answer, ETA 0.1 h | T: 'Two'
+[1341/1846] 0.68 s/answer, ETA 0.1 h | T: 'carrots'
+[1361/1846] 0.68 s/answer, ETA 0.1 h | T: 'potted plant'
+[1381/1846] 0.67 s/answer, ETA 0.1 h | T: 'motorcycle, bicycle'
+[1401/1846] 0.67 s/answer, ETA 0.1 h | T: 'Microwave'
+[1421/1846] 0.67 s/answer, ETA 0.1 h | T: 'Vegetables'
+[1441/1846] 0.67 s/answer, ETA 0.1 h | T: 'Baseball bat'
+[1461/1846] 0.67 s/answer, ETA 0.1 h | T: 'car'
+[1481/1846] 0.66 s/answer, ETA 0.1 h | T: 'bicycle'
+[1501/1846] 0.66 s/answer, ETA 0.1 h | T: '2'
+[1521/1846] 0.66 s/answer, ETA 0.1 h | T: 'book'
+[1541/1846] 0.66 s/answer, ETA 0.1 h | T: 'Two'
+[1561/1846] 0.66 s/answer, ETA 0.1 h | T: 'The passenger is wearing a gray hoodie.'
+[1581/1846] 0.66 s/answer, ETA 0.0 h | T: 'She is standing in the grass.'
+[1601/1846] 0.66 s/answer, ETA 0.0 h | T: 'The man is standing on a mound and wearing a baseball cap.'
+[1621/1846] 0.66 s/answer, ETA 0.0 h | T: 'Helmet'
+[1641/1846] 0.66 s/answer, ETA 0.0 h | T: 'Bus'
+[1661/1846] 0.66 s/answer, ETA 0.0 h | T: 'Small wooden'
+[1681/1846] 0.66 s/answer, ETA 0.0 h | T: 'The man is leaning on the truck and watching the dog.'
+[1701/1846] 0.66 s/answer, ETA 0.0 h | T: 'The bus is large.'
+[1721/1846] 0.66 s/answer, ETA 0.0 h | T: 'The vase is made of a greenish material, likely metal or ceramic.'
+[1741/1846] 0.66 s/answer, ETA 0.0 h | T: 'The batter is standing on home plate.'
+[1761/1846] 0.66 s/answer, ETA 0.0 h | T: 'The girl is wearing a colorful raincoat, a hood, and polka dot leggings. She is also wearing pink ra'
+[1781/1846] 0.66 s/answer, ETA 0.0 h | T: 'The boy is wearing a white t-shirt and dark pants.'
+[1801/1846] 0.66 s/answer, ETA 0.0 h | T: 'Surfboard, beach, ocean'
+[1821/1846] 0.66 s/answer, ETA 0.0 h | T: 'The baby is looking at a laptop.'
+[1841/1846] 0.66 s/answer, ETA 0.0 h | T: 'brick large'
+generated 1846 answers (100 tokens max) in 1215 s (0.66 s/answer)
+35 answers hit 100 tokens -> regenerate with 256
+[1/35] 3.66 s/answer, ETA 0.0 h | C0: 'The image contains two cubes and three cylinders. The cubes are yellow and brown, while the cylinder'
+[21/35] 4.08 s/answer, ETA 0.0 h | V: 'The image contains two cubes, one sphere, and four cylinders. The cubes are yellow and gray, while t'
+generated 35 answers (256 tokens max) in 143 s (4.07 s/answer)
+932 questions, 3728 answers planned; by branch: existence=175, existence_closed=174, count=186, attribute=197, relation=200
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/399 [00:00<?, ?it/s]Loading weights:   0%|          | 1/399 [00:00<01:37,  4.09it/s]Loading weights:  20%|██        | 81/399 [00:00<00:01, 291.72it/s]Loading weights:  33%|███▎      | 133/399 [00:00<00:00, 369.27it/s]Loading weights:  46%|████▌     | 182/399 [00:00<00:00, 400.10it/s]Loading weights:  58%|█████▊    | 230/399 [00:00<00:00, 351.01it/s]Loading weights:  68%|██████▊   | 271/399 [00:01<00:00, 205.88it/s]Loading weights:  76%|███████▌  | 302/399 [00:01<00:00, 151.09it/s]Loading weights:  84%|████████▍ | 335/399 [00:01<00:00, 175.98it/s]Loading weights:  92%|█████████▏| 367/399 [00:01<00:00, 196.62it/s]Loading weights: 100%|██████████| 399/399 [00:01<00:00, 223.85it/s]
+judge 64/2746
+judge 128/2746
+judge 192/2746
+judge 256/2746
+judge 320/2746
+judge 384/2746
+judge 448/2746
+judge 512/2746
+judge 576/2746
+judge 640/2746
+judge 704/2746
+judge 768/2746
+judge 832/2746
+judge 896/2746
+judge 960/2746
+judge 1024/2746
+judge 1088/2746
+judge 1152/2746
+judge 1216/2746
+judge 1280/2746
+judge 1344/2746
+judge 1408/2746
+judge 1472/2746
+judge 1536/2746
+judge 1600/2746
+judge 1664/2746
+judge 1728/2746
+judge 1792/2746
+judge 1856/2746
+judge 1920/2746
+judge 1984/2746
+judge 2048/2746
+judge 2112/2746
+judge 2176/2746
+judge 2240/2746
+judge 2304/2746
+judge 2368/2746
+judge 2432/2746
+judge 2496/2746
+judge 2560/2746
+judge 2624/2746
+judge 2688/2746
+judge 2746/2746
+judge (thinking) 64/378
+judge (thinking) 128/378
+judge (thinking) 192/378
+judge (thinking) 256/378
+judge (thinking) 320/378
+judge (thinking) 378/378
+judge (thinking) 2/2
+Loading weights:   0%|          | 0/399 [00:00<?, ?it/s]Loading weights:   0%|          | 1/399 [00:00<01:38,  4.03it/s]Loading weights:  25%|██▌       | 100/399 [00:00<00:00, 362.68it/s]Loading weights:  40%|███▉      | 158/399 [00:00<00:00, 401.44it/s]Loading weights:  53%|█████▎    | 211/399 [00:00<00:00, 439.90it/s]Loading weights:  66%|██████▌   | 264/399 [00:00<00:00, 456.73it/s]Loading weights:  79%|███████▉  | 316/399 [00:00<00:00, 448.34it/s]Loading weights:  91%|█████████▏| 365/399 [00:00<00:00, 445.68it/s]Loading weights: 100%|██████████| 399/399 [00:00<00:00, 400.95it/s]
+label 64/1186
+label 128/1186
+label 192/1186
+label 256/1186
+label 320/1186
+label 384/1186
+label 448/1186
+label 512/1186
+label 576/1186
+label 640/1186
+label 704/1186
+label 768/1186
+label 832/1186
+label 896/1186
+label 960/1186
+label 1024/1186
+label 1088/1186
+label 1152/1186
+label 1186/1186
+WARNING: 1 rows where the thinking judge gave no JSON even with the retry budget; they keep the fast verdict and are listed in review_pilot200.csv (judge_source=think_error)
+
+C0 states the target in 772/932 questions
+violation % (any mention: STATE/META/DENY/WRONG) among C0-mentioned (n), negative form
+branch                       T           A           V
+existence             10 (142)    49 (142)    97 (142)
+existence_closed      10 (172)    59 (172)    99 (172)
+count                 42 (151)    40 (151)    91 (151)
+attribute             35 (157)    22 (157)    84 (157)
+relation              33 (150)    34 (150)    85 (150)
+ALL                   26 (772)    41 (772)    91 (772)
+
+regex disagrees with judge on the target in 190/3728 rows
+files: /home/vyvn/new/cross_multimodal_negation/experiments/h1_v2/results/phi-4-mm/scored_pilot200.jsonl /home/vyvn/new/cross_multimodal_negation/experiments/h1_v2/results/phi-4-mm/review_pilot200.csv
+TRIAL DONE 2026. 11. 24. (화) 06:09:55 KST

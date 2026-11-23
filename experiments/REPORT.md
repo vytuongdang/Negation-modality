@@ -1,5 +1,29 @@
 # Experiments report (Pico)
 
+## H1 pilot v2 on dataset v2 subset (2026-11-24, MAIN pilot numbers)
+
+Setup: 932 questions (79 overlap units excluded), C0/T/A/V, T = instruction as its own text item (ITEM_SEP),
+cut answers regenerated with 256 tokens, judge v3 (reads the question) + count rule + label pass.
+Violation = any mention of the forbidden thing (STATE/META/DENY/WRONG), among questions where C0 states the target.
+Full tables: experiments/h1_v2/analysis_pilot200.md; figure experiments/figures/h1v2_violation_pilot200.png.
+
+| model | n C0-mentioned | T | A | V | T-A [95% CI] | A-V [95% CI] |
+|---|---|---|---|---|---|---|
+| Qwen2.5-Omni-7B | 790 | 17.2 | 13.0 | 88.9 | +4.2 [+1.6, +6.6] | -75.8 [-78.9, -72.8] |
+| Qwen2.5-Omni-3B | 799 | 63.0 | 51.1 | 91.7 | +11.9 [+8.5, +15.5] | -40.7 [-44.4, -36.8] |
+| MiniCPM-o 2.6 | 786 | 51.1 | 31.2 | 95.2 | +20.0 [+16.2, +23.8] | -64.0 [-67.6, -60.3] |
+| Phi-4-MM | 772 | 26.0 | 40.9 | 91.3 | -14.9 [-19.2, -10.8] | -50.4 [-54.4, -46.6] |
+
+What this supports (pilot, one subset, one dataset): the visual (typographic) instruction is violated far more
+than text or audio in all 4 models (V mostly STATE: the model answers the question and ignores the written
+instruction; whether it reads the text at all is NOT yet known -> OCR_V / COMP_V controls). The T-vs-A difference
+is model-dependent in sign: 3 models violate more in T, Phi-4 more in A. So there is no general "audio is worse"
+or "text is worse" result. Direction of T-A and the sign flip for Phi-4 match pilot v1 (old setup/metric).
+Not supported yet: any negation-specific claim (needs H4 affirmative/exceptive forms and comprehension controls).
+Phi-4 over-suppresses in count (required recall 74% at C0 -> 7% T, 17% A).
+Judge v3 vs Vy's labels on the 49 labelled answers that were not regenerated: kappa 0.83, 93.9% agree
+(3 disagreements: a WRONG count "2 spheres" scored compliant, "table" for "dining table" in C0, one false positive).
+
 ## H1 trial on dataset v2, stage-1 subset (2026-11-20; analysed 2026-11-23)
 
 Setup: 1,000 questions (200 per branch: existence, existence_closed, count, attribute, relation), one negative
