@@ -2,6 +2,7 @@
 
 Goal: a paper (target venue: ACL 2027; check the ARR deadline with a web search and keep it in NOTES.md).
 This file is the shared understanding of the study. Pico keeps the "Lessons" section at the end growing.
+- 2026-11-24: comparing human labels with a re-scored run must match on the answer text, not on (sample_id, condition): regenerated answers silently pair a human label with a different answer (18/67 items).
 
 ## 1. The question and why it is new
 Omni-models (image + audio + text in, e.g. Qwen2.5-Omni, MiniCPM-o, Phi-4-MM, Gemma-3n) are told what NOT to do

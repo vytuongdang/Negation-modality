@@ -10,3 +10,4 @@ W0000 00:00:1795471648.493251  603573 sentencepiece_processor.cc:130] Piece at i
 [1/3692] 2.00 s/answer, ETA 2.1 h | A: 'It is made of metal.'
 [21/3692] 1.36 s/answer, ETA 1.4 h | A: 'The cube is yellow, small, and made of metal.'
 [41/3692] 1.35 s/answer, ETA 1.4 h | A: 'It is made of metal.'
+[61/3692] 1.32 s/answer, ETA 1.3 h | A: 'The sphere is blue and rubber.'
