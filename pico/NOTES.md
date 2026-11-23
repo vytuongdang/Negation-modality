@@ -160,3 +160,19 @@
 - 2026-11-23 Vy: voices stay 2 (female/male CosyVoice2 clones) for main results. LATER (stage 6, not now): voice robustness subset - real voices (Vy + Huy ~100 sentences) and maybe a child voice (~200, only from a dataset with a clear licence; never record children).
 - 2026-11-23 Vy: InternOmni is NOT urgent ("cứ từ từ"); Vy may run new models on a B200. Plan: this server runs the 4 current models for stages 1,3,4,5; InternOmni + Qwen3-Omni (bf16, fits on B200) run together on the B200 later. Prepare adapters + env spec + one run script so the B200 run is copy-and-run (code/data via git + rsync). Keep the InternOmni download (dl-internomni) for local adapter tests.
 - 2026-11-23 Detailed approved plan in pico/PLAN.md (follow it when Vy says 'Duyệt, làm theo pico/PLAN.md').
+
+## >>> STATE 2026-11-23 20:0x (Pico): PLAN.md APPROVED by Vy 19:42 -> follow pico/PLAN.md stage by stage <<<
+- Stage 0 DONE 19:50 (experiments/h1_v2/run_smoke.sh, log pico/logs/smoke_v2.log): 5 models incl. InternOmni,
+  no crash; all rows have violation/leak/target_label; count rule fires (Phi 3, InternOmni 4); MiniCPM 3 cut ->
+  regenerated 256; InternOmni 1.5 s/answer, coherent; its A answers often short + only about the target (n=9:
+  maybe it treats the audio as the question; check on pilot). Reported in Telegram.
+- Stage 1 RUNNING since 19:52: tmux job-pilot2v2 (run_trial.sh), log pico/logs/pilot2v2.log ('TRIAL DONE').
+  ETA ~02:30. Then: analyze.py --tag pilot200 ; human_check.py score --tag pilot200_sepv1 --judge_tag pilot200
+  human_check/sheet_pilot200_sepv1_Vy67.csv ; report (PLAN Stage 1 list) ; then Stage 2 InternOmni pilot:
+  ~/anaconda3/envs/omni_intern/bin/python -u run_h1v2.py --model internomni --pilot 200 --generate_only
+  --batch_size 1, then `negation` --score_only (~932*4*1.5 s = 1.6 h + judge ~1 h).
+- Stage 3 code: H3-B READY (CPU-tested, not GPU-smoked): conds COMP_T/COMP_A/COMP_V in run_h1v2 (comp.py;
+  options = target + 2 others in the template {X} wording, fillers from the same source, seeded order, gold
+  letters balanced A320/B306/C306 on the pilot), scored by letter -> results/<m>/comp_<tag>_COMP_T-COMP_A-COMP_V.jsonl;
+  analyze_comp.py --tag pilot200 -> analysis_comp_pilot200.md. Run: --pilot 200 --conds COMP_T COMP_A COMP_V
+  (smoke with --pilot 2 first). H4 = --forms (exists). Controls = --conds C0_box OCR_V.

@@ -18,6 +18,8 @@ Later conditions, only with --conds (after H1 core is reported):
     OCR_V    V image + "copy the text in the white box"   (can the model read V at all? like the ASR check)
     OCR_card original image + card + "copy the text in the second image"
              OCR conditions are scored by string match with the instruction, not by the judge.
+    COMP_T / COMP_A / COMP_V  H3-B comprehension: the instruction delivered as in T / A / V, the question replaced
+             by a 3-option "which one must not be mentioned?" (comp.py); scored by the letter -> comp_<tag>.jsonl
 H4 forms (exceptive / affirmative) with --forms: T, A, V on the form samples of the selected units.
 
     python run_h1v2.py --model qwen2.5-omni-7b --pilot 40      # 40 questions per branch (200)
@@ -40,15 +42,17 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE.parent / "common"))
 from render_cards import card_rel  # noqa: E402
+import comp  # noqa: E402
 from omnilib import (BRANCHES, MODELS, AnswerCache, clean, input_key, judge_rows, load_dataset,  # noqa: E402
                      split_group)
 
 CORE = ["C0", "T", "A", "V"]
-EXTRA = ["T_join", "C0_box", "T_pre", "A_pre", "V_card", "OCR_V", "OCR_card"]
+EXTRA = ["T_join", "C0_box", "T_pre", "A_pre", "V_card", "OCR_V", "OCR_card"] + list(comp.COMP)
 OCR = {"OCR_V": "What does the text in the white box say? Copy it exactly, and say nothing else.",
        "OCR_card": "What does the text in the second image say? Copy it exactly, and say nothing else."}
 FORM_CONDS = ["T", "A", "V"]
 RESULTS = HERE / "results"
+POOL = None   # comp.build_pool(full dataset), set in main(): fillers for the H3-B options
 
 
 def inputs(s, cond):
@@ -76,6 +80,13 @@ def inputs(s, cond):
         return s["negation_image"], [("text", OCR[cond])]
     if cond == "OCR_card":
         return s["image"], [("text", OCR[cond]), ("image", card_rel(i))]
+    if cond in comp.COMP:   # H3-B: same delivery as T / A / V, the question replaced by the multiple choice
+        m = comp.mcq(s, cond, POOL)
+        if cond == "COMP_T":
+            return s["image"], [("text", m), ("text", i)]
+        if cond == "COMP_A":
+            return s["image"], [("text", m), ("audio", s["negation_audio"])]
+        return s["negation_image"], [("text", m)]
     raise ValueError(cond)
 
 
@@ -184,9 +195,11 @@ def main():
     # select on the full dataset, then drop double-labelled units: the selection stays the same as before the
     # exclusion list existed, so cached answers are reused and runs stay comparable (2026-11-23)
     data_all, data = load_dataset(keep_excluded=True), load_dataset()
+    global POOL
+    POOL = comp.build_pool(data_all)
     samples = [s for s in select(data_all, None if args.all else args.pilot, args.seed) if s["id"] in data]
     conds = list(args.conds)
-    if "C0" not in conds and any(c not in OCR for c in conds):
+    if "C0" not in conds and any(c not in OCR and c not in comp.COMP for c in conds):
         conds = ["C0"] + conds   # violation is counted among C0-mentioned questions; C0 answers are cached
     plan = [(s, c) for s in samples for c in conds]
     if args.forms:
@@ -217,7 +230,17 @@ def main():
                      "negation": s["negation"], "target": s["target"], "components": s["components"],
                      "answer": clean(raw), "raw_answer": raw, "_s": s})
     ocr_rows = [r for r in rows if r["condition"] in OCR]
-    rows = [r for r in rows if r["condition"] not in OCR]
+    comp_rows = [r for r in rows if r["condition"] in comp.COMP]
+    rows = [r for r in rows if r["condition"] not in OCR and r["condition"] not in comp.COMP]
+    if comp_rows:
+        with open(out / f"comp_{tag}.jsonl", "w") as f:
+            for r in comp_rows:
+                r.update(comp.score_comp(r.pop("_s"), r["answer"], POOL))
+                f.write(json.dumps({k: v for k, v in r.items() if k != "components"}, ensure_ascii=False) + "\n")
+        for c in sorted({r["condition"] for r in comp_rows}):
+            rs = [r for r in comp_rows if r["condition"] == c]
+            print(f"{c}: correct {100 * sum(r['comp_correct'] for r in rs) / len(rs):.1f}%, parsed "
+                  f"{100 * sum(r['comp_parsed'] for r in rs) / len(rs):.1f}% (n={len(rs)}) -> {out / f'comp_{tag}.jsonl'}")
     if ocr_rows:
         with open(out / f"ocr_{tag}.jsonl", "w") as f:
             for r in ocr_rows:
