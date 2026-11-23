@@ -5,16 +5,16 @@
 #   message: echo "try idea X next" > pico/note.txt            (delivered once, at the next step)
 #   stop:    touch pico/stop                                    (after the current step)
 # Quota savers:
-#   - pause between steps: pico/sleep_seconds if Pico wrote one (30..3600, used once); otherwise 10 min while a
+#   - pause between steps: pico/sleep_seconds if Pico wrote one (30..43200, used once); otherwise 3 h while a
 #     GPU job (tmux session job-*) runs, 30 s when Pico is working interactively;
 #   - Claude usage limit: back off 15 -> 30 -> 60 min instead of retrying every 30 s (the heartbeat tells Vy);
-#   - a fresh session every STEPS_PER_SESSION steps (50; change it in pico/steps_per_session; Pico can ask
+#   - a fresh session every STEPS_PER_SESSION steps (10; change it in pico/steps_per_session; Pico can ask
 #     for a fresh session earlier by creating pico/new_session when its context gets long) (long sessions make every step expensive); Pico's memory is
 #     pico/NOTES.md, so nothing is lost.
 cd "$(dirname "$0")/.." || exit 1
 LOG=pico/run.log
-FLAGS="--dangerously-skip-permissions"
-STEPS_PER_SESSION=50   # default; pico/steps_per_session overrides it (read every step, no restart needed)
+FLAGS="--dangerously-skip-permissions --model claude-opus-5-5 --effort medium"   # Vy: Opus 5.5 medium unless Vy asks otherwise
+STEPS_PER_SESSION=10   # default; pico/steps_per_session overrides it (read every step, no restart needed)
 LIMIT_RE='usage limit|limit reached|rate limit|resets at|out of extra usage'
 
 run_claude() {   # run one claude -p call, log it, return 2 on a usage limit
@@ -57,11 +57,12 @@ while [ ! -e pico/stop ]; do
     pause=$(cat pico/sleep_seconds); rm pico/sleep_seconds
     [[ "$pause" =~ ^[0-9]+$ ]] || pause=30
   elif tmux ls -F '#{session_name}' 2>/dev/null | grep -q '^job-'; then
-    pause=600
+    pause=10800   # 3 h while a GPU job runs (Pico should set an exact pause from the job ETA)
   else
     pause=30
   fi
-  [ "$pause" -lt 30 ] && pause=30; [ "$pause" -gt 3600 ] && pause=3600
+  [ "$pause" -lt 30 ] && pause=30; [ "$pause" -gt 43200 ] && pause=43200
+  [ "$pause" -gt 60 ] && echo "=== $(date) pause $pause s" >> $LOG
   for ((i = 0; i < pause; i += 10)); do   # wake early for a note from Vy or a stop request
     [ -e pico/note.txt ] || [ -e pico/stop ] && break
     sleep 10

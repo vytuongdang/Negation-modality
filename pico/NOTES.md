@@ -90,3 +90,9 @@
 - Old pilot design confound (not a finding): text glued into the question vs audio as its own segment -> T_sep.
 - Vy 20:05: NO v2 results yet; keep every report/note/paper text neutral (no direction) until v2 results with CIs.
 - Telegram works since 20:10; catch-up report sent 19:56. Report after every finished step.
+
+## State 2026-11-20 01:35 (written by Claude in Vy's terminal session, not by the runner)
+- Runner stopped 01:03 (Vy asked STOP at 00:58; it was in usage-limit backoff, so it did not update NOTES or stop the job).
+- job-h1trial was NOT stopped and keeps running overnight: Qwen-7B done; Qwen-3B at 3644/4000 answers at 01:30; then judge, MiniCPM-o, Phi-4. Check `tail pico/logs/h1_trial.log`.
+- Runner auto-restarts 10:00 (systemd timer pico-restart-10h -> pico/restart_at_10.sh). First step then: check job, update NOTES, one short Telegram report, continue H1 trial plan.
+- New quota rules (Vy): runner = Opus 5.5 --effort medium; 10 steps per session; while a GPU job runs, sleep until ~1 h before its ETA, never check more often than every 3 h (sleep_seconds max 43200). Heartbeat reports every 3 h. Telegram bot + email = Sonnet 5.5 medium.

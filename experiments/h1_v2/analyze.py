@@ -62,11 +62,9 @@ class ModelData:
         neg = [r for r in rows if r["form"] == "negative" and r["condition"] == "C0"]
         self.neg = {r["sample_id"]: r for r in neg}
         paired = {r["pair_of"] for r in rows if r["form"] != "negative"}
-        self.primary = [sid for sid, r in self.neg.items()
-                        if not r["template_sweep"] or r["template_id"] == "N1" or sid in paired]
-        # one primary per unit
+        # one primary per unit: the sample the forms are paired with if any, else the (single) negative run
         seen, prim = set(), []
-        for sid in sorted(self.primary, key=lambda s: (s not in paired, s)):
+        for sid in sorted(self.neg, key=lambda s: (s not in paired, s)):
             u = self.neg[sid]["unit_id"]
             if u not in seen:
                 seen.add(u)

@@ -82,11 +82,12 @@ Same analysis style, appended to REPORT.md.
 ## Saving Claude quota (important: Vy hopes it never runs out)
 
 - While a GPU job runs there is nothing to decide: check its log with `tail`, update status.txt, then write a long
-  pause into pico/sleep_seconds (jobs > 1 h: 1800-3600 s). The runner waits 10 min by default while a job-* tmux
-  session exists, and wakes early when Vy sends a note.
+  pause into pico/sleep_seconds computed from the job's ETA: wake about 1 h before it should finish (e.g. a 7 h
+  job -> sleep 6 h = 21600 s; max 43200). For checks in between, never more often than every 3 h (10800 s).
+  The runner waits 3 h by default while a job-* tmux session exists, and wakes early when Vy sends a note.
 - Read logs and files with tail/head/grep, never print whole large files or long outputs; batch several small
   actions into one step; do not re-read files you already summarised in NOTES.md.
-- Keep NOTES.md complete enough to resume from it: the runner starts a fresh session every 50 steps; if you
+- Keep NOTES.md complete enough to resume from it: the runner starts a fresh session every 10 steps; if you
   notice your context getting long (many steps, much read), update NOTES.md and `touch pico/new_session` to
   get a fresh session at the next step.
 - If Claude reports a usage limit the runner backs off by itself and the heartbeat tells Vy; just continue after.
@@ -110,7 +111,7 @@ Never edit the dataset, the judge, or a finished experiment to make an effect ap
 
 - GPU: one TITAN RTX 24GB. One GPU job at a time. Long jobs (> 5 min) run in their own tmux session
   (`tmux new -d -s job-<name> "..."`, output to a log); never wait for hours inside one step. Note the job in
-  NOTES.md, then write a number of seconds (300-3600) into pico/sleep_seconds so the runner waits before your
+  NOTES.md, then write a number of seconds (ETA minus ~1 h, at most 43200) into pico/sleep_seconds so the runner waits before your
   next step; on the next step check the log.
 - Pilot before full runs. Make every script resumable (cache answers) so a crash costs little.
 - Python: envs `negation` (pipeline, Qwen-Omni), `cosyvoice` (TTS). Run with PYTHONNOUSERSITE=1.

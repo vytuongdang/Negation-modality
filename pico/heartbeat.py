@@ -23,7 +23,7 @@ import notify
 
 ROOT = Path(__file__).resolve().parent.parent
 PICO = ROOT / "pico"
-CHECK_MIN, REPORT_MIN = 10, 60
+CHECK_MIN, REPORT_MIN = 10, 180   # status report every 3 h (Vy, 2026-11-20)
 DISK_WARN_GB, DISK_URGENT_GB = 30, 10
 STALE_MIN = 120
 
@@ -65,9 +65,13 @@ def check():
     runner_alive = "pico" in sessions
     log = PICO / "run.log"
     idle_min = (time.time() - log.stat().st_mtime) / 60 if log.exists() else None
+    pause_min = 0   # silence is expected while the runner sleeps its announced pause
+    for l in reversed(tail(log, 15)):
+        m = re.search(r"pause (\d+) s", l)
+        if m: pause_min = int(m.group(1)) / 60; break
     limit = any(re.search(r"usage limit|rate limit|limit reached|resets at", l, re.I) for l in tail(log, 15))
     return {"free_gb": free_gb, "sessions": sessions, "runner_alive": runner_alive,
-            "stop_asked": (PICO / "stop").exists(), "idle_min": idle_min, "limit": limit}
+            "stop_asked": (PICO / "stop").exists(), "idle_min": idle_min, "pause_min": pause_min, "limit": limit}
 
 
 def alerts(s):
@@ -79,7 +83,7 @@ def alerts(s):
     if not s["runner_alive"] and not s["stop_asked"]:
         out["runner"] = ("⚠️ Pico (tmux 'pico') không còn chạy. Bật lại: cd ~/new/cross_multimodal_negation && "
                          "tmux new -d -s pico \"bash pico/runner.sh\"")
-    if s["runner_alive"] and s["idle_min"] is not None and s["idle_min"] > STALE_MIN:
+    if s["runner_alive"] and s["idle_min"] is not None and s["idle_min"] > STALE_MIN + s.get("pause_min", 0):
         out["stale"] = f"⚠️ Pico không ghi log {s['idle_min']:.0f} phút rồi, có thể đang bị treo."
     if s["limit"]:
         out["limit"] = "⏸️ Claude báo hết quota; Pico tạm nghỉ và tự chạy lại khi quota hồi."
