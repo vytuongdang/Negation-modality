@@ -12,6 +12,7 @@ case "$1" in
   rest)   $PY -u run_pipeline.py --from_step 3
           ~/anaconda3/envs/cosyvoice/bin/python -u tts_negation.py --src samples_compact_all.jsonl \
               --dst samples_compact_all_audio.jsonl
+          $PY -u flag_excluded_units.py   # double labels / part-whole / attribute overlap -> out/excluded_units.jsonl
           echo "DATASET V2 DONE: dataset/out/samples_compact_all_audio.jsonl" ;;
   *) echo "usage: bash run_v2_all.sh select|rest"; exit 1 ;;
 esac

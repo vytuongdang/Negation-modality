@@ -44,17 +44,17 @@ def read_jsonl(path):
 
 # ---------------------------------------------------------------- data
 
-def load_dataset(keep_double_labels=False):
+def load_dataset(keep_excluded=False):
     """Every sample of dataset v2 with audio: compact row merged with the full record (components, expected,
     split) and the ASR flag of its audio. -> {sample_id: dict}
-    Units listed in out/excluded_double_label.jsonl (create_data/src/flag_double_labels.py) are left out."""
+    Units listed in out/excluded_units.jsonl (create_data/src/flag_excluded_units.py) are left out."""
     full = {s["sample_id"]: s for s in read_jsonl(OUT / "samples.jsonl")}
     forms = OUT / "samples_forms.jsonl"
     if forms.exists():
         full.update({s["sample_id"]: s for s in read_jsonl(forms)})
     asr = {m["text"]: m for m in read_jsonl(DATA / "audio" / "negation_sentences" / "manifest.jsonl")}
-    excl = OUT / "excluded_double_label.jsonl"   # COCO units with one object labelled twice (Vy, 2026-11-23)
-    dropped = {r["unit_id"] for r in read_jsonl(excl)} if excl.exists() and not keep_double_labels else set()
+    excl = OUT / "excluded_units.jsonl"   # double labels, part-whole, attribute overlap (create_data/src/flag_excluded_units.py)
+    dropped = {r["unit_id"] for r in read_jsonl(excl)} if excl.exists() and not keep_excluded else set()
     out = {}
     for r in read_jsonl(OUT / "samples_compact_all_audio.jsonl"):
         s = full[r["id"]]

@@ -182,7 +182,7 @@ def main():
     out.mkdir(parents=True, exist_ok=True)
     # select on the full dataset, then drop double-labelled units: the selection stays the same as before the
     # exclusion list existed, so cached answers are reused and runs stay comparable (2026-11-23)
-    data_all, data = load_dataset(keep_double_labels=True), load_dataset()
+    data_all, data = load_dataset(keep_excluded=True), load_dataset()
     samples = [s for s in select(data_all, None if args.all else args.pilot, args.seed) if s["id"] in data]
     conds = list(args.conds)
     if "C0" not in conds and any(c not in OCR for c in conds):
@@ -240,23 +240,32 @@ def main():
             r["target_mentioned"] = r["count_rule"] == "STATE"
             r["correct"] = r["all_required"] and (r["target_mentioned"] if r["condition"].startswith("C0")
                                                   else not r["target_mentioned"])
-    # strict-violation robustness check (2026-11-23): answers the judge counts as compliant although they NAME the
-    # target ("excluding the carrot", "there is no knife") get a STATE / META / DENY / NONE label;
-    # strict_violation = the target is stated, named to exclude it, or denied.
+    # PRIMARY METRIC (Vy, 2026-11-23): we measure whether the model obeys the negation, so a violation is ANY
+    # mention of the forbidden thing: the fact itself (STATE), naming it to exclude it (META, "besides the bed"),
+    # or a denial / different value (DENY, "there is no knife", "2 cylinders" when there are 3).
+    #   violation = STATE / META / DENY   (primary)      leak = target_mentioned (the correct fact; secondary)
+    # Every row the judge counts as compliant gets a label from the label pass (count-branch bare numbers are
+    # decided by count_rule); rows the judge counts as stating the fact are STATE.
     from judge import Judge
-    named = [r for r in rows if not r["target_mentioned"] and r["regex_target_mentioned"] and not r["count_rule"]]
-    if named:
+    todo = [r for r in rows if not r["target_mentioned"] and not r["count_rule"]]
+    if todo:
         j = Judge(RESULTS / "judge.jsonl")
         comp = lambda r: next(c for c in r["components"] if c["id"] == r["target"])
-        labels = j.label_target([(comp(r), r["answer"], r["question"]) for r in named])
+        labels = j.label_target([(comp(r), r["answer"], r["question"]) for r in todo])
         j.close()
-        for r, lab in zip(named, labels):
+        for r, lab in zip(todo, labels):
             r["target_label"] = lab or "NONE"
+            if lab is None:
+                r["label_error"] = True
     for r in rows:
         if r["count_rule"] in ("STATE", "NONE"):
             r["target_label"] = r["count_rule"]
-        r.setdefault("target_label", "STATE" if r["target_mentioned"] else "NONE")
-        r["strict_violation"] = r["target_label"] in ("STATE", "META", "DENY")
+        if r["target_mentioned"]:
+            r["target_label"] = "STATE"
+        r.setdefault("target_label", "NONE")
+        r["leak"] = r["target_mentioned"]
+        r["violation"] = r["target_label"] in ("STATE", "META", "DENY")
+        r["strict_violation"] = r["violation"]   # older name, kept for analyze.py / human_check.py
     flagged = [r for r in rows if r["judge_source"] == "think_error"]
     if flagged:
         print(f"WARNING: {len(flagged)} rows where the thinking judge gave no JSON even with the retry budget; "
@@ -268,7 +277,7 @@ def main():
         w = csv.writer(f)
         w.writerow(["sample_id", "form", "condition", "question", "negation", "answer", "stated", "target",
                     "target_mentioned", "regex_target_mentioned", "judge_source", "target_label",
-                    "strict_violation", "required_recall"])
+                    "violation", "required_recall"])
         for r in rows:
             comps = {c["id"]: c for c in r["components"]}
             name = lambda c: comps[c]["subject"] if comps[c]["type"] == "existence" else comps[c]["text"]
@@ -276,20 +285,20 @@ def main():
                         "" if r["condition"].startswith("C0") else r["negation"], r["answer"],
                         ", ".join(name(c) for c, v in r["mentioned"].items() if v), name(r["target"]),
                         int(r["target_mentioned"]), int(r["regex_target_mentioned"]), r["judge_source"],
-                        r["target_label"], int(r["strict_violation"]),
+                        r["target_label"], int(r["violation"]),
                         round(r["required_recall"], 2)])
     # quick table: violation rate among questions whose C0 answer states the target
-    c0 = {r["pair_of"] for r in rows if r["condition"] == "C0" and r["target_mentioned"]}
+    c0 = {r["pair_of"] for r in rows if r["condition"] == "C0" and r["violation"]}
     n0 = sum(1 for r in rows if r["condition"] == "C0")
     print(f"\nC0 states the target in {len(c0)}/{n0} questions")
     conds = [c for c in conds if c != "C0" and c not in OCR]
-    print(f"violation % among C0-mentioned (n), negative form\n{'branch':<18}" + "".join(f"{c:>12}" for c in conds))
+    print(f"violation % (any mention: STATE/META/DENY) among C0-mentioned (n), negative form\n{'branch':<18}" + "".join(f"{c:>12}" for c in conds))
     for b in BRANCHES + ["ALL"]:
         cells = []
         for c in conds:
             rs = [r for r in rows if r["form"] == "negative" and r["condition"] == c and r["pair_of"] in c0
                   and (b == "ALL" or r["branch"] == b)]
-            cells.append(f"{100 * sum(r['target_mentioned'] for r in rs) / len(rs):.0f} ({len(rs)})" if rs else "-")
+            cells.append(f"{100 * sum(r['violation'] for r in rs) / len(rs):.0f} ({len(rs)})" if rs else "-")
         print(f"{b:<18}" + "".join(f"{x:>12}" for x in cells))
     dis = sum(r["target_mentioned"] != r["regex_target_mentioned"] for r in rows)
     print(f"\nregex disagrees with judge on the target in {dis}/{len(rows)} rows")

@@ -57,18 +57,21 @@ Facts:
 Reply with JSON only, e.g. {{"stated": [1, 3]}} or {{"stated": []}}."""
 
 
-LABEL_VERSION = "label-v2"
+LABEL_VERSION = "label-v3"
 LABEL_PROMPT = """Below is a question about an image, the answer a model gave, and one fact X.
-The question is only there so you can read short answers ("Cart" to "what is the horse pulling?").
+The model had been told NOT to mention X. The question is only there so you can read short answers
+("Cart" to "what is the horse pulling?").
 X: {fact}
 
 How does the answer treat X? Reply with exactly one word:
 STATE - the answer says X is true / present, even if it also says it will not talk about it
         ("there's a horse too, but I won't mention it").
-META  - the answer names X only to exclude it or to say it will not talk about it, without saying X is true
-        ("besides the bed, there is a chair", "excluding the suitcase", "I won't mention the color").
-DENY  - the answer says X is false / absent, or gives a different value ("there is no knife").
-NONE  - the answer does not refer to X at all (words that appear only in the question do not count).
+META  - the answer names X's object or value only to exclude it, without saying it is true
+        ("besides the bed, there is a chair", "excluding the suitcase").
+DENY  - the answer says X is false / absent, or gives a different value for the same thing
+        ("there is no knife"; "2 cylinders" when X is "there are 3 cylinders"; "small" when X is "cube is large").
+NONE  - the answer does not refer to X. Words that appear only in the question do not count, and talking about
+        the instruction without naming X's object or value ("I won't mention its color") is NONE.
 
 Question:
 \"\"\"{question}\"\"\"

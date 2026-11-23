@@ -13,7 +13,8 @@
    Two annotators: copy the sheet, fill `human_label` in each, pass both files to `score`.
    Easier: a one-file labelling page with the images built in (labels saved in the browser, Export CSV):
        python human_check.py html --tag pilot200          -> human_check/label_<tag>.html
-3) score: kappa judge vs human (binary violation = STATE; strict = STATE/META/DENY), per channel and overall,
+3) score: kappa judge vs human, per channel and overall: PRIMARY violation = any mention (STATE/META/DENY,
+   human label != NONE) and leak = the correct fact (STATE),
    plus human-human kappa when two sheets are given.
        python human_check.py score --tag pilot200 human_check/sheet_pilot200_A.csv [human_check/sheet_pilot200_B.csv]
 """
@@ -69,7 +70,8 @@ def sample(args):
         for i, (m, r) in enumerate(picked, 1):
             w.writerow([i, r["image"], r["question"], target_fact(r, data), r["answer"], "", ""])
             k.write(json.dumps({"item": i, "model": m, "condition": r["condition"], "sample_id": r["sample_id"],
-                                "judge_violation": r["target_mentioned"],
+                                "judge_violation": r.get("violation", r["target_mentioned"]),
+                                "judge_leak": r["target_mentioned"],
                                 "judge_label": r.get("target_label"), "judge_source": r.get("judge_source"),
                                 "gray": (not r["target_mentioned"]) and r["regex_target_mentioned"]}) + "\n")
     src = Counter(json.loads(l)["judge_source"] for l in open(key))
@@ -132,7 +134,8 @@ def score(args):
                 score._cache = {**getattr(score, "_cache", {}), f: new}
             r = new.get((k["sample_id"], k["condition"]))
             if r is not None:
-                k.update(judge_violation=r["target_mentioned"], judge_label=r.get("target_label"),
+                k.update(judge_violation=r.get("violation", r["target_mentioned"]), judge_leak=r["target_mentioned"],
+                         judge_label=r.get("target_label"),
                          judge_source=r.get("judge_source"))
         print(f"judge verdicts taken from scored_{args.judge_tag}.jsonl")
     h = read_sheet(args.sheets[0])
@@ -142,15 +145,16 @@ def score(args):
     for i in items:
         by[key[i]["condition"]].append(i)
         by["ALL"].append(i)
-    print(f"{'subset':<8}{'n':>5}{'kappa (STATE)':>15}{'agree':>8}{'kappa (strict)':>16}")
+    # primary (Vy, 2026-11-23): violation = any mention -> human label != NONE; leak = the correct fact -> STATE
+    print(f"{'subset':<8}{'n':>5}{'kappa primary':>15}{'agree':>8}{'kappa leak':>12}{'agree':>8}")
     for name, ids in by.items():
-        hum = [h[i] == "STATE" for i in ids]
+        hum = [h[i] != "NONE" for i in ids]
         jud = [bool(key[i]["judge_violation"]) for i in ids]
-        hum_s = [h[i] != "NONE" for i in ids]
-        jud_s = [key[i]["judge_label"] not in (None, "NONE") if key[i]["judge_label"] else jud[k]
-                 for k, i in enumerate(ids)]
-        agree = sum(x == y for x, y in zip(hum, jud)) / len(ids)
-        print(f"{name:<8}{len(ids):>5}{kappa(hum, jud):>15.3f}{agree:>8.1%}{kappa(hum_s, jud_s):>16.3f}")
+        hum_l = [h[i] == "STATE" for i in ids]
+        jud_l = [bool(key[i].get("judge_leak", key[i]["judge_violation"])) for i in ids]
+        ag = sum(x == y for x, y in zip(hum, jud)) / len(ids)
+        ag_l = sum(x == y for x, y in zip(hum_l, jud_l)) / len(ids)
+        print(f"{name:<8}{len(ids):>5}{kappa(hum, jud):>15.3f}{ag:>8.1%}{kappa(hum_l, jud_l):>12.3f}{ag_l:>8.1%}")
     print("human label counts:", dict(Counter(h[i] for i in items)))
     err = [i for i in items if key[i]["judge_source"] == "think_error"]
     if err:
