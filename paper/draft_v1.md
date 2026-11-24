@@ -87,7 +87,7 @@ omni-models on a 932-question pilot (Sec. 5-6). Our pilot findings:
 content; we test compliance with a prohibition on the answer, delivered through different channels.
 
 **Negative instructions and priming.** Negative prompts in text-to-image models can push generation toward the
-forbidden concept (arXiv 2404.15154). [TBD: verify Truhn et al., arXiv 2503.22395.] Our exceptive form ("Mention
+forbidden concept (arXiv 2404.15154). Negation remains hard for LLMs across sizes and languages (Vrabcová et al., arXiv 2503.22395). Our exceptive form ("Mention
 everything except the carrot.") names the target without a negation word and serves as the priming control.
 
 **Instructions inside the image.** Typographic and visual prompt injection show that drawn-in text can steer LVLMs

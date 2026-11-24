@@ -1,0 +1,40 @@
+\section{Experimental Setup}
+\label{sec:setup}
+
+\paragraph{Models.} Qwen2.5-Omni-7B and -3B \citep{xu2025qwen25omni} (thinker only), MiniCPM-o 2.6,
+Phi-4-multimodal-instruct \citep{microsoft2025phi4mini}, and InternOmni. Greedy decoding, 100 new tokens; answers
+that hit the limit are regenerated with 256.
+
+\paragraph{Conditions.} Input order: image, question, instruction; items separated by a newline.
+\textbf{C0}: image + question. \textbf{T}: question, then the instruction as its own text item. \textbf{A}:
+question, then the spoken instruction. \textbf{V}: the image with the instruction written in it, then the question.
+Controls: \textbf{C0\_box} (empty box, no instruction) and \textbf{OCR\_V} (transcribe the text in the image).
+
+\paragraph{Violation rate.} How often the model still names the forbidden component, among questions where it names
+that component without any instruction: $v_m = P(\text{target named} \mid m,\ \text{C0 names target})$ for channel
+$m \in \{T, A, V\}$. A high $v_m$ means the prohibition in channel $m$ is mostly ignored. Example: if C0 lists
+``broccoli, tofu, carrot'' and the T answer says ``broccoli, tofu, and no carrot'', that is a violation.
+Conditioning on C0 is needed because not naming something the model would never name is not compliance.
+
+\paragraph{Violation kinds.} STATE (states the fact), META (names it to exclude it: ``apart from the carrot''),
+DENY (says it is absent or false: ``there is no carrot''), WRONG (gives a different value, e.g.\ a wrong count).
+Leak = STATE is secondary.
+
+\paragraph{Negation penalty (H4).} With compliance $F_m = 1 - v_m$, $\Delta_m = F_{\text{aff},m} -
+F_{\text{neg},m}$ measures how much harder the negative form is than the affirmative one in channel $m$. A high
+$\Delta_A - \Delta_T$ would mean that negation, not instruction following in general, is harder by speech.
+
+\paragraph{Required recall.} The share of the allowed components still named; a drop means over-suppression.
+
+\paragraph{Scoring.} Judge v3: Qwen3-8B \citep{yang2025qwen3} reads the question, the components and the answer;
+disagreements with a regex second opinion get a thinking pass; bare-number answers in the count branch are scored by
+rule; a label pass assigns the violation kind. Against one human annotator on 49 unchanged answers: 93.9\% agreement,
+$\kappa = 0.83$\pilot. \tbd{blind 300-item check plus 100-item overlap by a second annotator.}
+
+\paragraph{Statistics.} All comparisons are paired within question. 95\% CIs are percentile bootstrap over images
+(1,000--2,000 resamples); paired differences also get an exact McNemar test.
+
+\paragraph{Comprehension (H3-B).} COMP v1: three-option multiple choice (``which item were you asked not to
+mention?'') with the instruction in its usual slot after the question. COMP v2: the instruction is quoted first as
+content (``Here is an [spoken] instruction:''), then the same multiple choice, plus a verbatim repeat task per
+channel.

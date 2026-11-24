@@ -1,0 +1,43 @@
+\section{Related Work}
+\label{sec:related}
+
+\paragraph{Negation in vision-language models.}
+NegBench \citep{alhamoud2025negbench} and NegVQA \citep{zhang2025negvqa} show that VLMs misread negated captions and
+questions, and negation remains hard for LLMs across sizes and languages \citep{vrabcova2025negation}. These works test
+understanding of negated content; we test compliance with a prohibition on the answer, delivered through different
+channels.
+
+\paragraph{Negative instructions and priming.}
+Negative prompts in text-to-image models can push generation toward the forbidden concept
+\citep{hwang2024pinkelephant}. Our exceptive form (``Mention everything except the carrot.'') names the target
+without a negation word and serves as the priming control.
+
+\paragraph{Instructions inside the image.}
+Typographic and visual prompt injection show that drawn-in text can steer LVLMs
+\citep{kimura2024goalhijacking,cheng2025typographic,balakrishnan2026pixels}. These are adversarial; our visual
+channel is a legitimate instruction from the user, with an OCR check and an empty-box control.
+
+\paragraph{Speech versus text instructions.}
+Spoken input is processed less reliably than the same text \citep{hsu2026modalitygap,chen2024voicebench}; under
+audio--text conflict, models tend to follow text \citep{wang2025audiotext,billa2026alme}; XModBench
+\citep{wang2025xmodbench} and OmniBench \citep{li2024omnibench} report cross-modal inconsistency in omni-models. None
+tests a negative instruction across channels with a paired baseline; our conflict tests (H2, H3-A) ask whether
+dominance changes with polarity.
+
+\begin{table}[t]
+\centering\small
+\setlength{\tabcolsep}{3pt}
+\resizebox{\columnwidth}{!}{\begin{tabular}{lcccccc}
+\toprule
+work & neg. & text & audio & image & paired C0 & CIs \\
+\midrule
+NegBench / NegVQA & \checkmark & \checkmark & -- & -- & -- & \tbd{} \\
+visual prompt inj. & -- & \checkmark & -- & \checkmark & \tbd{} & \tbd{} \\
+MCR-Bench / ALME & -- & \checkmark & \checkmark & -- & -- & \tbd{} \\
+ours & \checkmark & \checkmark & \checkmark & \checkmark & \checkmark & \checkmark \\
+\bottomrule
+\end{tabular}}
+\caption{Coverage of related benchmarks: negation, instruction channels, a paired no-instruction baseline, and
+confidence intervals. \tbd{verify every cell before submission.}}
+\label{tab:related}
+\end{table}

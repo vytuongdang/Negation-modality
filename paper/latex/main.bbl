@@ -1,0 +1,119 @@
+\begin{thebibliography}{23}
+\providecommand{\natexlab}[1]{#1}
+
+\bibitem[{Alhamoud et~al.(2025)Alhamoud, Alshammari, Tian, Li, Torr, Kim, and Ghassemi}]{alhamoud2025negbench}
+Kumail Alhamoud, Shaden Alshammari, Yonglong Tian, Guohao Li, Philip Torr, Yoon Kim, and Marzyeh Ghassemi. 2025.
+\newblock \href {https://arxiv.org/abs/2501.09425} {{Vision-Language Models Do Not Understand Negation}}.
+\newblock \emph{arXiv preprint arXiv:2501.09425}.
+
+\bibitem[{Bai et~al.(2025)Bai, Cai, Chen, Chen, Chen, Cheng, Deng, Ding, Gao, Ge, Ge, Guo et~al.}]{bai2025qwen3vl}
+Shuai Bai, Yuxuan Cai, Ruizhe Chen, Keqin Chen, Xionghui Chen, Zesen Cheng, Lianghao Deng, Wei Ding, Chang Gao, Chunjiang Ge, Wenbin Ge, Zhifang Guo, et~al. 2025.
+\newblock \href {https://arxiv.org/abs/2511.21631} {{Qwen3-VL Technical Report}}.
+\newblock \emph{arXiv preprint arXiv:2511.21631}.
+
+\bibitem[{Balakrishnan et~al.(2026)Balakrishnan, Mendapara, and Garg}]{balakrishnan2026pixels}
+Ravikumar Balakrishnan, Sanket Mendapara, and Ankit Garg. 2026.
+\newblock \href {https://arxiv.org/abs/2604.12371} {{Reading Between the Pixels: Linking Text-Image Embedding Alignment to Typographic Attack Success on Vision-Language Models}}.
+\newblock \emph{arXiv preprint arXiv:2604.12371}.
+
+\bibitem[{Billa(2026)}]{billa2026alme}
+Jayadev Billa. 2026.
+\newblock \href {https://arxiv.org/abs/2602.11488} {{When Audio-LLMs Don't Listen: A Cross-Linguistic Study of Modality Arbitration}}.
+\newblock \emph{arXiv preprint arXiv:2602.11488}.
+
+\bibitem[{Chen et~al.(2024)Chen, Yue, Zhang, Gao, Tan, and Li}]{chen2024voicebench}
+Yiming Chen, Xianghu Yue, Chen Zhang, Xiaoxue Gao, Robby~T. Tan, and Haizhou Li. 2024.
+\newblock \href {https://arxiv.org/abs/2410.17196} {{VoiceBench: Benchmarking LLM-Based Voice Assistants}}.
+\newblock \emph{arXiv preprint arXiv:2410.17196}.
+
+\bibitem[{Cheng et~al.(2025)Cheng, Xiao, Wang, Zhang, Zhang, Cao, Xu, Sun, Hao, Gu, and Xu}]{cheng2025typographic}
+Hao Cheng, Erjia Xiao, Yichi Wang, Lingfeng Zhang, Qiang Zhang, Jiahang Cao, Kaidi Xu, Mengshu Sun, Xiaoshuai Hao, Jindong Gu, and Renjing Xu. 2025.
+\newblock \href {https://arxiv.org/abs/2503.11519} {{Exploring Typographic Visual Prompts Injection Threats in Cross-Modality Generation Models}}.
+\newblock \emph{arXiv preprint arXiv:2503.11519}.
+
+\bibitem[{Du et~al.(2024)Du, Wang, Chen, Shi, Lv, Zhao, Gao, Yang, Gao, Wang, Yu, Liu et~al.}]{du2024cosyvoice2}
+Zhihao Du, Yuxuan Wang, Qian Chen, Xian Shi, Xiang Lv, Tianyu Zhao, Zhifu Gao, Yexin Yang, Changfeng Gao, Hui Wang, Fan Yu, Huadai Liu, et~al. 2024.
+\newblock \href {https://arxiv.org/abs/2412.10117} {{CosyVoice 2: Scalable Streaming Speech Synthesis with Large Language Models}}.
+\newblock \emph{arXiv preprint arXiv:2412.10117}.
+
+\bibitem[{Hsu et~al.(2026)Hsu, Tian, Zhang, Lu, Wang, and Wu}]{hsu2026modalitygap}
+Ming-Hao Hsu, Xiaohai Tian, Jun Zhang, Lu~Lu, Yuxuan Wang, and Zhizheng Wu. 2026.
+\newblock \href {https://arxiv.org/abs/2603.01502} {{Geometric Alignment without Functional Equivalence: A Layer-wise Analysis of the Speech-Text Modality Gap}}.
+\newblock \emph{arXiv preprint arXiv:2603.01502}.
+
+\bibitem[{Hudson and Manning(2019)}]{hudson2019gqa}
+Drew~A. Hudson and Christopher~D. Manning. 2019.
+\newblock \href {https://arxiv.org/abs/1902.09506} {{GQA: A New Dataset for Real-World Visual Reasoning and Compositional Question Answering}}.
+\newblock \emph{arXiv preprint arXiv:1902.09506}.
+
+\bibitem[{Hwang et~al.(2024)Hwang, Kim, Lee, and Kwak}]{hwang2024pinkelephant}
+Kyomin Hwang, Suyoung Kim, JunHoo Lee, and Nojun Kwak. 2024.
+\newblock \href {https://arxiv.org/abs/2404.15154} {{Do not think about pink elephant!}}
+\newblock \emph{arXiv preprint arXiv:2404.15154}.
+
+\bibitem[{Johnson et~al.(2016)Johnson, Hariharan, van~der Maaten, Fei-Fei, Zitnick, and Girshick}]{johnson2017clevr}
+Justin Johnson, Bharath Hariharan, Laurens van~der Maaten, Li~Fei-Fei, C.~Lawrence Zitnick, and Ross Girshick. 2016.
+\newblock \href {https://arxiv.org/abs/1612.06890} {{CLEVR: A Diagnostic Dataset for Compositional Language and Elementary Visual Reasoning}}.
+\newblock \emph{arXiv preprint arXiv:1612.06890}.
+
+\bibitem[{Kimura et~al.(2024)Kimura, Tanaka, Miyawaki, Suzuki, and Sakaguchi}]{kimura2024goalhijacking}
+Subaru Kimura, Ryota Tanaka, Shumpei Miyawaki, Jun Suzuki, and Keisuke Sakaguchi. 2024.
+\newblock \href {https://arxiv.org/abs/2408.03554} {{Empirical Analysis of Large Vision-Language Models against Goal Hijacking via Visual Prompt Injection}}.
+\newblock \emph{arXiv preprint arXiv:2408.03554}.
+
+\bibitem[{Li et~al.(2024)Li, Ma, Zhang, Yuan, Zhu, Guo, Liang, Liu, Wang, Yang, Wu, Qu et~al.}]{li2024omnibench}
+Yizhi Li, Yinghao Ma, Ge~Zhang, Ruibin Yuan, Kang Zhu, Hangyu Guo, Yiming Liang, Jiaheng Liu, Zekun Wang, Jian Yang, Siwei Wu, Xingwei Qu, et~al. 2024.
+\newblock \href {https://arxiv.org/abs/2409.15272} {{OmniBench: Towards The Future of Universal Omni-Language Models}}.
+\newblock \emph{arXiv preprint arXiv:2409.15272}.
+
+\bibitem[{Lin et~al.(2014)Lin, Maire, Belongie, Bourdev, Girshick, Hays, Perona, Ramanan, Zitnick, and Dollár}]{lin2014coco}
+Tsung-Yi Lin, Michael Maire, Serge Belongie, Lubomir Bourdev, Ross Girshick, James Hays, Pietro Perona, Deva Ramanan, C.~Lawrence Zitnick, and Piotr Dollár. 2014.
+\newblock \href {https://arxiv.org/abs/1405.0312} {{Microsoft COCO: Common Objects in Context}}.
+\newblock \emph{arXiv preprint arXiv:1405.0312}.
+
+\bibitem[{Microsoft et~al.(2025)Microsoft, :, Abouelenin, Ashfaq, Atkinson, Awadalla, Bach, Bao, Benhaim, Cai, Chaudhary, Chen et~al.}]{microsoft2025phi4mini}
+Microsoft, :, Abdelrahman Abouelenin, Atabak Ashfaq, Adam Atkinson, Hany Awadalla, Nguyen Bach, Jianmin Bao, Alon Benhaim, Martin Cai, Vishrav Chaudhary, Congcong Chen, et~al. 2025.
+\newblock \href {https://arxiv.org/abs/2503.01743} {{Phi-4-Mini Technical Report: Compact yet Powerful Multimodal Language Models via Mixture-of-LoRAs}}.
+\newblock \emph{arXiv preprint arXiv:2503.01743}.
+
+\bibitem[{Pham et~al.(2021)Pham, Kafle, Lin, Ding, Cohen, Tran, and Shrivastava}]{pham2021vaw}
+Khoi Pham, Kushal Kafle, Zhe Lin, Zhihong Ding, Scott Cohen, Quan Tran, and Abhinav Shrivastava. 2021.
+\newblock \href {https://arxiv.org/abs/2106.09707} {{Learning to Predict Visual Attributes in the Wild}}.
+\newblock \emph{arXiv preprint arXiv:2106.09707}.
+
+\bibitem[{Radford et~al.(2022)Radford, Kim, Xu, Brockman, McLeavey, and Sutskever}]{radford2022whisper}
+Alec Radford, Jong~Wook Kim, Tao Xu, Greg Brockman, Christine McLeavey, and Ilya Sutskever. 2022.
+\newblock \href {https://arxiv.org/abs/2212.04356} {{Robust Speech Recognition via Large-Scale Weak Supervision}}.
+\newblock \emph{arXiv preprint arXiv:2212.04356}.
+
+\bibitem[{Vrabcová et~al.(2025)Vrabcová, Kadlčík, Sojka, Štefánik, and Spiegel}]{vrabcova2025negation}
+Tereza Vrabcová, Marek Kadlčík, Petr Sojka, Michal Štefánik, and Michal Spiegel. 2025.
+\newblock \href {https://arxiv.org/abs/2503.22395} {{Negation: A Pink Elephant in the Large Language Models' Room?}}
+\newblock \emph{arXiv preprint arXiv:2503.22395}.
+
+\bibitem[{Wang et~al.(2025{\natexlab{a}})Wang, Deng, Yang, Qiu, and Zhang}]{wang2025audiotext}
+Cheng Wang, Gelei Deng, Xianglin Yang, Han Qiu, and Tianwei Zhang. 2025{\natexlab{a}}.
+\newblock \href {https://arxiv.org/abs/2508.15407} {{When Audio and Text Disagree: Revealing Text Bias in Large Audio-Language Models}}.
+\newblock \emph{arXiv preprint arXiv:2508.15407}.
+
+\bibitem[{Wang et~al.(2025{\natexlab{b}})Wang, Liu, Huang, Yu, Wang, Sun, Wu, Yuille, Barsoum, and Liu}]{wang2025xmodbench}
+Xingrui Wang, Jiang Liu, Chao Huang, Xiaodong Yu, Ze~Wang, Ximeng Sun, Jialian Wu, Alan Yuille, Emad Barsoum, and Zicheng Liu. 2025{\natexlab{b}}.
+\newblock \href {https://arxiv.org/abs/2510.15148} {{XModBench: Benchmarking Cross-Modal Capabilities and Consistency in Omni-Language Models}}.
+\newblock \emph{arXiv preprint arXiv:2510.15148}.
+
+\bibitem[{Xu et~al.(2025)Xu, Guo, He, Hu, He, Bai, Chen, Wang, Fan, Dang, Zhang, Wang et~al.}]{xu2025qwen25omni}
+Jin Xu, Zhifang Guo, Jinzheng He, Hangrui Hu, Ting He, Shuai Bai, Keqin Chen, Jialin Wang, Yang Fan, Kai Dang, Bin Zhang, Xiong Wang, et~al. 2025.
+\newblock \href {https://arxiv.org/abs/2503.20215} {{Qwen2.5-Omni Technical Report}}.
+\newblock \emph{arXiv preprint arXiv:2503.20215}.
+
+\bibitem[{Yang et~al.(2025)Yang, Li, Yang, Zhang, Hui, Zheng, Yu, Gao, Huang, Lv, Zheng, Liu et~al.}]{yang2025qwen3}
+An~Yang, Anfeng Li, Baosong Yang, Beichen Zhang, Binyuan Hui, Bo~Zheng, Bowen Yu, Chang Gao, Chengen Huang, Chenxu Lv, Chujie Zheng, Dayiheng Liu, et~al. 2025.
+\newblock \href {https://arxiv.org/abs/2505.09388} {{Qwen3 Technical Report}}.
+\newblock \emph{arXiv preprint arXiv:2505.09388}.
+
+\bibitem[{Zhang et~al.(2025)Zhang, Su, Liu, and Yeung-Levy}]{zhang2025negvqa}
+Yuhui Zhang, Yuchang Su, Yiming Liu, and Serena Yeung-Levy. 2025.
+\newblock \href {https://arxiv.org/abs/2505.22946} {{NegVQA: Can Vision Language Models Understand Negation?}}
+\newblock \emph{arXiv preprint arXiv:2505.22946}.
+
+\end{thebibliography}

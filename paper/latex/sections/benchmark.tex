@@ -1,0 +1,47 @@
+\section{Benchmark}
+\label{sec:benchmark}
+
+The pipeline has six steps (counts for the pilot subset; full build \tbd{}):
+\begin{enumerate}[leftmargin=*,itemsep=1pt,topsep=2pt]
+  \item \textbf{Collect} image--question units from COCO \citep{lin2014coco} (existence, closed existence, count),
+  CLEVR \citep{johnson2017clevr} (count, attribute), VAW \citep{pham2021vaw} (attribute) and GQA
+  \citep{hudson2019gqa} (relation). Each question has several answer components with aliases (e.g.\ ``dining
+  table'' / ``table''); one is the target.
+  \item \textbf{Filter} images with pixel checks (blur, brightness, black-and-white, large text, near-duplicates)
+  and a VLM check (Qwen3-VL-8B \citep{bai2025qwen3vl}, yes/no on every component and distractor): COCO 950, CLEVR
+  600, VAW 950, GQA 654 images; 5,335 units.
+  \item \textbf{Subset and clean} for the pilot: 1,150 units (230 per branch); drop 79 where two components cannot
+  be told apart (same object with two labels, part--whole, overlapping attributes): 1,071 units. One negative sample
+  per unit with ASR-checked audio: 932 questions.
+  \item \textbf{Phrase} the prohibition with one of seven templates (Table~\ref{tab:templates}); a 10\% subset
+  repeats all seven. H4 forms: exceptive ``Mention everything except \{X\}.'' (all branches) and affirmative
+  ``Mention only \{Y\}.'' (not in open existence, where it would give the answer away).
+  \item \textbf{Speak} every sentence with CosyVoice2-0.5B \citep{du2024cosyvoice2} (two cloned voices, female /
+  male, 50/50) and transcribe it with Whisper \citep{radford2022whisper}: 1,330 sentences, 33 (2.5\%) mismatches
+  flagged and left out of the pilot.
+  \item \textbf{Render} the sentence onto the image away from the question's objects (5.4\% still overlap a
+  component, flagged), plus an empty-box twin for C0\_box.
+\end{enumerate}
+In the H1 pilot, 932 questions $\times$ 4 conditions (C0, T, A, V) give 3,728 answers per model. In our own review
+of 60 random accepted units, 6 (10\%) had doubtful ground truth; conditioning on C0 removes most of them from the
+violation counts. \tbd{Table: statistics of the full build per source, branch, split and form.}
+
+\begin{table}[t]
+\centering\small
+\begin{tabular}{ll}
+\toprule
+id & template \\
+\midrule
+N1 & Do not mention \{X\}. \\
+N2 & Don't say anything about \{X\}. \\
+N3 & Never refer to \{X\}. \\
+N4 & Make no mention of \{X\}. \\
+N5 & Answer without mentioning \{X\}. \\
+N6 & Avoid mentioning \{X\}. \\
+N7 & Leave \{X\} out of your answer. \\
+\bottomrule
+\end{tabular}
+\caption{Negative templates. N6 and N7 carry no negation word. One template per question; a 10\% subset repeats
+all seven.}
+\label{tab:templates}
+\end{table}

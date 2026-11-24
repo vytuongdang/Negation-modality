@@ -230,3 +230,9 @@
   -> paper/marginal_cis_pilot200.md; Qwen-7B C0_box-C0 -0.2 [-1.9,+1.6], OCR 930/932). style_notes.md being written by a
   background subagent (if it is missing at the next step: write it yourself from the 3 papers). DONE 14:5x: style_notes.md (subagent, 15-rule checklist) + draft_v1.md rewritten to it; both Telegram reports sent.
   Next for the paper: fill [TBD]s from Stage 3 (H4, OCR_V/C0_box all models) and COMP v2; Figure 1 real outputs.
+
+## 2026-11-24 16:20 Note from Vy: LaTeX version -> DONE 16:25
+- paper/latex/ (ACL template d5adc82, main.tex + sections/*.tex, references.bib 23 arXiv-checked entries, figures/),
+  main.pdf compiles (latexmk in ~/.local/bin), 6 pages, body ~4.5/8. paper/latex.zip for Overleaf. Telegram sent.
+  Keep draft_v1.md and latex/sections in sync when filling TBDs (2503.22395 = Vrabcova et al., not Truhn).
+- Stage 3 timing: Qwen-7B 10:16-15:48 (5.5 h); Qwen-3B from 15:48; batch-1 models slower -> all done ~11-25 evening.

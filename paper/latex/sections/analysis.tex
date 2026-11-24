@@ -1,0 +1,22 @@
+\section{Analysis}
+\label{sec:analysis}
+
+\subsection{A comprehension probe before the instruction is obeyed, not answered}
+\label{sec:comp}
+In COMP v1 the multiple-choice question came first and the instruction after it. Qwen2.5-Omni-7B picked the
+forbidden item in 18.7\% [16.1, 21.0] of typed cases (below 33.3\% chance), 45.1\% [42.1, 48.2] spoken, and 99.0\%
+[98.4, 99.6] written in the image ($n = 932$ each)\pilot. Its answers avoid the forbidden option, i.e.\ the
+instruction is applied to the probe. COMP v1 therefore mixes reading, understanding and obeying, and we do not
+interpret its channel ordering; COMP v2 quotes the instruction as content. \tbd{COMP v2 for all five models.}
+
+\subsection{Violation kinds}
+For Qwen2.5-Omni-7B, META and DENY stay at 2--4\% in every channel; DENY is concentrated in closed existence
+(21.5\% under T), where ``there is no carrot'' still names the carrot\pilot. \tbd{all models, with CIs.}
+
+\subsection{Wording, split, voice, occlusion}
+Template N3 (``Never refer to'') is kept in all main numbers and reported separately: for Qwen2.5-Omni-7B, T$-$A is
+$+4.8$ [$+2.3$, $+7.5$] without N3 and $-1.1$ [$-10.3$, $+8.0$] with N3 only ($n = 87$). Train versus val images:
+T 17.3 vs 17.0, A 14.2 vs 10.7, V 87.9 vs 90.9 (split confounded with source; CLEVR is all val). Voice: A 13.4\%
+female ($n = 409$) vs 12.6\% male ($n = 381$). Occlusion: V 88.9\% vs 88.1\% ($n = 42$ occluded). All for
+Qwen2.5-Omni-7B\pilot. \tbd{CIs and all models; explicit (N1--N5) vs implicit (N6--N7) cues per channel; H3-C
+instruction before the image; H3-D violation by target area.}

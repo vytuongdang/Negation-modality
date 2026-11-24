@@ -1,0 +1,52 @@
+\section{Introduction}
+\label{sec:intro}
+
+\begin{figure}[t]
+  \centering
+  \fbox{\parbox{0.92\columnwidth}{\centering\vspace{2.2cm}\textbf{Figure 1 placeholder}\vspace{2.2cm}}}
+  \caption{\tbd{Figure 1 does not exist yet.} Planned: (a) the running example (one image, the question, and
+  ``Leave the carrot out of your answer.'' typed, spoken, and written in the image), with the no-instruction answer
+  C0 naming the carrot; (b) real outputs of 2--3 models per channel, marked obeyed / violated; (c) violation rate per
+  model and channel with 95\% CIs\pilot.}
+  \label{fig:teaser}
+\end{figure}
+
+Omni-models such as Qwen2.5-Omni \citep{xu2025qwen25omni}, MiniCPM-o and Phi-4-multimodal \citep{microsoft2025phi4mini}
+accept images, audio and text together. In use, constraints reach them through all three: a user types ``don't
+mention the price'', says it to a voice assistant, or the rule sits on a slide in the picture. If a model obeys
+``do not mention X'' when typed but not when spoken or shown, a user's constraint depends on how it was delivered.
+
+Negation is a known weak spot. Vision-language models often read negated queries like affirmative ones
+\citep{alhamoud2025negbench,zhang2025negvqa}, and naming a forbidden concept can make it more likely to appear
+\citep{hwang2024pinkelephant}. Separately, audio--text studies find that models follow text when text and audio
+disagree \citep{wang2025audiotext,billa2026alme}. But no study holds the instruction fixed and changes only the
+channel, so it is unknown whether a prohibition is channel-robust.
+
+We ask: \emph{is a negative instruction obeyed equally when the same words arrive typed, spoken, or written in the
+image, and if not, is the gap about negation or about the channel?} Figure~\ref{fig:teaser} shows the setup on one
+example.
+
+A fair comparison needs four controls. (i) A model can only comply with ``do not mention the carrot'' if it would
+otherwise mention it, so violation is conditioned on its own no-instruction answer C0. (ii) Audio is always a
+separate segment, so the typed instruction is also a separate item, not glued into the question. (iii) Text on the
+image covers pixels, so an empty box of the same size is a control (C0\_box). (iv) A model may disobey because it
+did not read or hear the instruction, or because it follows any instruction worse in that channel; we therefore
+probe transcription and comprehension per channel, and compare negative with affirmative and exceptive forms (H4).
+
+We build a component-level negation benchmark (\S\ref{sec:benchmark}), define a paired protocol
+(\S\ref{sec:setup}), and test five open omni-models on a 932-question pilot (\S\ref{sec:results},
+\S\ref{sec:analysis}). Our pilot findings:
+\begin{enumerate}[leftmargin=*,itemsep=1pt,topsep=2pt]
+  \item The five models name the target without instruction in 82.8\% [80.6, 85.3] to 85.7\% [83.5, 87.9] of
+  questions, so about 780 questions per model can test compliance (\S\ref{sec:sanity}).
+  \item Written in the image, the prohibition is violated in 88.9\% to 95.8\% of cases in every model
+  (\S\ref{sec:visual}). For Qwen2.5-Omni-7B this is not a reading failure: it transcribes the written instruction
+  exactly in 930/932 images, and the empty box alone changes nothing ($-0.2$\,pp [$-1.9$, $+1.6$]).
+  \tbd{other four models.}
+  \item Typed and spoken prohibitions differ in every model (T$-$A from $+20.0$ [$+16.2$, $+23.8$] to $-29.8$
+  [$-34.0$, $-25.3$]\,pp), but three models violate more when typed and two more when spoken: the pilot shows no
+  single channel ordering (\S\ref{sec:ta}).
+  \item A comprehension probe placed before the instruction is itself obeyed: Qwen2.5-Omni-7B picks the forbidden
+  item in only 18.7\% [16.1, 21.0] of typed cases, below the 33.3\% chance level (\S\ref{sec:comp}).
+  \item \tbd{H4: whether the channel gaps remain when the instruction is affirmative or exceptive (\S\ref{sec:h4}).}
+\end{enumerate}

@@ -1,0 +1,12 @@
+\begin{abstract}
+Omni-models take text, speech and images in one prompt, so a user can type, say, or show what a model must not do.
+Work on negation has studied the content of queries, not whether a prohibition survives the channel it arrives in.
+We build a paired benchmark in which each image--question pair has one forbidden answer component, and the same
+instruction (``Leave the carrot out of your answer.'') is given as a separate text item, as synthetic speech, or as
+text written in the image; violations are counted only where the model names the component without any
+instruction. In a pilot with five open omni-models (932 questions), in-image instructions are violated in 88.9\%
+[86.7, 91.0] to 95.8\% [94.2, 97.0] of cases, although the one model checked so far transcribes them almost
+perfectly (930 of 932). Typed and spoken instructions differ by 4 to 30 points, but the sign of the difference
+changes across models. \tbd{one sentence on H4: is the gap specific to negation?} \tbd{one sentence on the conflict
+tests.} The design separates reading, understanding and obeying an instruction per channel. \tbd{URL.}
+\end{abstract}

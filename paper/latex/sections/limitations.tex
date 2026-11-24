@@ -1,0 +1,8 @@
+\section*{Limitations}
+Pilot size: 932 questions from a 1,150-unit subset; the full build is not done. Speech is synthetic (two cloned
+voices) and English only; real and diverse voices are not yet tested. The question is always typed, which may favour
+the text channel; T is a separate item to match audio. The visual channel is typographic text, not a prohibition
+sign. Images were filtered with a VLM check, which may favour easy images; about 10\% of reviewed units had doubtful
+ground truth. The judge is an LLM; agreement with one annotator is $\kappa = 0.83$ on 49 answers, and a larger blind
+check is pending. We test five open models up to about 8B parameters, no larger or closed omni-models. Not measured
+yet: comprehension per channel (COMP v2), negation specificity (H4), conflict (H2, H3-A), instruction position (H3-C).
