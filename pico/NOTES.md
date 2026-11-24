@@ -218,3 +218,11 @@
   Smoke --pilot 2 OK in negation / omni_neg / omni_phi + score_only. RESTARTED 22:59: job-pilot2v2 =
   run_trial.sh qwen2.5-omni-3b minicpm-o-2.6 phi-4-mm, log pico/logs/pilot2v2.log. ETA ~08:30 11-24 (3 x ~2.5 h
   judge + gen). Vy: check often enough that a crash idles the GPU at most 1 h -> sleep 3600 per check while running.
+
+## >>> 2026-11-24 13:45 Note from Vy: PAPER DRAFT task (CPU only, between GPU checks, do not disturb jobs) <<<
+- Step 1: paper/style_notes.md = writing-style notes from B-score (arXiv 2505.18545), VLMs are Biased (2505.23941),
+  Deep and shallow biases in LMs (2609.09901): abstract, Fig 1, intro + numbered contributions, related work, method,
+  results, limitations; never copy text. Telegram (English, short) when ready.
+- Step 2: paper/draft_v1.md (plain markdown) from claims/outline/ideas/related_work/PLAN + Stage 1-3 results;
+  every number from result files with 95% CI, marked pilot; [TBD: ...] for unfinished; neutral; Methods = real design
+  (C0/T/A/V, violation kinds, judge v3, COMP v1/v2); "What is still missing" list at end. Telegram when ready.
