@@ -17,6 +17,7 @@ import shutil
 import subprocess
 import time
 from datetime import datetime
+from zoneinfo import ZoneInfo
 from pathlib import Path
 
 import notify
@@ -26,6 +27,7 @@ PICO = ROOT / "pico"
 CHECK_MIN, REPORT_MIN = 10, 180   # status report every 3 h (Vy, 2026-11-20)
 DISK_WARN_GB, DISK_URGENT_GB = 30, 10
 STALE_MIN = 120
+KST = ZoneInfo("Asia/Seoul")   # Vy's time; the B200 clock is UTC
 
 
 def send(text):
@@ -119,7 +121,7 @@ def report(s):
     jobs = [x for x in s["sessions"] if x.startswith("job-")]
     alive = "✅ Pico đang chạy" if s["runner_alive"] else ("⏹️ Pico đã dừng (theo yêu cầu)" if s["stop_asked"]
                                                             else "❌ Pico không chạy")
-    return (f"🫀 {datetime.now():%H:%M} · {alive}\n{status}\n"
+    return (f"🫀 {datetime.now(KST):%H:%M} · {alive}\n{status}\n"
             f"Jobs: {', '.join(jobs) or 'không có'} · {gpu()} · Ổ đĩa trống {s['free_gb']:.0f} GB")
 
 
@@ -144,7 +146,7 @@ def main():
                 send(report(s))
                 last_report = time.time()
         except Exception as e:  # noqa: BLE001  the heartbeat must never die
-            print(f"{datetime.now():%H:%M} heartbeat error: {e}", flush=True)
+            print(f"{datetime.now(KST):%H:%M} heartbeat error: {e}", flush=True)
         time.sleep(CHECK_MIN * 60)
 
 
