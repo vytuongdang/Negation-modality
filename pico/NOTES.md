@@ -158,6 +158,9 @@
   all 5, then pilot200 all 5, then analyze_comp.py --version v2 (-> analysis_comp2_pilot200.md, NC + verbatim, CIs).
   tmux job-comp2 = run_comp2.sh --wait: WAITS until job-stage3 ends with TRIAL DONE, then starts (log pico/logs/comp2.log).
   If stage3 STOPS, comp2 does not start: fix stage3, then start comp2 by hand. When done: brief neutral Telegram (NC per channel, CIs).
+- 11:50 Stage 3 progress: Qwen-7B COMP + C0_box/OCR_V done, forms (H4) running since 11:09. Early peek (1 model, not a
+  finding): C0_box target mention 84.5% vs C0 84.8% (n 932 pairs) -> the empty box itself does not change mentioning;
+  OCR_V exact 99.8% -> Qwen-7B reads the written instruction yet V violation is ~89%. Full table after all 5 models.
 - Stage 3 runner (was prepared 08:15): experiments/h1_v2/run_stage3.sh = smoke --pilot 2 of COMP_T/A/V C0_box OCR_V
   for all 5 models, then per model: COMP (comp_pilot200.jsonl), C0_box+OCR_V, --forms (H4). Launch when Stage 2 is done:
   cd experiments/h1_v2 && tmux new -d -s job-stage3 "bash run_stage3.sh > ../../pico/logs/stage3.log 2>&1" ; ~12-14 h.
