@@ -34,7 +34,7 @@ run_claude() {   # run one claude -p call, log it, return 2 on a usage limit
 }
 
 new_session() {
-  SID=$(uuidgen); echo "$SID" > pico/session_id; STEP=0
+  SID=$(uuidgen 2>/dev/null || cat /proc/sys/kernel/random/uuid); echo "$SID" > pico/session_id; STEP=0
   echo "=== $(date) new session $SID" >> $LOG
   run_claude "$(cat pico/task.md)
 
@@ -43,7 +43,7 @@ Read pico/RESEARCH.md (the study)$HOSTDOC and $NOTES (your memory) first, then c
 }
 
 backoff=0
-if [ -s pico/session_id ]; then SID=$(cat pico/session_id); STEP=0; echo "=== $(date) resume $SID" >> $LOG
+if grep -qE '^[0-9a-f-]{36}$' pico/session_id 2>/dev/null; then SID=$(cat pico/session_id); STEP=0; echo "=== $(date) resume $SID" >> $LOG
 else new_session; fi
 while [ ! -e pico/stop ]; do
   [ -s pico/steps_per_session ] && STEPS_PER_SESSION=$(cat pico/steps_per_session)
