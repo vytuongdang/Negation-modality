@@ -13,9 +13,15 @@ Full tables: experiments/h1_v2/analysis_pilot200.md; figure experiments/figures/
 | Qwen2.5-Omni-3B | 799 | 63.0 | 51.1 | 91.7 | +11.9 [+8.5, +15.5] | -40.7 [-44.4, -36.8] |
 | MiniCPM-o 2.6 | 786 | 51.1 | 31.2 | 95.2 | +20.0 [+16.2, +23.8] | -64.0 [-67.6, -60.3] |
 | Phi-4-MM | 772 | 26.0 | 40.9 | 91.3 | -14.9 [-19.2, -10.8] | -50.4 [-54.4, -46.6] |
+| InternOmni | 779 | 50.1 | 79.8 | 95.8 | -29.8 [-34.0, -25.3] | -15.9 [-19.0, -12.8] |
+
+InternOmni (added 2026-11-24): required recall collapses under A (C0 70% -> A 27%, T 74%, V 73%); many A answers
+are one short sentence about the forbidden item only ("The man is sitting on a bench."), as if the spoken
+instruction were taken as the question. So its high A violation may be a prompt-role / comprehension effect, not
+negation; COMP_A (Stage 3) is the check.
 
 What this supports (pilot, one subset, one dataset): the visual (typographic) instruction is violated far more
-than text or audio in all 4 models (V mostly STATE: the model answers the question and ignores the written
+than text or audio in all 4 models (InternOmni: V > A > T) (V mostly STATE: the model answers the question and ignores the written
 instruction; whether it reads the text at all is NOT yet known -> OCR_V / COMP_V controls). The T-vs-A difference
 is model-dependent in sign: 3 models violate more in T, Phi-4 more in A. So there is no general "audio is worse"
 or "text is worse" result. Direction of T-A and the sign flip for Phi-4 match pilot v1 (old setup/metric).

@@ -146,7 +146,10 @@
 - Stage 2 RUNNING since 07:07: tmux job-internomni = experiments/h1_v2/run_internomni.sh (gen omni_intern 3692 answers
   ~1.4 s -> ~1.5 h, then judge in negation ~1.5-2.5 h), log pico/logs/internomni_pilot.log ('TRIAL DONE' / 'TRIAL STOPPED').
   ETA ~10:30-11:00. Then analyze.py (adds internomni), short Stage 2 report, then Stage 3 per PLAN.md.
-- Stage 3 runner PREPARED 08:15 (not run): experiments/h1_v2/run_stage3.sh = smoke --pilot 2 of COMP_T/A/V C0_box OCR_V
+- Stage 2 DONE 09:41: InternOmni T/A/V 50.1/79.8/95.8 (n 779), T-A -29.8 [-34.0,-25.3], A-V -15.9; recall C0 70, T 74,
+  A 27, V 73 -> A answers often short, only about the target (audio taken as question?). COMP_A will check. Reported.
+- Stage 3 RUNNING since 10:10: tmux job-stage3, log pico/logs/stage3.log ('SMOKE DONE', 'TRIAL DONE'/'TRIAL STOPPED'). ETA ~23:00-24:00.
+- Stage 3 runner (was prepared 08:15): experiments/h1_v2/run_stage3.sh = smoke --pilot 2 of COMP_T/A/V C0_box OCR_V
   for all 5 models, then per model: COMP (comp_pilot200.jsonl), C0_box+OCR_V, --forms (H4). Launch when Stage 2 is done:
   cd experiments/h1_v2 && tmux new -d -s job-stage3 "bash run_stage3.sh > ../../pico/logs/stage3.log 2>&1" ; ~12-14 h.
   Analysis then: analyze.py --tag pilot200 (H4 section) + analyze_comp.py --tag pilot200 + OCR summary.

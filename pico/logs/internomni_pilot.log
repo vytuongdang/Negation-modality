@@ -132,3 +132,146 @@ W0000 00:00:1795471648.493251  603573 sentencepiece_processor.cc:130] Piece at i
 [2441/3692] 1.49 s/answer, ETA 0.5 h | T: 'The image contains a wine glass and a bottle.'
 [2461/3692] 1.49 s/answer, ETA 0.5 h | T: 'There is one bird and one cat in the image.'
 [2481/3692] 1.49 s/answer, ETA 0.5 h | T: 'The pants are black and made of leather.'
+[2501/3692] 1.49 s/answer, ETA 0.5 h | T: 'The surfboard is white in color.'
+[2521/3692] 1.49 s/answer, ETA 0.5 h | T: 'The surfer is riding on a surfboard.'
+[2541/3692] 1.49 s/answer, ETA 0.5 h | T: 'The boy is holding a stick and riding an elephant.'
+[2561/3692] 1.48 s/answer, ETA 0.5 h | T: 'The man is looking at the snow.'
+[2581/3692] 1.48 s/answer, ETA 0.5 h | T: 'The roof is made of metal and is large.'
+[2601/3692] 1.48 s/answer, ETA 0.4 h | T: 'The child is eating pizza.'
+[2621/3692] 1.48 s/answer, ETA 0.4 h | T: 'The boy is holding a tennis racket.'
+[2641/3692] 1.48 s/answer, ETA 0.4 h | T: 'The crust is large.'
+[2661/3692] 1.48 s/answer, ETA 0.4 h | T: 'The person is wearing a wetsuit while riding on a surfboard.'
+[2681/3692] 1.48 s/answer, ETA 0.4 h | T: 'The man is wearing a white shirt and a white hat.'
+[2701/3692] 1.48 s/answer, ETA 0.4 h | T: 'The sky is a mix of purple and orange hues, indicating either sunrise or sunset.'
+[2721/3692] 1.48 s/answer, ETA 0.4 h | T: 'The girl is standing in the rain.'
+[2741/3692] 1.47 s/answer, ETA 0.4 h | T: 'The banana is sitting on the white tiled surface.'
+[2761/3692] 1.47 s/answer, ETA 0.4 h | T: 'The mouth of the seal in the image appears to be open, revealing its teeth. The state of the mouth s'
+[2781/3692] 1.48 s/answer, ETA 0.4 h | V: 'The cube in the image is green, large in size, and appears to be made of metal.'
+[2801/3692] 1.48 s/answer, ETA 0.4 h | V: 'The cylinder is purple, small in size, and made of rubber.'
+[2821/3692] 1.48 s/answer, ETA 0.4 h | V: 'The sphere is blue, small in size, and made of rubber.'
+[2841/3692] 1.48 s/answer, ETA 0.4 h | V: 'The sphere in the image is brown, small in size, and appears to be made of rubber.'
+[2861/3692] 1.48 s/answer, ETA 0.3 h | V: 'The cube in the image is yellow, large in size, and appears to be made of a rubber material.'
+[2881/3692] 1.48 s/answer, ETA 0.3 h | V: '4'
+[2901/3692] 1.48 s/answer, ETA 0.3 h | V: '3'
+[2921/3692] 1.48 s/answer, ETA 0.3 h | V: '3'
+[2941/3692] 1.48 s/answer, ETA 0.3 h | V: '5'
+[2961/3692] 1.48 s/answer, ETA 0.3 h | V: '6'
+[2981/3692] 1.48 s/answer, ETA 0.3 h | V: 'There are two giraffes and one ostrich in the image.'
+[3001/3692] 1.48 s/answer, ETA 0.3 h | V: 'There are two cats and one dog in the image.'
+[3021/3692] 1.48 s/answer, ETA 0.3 h | V: 'There are two bottles, one bowl, and one fork in the image.'
+[3041/3692] 1.48 s/answer, ETA 0.3 h | V: 'There is one keyboard and one TV in the image.'
+[3061/3692] 1.48 s/answer, ETA 0.3 h | V: 'There are two animals present in the image: a cat and a dog.'
+[3081/3692] 1.48 s/answer, ETA 0.3 h | V: 'The image shows a coffee cup and a spoon.'
+[3101/3692] 1.48 s/answer, ETA 0.2 h | V: 'The image shows two motorcycles parked on grass.'
+[3121/3692] 1.48 s/answer, ETA 0.2 h | V: 'The indoor objects present in the image include a vase with a skull design, a wooden shelf, a book t'
+[3141/3692] 1.48 s/answer, ETA 0.2 h | V: 'There are no indoor objects present in the image. The image shows a teddy bear sitting on a bench, r'
+[3161/3692] 1.49 s/answer, ETA 0.2 h | V: 'The image shows a police motorcycle and a white van.'
+[3181/3692] 1.49 s/answer, ETA 0.2 h | V: 'The image shows zebras and a cow.'
+[3201/3692] 1.49 s/answer, ETA 0.2 h | V: 'There are two dogs in the image.'
+[3221/3692] 1.49 s/answer, ETA 0.2 h | V: 'The image shows a tray with two pizzas and a glass of soda. There are no other kitchen items visible'
+[3241/3692] 1.49 s/answer, ETA 0.2 h | V: 'In the image, there is a wine glass and a fork present. There is no bowl or cup visible.'
+[3261/3692] 1.50 s/answer, ETA 0.2 h | V: 'The image shows a chair and a bed. There is no dining table or toilet visible in the image.'
+[3281/3692] 1.50 s/answer, ETA 0.2 h | V: 'In the image, the following foods are present: orange and apple. There is no pizza or sandwich visib'
+[3301/3692] 1.50 s/answer, ETA 0.2 h | V: 'In the image, there is a truck and a car present. There is no bicycle or bus visible.'
+[3321/3692] 1.50 s/answer, ETA 0.2 h | V: 'In the image, there is a bus and a bicycle. There is no car or train present.'
+[3341/3692] 1.51 s/answer, ETA 0.1 h | V: 'In the image, there is a wine glass and a cup present. There is no knife or bowl visible.'
+[3361/3692] 1.51 s/answer, ETA 0.1 h | V: 'In the image, there is a dog and a cat. There are no elephants or bears present.'
+[3381/3692] 1.51 s/answer, ETA 0.1 h | V: 'In the image, the following foods are present: carrot and orange. There is no sandwich or banana vis'
+[3401/3692] 1.51 s/answer, ETA 0.1 h | V: 'The boy is sitting on a skateboard. He is wearing an orange hoodie and blue shoes.'
+[3421/3692] 1.51 s/answer, ETA 0.1 h | V: 'The man is leaning on a black metal railing. He is standing in front of a brick wall. He is wearing '
+[3441/3692] 1.51 s/answer, ETA 0.1 h | V: 'The girl is carrying an umbrella and standing in the rain.'
+[3461/3692] 1.51 s/answer, ETA 0.1 h | V: 'The person in the image is flying a kite. They are standing on a sandy beach. The person is wearing '
+[3481/3692] 1.52 s/answer, ETA 0.1 h | V: 'The man is skating on a skateboard. He is wearing a white shirt, white shorts, a blue helmet, and wh'
+[3501/3692] 1.52 s/answer, ETA 0.1 h | V: 'The man is sitting on a black leather couch. He is wearing a white t-shirt with the words "PANAMA CI'
+[3521/3692] 1.52 s/answer, ETA 0.1 h | V: 'The umpire is standing behind the catcher and wearing a black uniform.'
+[3541/3692] 1.52 s/answer, ETA 0.1 h | V: 'The man is carrying a stick and guiding the elephant.'
+[3561/3692] 1.52 s/answer, ETA 0.1 h | V: 'The man is carrying a surfboard, standing on the beach, and wearing a wetsuit.'
+[3581/3692] 1.52 s/answer, ETA 0.0 h | V: 'The boy is holding a baseball bat and wearing a helmet.'
+[3601/3692] 1.52 s/answer, ETA 0.0 h | V: 'The mirror in the image is small, rectangular, and has a smooth surface. It is located on the left s'
+[3621/3692] 1.53 s/answer, ETA 0.0 h | V: 'The wetsuit worn by the surfer is pink in color. It appears to be in good condition, as the surfer i'
+[3641/3692] 1.53 s/answer, ETA 0.0 h | V: 'The girl in the image is small in size, indicating she is likely a young child. She is wearing a red'
+[3661/3692] 1.54 s/answer, ETA 0.0 h | V: 'The train is green in color and appears to be in good condition.'
+[3681/3692] 1.54 s/answer, ETA 0.0 h | V: 'The cat in the image is medium-sized and appears to be sitting or lying down. It is wearing a green '
+generated 3692 answers (100 tokens max) in 5695 s (1.54 s/answer)
+20 answers hit 100 tokens -> regenerate with 256
+[1/20] 10.53 s/answer, ETA 0.1 h | A: 'The image contains a vase with flowers, a wooden cabinet, a wooden shelf, a wooden door, a wooden ta'
+generated 20 answers (256 tokens max) in 153 s (7.66 s/answer)
+932 questions, 3728 answers planned; by branch: existence=175, existence_closed=174, count=186, attribute=197, relation=200
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/399 [00:00<?, ?it/s]Loading weights:   0%|          | 1/399 [00:00<00:57,  6.97it/s]Loading weights:  20%|█▉        | 78/399 [00:00<00:00, 371.64it/s]Loading weights:  32%|███▏      | 126/399 [00:00<00:00, 396.42it/s]Loading weights:  47%|████▋     | 188/399 [00:00<00:00, 460.38it/s]Loading weights:  59%|█████▉    | 237/399 [00:00<00:00, 449.29it/s]Loading weights:  75%|███████▍  | 298/399 [00:00<00:00, 494.62it/s]Loading weights:  87%|████████▋ | 349/399 [00:00<00:00, 338.78it/s]Loading weights:  98%|█████████▊| 390/399 [00:01<00:00, 265.95it/s]Loading weights: 100%|██████████| 399/399 [00:01<00:00, 334.44it/s]
+judge 64/2529
+judge 128/2529
+judge 192/2529
+judge 256/2529
+judge 320/2529
+judge 384/2529
+judge 448/2529
+judge 512/2529
+judge 576/2529
+judge 640/2529
+judge 704/2529
+judge 768/2529
+judge 832/2529
+judge 896/2529
+judge 960/2529
+judge 1024/2529
+judge 1088/2529
+judge 1152/2529
+judge 1216/2529
+judge 1280/2529
+judge 1344/2529
+judge 1408/2529
+judge 1472/2529
+judge 1536/2529
+judge 1600/2529
+judge 1664/2529
+judge 1728/2529
+judge 1792/2529
+judge 1856/2529
+judge 1920/2529
+judge 1984/2529
+judge 2048/2529
+judge 2112/2529
+judge 2176/2529
+judge 2240/2529
+judge 2304/2529
+judge 2368/2529
+judge 2432/2529
+judge 2496/2529
+judge 2529/2529
+judge (thinking) 64/347
+judge (thinking) 128/347
+judge (thinking) 192/347
+judge (thinking) 256/347
+judge (thinking) 320/347
+judge (thinking) 347/347
+judge (thinking) 9/9
+Loading weights:   0%|          | 0/399 [00:00<?, ?it/s]Loading weights:   0%|          | 1/399 [00:00<01:32,  4.30it/s]Loading weights:  24%|██▎       | 94/399 [00:00<00:00, 341.34it/s]Loading weights:  39%|███▉      | 155/399 [00:00<00:00, 430.56it/s]Loading weights:  53%|█████▎    | 210/399 [00:00<00:00, 453.28it/s]Loading weights:  66%|██████▌   | 263/399 [00:00<00:00, 474.86it/s]Loading weights:  79%|███████▉  | 316/399 [00:00<00:00, 466.59it/s]Loading weights:  92%|█████████▏| 368/399 [00:00<00:00, 473.42it/s]Loading weights: 100%|██████████| 399/399 [00:00<00:00, 419.72it/s]
+label 64/823
+label 128/823
+label 192/823
+label 256/823
+label 320/823
+label 384/823
+label 448/823
+label 512/823
+label 576/823
+label 640/823
+label 704/823
+label 768/823
+label 823/823
+WARNING: 1 rows where the thinking judge gave no JSON even with the retry budget; they keep the fast verdict and are listed in review_pilot200.csv (judge_source=think_error)
+
+C0 states the target in 779/932 questions
+violation % (any mention: STATE/META/DENY/WRONG) among C0-mentioned (n), negative form
+branch                       T           A           V
+existence             61 (135)    84 (135)    97 (135)
+existence_closed      63 (172)    72 (172)   100 (172)
+count                 60 (161)    67 (161)    93 (161)
+attribute             42 (158)    89 (158)    96 (158)
+relation              23 (153)    89 (153)    92 (153)
+ALL                   50 (779)    80 (779)    96 (779)
+
+regex disagrees with judge on the target in 376/3728 rows
+files: /home/vyvn/new/cross_multimodal_negation/experiments/h1_v2/results/internomni/scored_pilot200.jsonl /home/vyvn/new/cross_multimodal_negation/experiments/h1_v2/results/internomni/review_pilot200.csv
+TRIAL DONE 2026. 11. 24. (화) 09:41:24 KST
