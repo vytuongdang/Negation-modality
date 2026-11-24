@@ -13,6 +13,10 @@
 #     pico/NOTES.md, so nothing is lost.
 cd "$(dirname "$0")/.." || exit 1
 LOG=pico/run.log
+# This machine's settings (not in git): PICO_HOST (server1 | b200), PICO_TOPIC, PICO_NOTES. See pico/hosts/.
+[ -f pico/host.env ] && . pico/host.env
+NOTES=${PICO_NOTES:-pico/NOTES.md}
+HOSTDOC=""; [ -n "$PICO_HOST" ] && [ -f "pico/hosts/$PICO_HOST.md" ] && HOSTDOC=" and pico/hosts/$PICO_HOST.md (this machine's role and git rules; on this machine your memory file is $NOTES)"
 FLAGS="--dangerously-skip-permissions --model claude-opus-5-5 --effort medium"   # Vy: Opus 5.5 medium unless Vy asks otherwise
 STEPS_PER_SESSION=10   # default; pico/steps_per_session overrides it (read every step, no restart needed)
 LIMIT_RE='usage limit|limit reached|rate limit|resets at|out of extra usage'
@@ -32,7 +36,7 @@ new_session() {
   run_claude "$(cat pico/task.md)
 
 (You are starting a fresh session: sessions are rotated every $STEPS_PER_SESSION steps to save quota.
-Read pico/RESEARCH.md (the study) and pico/NOTES.md (your memory) first, then continue from where NOTES says.)" --session-id "$SID"
+Read pico/RESEARCH.md (the study)$HOSTDOC and $NOTES (your memory) first, then continue from where it says.)" --session-id "$SID"
 }
 
 backoff=0
@@ -41,7 +45,7 @@ else new_session; fi
 while [ ! -e pico/stop ]; do
   [ -s pico/steps_per_session ] && STEPS_PER_SESSION=$(cat pico/steps_per_session)
   if [ "$STEP" -ge "$STEPS_PER_SESSION" ] || [ -e pico/new_session ]; then rm -f pico/new_session; new_session; continue; fi
-  msg="Continue the task from where you are. Read pico/NOTES.md and pico/task.md if unsure."
+  msg="Continue the task from where you are. Read $NOTES and pico/task.md if unsure."
   note=""
   if [ -e pico/note.txt ]; then note=$(cat pico/note.txt); rm pico/note.txt; msg="$msg Note from Vy: $note"; fi
   echo "=== $(date) step $STEP" >> $LOG

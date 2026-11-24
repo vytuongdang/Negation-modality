@@ -60,7 +60,7 @@ def tail(path, n=30):
 
 
 def check():
-    free_gb = shutil.disk_usage("/").free / 1e9
+    free_gb = shutil.disk_usage(ROOT).free / 1e9   # the project's disk (B200: the shared volume)
     sessions = tmux_sessions()
     runner_alive = "pico" in sessions
     log = PICO / "run.log"
@@ -81,7 +81,7 @@ def alerts(s):
     elif s["free_gb"] < DISK_WARN_GB:
         out["disk"] = f"⚠️ Ổ đĩa còn {s['free_gb']:.1f} GB trống (dưới {DISK_WARN_GB} GB)."
     if not s["runner_alive"] and not s["stop_asked"]:
-        out["runner"] = ("⚠️ Pico (tmux 'pico') không còn chạy. Bật lại: cd ~/new/cross_multimodal_negation && "
+        out["runner"] = (f"⚠️ Pico (tmux 'pico') không còn chạy. Bật lại: cd {ROOT} && "
                          "tmux new -d -s pico \"bash pico/runner.sh\"")
     if s["runner_alive"] and s["idle_min"] is not None and s["idle_min"] > STALE_MIN + s.get("pause_min", 0):
         out["stale"] = f"⚠️ Pico không ghi log {s['idle_min']:.0f} phút rồi, có thể đang bị treo."

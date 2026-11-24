@@ -7,9 +7,11 @@
     python3 pico/notify.py "caption" --doc REPORT.md   # a file
     python3 pico/notify.py --last                      # the last reports sent (read before writing a new one)
 
-The bot token is read from ~/new/AI_assitant/pico/keys/telegram.txt and the topic's thread id from the bot's
-bot_state.json (the topic must exist: Vy sends /setup in the group once). Every report is also appended to
-pico/telegram_sent.log, which the chat side of the bot reads to answer Vy's questions.
+The topic is PICO_TOPIC in pico/host.env (this machine's settings, not in git; default "Pico Vy Research").
+On server 1 the bot token is read from ~/new/AI_assitant/pico/keys/telegram.txt and the topic's thread id from the
+bot's bot_state.json (the topic must exist: Vy sends /setup in the group once). On a machine without the bot
+(B200) they come from ~/.config/pico/telegram.env (TOKEN=, CHAT=, THREAD=; chmod 600). Every report is also
+appended to pico/telegram_sent.log, which the chat side of the bot reads to answer Vy's questions.
 """
 import json
 import sys
@@ -20,11 +22,31 @@ from datetime import datetime
 from pathlib import Path
 
 BOT_DIR = Path.home() / "new" / "AI_assitant" / "pico"
-TOPIC = "Pico Vy Research"
 LOG = Path(__file__).resolve().parent / "telegram_sent.log"
+TG_ENV = Path.home() / ".config" / "pico" / "telegram.env"
+
+
+def read_env(path):
+    """KEY=value lines (shell style, optional quotes) -> dict; {} if the file is missing."""
+    out = {}
+    if path.exists():
+        for line in path.read_text().splitlines():
+            if "=" in line and not line.lstrip().startswith("#"):
+                k, v = line.split("=", 1)
+                out[k.strip().removeprefix("export ").strip()] = v.strip().strip('"').strip("'")
+    return out
+
+
+HOST = read_env(Path(__file__).resolve().parent / "host.env")
+TOPIC = HOST.get("PICO_TOPIC", "Pico Vy Research")
 
 
 def target():
+    if not (BOT_DIR / "bot_state.json").exists():   # a machine without the bot (B200)
+        env = read_env(TG_ENV)
+        if not all(env.get(k) for k in ("TOKEN", "CHAT", "THREAD")):
+            raise SystemExit(f"no Telegram settings: {TG_ENV} needs TOKEN=, CHAT=, THREAD=")
+        return env["TOKEN"], env["CHAT"], env["THREAD"]
     token = (BOT_DIR / "keys" / "telegram.txt").read_text().splitlines()[0].strip()
     state = json.loads((BOT_DIR / "bot_state.json").read_text())
     for chat, names in state.get("topic_names", {}).items():
