@@ -48,8 +48,11 @@ def gpu():
     try:
         out = subprocess.run(["nvidia-smi", "--query-gpu=utilization.gpu,memory.used,memory.total",
                               "--format=csv,noheader,nounits"], capture_output=True, text=True, timeout=20).stdout
-        u, m, t = [x.strip() for x in out.split(",")]
-        return f"GPU {u}% · {int(m) / 1024:.1f}/{int(t) / 1024:.0f} GB"
+        rows = [[x.strip() for x in l.split(",")] for l in out.strip().splitlines()]
+        if len(rows) == 1:
+            u, m, t = rows[0]
+            return f"GPU {u}% · {int(m) / 1024:.1f}/{int(t) / 1024:.0f} GB"
+        return "GPU " + " | ".join(f"{i}: {u}% {int(m) / 1024:.0f}/{int(t) / 1024:.0f}G" for i, (u, m, t) in enumerate(rows))
     except Exception:
         return "GPU ?"
 
