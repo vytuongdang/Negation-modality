@@ -1,5 +1,13 @@
 # NOTES (B200 runner's memory)
 
+## >>> 2026-11-24 23:50 KST: FINAL BENCHMARK DONE; H1 SMOKE RUNNING (tmux job-h1-smoke, GPU 2, log pico/logs/h1_smoke.log) <<<
+- Stage 1 EXIT 0 at 14:38 UTC. filter_benchmark.py applied (3 images; 24 media files moved to dataset/removed_images/,
+  out_unfiltered/ = untouched build, 71 MB). Final: 2,792 images, 4,666 units, 7,468 negative + 4,666 exceptive +
+  3,874 affirmative = 16,008 samples; units: attribute 1,546, count 963, existence 792, existence_closed 713,
+  relation 652. check_ids.py: OK (no missing/duplicate ids). ASR ok 2,506/2,553 sentences (47 fail after 3 tries).
+  excluded_units 276 (double_label 209, part_whole 39, attr_overlap 28). occludes_subject 625/16,008.
+- Smoke started 14:49 UTC (models: qwen 7b, 3b, minicpm, phi, internomni). Next: s/answer -> ETA -> full run.
+
 ## >>> FULL AUTONOMY (Vy, 2026-11-24 23:09 KST, Vy asleep) -- overrides "no GPU until Vy OK" and "Vy's review" <<<
 - (1) stage 1 done -> Pico reviews itself (selection report, sharpness, B2 human-verify, ASR) -> filter_benchmark.py
   -> FINAL benchmark (unfiltered copy untouched in out_unfiltered/). Never drop images because of results.
