@@ -47,6 +47,10 @@
 - IDs: image_id = '<folder>/<stem>' (omnilib.image_id); added to load_dataset rows, run_h1v2 / run_h2 result rows and
   (by filter_benchmark.py) every benchmark row. analyze.py / analyze_h2.py take `--remove FILE...` (jsonl with
   image_id/image/unit_id/sample_id, or one id per line) -> output analysis_<tag>[_asrok]_rm.md, nothing regenerated.
+- NEXT when stage 1 prints STAGE1 DONE: (a) cd create_data/src; filter_benchmark.py (writes out_unfiltered/ once,
+  adds image_id/unit_id/sample_id to every row); (b) check_ids.py -> counts + ID check go into the next Telegram
+  report (Vy 23:22 KST asked); (c) nvidia-smi -i 2, then tmux job-h1-smoke: bash experiments/h1_v2/run_b200_h1.sh smoke
+  > pico/logs/h1_smoke.log 2>&1 ; measure s/answer; then full.
 - Tag clash: run_h1v2 tags are pilot2 / all (same as server 1). Results are local (git-ignored), but before committing
   an analysis_*.md / figure from B200 rename it with a `full_` prefix (hosts/b200.md rule).
 

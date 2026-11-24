@@ -68,12 +68,27 @@ def main():
             return True
         return any(r.get(k) in drop_ids for k in ID_KEYS)
 
+    unit_of = {s["sample_id"]: s["validation"]["unit_id"] for s in samples}
+
+    def with_ids(r):
+        """Every benchmark row carries image_id, unit_id and sample_id (Vy 2026-11-24); compact rows use id."""
+        r = dict(r)
+        if "image" in r:
+            r["image_id"] = image_id(r["image"])
+        sid = r.get("sample_id") or r.get("id")
+        if sid in unit_of:
+            r.setdefault("sample_id", sid)
+            r.setdefault("unit_id", unit_of[sid])
+        elif "validation" in r:
+            r.setdefault("unit_id", r["validation"]["unit_id"])
+        return r
+
     removed_rows = []
     for f in sorted(src.glob("*.jsonl")):
         if f.name == LIST.name:
             continue
         rows = read_jsonl(f)
-        keep = [dict(r, image_id=image_id(r["image"])) if "image" in r else r for r in rows if not dropped(r)]
+        keep = [with_ids(r) for r in rows if not dropped(r)]
         if f.name.startswith("samples_compact_all"):
             removed_rows += [r for r in rows if dropped(r)]
         print(f"{f.name}: {len(rows)} -> {len(keep)}")
