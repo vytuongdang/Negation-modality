@@ -1,6 +1,7 @@
 # NOTES (B200 runner's memory)
 
 ## >>> 2026-11-25 00:10 KST: H1 FULL RUNNING (tmux job-h1-full, GPU 2, log pico/logs/h1_full.log, ends "EXIT n") <<<
+- NEVER `git commit -a` on B200 (it commits the deleted old results + B200 smoke files over server 1 tracked pilot2 files); add files by name.
 - Smoke OK on all 5 (s/answer gen: qwen7b 0.36, qwen3b 0.40, minicpm 0.72, phi 0.88, internomni 0.49). Smoke tag pilot2.
 - FIX: InternOmni tokenizer failed with sentencepiece 0.2.2 ("piece must not include null character"): installed
   sentencepiece==0.2.0 (--no-deps, wheel in /tmp/spt/dl) into env omni_intern -> loads (92,544 pieces). File verified intact: sha256 = HF blob name f868398f..., binary (not an LFS pointer). Server 1 freeze
