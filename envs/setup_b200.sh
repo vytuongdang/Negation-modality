@@ -2,7 +2,7 @@
 # Build the experiment envs on B200 from server 1's package lists (envs/<env>.freeze.txt).
 #
 #   bash envs/setup_b200.sh                 # build all 4 envs (skips steps already done), then --check
-#   bash envs/setup_b200.sh omni_neg        # only these envs
+#   bash envs/setup_b200.sh omni_neg        # only these envs (cosyvoice = TTS, built only when named)
 #   bash envs/setup_b200.sh --check         # versions + a tiny CUDA test per env
 #
 # Same env names as server 1 (negation, omni_neg, omni_phi, omni_intern), created in /home/vy/conda-envs, and
@@ -19,14 +19,15 @@ ENVROOT=/home/vy/conda-envs
 TORCH="torch==2.7.1 torchvision==0.22.1 torchaudio==2.7.1"
 TORCH_INDEX=https://download.pytorch.org/whl/cu128
 FA_WHEEL=https://github.com/Dao-AILab/flash-attention/releases/download/v2.8.3/flash_attn-2.8.3+cu12torch2.7cxx11abiTRUE-cp310-cp310-linux_x86_64.whl
-SKIP='^(torch|torchvision|torchaudio|triton|tokenspeed-triton|torch_c_dlpack_ext|torchcodec|vllm|flashinfer-python|flash_attn|flash-attn|xgrammar|nccl4py|cuda-[A-Za-z-]+|nvidia-(?!ml-py)[A-Za-z0-9-]+)( @|==)'
+SKIP='^(torch|torchvision|torchaudio|onnxruntime-gpu|triton|tokenspeed-triton|torch_c_dlpack_ext|torchcodec|vllm|flashinfer-python|flash_attn|flash-attn|xgrammar|nccl4py|cuda-[A-Za-z-]+|nvidia-(?!ml-py)[A-Za-z0-9-]+)( @|==)'
 ALL="negation omni_neg omni_phi omni_intern"
+CHECK="$ALL cosyvoice"
 export PYTHONNOUSERSITE=1   # never mix in ~/.local packages
 
 pyver() { [ "$1" = negation ] && echo 3.11 || echo 3.10; }
 
 check() {
-  for e in $ALL; do
+  for e in $CHECK; do
     py=$ENVROOT/$e/bin/python
     [ -x "$py" ] || { echo "== $e: MISSING"; continue; }
     echo "== $e"
@@ -34,7 +35,7 @@ check() {
 import importlib, torch
 x = torch.ones(4, device="cuda")
 print(f"  torch {torch.__version__}  cuda ok: {(x * 2).sum().item() == 8}  gpu: {torch.cuda.get_device_name(0)}")
-for m in ("transformers", "accelerate", "peft", "soundfile", "librosa", "decord", "flash_attn"):
+for m in ("transformers", "accelerate", "peft", "soundfile", "librosa", "decord", "flash_attn", "onnxruntime", "whisper"):
     try:
         print(f"  {m} {getattr(importlib.import_module(m), '__version__', '?')}")
     except Exception as err:
@@ -62,6 +63,9 @@ build() {
   req=$(mktemp); grep -vP "$SKIP" "$e.freeze.txt" > "$req"
   "$py" -m pip install -q --no-deps -r "$req" || { echo "FAILED packages $e"; rm -f "$req"; return 1; }
   rm -f "$req"
+  if [ "$e" = cosyvoice ]; then   # server 1's onnxruntime-gpu 1.18 needs cuDNN 8; torch 2.7 ships cuDNN 9
+    "$py" -m pip install -q --no-deps onnxruntime-gpu==1.22.0 || echo "WARNING $e: onnxruntime-gpu upgrade failed"
+  fi
   if grep -q '^flash_attn' "$e.freeze.txt"; then
     "$py" -m pip install -q --no-deps "$FA_WHEEL" || echo "WARNING $e: flash_attn wheel did not install"
   fi
