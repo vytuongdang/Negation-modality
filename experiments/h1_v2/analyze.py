@@ -22,6 +22,9 @@ import random
 from collections import defaultdict
 from math import comb
 from pathlib import Path
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "common"))
+from omnilib import removal_set, removed   # noqa: E402
 
 HERE = Path(__file__).resolve().parent
 RESULTS = HERE / "results"
@@ -344,7 +347,14 @@ def main():
     ap.add_argument("--tag", default="all")
     ap.add_argument("--models", nargs="*")
     ap.add_argument("--seed", type=int, default=0)
+    ap.add_argument("--asr_ok_only", action="store_true",
+                    help="main analysis (Vy, 2026-11-24): leave out units whose spoken instruction failed the Whisper "
+                         "check (asr_ok False); run once without it as the sensitivity check; output gets _asrok")
+    ap.add_argument("--remove", nargs="*", default=[],
+                    help="optional removal lists (image_id / unit_id / sample_id; jsonl or one id per line): rows of "
+                         "those images/units/samples are left out at analysis time, nothing regenerated; output gets _rm")
     args = ap.parse_args()
+    rm = removal_set(args.remove)
     files = sorted(RESULTS.glob(f"*/scored_{args.tag}.jsonl"))
     if args.models:
         files = [f for f in files if f.parent.name in args.models]
@@ -356,6 +366,10 @@ def main():
     dropped = {r["unit_id"] for r in read_jsonl(excl)} if excl.exists() else set()   # flag_excluded_units.py
     if dropped:
         out.append(f"\nExcluded units left out: {len(dropped)} (double label / part-whole / attribute overlap, create_data/src/flag_excluded_units.py).")
+    if args.asr_ok_only:
+        out.append("\nONLY units with asr_ok = True (every audio instruction of the unit passed the Whisper check).")
+    if args.remove:
+        out.append(f"\nRemoval lists {args.remove}: {len(rm[0])} images, {len(rm[1])} unit/sample ids left out.")
     for f in files:
         rows = read_jsonl(f)
         # merge extra runs of the same tag (H4 forms, C0_box controls): only (sample_id, condition) pairs that the
@@ -369,12 +383,16 @@ def main():
             rows += extra
             if extra:
                 print(f"{f.parent.name}: +{len(extra)} rows from {g.name}")
-        section_model(f.parent.name, ModelData([r for r in rows if r["unit_id"] not in dropped]),
-                      out, rng, figs)
+        rows = [r for r in rows if r["unit_id"] not in dropped and not removed(r, rm)]
+        if args.asr_ok_only:
+            bad = {r["unit_id"] for r in rows if not r["asr_ok"]}
+            out.append(f"\n{f.parent.name}: {len(bad)} units left out because of asr_ok = False")
+            rows = [r for r in rows if r["unit_id"] not in bad]
+        section_model(f.parent.name, ModelData(rows), out, rng, figs)
     if figs:
-        for p in plots(figs, args.tag):
+        for p in plots(figs, args.tag + ("_asrok" if args.asr_ok_only else "") + ("_rm" if args.remove else "")):
             out.append(f"\n![{p.stem}](../figures/{p.name})")
-    path = HERE / f"analysis_{args.tag}.md"
+    path = HERE / f"analysis_{args.tag}{'_asrok' if args.asr_ok_only else ''}{'_rm' if args.remove else ''}.md"
     path.write_text("\n".join(out) + "\n")
     print("\n".join(out))
     print(f"\nwritten {path}")

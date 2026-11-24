@@ -1,9 +1,22 @@
 # NOTES (B200 runner's memory)
 
+## >>> FULL AUTONOMY (Vy, 2026-11-24 23:09 KST, Vy asleep) -- overrides "no GPU until Vy OK" and "Vy's review" <<<
+- (1) stage 1 done -> Pico reviews itself (selection report, sharpness, B2 human-verify, ASR) -> filter_benchmark.py
+  -> FINAL benchmark (unfiltered copy untouched in out_unfiltered/). Never drop images because of results.
+- (2) then H1 at once on the final benchmark: smoke --pilot 2 on all 5 models (s/answer), then full. GPU 2 ONLY,
+  nvidia-smi before each job, never kill others, stop at first failure. NEU_T/NEU_A/NEU_V + cues + OCR_V only after
+  CPU smoke test; NEU code does NOT exist anywhere (checked local + origin 23:10 KST) -> standard H1 first.
+- IDs mandatory: image_id, unit_id, sample_id in the benchmark and ALL result files. Removed images -> NOTES list +
+  dataset/out/removed_images.jsonl (= the filter list). Analysis gets an optional removal-list argument (by id) to
+  re-run without regenerating.
+- Reporting: ~1 short Telegram per hour (sleep_seconds <= 3600 while jobs run), one per finished stage, urgent only for
+  crashes/quota/decisions. Warn if volume < 30 GB. Commit + push code when stable. Low tokens.
+  (The 12 h sleep rule is suspended for this autonomous session.)
+
 ## >>> BAD-IMAGE CLEANUP = FILTER THE BENCHMARK ITSELF, BEFORE H1 (Vy, 2026-11-24 23:04 KST; replaces 23:01) <<<
 - Order: (1) stage 1 builds the full dataset ONCE (never rebuild from step 3 for image cleanup); (2) after the build
   AND Vy's review: list bad images {"image": "images/...", "reason": ...} (exact path as in samples.jsonl) in
-  create_data/dataset/out/excluded_images.jsonl + the "Removed images" list below, then
+  create_data/dataset/out/removed_images.jsonl + the "Removed images" list below, then
   `cd create_data/src && PYTHONNOUSERSITE=1 ~/anaconda3/envs/negation/bin/python filter_benchmark.py` (--dry_run first);
   (3) only then H1, reading the filtered out/ as usual (no bad-image logic in run/analysis code; asr_ok handling
   and flag_excluded_units' excluded_units.jsonl stay as they are). Do NOT start H1 until Vy says OK.
@@ -17,7 +30,25 @@
   and are dropped with their unit, audio/visual are per sample. Dry run on the partial build (3 test images): 9
   units, 39 samples removed; samples 7471->7450, forms 8545->8527, compact_all 16016->15977 (consistent).
   Side effects to state: template-sweep share and voice balance shift slightly.
-- Removed images: (none yet; review after stage 1, then Vy's review)
+- Image review (Pico, 2026-11-24 23:15 KST, on the built samples.jsonl: 2,795 images / 4,669 units before TTS ended):
+  72 random images (18 per source; sheets /tmp/rev, not kept). CLEVR 18/18 fine. 54 photos: 2 too dark to see the
+  target (coco/000000109532 chair/plant in a black room; vg/2409290 tiny woman on a dark blue escalator), 1 clearly
+  wrong GT (vg/2390987 VAW "building is brown", building is grey/white), 2 doubtful (coco/000000291791 handbag not
+  visible; vg/2402934 horse colour = silhouette), several odd VAW attributes ("elephants are wide", "sky is wide":
+  annotation style, kept). => ~4% image-quality + ~5% GT problems, same as server 1's 10% (decision there: no filter
+  change). Tested a stricter darkness rule (brightness < 60 or clipped > 0.25 = 83 images): 24 of them viewed, only
+  ~2 really bad -> a global pixel rule would remove mostly good images: NOT applied. ASR is handled by asr_ok
+  (analysis), B2 human-verify sheet is unlabeled (no signal). Decision: remove only the images seen as clearly bad;
+  the rest is a stated limitation (violation is conditioned on each model's own C0, so wrong targets mostly drop out).
+- Removed images (id, reason) -> also in create_data/dataset/out/removed_images.jsonl:
+  coco/000000109532 too dark (clipped 0.31), target objects not visible
+  vg/2409290 too dark / blue-tinted, subject tiny, relation not verifiable
+  vg/2390987 wrong ground truth (VAW: building is brown; it is grey/white)
+- IDs: image_id = '<folder>/<stem>' (omnilib.image_id); added to load_dataset rows, run_h1v2 / run_h2 result rows and
+  (by filter_benchmark.py) every benchmark row. analyze.py / analyze_h2.py take `--remove FILE...` (jsonl with
+  image_id/image/unit_id/sample_id, or one id per line) -> output analysis_<tag>[_asrok]_rm.md, nothing regenerated.
+- Tag clash: run_h1v2 tags are pilot2 / all (same as server 1). Results are local (git-ignored), but before committing
+  an analysis_*.md / figure from B200 rename it with a `full_` prefix (hosts/b200.md rule).
 
 ## >>> RULE (Vy, 2026-11-24 ~21:35 KST): NO PERIODIC CHECKS <<<
 - job-stage1 posts to Telegram itself when it finishes or fails. End EVERY step by writing 43200 to pico/sleep_seconds

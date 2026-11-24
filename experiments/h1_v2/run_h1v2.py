@@ -222,7 +222,7 @@ def main():
         raw = cache.final(args.model, img, items)   # the 256-token answer if the 100-token one was cut
         if raw is None:
             continue
-        rows.append({"sample_id": s["id"], "pair_of": s["pair_of"], "unit_id": s["unit_id"], "image": s["image"],
+        rows.append({"sample_id": s["id"], "pair_of": s["pair_of"], "unit_id": s["unit_id"], "image_id": s["image_id"], "image": s["image"],
                      "form": s["form"], "condition": c, "branch": s["branch"], "source": s["source"],
                      "split": s["split"], "split_group": split_group(s["split"]), "template_id": s["template_id"],
                      "template_sweep": s["template_sweep"], "voice": s["voice"], "asr_ok": s["asr_ok"],

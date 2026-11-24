@@ -1,6 +1,6 @@
 """Remove bad images FROM THE BENCHMARK after the one-time build, regenerating nothing (Vy, 2026-11-24 23:04 KST).
 
-Input:  dataset/out/excluded_images.jsonl  (written by hand after the image review), one row per image:
+Input:  dataset/out/removed_images.jsonl  (written by hand after the image review), one row per image:
           {"image": "<path exactly as in samples.jsonl, e.g. images/vg/2345.jpg>", "reason": "<why>"}
         (paths, not file names: VAW and GQA share Visual Genome images)
 Effect: 1. the first time, the unfiltered build is copied to dataset/out_unfiltered/ (never overwritten after);
@@ -27,10 +27,16 @@ from config import DATA, OUT_DIR
 from utils import read_jsonl
 
 SRC = DATA / "out_unfiltered"
-LIST = OUT_DIR / "excluded_images.jsonl"
+LIST = OUT_DIR / "removed_images.jsonl"
 MANIFEST = DATA / "audio" / "negation_sentences" / "manifest.jsonl"
 MOVED = DATA / "removed_images"
 ID_KEYS = ("sample_id", "id", "pair_of")
+
+
+def image_id(p):
+    """Stable image id (same as experiments/common/omnilib.image_id): '<folder>/<stem>', e.g. 'vg/2345'."""
+    p = Path(str(p))
+    return f"{p.parent.name}/{p.stem}"
 
 
 def name(p):
@@ -41,7 +47,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--dry_run", action="store_true")
     args = ap.parse_args()
-    bad = {name(r["image"]): r["reason"] for r in read_jsonl(LIST)}
+    bad = {name(r["image"]): r["reason"] for r in read_jsonl(LIST)}   # rows also carry image_id (for Vy)
     if not SRC.exists() and not args.dry_run:
         shutil.copytree(OUT_DIR, SRC)
         print(f"unfiltered build copied to {SRC}")
@@ -67,7 +73,7 @@ def main():
         if f.name == LIST.name:
             continue
         rows = read_jsonl(f)
-        keep = [r for r in rows if not dropped(r)]
+        keep = [dict(r, image_id=image_id(r["image"])) if "image" in r else r for r in rows if not dropped(r)]
         if f.name.startswith("samples_compact_all"):
             removed_rows += [r for r in rows if dropped(r)]
         print(f"{f.name}: {len(rows)} -> {len(keep)}")

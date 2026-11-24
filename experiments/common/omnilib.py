@@ -45,6 +45,46 @@ def read_jsonl(path):
 
 # ---------------------------------------------------------------- data
 
+def image_id(path):
+    """Stable image id (Vy 2026-11-24): '<folder>/<file stem>', e.g. 'coco/000000123456', 'vg/2345',
+    'clevr/CLEVR_val_008260' (VAW and GQA share Visual Genome images: same image, same id)."""
+    p = Path(str(path))
+    return f"{p.parent.name}/{p.stem}"
+
+
+def removal_set(paths):
+    """Ids to leave out at analysis time (Vy: extra filtering later by id, nothing regenerated). Each file: jsonl
+    rows with image_id / unit_id / sample_id (or image), or plain text, one id per line. -> (images, units, samples)"""
+    import json as _json
+    imgs, units, samples = set(), set(), set()
+    for path in paths or []:
+        for line in open(path):
+            line = line.strip()
+            if not line or line.startswith("#"):
+                continue
+            if line.startswith("{"):
+                r = _json.loads(line)
+                if r.get("image_id") or r.get("image"):
+                    imgs.add(r.get("image_id") or image_id(r["image"]))
+                elif r.get("unit_id"):
+                    units.add(r["unit_id"])
+                elif r.get("sample_id"):
+                    samples.add(r["sample_id"])
+            elif "/" in line:
+                imgs.add(line if line.count("/") == 1 and "." not in line else image_id(line))
+            else:   # unit ids (…-00000) and sample ids (…-000000[-aff|-exc]) never collide
+                units.add(line)
+                samples.add(line)
+    return imgs, units, samples
+
+
+def removed(r, rm):
+    """True if a result row is covered by removal_set(...)."""
+    imgs, units, samples = rm
+    return (r.get("image_id") or image_id(r["image"])) in imgs or r.get("unit_id") in units \
+        or r.get("sample_id") in samples or r.get("pair_of") in samples
+
+
 def load_dataset(keep_excluded=False):
     """Every sample of dataset v2 with audio: compact row merged with the full record (components, expected,
     split) and the ASR flag of its audio. -> {sample_id: dict}
@@ -63,7 +103,7 @@ def load_dataset(keep_excluded=False):
             continue
         m = asr.get(r["negation"], {})
         out[r["id"]] = {
-            "id": r["id"], "image": r["image"], "question": r["question"], "negation": r["negation"],
+            "id": r["id"], "image": r["image"], "image_id": image_id(r["image"]), "question": r["question"], "negation": r["negation"],
             "form": r["form"], "pair_of": r["pair_of"], "branch": s["branch"], "source": s["source"]["dataset"],
             "split": s["source"]["split"], "unit_id": s["validation"]["unit_id"],
             "template_id": s["negation"]["template_id"], "template_sweep": s["negation"].get("template_sweep", False),
