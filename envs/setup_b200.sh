@@ -61,7 +61,9 @@ build() {
   "$py" -c "import torch, sys; sys.exit(torch.__version__ != '2.7.1+cu128')" 2>/dev/null ||
     "$py" -m pip install -q $TORCH --index-url $TORCH_INDEX || { echo "FAILED torch $e"; return 1; }
   req=$(mktemp); grep -vP "$SKIP" "$e.freeze.txt" > "$req"
-  "$py" -m pip install -q --no-deps -r "$req" || { echo "FAILED packages $e"; rm -f "$req"; return 1; }
+  # old source packages (openai-whisper) import pkg_resources while building: setuptools < 81 + no build isolation
+  "$py" -m pip install -q "setuptools<81" wheel
+  "$py" -m pip install -q --no-deps --no-build-isolation -r "$req" || { echo "FAILED packages $e"; rm -f "$req"; return 1; }
   rm -f "$req"
   if [ "$e" = cosyvoice ]; then   # server 1's onnxruntime-gpu 1.18 needs cuDNN 8; torch 2.7 ships cuDNN 9
     "$py" -m pip install -q --no-deps onnxruntime-gpu==1.22.0 || echo "WARNING $e: onnxruntime-gpu upgrade failed"
