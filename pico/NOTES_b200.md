@@ -1,6 +1,11 @@
 # NOTES (B200 runner's memory)
 
 ## >>> 2026-11-25 00:10 KST: H1 FULL RUNNING (tmux job-h1-full, GPU 2, log pico/logs/h1_full.log, ends "EXIT n") <<<
+- 22:30 UTC: QWEN7B FULL DONE (scored_all.jsonl). 113 think_error rows (fast verdict kept, in review_all.csv). Analysis (asr_ok, 52 units out):
+  experiments/h1_v2/full_analysis_qwen7b_asrok.md + figures/full_h1v2_*_qwen7b_asrok.png. C0 81.5% (3,535/4,338). Violation T 17.3,
+  A 13.5, V 89.0; T-A +3.8 pp [2.6, 5.0], McNemar p 5e-10 (matches server-1 subset +4.2). Val T 16.1/A 10.4, train 18.2/15.9.
+  Recall C0 80.4, T 84.1, A 83.8, V 79.5. analyze.py takes ~3 min; it writes analysis_all*.md + h1v2_*_all*.png: rename to full_* before commit.
+  Qwen3B started 21:29 UTC (0.50 s/ans). claims.md (shared) NOT edited yet: update once after all 5 models.
 - 18:15 UTC: judge THINKING pass is the bottleneck: ~1,100 rows/h (batch_size=8, 1500 tok), 3,549 rows (23% regex-disagree) = ~3.2 h/model -> all 5 done ~21-22 UTC 11-25. Asked Vy (Telegram 03:15 KST) for OK to raise judge batch to 32 between models; no reply = keep as is. Do NOT edit judge.py while job runs (later models re-import it).
 - 17:15 UTC: qwen7b gen done 6,230 s (0.36 s/ans; 95 regen at 256 tok); judge pass 1 15,208 rows ~10 min; then judge (thinking) 3,549 rows. Remaining 4 models ~12 h.
 - 2026-11-24 16:05 UTC: qwen7b gen 7,544/17,524 at 0.44 s/answer (gen ends ~17:15 UTC, then judge: measure its speed). Projected all 5 done ~06-09 UTC 11-25.
