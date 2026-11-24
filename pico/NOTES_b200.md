@@ -3,7 +3,7 @@
 ## >>> 2026-11-25 00:10 KST: H1 FULL RUNNING (tmux job-h1-full, GPU 2, log pico/logs/h1_full.log, ends "EXIT n") <<<
 - Smoke OK on all 5 (s/answer gen: qwen7b 0.36, qwen3b 0.40, minicpm 0.72, phi 0.88, internomni 0.49). Smoke tag pilot2.
 - FIX: InternOmni tokenizer failed with sentencepiece 0.2.2 ("piece must not include null character"): installed
-  sentencepiece==0.2.0 (--no-deps, wheel in /tmp/spt/dl) into env omni_intern -> loads (92,544 pieces). Server 1 freeze
+  sentencepiece==0.2.0 (--no-deps, wheel in /tmp/spt/dl) into env omni_intern -> loads (92,544 pieces). File verified intact: sha256 = HF blob name f868398f..., binary (not an LFS pointer). Server 1 freeze
   says 0.2.2: version differs; envs/setup_b200.sh not changed yet (TODO: pin 0.2.0 for omni_intern there).
 - Full: 4,390 questions x C0/T/A/V = 17,560 answers per model (existence 696, closed 622, count 902, attribute 1,518,
   relation 652). Order qwen7b, qwen3b, minicpm, phi, internomni; ETA ~16-20 h total (judge speed unmeasured yet).
