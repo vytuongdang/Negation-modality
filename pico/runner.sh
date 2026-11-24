@@ -15,6 +15,9 @@ cd "$(dirname "$0")/.." || exit 1
 LOG=pico/run.log
 # This machine's settings (not in git): PICO_HOST (server1 | b200), PICO_TOPIC, PICO_NOTES. See pico/hosts/.
 [ -f pico/host.env ] && . pico/host.env
+# Claude login for unattended runs (B200): ~/.config/pico/claude.env (chmod 600) with
+#   export CLAUDE_CODE_OAUTH_TOKEN=...   (from `claude setup-token`)   and   export PATH="$HOME/.local/bin:$PATH"
+[ -f ~/.config/pico/claude.env ] && . ~/.config/pico/claude.env
 NOTES=${PICO_NOTES:-pico/NOTES.md}
 HOSTDOC=""; [ -n "$PICO_HOST" ] && [ -f "pico/hosts/$PICO_HOST.md" ] && HOSTDOC=" and pico/hosts/$PICO_HOST.md (this machine's role and git rules; on this machine your memory file is $NOTES)"
 FLAGS="--dangerously-skip-permissions --model claude-opus-5-5 --effort medium"   # Vy: Opus 5.5 medium unless Vy asks otherwise
