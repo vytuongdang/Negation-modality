@@ -445,19 +445,19 @@ Violation = any mention (STATE/META/DENY).
 
 Primary negative samples (one per unit): 932; C0 states the target in 799 (85.7%).
 
-Target stated without instruction (C0): 85.7%.
+Target stated without instruction: C0 85.7%, C0_box 84.0% (n=932; discordant 34 vs 18, McNemar p=0.0365).
 
 
 ### Violation rate (%) among C0-mentioned, negative form
 
-| branch | n | T | A | V |
-|---|---|---|---|---|
-| existence | 139 | 20.1 | 26.6 | 97.8 |
-| existence_closed | 172 | 47.1 | 47.7 | 98.8 |
-| count | 163 | 87.7 | 71.2 | 89.6 |
-| attribute | 160 | 66.9 | 47.5 | 85.0 |
-| relation | 165 | 87.3 | 58.8 | 87.9 |
-| ALL | 799 | 63.0 | 51.1 | 91.7 |
+| branch | n | T | A | V | C0_box |
+|---|---|---|---|---|---|
+| existence | 139 | 20.1 | 26.6 | 97.8 | 95.0 |
+| existence_closed | 172 | 47.1 | 47.7 | 98.8 | 100.0 |
+| count | 163 | 87.7 | 71.2 | 89.6 | 95.1 |
+| attribute | 160 | 66.9 | 47.5 | 85.0 | 97.5 |
+| relation | 165 | 87.3 | 58.8 | 87.9 | 90.9 |
+| ALL | 799 | 63.0 | 51.1 | 91.7 | 95.7 |
 
 ### Paired comparisons (C0-mentioned, negative form)
 
@@ -509,7 +509,7 @@ Paired differences by kind (A-B, pp, 95% CI image bootstrap):
 | T vs V | -30.2 [-34.0, -26.4] | -1.3 [-3.0, +0.5] | +2.6 [+0.9, +4.4] | +0.0 [+0.0, +0.0] | -29.7 [-33.5, -25.4] |
 | A vs V | -40.8 [-44.9, -36.8] | -2.3 [-3.9, -0.8] | +2.4 [+0.8, +4.0] | +0.0 [+0.0, +0.0] | -39.9 [-43.9, -36.0] |
 
-Flagged for a human check: thinking judge gave no JSON 17; ambiguous bare-number counts 0.
+Flagged for a human check: thinking judge gave no JSON 22; ambiguous bare-number counts 0.
 
 
 ### Required recall (over-suppression), C0-mentioned primary samples
@@ -566,10 +566,10 @@ Flagged for a human check: thinking judge gave no JSON 17; ambiguous bare-number
 
 ### Violation rate (%) by occludes_subject
 
-| occludes_subject | n | V |
-|---|---|---|
-| False | 757 | 91.5 |
-| True | 42 | 95.2 |
+| occludes_subject | n | V | C0_box |
+|---|---|---|---|
+| False | 757 | 91.5 | 95.5 |
+| True | 42 | 95.2 | 100.0 |
 
 ### H4: forms (C0-mentioned units that have the form)
 
@@ -590,40 +590,40 @@ Violation = any mention (STATE/META/DENY).
 
 Primary negative samples (one per unit): 932; C0 states the target in 790 (84.8%).
 
-Target stated without instruction (C0): 84.8%.
+Target stated without instruction: C0 84.8%, C0_box 84.5% (n=932; discordant 35 vs 33, McNemar p=0.904).
 
 
 ### Violation rate (%) among C0-mentioned, negative form
 
-| branch | n | T | A | V |
-|---|---|---|---|---|
-| existence | 145 | 14.5 | 13.1 | 89.0 |
-| existence_closed | 163 | 36.8 | 28.8 | 95.7 |
-| count | 181 | 13.3 | 6.6 | 95.0 |
-| attribute | 134 | 17.2 | 11.9 | 82.8 |
-| relation | 167 | 4.8 | 5.4 | 80.2 |
-| ALL | 790 | 17.2 | 13.0 | 88.9 |
+| branch | n | T | A | V | C0_box |
+|---|---|---|---|---|---|
+| existence | 145 | 14.5 | 13.1 | 89.0 | 96.6 |
+| existence_closed | 163 | 36.8 | 28.8 | 95.7 | 96.9 |
+| count | 181 | 13.3 | 6.6 | 95.0 | 99.4 |
+| attribute | 134 | 17.2 | 11.9 | 82.8 | 94.8 |
+| relation | 167 | 4.8 | 5.4 | 80.2 | 89.8 |
+| ALL | 790 | 17.2 | 13.0 | 88.9 | 95.6 |
 
 ### Paired comparisons (C0-mentioned, negative form)
 
 | pair | violation A | violation B | A-B (pp) | 95% CI (image bootstrap) | only A violates | only B violates | McNemar p |
 |---|---|---|---|---|---|---|---|
 | T vs A | 17.2 | 13.0 | +4.2 | [+1.6, +6.7] | 69 | 36 | 0.00166 |
-| T vs V | 17.2 | 88.9 | -71.6 | [-74.8, -68.4] | 8 | 574 | 3.99e-158 |
-| A vs V | 13.0 | 88.9 | -75.8 | [-78.7, -72.7] | 6 | 605 | 1.68e-170 |
+| T vs V | 17.2 | 88.9 | -71.6 | [-74.8, -68.5] | 8 | 574 | 3.99e-158 |
+| A vs V | 13.0 | 88.9 | -75.8 | [-79.0, -72.7] | 6 | 605 | 1.68e-170 |
 
 ### Template N3 ("Never refer to ..."): paired comparisons with / without it
 
 | pair | subset | n | A-B (pp) | 95% CI (image bootstrap) |
 |---|---|---|---|---|
-| T vs A | all | 790 | +4.2 | [+1.8, +6.7] |
+| T vs A | all | 790 | +4.2 | [+1.6, +6.7] |
 | T vs A | without N3 | 703 | +4.8 | [+2.3, +7.5] |
 | T vs A | N3 only | 87 | -1.1 | [-10.3, +8.0] |
-| T vs V | all | 790 | -71.6 | [-75.1, -68.4] |
-| T vs V | without N3 | 703 | -72.3 | [-75.7, -69.0] |
+| T vs V | all | 790 | -71.6 | [-74.9, -68.4] |
+| T vs V | without N3 | 703 | -72.3 | [-75.5, -68.7] |
 | T vs V | N3 only | 87 | -66.7 | [-77.0, -56.3] |
 | A vs V | all | 790 | -75.8 | [-78.9, -72.8] |
-| A vs V | without N3 | 703 | -77.1 | [-80.1, -73.8] |
+| A vs V | without N3 | 703 | -77.1 | [-80.2, -73.8] |
 | A vs V | N3 only | 87 | -65.5 | [-75.9, -55.2] |
 
 ### Violation by kind (% of C0-mentioned; the kinds add up to the violation), negative form
@@ -650,11 +650,11 @@ Paired differences by kind (A-B, pp, 95% CI image bootstrap):
 
 | pair | STATE | META | DENY | WRONG | leak |
 |---|---|---|---|---|---|
-| T vs A | +3.5 [+1.4, +5.8] | -0.8 [-1.9, +0.4] | +1.4 [+0.1, +2.7] | +0.0 [+0.0, +0.0] | +3.5 [+1.3, +5.7] |
-| T vs V | -71.1 [-74.4, -67.8] | -1.9 [-3.7, -0.3] | +1.4 [-0.3, +3.2] | +0.0 [+0.0, +0.0] | -70.4 [-73.7, -67.0] |
-| A vs V | -74.7 [-77.8, -71.6] | -1.1 [-2.8, +0.5] | +0.0 [-1.6, +1.5] | +0.0 [+0.0, +0.0] | -73.9 [-77.0, -70.8] |
+| T vs A | +3.5 [+1.4, +5.7] | -0.8 [-1.9, +0.4] | +1.4 [+0.1, +2.8] | +0.0 [+0.0, +0.0] | +3.5 [+1.3, +5.8] |
+| T vs V | -71.1 [-74.3, -68.0] | -1.9 [-3.5, -0.3] | +1.4 [-0.3, +3.2] | +0.0 [+0.0, +0.0] | -70.4 [-73.7, -67.1] |
+| A vs V | -74.7 [-78.0, -71.5] | -1.1 [-2.9, +0.5] | +0.0 [-1.5, +1.5] | +0.0 [+0.0, +0.0] | -73.9 [-77.2, -70.6] |
 
-Flagged for a human check: thinking judge gave no JSON 19; ambiguous bare-number counts 0.
+Flagged for a human check: thinking judge gave no JSON 45; ambiguous bare-number counts 55.
 
 
 ### Required recall (over-suppression), C0-mentioned primary samples
@@ -711,10 +711,10 @@ Flagged for a human check: thinking judge gave no JSON 19; ambiguous bare-number
 
 ### Violation rate (%) by occludes_subject
 
-| occludes_subject | n | V |
-|---|---|---|
-| False | 748 | 88.9 |
-| True | 42 | 88.1 |
+| occludes_subject | n | V | C0_box |
+|---|---|---|---|
+| False | 748 | 88.9 | 95.5 |
+| True | 42 | 88.1 | 97.6 |
 
 ### H4: forms (C0-mentioned units that have the form)
 
@@ -723,11 +723,19 @@ Flagged for a human check: thinking judge gave no JSON 19; ambiguous bare-number
 | negative | text | 790 | 17.2 | 82.8 |
 | negative | audio | 790 | 13.0 | 87.0 |
 | negative | visual | 790 | 88.9 | 11.1 |
+| exceptive | text | 722 | 64.0 | 36.0 |
+| exceptive | audio | 722 | 54.4 | 45.6 |
+| exceptive | visual | 722 | 85.7 | 14.3 |
+| affirmative | text | 591 | 38.2 | 61.8 |
+| affirmative | audio | 591 | 33.5 | 66.5 |
+| affirmative | visual | 591 | 87.8 | 12.2 |
 
 Delta_m = F_aff,m - F_neg,m (and the exceptive analogue), same units; 95% image-bootstrap CI.
 
 | contrast | text | audio | visual | audio - text | visual - text |
 |---|---|---|---|---|---|
+| Delta (aff - neg), n=591 | -20.8 [-25.4, -16.2] | -21.2 [-25.4, -17.1] | +0.8 [-2.4, +4.1] | -0.3 [-5.2, +4.6] | +21.7 [+16.6, +27.1] |
+| Delta (exc - neg), n=722 | -47.0 [-51.0, -43.2] | -41.7 [-45.7, -37.4] | +2.8 [+0.0, +5.5] | +5.3 [+0.7, +9.8] | +49.7 [+44.9, +54.7] |
 
 ![h1v2_violation_pilot200](../figures/h1v2_violation_pilot200.png)
 

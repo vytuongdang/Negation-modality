@@ -236,3 +236,13 @@
   main.pdf compiles (latexmk in ~/.local/bin), 6 pages, body ~4.5/8. paper/latex.zip for Overleaf. Telegram sent.
   Keep draft_v1.md and latex/sections in sync when filling TBDs (2503.22395 = Vrabcova et al., not Truhn).
 - Stage 3 timing: Qwen-7B 10:16-15:48 (5.5 h); Qwen-3B from 15:48; batch-1 models slower -> all done ~11-25 evening.
+
+## 2026-11-24 19:3x interim (Stage 3 still running: Qwen-3B forms judging, then MiniCPM, Phi, InternOmni)
+- analyze.py now MERGES scored_<tag>_*.jsonl (forms, C0_box) into the main rows (only new (sample_id, condition); main
+  H1 numbers unchanged; sepv1 skipped). Re-run analyze.py --tag pilot200 after each model.
+- Qwen-7B H4 (pilot, C0-mentioned): violation neg T/A/V 17.2/13.0/88.9; exceptive 64.0/54.4/85.7 (n 722);
+  affirmative 38.2/33.5/87.8 (n 591). Delta(aff-neg) T -20.8 [-25.2,-16.1], A -21.2 [-25.4,-16.9], V +0.8;
+  A-T -0.3 [-4.9,+4.6] (no negation-specific T/A difference for this model). Delta(exc-neg) A-T +5.3 [+0.8,+9.7].
+  Note: negative form obeyed BETTER than "Mention only Y" (Delta < 0) and exceptive much worse (names X).
+- Qwen-3B controls: OCR_V exact 866/932 (92.9%); C0_box 84.0 vs C0 85.7 (McNemar p=0.037, small).
+- TODO when Stage 3 done: all-model H4 + controls table, Telegram stage report, fill paper TBDs (draft_v1.md + latex).

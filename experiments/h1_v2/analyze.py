@@ -357,7 +357,19 @@ def main():
     if dropped:
         out.append(f"\nExcluded units left out: {len(dropped)} (double label / part-whole / attribute overlap, create_data/src/flag_excluded_units.py).")
     for f in files:
-        section_model(f.parent.name, ModelData([r for r in read_jsonl(f) if r["unit_id"] not in dropped]),
+        rows = read_jsonl(f)
+        # merge extra runs of the same tag (H4 forms, C0_box controls): only (sample_id, condition) pairs that the
+        # main file does not have, so the main H1 numbers never change. sepv1 = old history, skipped.
+        have = {(r["sample_id"], r["condition"]) for r in rows}
+        for g in sorted(f.parent.glob(f"scored_{args.tag}_*.jsonl")):
+            if "sepv1" in g.name:
+                continue
+            extra = [r for r in read_jsonl(g) if (r["sample_id"], r["condition"]) not in have]
+            have |= {(r["sample_id"], r["condition"]) for r in extra}
+            rows += extra
+            if extra:
+                print(f"{f.parent.name}: +{len(extra)} rows from {g.name}")
+        section_model(f.parent.name, ModelData([r for r in rows if r["unit_id"] not in dropped]),
                       out, rng, figs)
     if figs:
         for p in plots(figs, args.tag):

@@ -1717,3 +1717,429 @@ judge 512/636
 judge 576/636
 judge 636/636
 judge (thinking) 64/129
+judge (thinking) 128/129
+judge (thinking) 129/129
+judge (thinking) 6/6
+Loading weights:   0%|          | 0/399 [00:00<?, ?it/s]Loading weights:   0%|          | 1/399 [00:00<01:16,  5.17it/s]Loading weights:  19%|█▉        | 76/399 [00:00<00:01, 320.56it/s]Loading weights:  31%|███▏      | 125/399 [00:00<00:00, 373.50it/s]Loading weights:  44%|████▍     | 177/399 [00:00<00:00, 420.49it/s]Loading weights:  59%|█████▉    | 235/399 [00:00<00:00, 450.63it/s]Loading weights:  73%|███████▎  | 290/399 [00:00<00:00, 469.51it/s]Loading weights:  85%|████████▌ | 340/399 [00:00<00:00, 450.94it/s]Loading weights:  97%|█████████▋| 387/399 [00:00<00:00, 419.20it/s]Loading weights: 100%|██████████| 399/399 [00:00<00:00, 402.82it/s]
+label 64/147
+label 128/147
+label 147/147
+WARNING: 9 rows where the thinking judge gave no JSON even with the retry budget; they keep the fast verdict and are listed in review_pilot200_C0_box-OCR_V.csv (judge_source=think_error)
+
+C0 states the target in 799/932 questions
+violation % (any mention: STATE/META/DENY/WRONG) among C0-mentioned (n), negative form
+branch                  C0_box
+existence             95 (139)
+existence_closed     100 (172)
+count                 95 (163)
+attribute             98 (160)
+relation              91 (165)
+ALL                   96 (799)
+
+regex disagrees with judge on the target in 124/1864 rows
+files: /home/vyvn/new/cross_multimodal_negation/experiments/h1_v2/results/qwen2.5-omni-3b/scored_pilot200_C0_box-OCR_V.jsonl /home/vyvn/new/cross_multimodal_negation/experiments/h1_v2/results/qwen2.5-omni-3b/review_pilot200_C0_box-OCR_V.csv
+=== qwen2.5-omni-3b forms (H4) 2026. 11. 24. (화) 16:36:41 KST
+932 questions, 8360 answers planned; by branch: existence=175, existence_closed=174, count=186, attribute=197, relation=200
+4632 answers to generate (8360 jobs)
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[transformers] Model config: tts_text_start_token_id must be `None` or an integer within the vocabulary (between 0 and 8447), got 151860. This may result in unexpected behavior.
+[transformers] Model config: tts_text_end_token_id must be `None` or an integer within the vocabulary (between 0 and 8447), got 151861. This may result in unexpected behavior.
+[transformers] Model config: tts_text_pad_token_id must be `None` or an integer within the vocabulary (between 0 and 8447), got 151859. This may result in unexpected behavior.
+[transformers] Model config: vision_start_token_id must be `None` or an integer within the vocabulary (between 0 and 8447), got 151652. This may result in unexpected behavior.
+[transformers] Model config: vision_end_token_id must be `None` or an integer within the vocabulary (between 0 and 8447), got 151653. This may result in unexpected behavior.
+[transformers] Model config: audio_start_token_id must be `None` or an integer within the vocabulary (between 0 and 8447), got 151647. This may result in unexpected behavior.
+[transformers] Model config: audio_end_token_id must be `None` or an integer within the vocabulary (between 0 and 8447), got 151648. This may result in unexpected behavior.
+Fetching 3 files:   0%|          | 0/3 [00:00<?, ?it/s]Fetching 3 files: 100%|██████████| 3/3 [00:00<00:00, 1953.26it/s]
+Loading weights:   0%|          | 0/1442 [00:00<?, ?it/s]Loading weights:  34%|███▍      | 490/1442 [00:00<00:00, 2796.62it/s]Loading weights:  53%|█████▎    | 770/1442 [00:00<00:00, 2046.07it/s]Loading weights:  68%|██████▊   | 976/1442 [00:00<00:00, 1956.65it/s]Loading weights: 100%|██████████| 1442/1442 [00:00<00:00, 2627.13it/s]
+[transformers] [1mQwen2_5OmniThinkerForConditionalGeneration LOAD REPORT[0m from: Qwen/Qwen2.5-Omni-3B
+Key                                                                                                      | Status     |  | 
+---------------------------------------------------------------------------------------------------------+------------+--+-
+talker.model.layers.{0...23}.self_attn.q_proj.bias                                                       | UNEXPECTED |  | 
+talker.model.layers.{0...23}.input_layernorm.weight                                                      | UNEXPECTED |  | 
+token2wav.code2wav_bigvgan_model.resblocks.{0...17}.convs2.{0, 1, 2}.weight                              | UNEXPECTED |  | 
+token2wav.code2wav_bigvgan_model.ups.{0, 1, 2, 3, 4, 5}.0.bias                                           | UNEXPECTED |  | 
+talker.model.layers.{0...23}.self_attn.k_proj.weight                                                     | UNEXPECTED |  | 
+token2wav.code2wav_bigvgan_model.resblocks.{0...17}.activations.{0, 1, 2, 3, 4, 5}.act.alpha             | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.transformer_blocks.{0...21}.attn.to_out.0.bias                              | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.transformer_blocks.{0...21}.attn.to_k.weight                                | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.transformer_blocks.{0...21}.attn.to_k.bias                                  | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.proj.weight                                                     | UNEXPECTED |  | 
+talker.model.layers.{0...23}.self_attn.k_proj.bias                                                       | UNEXPECTED |  | 
+talker.model.layers.{0...23}.mlp.up_proj.weight                                                          | UNEXPECTED |  | 
+talker.model.layers.{0...23}.self_attn.q_proj.weight                                                     | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.transformer_blocks.{0...21}.ff.ff.{0, 3}.bias                               | UNEXPECTED |  | 
+talker.thinker_to_talker_proj.weight                                                                     | UNEXPECTED |  | 
+token2wav.code2wav_bigvgan_model.resblocks.{0...17}.convs2.{0, 1, 2}.bias                                | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.transformer_blocks.{0...21}.attn.to_q.weight                                | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.rotary_embed.inv_freq                                                       | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.transformer_blocks.{0...21}.attn.to_q.bias                                  | UNEXPECTED |  | 
+token2wav.code2wav_bigvgan_model.resblocks.{0...17}.convs1.{0, 1, 2}.weight                              | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.transformer_blocks.{0...21}.attn.to_v.weight                                | UNEXPECTED |  | 
+token2wav.code2wav_bigvgan_model.resblocks.{0...17}.activations.{0, 1, 2, 3, 4, 5}.act.beta              | UNEXPECTED |  | 
+token2wav.code2wav_bigvgan_model.resblocks.{0...17}.convs1.{0, 1, 2}.bias                                | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.blocks.{1, 2, 3}.tdnn2.conv.bias                    | UNEXPECTED |  | 
+talker.model.layers.{0...23}.self_attn.v_proj.bias                                                       | UNEXPECTED |  | 
+talker.model.layers.{0...23}.post_attention_layernorm.weight                                             | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.blocks.{1, 2, 3}.res2net_block.blocks.0.conv.weight | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.transformer_blocks.{0...21}.attn_norm.linear.bias                           | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.transformer_blocks.{0...21}.ff.ff.{0, 3}.weight                             | UNEXPECTED |  | 
+talker.model.layers.{0...23}.mlp.down_proj.weight                                                        | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.transformer_blocks.{0...21}.attn_norm.linear.weight                         | UNEXPECTED |  | 
+talker.model.layers.{0...23}.self_attn.o_proj.weight                                                     | UNEXPECTED |  | 
+talker.model.layers.{0...23}.self_attn.v_proj.weight                                                     | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.transformer_blocks.{0...21}.attn.to_v.bias                                  | UNEXPECTED |  | 
+token2wav.code2wav_bigvgan_model.ups.{0, 1, 2, 3, 4, 5}.0.weight                                         | UNEXPECTED |  | 
+token2wav.code2wav_bigvgan_model.activation_post.act.beta                                                | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.blocks.{1, 2, 3}.tdnn1.conv.weight                  | UNEXPECTED |  | 
+talker.model.layers.{0...23}.mlp.gate_proj.weight                                                        | UNEXPECTED |  | 
+talker.model.embed_tokens.weight                                                                         | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.transformer_blocks.{0...21}.attn.to_out.0.weight                            | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.blocks.{1, 2, 3}.tdnn2.conv.weight                  | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.blocks.{1, 2, 3}.se_block.conv2.weight              | UNEXPECTED |  | 
+token2wav.code2wav_bigvgan_model.conv_pre.bias                                                           | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.blocks.{1, 2, 3}.se_block.conv2.bias                | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.blocks.{1, 2, 3}.se_block.conv1.bias                | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.blocks.{1, 2, 3}.res2net_block.blocks.0.conv.bias   | UNEXPECTED |  | 
+talker.model.norm.weight                                                                                 | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.proj_out.bias                                                               | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.text_embed.codec_embed.weight                                               | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.asp.tdnn.conv.bias                                  | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.time_embed.time_mlp.{0, 2}.weight                                           | UNEXPECTED |  | 
+token2wav.code2wav_bigvgan_model.conv_post.weight                                                        | UNEXPECTED |  | 
+talker.thinker_to_talker_proj.bias                                                                       | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.proj.bias                                                       | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.blocks.0.conv.weight                                | UNEXPECTED |  | 
+token2wav.code2wav_bigvgan_model.activation_post.act.alpha                                               | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.blocks.0.conv.bias                                  | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.blocks.{1, 2, 3}.tdnn1.conv.bias                    | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.asp.tdnn.conv.weight                                | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.fc.weight                                           | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.mfa.conv.bias                                       | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.proj_out.weight                                                             | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.blocks.{1, 2, 3}.se_block.conv1.weight              | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.asp.conv.bias                                       | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.time_embed.time_mlp.{0, 2}.bias                                             | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.mfa.conv.weight                                     | UNEXPECTED |  | 
+talker.codec_head.weight                                                                                 | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.norm_out.linear.bias                                                        | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.fc.bias                                             | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.norm_out.linear.weight                                                      | UNEXPECTED |  | 
+token2wav.code2wav_bigvgan_model.conv_pre.weight                                                         | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.asp.conv.weight                                     | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+[4/4632] 0.55 s/answer, ETA 0.7 h | A: "The sphere is red in color. It's small in size. It looks like it's made of a shiny material, but we "
+[24/4632] 0.41 s/answer, ETA 0.5 h | A: "There's one cube, two spheres, and one cylinder. So, that's a total of four objects. If you have any"
+[44/4632] 0.42 s/answer, ETA 0.5 h | A: "Well, the cube is made of a shiny material. It's not very big, but it's definitely bigger than the s"
+[64/4632] 0.41 s/answer, ETA 0.5 h | A: "There's one cube, two spheres, and one cylinder. So, that's it. If you have any other questions abou"
+[84/4632] 0.40 s/answer, ETA 0.5 h | A: 'There are three cubes and one sphere. So, there are three cubes in total. If you have any other ques'
+[104/4632] 0.40 s/answer, ETA 0.5 h | A: "The sphere is blue in color. It's small in size. It looks like it's made of a soft material, maybe r"
+[124/4632] 0.41 s/answer, ETA 0.5 h | A: "The sphere is large in size. It has a shiny, reflective surface, which suggests it's made of a metal"
+[144/4632] 0.40 s/answer, ETA 0.5 h | A: "There are 2 cubes, 2 spheres, and 1 cylinder. So that's 5 objects in total. If you have any other qu"
+[164/4632] 0.40 s/answer, ETA 0.5 h | A: "There are two cubes, one red cube and one purple cube. There's one sphere, a yellow sphere. And ther"
+[184/4632] 0.41 s/answer, ETA 0.5 h | A: "The cylinder is blue in color. It's a small cylinder. It looks like it's made of a matte material. S"
+[204/4632] 0.41 s/answer, ETA 0.5 h | A: "There's one cube, two spheres, and one cylinder. So, that's it. If you have any other questions abou"
+[224/4632] 0.41 s/answer, ETA 0.5 h | A: "The cylinder is gray in color. It's a small cylinder. It looks like it's made of a matte material. S"
+[244/4632] 0.41 s/answer, ETA 0.5 h | A: "The cylinder is small in size. It's made of a matte material. Well, that's about it. If you have any"
+[264/4632] 0.41 s/answer, ETA 0.5 h | A: "There are two cubes, three spheres, and one cylinder. So, that's a total of six objects. If you have"
+[284/4632] 0.41 s/answer, ETA 0.5 h | A: "The cylinder is blue in color. It's made of a shiny material. Well, that's about it. If you have any"
+[304/4632] 0.40 s/answer, ETA 0.5 h | A: 'There are 3 cubes, 1 sphere, and 2 cylinders. If you have any other questions about this image or an'
+[324/4632] 0.40 s/answer, ETA 0.5 h | A: "The cube is cyan in color. It's a medium - sized cube. Well, that's about it. If you have any other "
+[344/4632] 0.40 s/answer, ETA 0.5 h | A: "There's one cube, two spheres, and one cylinder. So, that's it. If you have any other questions abou"
+[364/4632] 0.40 s/answer, ETA 0.5 h | A: "There's one cube, two spheres, and one cylinder. So, that's it. If you have any other questions abou"
+[384/4632] 0.41 s/answer, ETA 0.5 h | A: "Well, from what I can see in the image, there are carrots and orange. But there's no apple in there."
+[404/4632] 0.42 s/answer, ETA 0.5 h | A: "There's a car in the image. So, that's the vehicle present. If you have any other questions about th"
+[424/4632] 0.42 s/answer, ETA 0.5 h | A: 'In the image, there are giraffes, zebras, and cows. So, the animals present are giraffe, zebra, and '
+[444/4632] 0.43 s/answer, ETA 0.5 h | A: "Well, there's a clear umbrella in the image. It's got a handle and it's open. And there's also a blu"
+[464/4632] 0.43 s/answer, ETA 0.5 h | A: 'The sandwich, broccoli, and orange are present in the image. If you have any other questions about t'
+[484/4632] 0.44 s/answer, ETA 0.5 h | A: "Oh, there's a dog in the image too. It's a brown and white dog. So, yeah, that's the only other anim"
+[504/4632] 0.44 s/answer, ETA 0.5 h | A: "In the image, there's a bus, a truck, and a bicycle. So, that's it. If you have any other questions "
+[524/4632] 0.45 s/answer, ETA 0.5 h | A: "There's one potted plant in the image. So, that's 1. If you have any other questions about the image"
+[544/4632] 0.45 s/answer, ETA 0.5 h | A: "The bowl, spoon, cup, and bottle are all present in the image. So, that's it. If you have any other "
+[564/4632] 0.46 s/answer, ETA 0.5 h | A: "Well, in the image, there's a banana leaf. And there's also a plastic spoon. Oh, and there are two b"
+[584/4632] 0.46 s/answer, ETA 0.5 h | A: "In the image, there's a cat and a dog. There's no sheep or cow in the picture. So, that's it. If you"
+[604/4632] 0.46 s/answer, ETA 0.5 h | A: "Oh, there's also a cat in the image. It's a Siamese cat, you know, with those blue eyes and the dark"
+[624/4632] 0.46 s/answer, ETA 0.5 h | A: "Oh, there's also an ostrich in the image. It's standing near a tree. So, yeah, that's the main anima"
+[644/4632] 0.47 s/answer, ETA 0.5 h | A: "Well, there's a sink in the image. That's the main appliance you can see. And there's also a microwa"
+[664/4632] 0.47 s/answer, ETA 0.5 h | A: 'There are two birds and two giraffes in the image. The birds are ostriches, and the giraffes are sta'
+[684/4632] 0.47 s/answer, ETA 0.5 h | A: 'There are two birds and one giraffe in the image. The giraffe is standing on the left side, looking '
+[704/4632] 0.47 s/answer, ETA 0.5 h | A: "Well, in the image, there's a bowl, a pair of scissors, and a spoon. There's no bottle in the pictur"
+[724/4632] 0.48 s/answer, ETA 0.5 h | A: "Well, in the image, there's a potted plant. That's the only piece of furniture present that's not th"
+[744/4632] 0.48 s/answer, ETA 0.5 h | A: "There's one cup and one spoon in the image. So, that's 1 cup and 1 spoon. If you have any other ques"
+[764/4632] 0.48 s/answer, ETA 0.5 h | A: "Well, in the image, there's a chair. That's the only piece of furniture that's not a couch. So, that"
+[784/4632] 0.48 s/answer, ETA 0.5 h | A: "Well, there's a blue car in the image. That's the main thing. But there's also a bottle, some boxes,"
+[804/4632] 0.49 s/answer, ETA 0.5 h | A: 'There is one bowl in the image. Inside the bowl, there are noodles, some vegetables like broccoli an'
+[824/4632] 0.49 s/answer, ETA 0.5 h | A: "The cat is present in the image. So, that's the answer. If you have any other questions about the im"
+[844/4632] 0.49 s/answer, ETA 0.5 h | A: "There's one bird and one dog in the image. So, that's it. If you have any other questions about the "
+[864/4632] 0.49 s/answer, ETA 0.5 h | A: "There's a car in the image. There's no boat or bicycle in it. So, that's it. If you have any other q"
+[884/4632] 0.49 s/answer, ETA 0.5 h | A: "Oh, there's also a giraffe in the image. It's standing tall and looking around. What do you think ab"
+[904/4632] 0.50 s/answer, ETA 0.5 h | A: "Well, there's a teddy bear with a purple bow, a Buddha statue, a lit candle, a bag of Good Earth cof"
+[924/4632] 0.50 s/answer, ETA 0.5 h | A: "Well, in the image, there are bowls. One has eggs, another has butter, and there's a bowl with choco"
+[944/4632] 0.50 s/answer, ETA 0.5 h | A: "There's a motorcycle in the image. There's no bicycle or bus in it. So, that's it. If you have any o"
+[964/4632] 0.50 s/answer, ETA 0.5 h | A: "There are four bowls in the image. There's also a fork. So, that's it. If you have any other questio"
+[984/4632] 0.50 s/answer, ETA 0.5 h | A: "Well, there's a red double - decker bus in the image. That's the main vehicle. And there's also a bl"
+[1004/4632] 0.50 s/answer, ETA 0.5 h | A: "Well, the lighthouse is white. It's quite tall, you know. It's got a cylindrical shape and a conical"
+[1024/4632] 0.50 s/answer, ETA 0.5 h | A: "They're holding a colorful umbrella with a rainbow - like pattern. And they're wearing black pants. "
+[1044/4632] 0.50 s/answer, ETA 0.5 h | A: 'Well, the bird is small. It has a white belly with some brownish - grayish - white markings on its w'
+[1064/4632] 0.50 s/answer, ETA 0.5 h | A: "The sweatshirt is green. It looks like it's a medium - sized sweatshirt. If you want to know more ab"
+[1084/4632] 0.50 s/answer, ETA 0.5 h | A: "She's holding an umbrella. And she's wearing a backpack. What else do you want to know about her?"
+[1104/4632] 0.50 s/answer, ETA 0.5 h | A: 'The boy is lying in a bed. He\'s reading a book titled "Kill the Squid". He\'s holding the book open w'
+[1124/4632] 0.50 s/answer, ETA 0.5 h | A: "Well, it's a green skateboard. It has a long, rectangular shape. The wheels are white. And it has a "
+[1144/4632] 0.50 s/answer, ETA 0.5 h | A: "The child is holding two ski poles. They are skiing on skis. So, that's all there is to it. If you h"
+[1164/4632] 0.50 s/answer, ETA 0.5 h | A: "She's sitting on a bus seat. And she's using a laptop. What else do you want to know about this scen"
+[1184/4632] 0.50 s/answer, ETA 0.5 h | A: "She's sitting on a bench. And she's wearing a purple hoodie. So, what do you think about her outfit?"
+[1204/4632] 0.50 s/answer, ETA 0.5 h | A: "The man is wearing a white shirt and a baseball cap. He's looking at the giraffe. So, that's all the"
+[1224/4632] 0.50 s/answer, ETA 0.5 h | A: "The field is green. It looks like it's a grassy field. There are some trees in the background too. S"
+[1244/4632] 0.50 s/answer, ETA 0.5 h | A: 'The giraffe has a light brown body with darker brown patches. Its neck is long and its head is relat'
+[1264/4632] 0.49 s/answer, ETA 0.5 h | A: "The elephant is gray. It's walking through a grassy area with some bushes and trees around. It has i"
+[1284/4632] 0.49 s/answer, ETA 0.5 h | A: "The giraffe is eating leaves. It's eating from a tree. So, that's all there is to it. If you have an"
+[1304/4632] 0.49 s/answer, ETA 0.5 h | A: "The wall is gray in color. It looks like it's made of concrete. There are some cracks in it too. So,"
+[1324/4632] 0.49 s/answer, ETA 0.5 h | A: "He's leaning on a black metal railing. He's standing in front of a brick wall. He's wearing a blue l"
+[1344/4632] 0.49 s/answer, ETA 0.4 h | A: "The wetsuit is pink. It looks like it's in good condition, not torn or anything. If you want to know"
+[1364/4632] 0.49 s/answer, ETA 0.4 h | A: 'The player is running on the baseball field. He\'s wearing a white uniform with "Twins" on it, a blac'
+[1384/4632] 0.49 s/answer, ETA 0.4 h | A: "The man is riding a brown horse. He's talking to a woman on a blue bicycle. What do you think they m"
+[1404/4632] 0.49 s/answer, ETA 0.4 h | A: "She's sitting on the ground. She's wearing a black jacket, white leggings, and black boots. And she'"
+[1424/4632] 0.49 s/answer, ETA 0.4 h | A: "The man is standing behind a woman. He's standing in a field. Well, that's about it. If you have any"
+[1444/4632] 0.49 s/answer, ETA 0.4 h | A: "He's balancing on a surfboard. He's wearing a pair of colorful striped swim trunks. So, what do you "
+[1464/4632] 0.49 s/answer, ETA 0.4 h | A: "He's wearing a black wetsuit. He's also barefoot. So, that's about it. If you have any other questio"
+[1484/4632] 0.49 s/answer, ETA 0.4 h | A: "The boy is sitting on a motorcycle. He's wearing a red and white shirt. Well, that's about it. If yo"
+[1504/4632] 0.49 s/answer, ETA 0.4 h | A: "The hair is curly. It's a light brown color. Well, that's about it. If you have any other questions "
+[1524/4632] 0.49 s/answer, ETA 0.4 h | A: "They're flying a kite. They're standing on the beach. And they're wearing a jacket. So, what do you "
+[1544/4632] 0.49 s/answer, ETA 0.4 h | A: 'He\'s wearing a blue shirt with "ALL - STAR" on it and blue pants. He\'s got a tennis racket in his ha'
+[1564/4632] 0.49 s/answer, ETA 0.4 h | T: "There are two cubes. There's one green sphere and one red cylinder. So, that's it. If you have any o"
+[1584/4632] 0.48 s/answer, ETA 0.4 h | T: "The cube is yellow in color. It's a small cube. And it looks like it's made of a shiny material, pro"
+[1604/4632] 0.48 s/answer, ETA 0.4 h | T: "There's one cube, one sphere, and one cylinder. So, that's three objects in total. If you have any o"
+[1624/4632] 0.48 s/answer, ETA 0.4 h | T: "There's one cube, two spheres, and one cylinder. So, that's a total of four objects. If you have any"
+[1644/4632] 0.48 s/answer, ETA 0.4 h | T: "The sphere is blue in color. It's small in size. And it looks like it's made of a soft material, pro"
+[1664/4632] 0.48 s/answer, ETA 0.4 h | T: 'There are two cubes and one cylinder. The cubes are a brown one and a red one. The cylinder is gray.'
+[1684/4632] 0.48 s/answer, ETA 0.4 h | T: "The cube is gray in color. It's a small cube. It looks like it's made of a soft material, maybe rubb"
+[1704/4632] 0.48 s/answer, ETA 0.4 h | T: "There's one cube and two cylinders. The small cyan cylinder is on the left, and the big blue cylinde"
+[1724/4632] 0.47 s/answer, ETA 0.4 h | T: 'There are two spheres and one cylinder. The purple sphere is bigger, and the brown sphere is smaller'
+[1744/4632] 0.47 s/answer, ETA 0.4 h | T: 'There are three spheres and one cylinder. The spheres are a red one, a brown one, and a cyan one. Th'
+[1764/4632] 0.47 s/answer, ETA 0.4 h | T: "There are three cubes. There's one sphere and one cylinder. So, in total, there are four objects. If"
+[1784/4632] 0.47 s/answer, ETA 0.4 h | T: "The cube is yellow, it's small in size, and it looks like it's made of a shiny material. If you want"
+[1804/4632] 0.47 s/answer, ETA 0.4 h | T: "The cylinder is red in color. It's small in size. It looks like it's made of a matte material. If yo"
+[1824/4632] 0.47 s/answer, ETA 0.4 h | T: "Well, it's a small cylinder. It's not very big. And it looks like it's made of a shiny material. You"
+[1844/4632] 0.47 s/answer, ETA 0.4 h | T: "There's one cube, two spheres, and one cylinder. So, that's a total of three different shapes. If yo"
+[1864/4632] 0.46 s/answer, ETA 0.4 h | T: 'There are three cubes and one sphere. So, in total, there are four objects. If you have any other qu'
+[1884/4632] 0.46 s/answer, ETA 0.4 h | T: "There's one cube, one sphere, and one cylinder. So, that's three objects in total. If you have any o"
+[1904/4632] 0.46 s/answer, ETA 0.4 h | T: "The sphere is small in size. It's made of a matte material. Well, that's about it. If you have any o"
+[1924/4632] 0.46 s/answer, ETA 0.3 h | T: "There's a horse in the image. It's standing near a fence. So, that's the animal present. What else d"
+[1944/4632] 0.46 s/answer, ETA 0.3 h | T: 'In the image, there are zebras. So, the animals present are zebras. If you have any other questions '
+[1964/4632] 0.46 s/answer, ETA 0.3 h | T: "Well, there's a table in the image. And there's also a lamp. Oh, and there's a mirror too. So, that'"
+[1984/4632] 0.46 s/answer, ETA 0.3 h | T: "There's a dog in the image. It's lying on the bed next to the laptops. So, that's the animal present"
+[2004/4632] 0.46 s/answer, ETA 0.3 h | T: "The image has a bowl, a fork, and a cup. So, that's it. If you have any other questions about the im"
+[2024/4632] 0.46 s/answer, ETA 0.3 h | T: "In the image, there's a car. So, the vehicles present are motorcycle, car. If you have any other que"
+[2044/4632] 0.46 s/answer, ETA 0.3 h | T: "Oh, in the image, there's a teddy bear and a hair drier. But there's no scissors or book. So, that's"
+[2064/4632] 0.46 s/answer, ETA 0.3 h | T: "In the image, there's a motorcycle. There's no car, bicycle, or other vehicles like those mentioned "
+[2084/4632] 0.46 s/answer, ETA 0.3 h | T: "Sheep and cow. There's no cat in the image. So, that's it. If you have any other questions about the"
+[2104/4632] 0.46 s/answer, ETA 0.3 h | T: 'There are two cats and two dogs in the image. The cats are orange and white, and the dogs are black '
+[2124/4632] 0.46 s/answer, ETA 0.3 h | T: "There's one chair in the image. So, that's 1. If you have any other questions about the image, feel "
+[2144/4632] 0.46 s/answer, ETA 0.3 h | T: 'Sheep. So, what do you think about the image?'
+[2164/4632] 0.46 s/answer, ETA 0.3 h | T: "Well, there's a sandwich, some soup, and a piece of lettuce in the sandwich. And there's also a spoo"
+[2184/4632] 0.46 s/answer, ETA 0.3 h | T: 'The image has a laptop, a mouse, and a cell phone. So, the answer is "laptop, mouse, and cell phone.'
+[2204/4632] 0.46 s/answer, ETA 0.3 h | T: 'Apple and banana are present in the image. So, the foods present are apple and banana. If you have a'
+[2224/4632] 0.46 s/answer, ETA 0.3 h | T: 'Well, there are bananas, green beans, noodles, cucumber, and some other stuff in there. But the carr'
+[2244/4632] 0.46 s/answer, ETA 0.3 h | T: "The image has a handbag, a backpack, and a suitcase. So, that's it. If you have any other questions "
+[2264/4632] 0.46 s/answer, ETA 0.3 h | T: "Well, in the image, there's a bottle of wine, a cake, and a plate. That's about it. If you have any "
+[2284/4632] 0.46 s/answer, ETA 0.3 h | T: "The dog and the cat are present in the image. There's no zebra or giraffe in it. So, that's all. If "
+[2304/4632] 0.46 s/answer, ETA 0.3 h | T: "There's one bottle in the image. It's a black water bottle with a red sleeve. There are no cups in t"
+[2324/4632] 0.46 s/answer, ETA 0.3 h | T: "In the image, there's a car. So, the vehicles present are a car. If you have any other questions abo"
+[2344/4632] 0.46 s/answer, ETA 0.3 h | T: 'Cow. There are no horses or zebras in the image. If you have any other questions about the image, fe'
+[2364/4632] 0.46 s/answer, ETA 0.3 h | T: "The image has skis. There's no sports ball or baseball glove in the image. So, the answer is just th"
+[2384/4632] 0.47 s/answer, ETA 0.3 h | T: "There's one dog in the image. So, that's 1. If you have any other questions about the image, feel fr"
+[2404/4632] 0.47 s/answer, ETA 0.3 h | T: "Well, there's a handbag that the woman is carrying. That's the main accessory in the image. So, yeah"
+[2424/4632] 0.47 s/answer, ETA 0.3 h | T: 'Cat. So, what do you think about the image?'
+[2444/4632] 0.47 s/answer, ETA 0.3 h | T: "There's one dog in the image. So, that's 1. If you have any other questions about the image, feel fr"
+[2464/4632] 0.47 s/answer, ETA 0.3 h | T: "Well, from what I can see in the image, there's a backpack. There's no umbrella or tie in the image."
+[2484/4632] 0.47 s/answer, ETA 0.3 h | T: "Well, in the image, there's a bottle of milk. That's the kitchen item you can see. But there aren't "
+[2504/4632] 0.47 s/answer, ETA 0.3 h | T: 'There is one horse in the image. So, the answer is 1. If you have any other questions about the imag'
+[2524/4632] 0.47 s/answer, ETA 0.3 h | T: "Well, there are some books stacked on top of each other. There's also a bird figurine on top of the "
+[2544/4632] 0.47 s/answer, ETA 0.3 h | T: 'The helmet is black and made of plastic. It has a strap for securing it on the head. If you want to '
+[2564/4632] 0.47 s/answer, ETA 0.3 h | T: "He's wearing a green hazmat suit. It looks like he's in a position that suggests he might be investi"
+[2584/4632] 0.47 s/answer, ETA 0.3 h | T: "The mirror is black in color. Well, that's about it. If you want to know more about the mirror, like"
+[2604/4632] 0.47 s/answer, ETA 0.3 h | T: "The child is boarding a red train. They are wearing a red jacket. So, that's all there is to it. If "
+[2624/4632] 0.46 s/answer, ETA 0.3 h | T: "The surfer is riding on a white surfboard with some pink and black designs. They're wearing a wetsui"
+[2644/4632] 0.46 s/answer, ETA 0.3 h | T: "He's sitting on a skateboard. He's wearing an orange hoodie and gray pants. What do you think about "
+[2664/4632] 0.46 s/answer, ETA 0.3 h | T: "The boy is holding a stick. He's riding an elephant. He's wearing a white shirt with a red symbol on"
+[2684/4632] 0.46 s/answer, ETA 0.2 h | T: "She's standing on a sidewalk. She's wearing a black dress, a red scarf, a hat, and red high - heeled"
+[2704/4632] 0.46 s/answer, ETA 0.2 h | T: 'The child is holding a surfboard. They are looking at the ocean. And they are standing on a surfboar'
+[2724/4632] 0.46 s/answer, ETA 0.2 h | T: "He's holding a pink tennis racket. He's standing against a wall with some graffiti on it. What do yo"
+[2744/4632] 0.46 s/answer, ETA 0.2 h | T: "Well, the box is made of cardboard. It's a medium - sized box. It's rectangular in shape. So, that's"
+[2764/4632] 0.46 s/answer, ETA 0.2 h | T: "He's standing in a doorway. He's wearing a black shirt and blue jeans. What do you think about his o"
+[2784/4632] 0.46 s/answer, ETA 0.2 h | T: 'He\'s sitting on a couch. He\'s wearing a white t - shirt with "Panama City" written on it, red shorts'
+[2804/4632] 0.46 s/answer, ETA 0.2 h | T: "Well, the man is shirtless. He's standing on a red surfboard. He's in the middle of a wave, and the "
+[2824/4632] 0.46 s/answer, ETA 0.2 h | T: "Well, the person is sitting on a log in the water. They're wearing a pair of striped swim trunks. It"
+[2844/4632] 0.46 s/answer, ETA 0.2 h | T: "He's wearing a brown suit jacket, a white shirt, a black tie, and beige pants. He's also wearing a b"
+[2864/4632] 0.46 s/answer, ETA 0.2 h | T: "Well, it's a blender. It's a bit small, you know. It's not super big. And it's made of plastic. So, "
+[2884/4632] 0.45 s/answer, ETA 0.2 h | T: "The elephant is lying in a grassy field. It's covered in mud. So, that's all there is to it. If you "
+[2904/4632] 0.45 s/answer, ETA 0.2 h | T: "The surfboard is rectangular in shape. It's quite long, probably about 8 - 10 feet long. It has a re"
+[2924/4632] 0.45 s/answer, ETA 0.2 h | T: "She's wearing a colorful raincoat with a hood, black leggings with white polka dots, and pink rain b"
+[2944/4632] 0.45 s/answer, ETA 0.2 h | T: "Well, the spectators are sitting on the grass. They're watching the two people playing with the fris"
+[2964/4632] 0.45 s/answer, ETA 0.2 h | T: "She's photographing a bird. She's standing beside a fence. Well, that's about it. If you have any ot"
+[2984/4632] 0.45 s/answer, ETA 0.2 h | T: "The water is clear and light blue. It's flowing over a rocky bed. So, that's pretty much it. If you "
+[3004/4632] 0.45 s/answer, ETA 0.2 h | T: "They're holding a surfboard. They're standing on the beach. And they're walking towards the ocean. S"
+[3024/4632] 0.45 s/answer, ETA 0.2 h | T: "She's walking down a sidewalk. She's got a red umbrella and a shopping bag in her hand. So, what do "
+[3044/4632] 0.45 s/answer, ETA 0.2 h | T: "He's carrying a surfboard. He's standing on the beach. And he's wearing a wetsuit. So, what do you t"
+[3064/4632] 0.45 s/answer, ETA 0.2 h | T: "The plate is made of paper. It's a white paper plate. If you have any other questions about this pla"
+[3084/4632] 0.45 s/answer, ETA 0.2 h | T: 'The roof is gray in color. It has a flat surface. There are also some parts of the roof that are sli'
+[3104/4632] 0.45 s/answer, ETA 0.2 h | V: "The cylinder is cyan in color. It's quite large in size. And it's made of a material that looks like"
+[3124/4632] 0.45 s/answer, ETA 0.2 h | V: "The sphere is yellow in color. It's quite large in size. And it looks like it's made of metal. So, w"
+[3144/4632] 0.45 s/answer, ETA 0.2 h | V: "The cylinder is yellow in color. It's a medium - sized cylinder. The material looks like it's made o"
+[3164/4632] 0.45 s/answer, ETA 0.2 h | V: "The cube is green in color. It's a small cube. And it's made of metal. So, that's it. If you have an"
+[3184/4632] 0.45 s/answer, ETA 0.2 h | V: "The cylinder is blue in color. It's quite large in size. And it looks like it's made of a shiny, ref"
+[3204/4632] 0.45 s/answer, ETA 0.2 h | V: "The cube is gray in color. It's a bit bigger than the green sphere. And it looks like it's made of a"
+[3224/4632] 0.45 s/answer, ETA 0.2 h | V: "The sphere is gray in color. It's small in size. And it looks like it's made of rubber. So, that's i"
+[3244/4632] 0.45 s/answer, ETA 0.2 h | V: "The sphere is yellow in color. It's small in size. And it looks like it's made of a shiny material, "
+[3264/4632] 0.45 s/answer, ETA 0.2 h | V: "The sphere is red in color. It's small in size. And it looks like it's made of metal. So, that's it."
+[3284/4632] 0.45 s/answer, ETA 0.2 h | V: 'There are 2 cubes, 2 spheres, and 1 cylinder. If you have any other questions about this image or an'
+[3304/4632] 0.45 s/answer, ETA 0.2 h | V: 'There are 3 spheres and 3 cylinders. If you have any other questions about this image or anything el'
+[3324/4632] 0.45 s/answer, ETA 0.2 h | V: 'There are 4 cubes and 1 sphere. If you have any other questions about this image or anything else, f'
+[3344/4632] 0.44 s/answer, ETA 0.2 h | V: 'There are 2 spheres and 1 cylinder. If you have any other questions about this image or anything els'
+[3364/4632] 0.44 s/answer, ETA 0.2 h | V: 'There are 3 cubes, 4 spheres, and 1 cylinder. If you have any other questions about this image or an'
+[3384/4632] 0.44 s/answer, ETA 0.2 h | V: 'There is 1 cube, 1 sphere, and 1 cylinder. If you have any other questions about these shapes or any'
+[3404/4632] 0.44 s/answer, ETA 0.2 h | V: 'There are 2 cubes, 1 sphere, and 3 cylinders. If you have any other questions about this image or an'
+[3424/4632] 0.44 s/answer, ETA 0.1 h | V: 'There is 1 cube, 3 spheres, and 1 cylinder. If you have any other questions about these objects, fee'
+[3444/4632] 0.44 s/answer, ETA 0.1 h | V: "There's one cube and five cylinders. So, in total, there are six objects. If you have any other ques"
+[3464/4632] 0.44 s/answer, ETA 0.1 h | V: 'There is one microwave and one refrigerator in the image. So, the answer is 2. If you have any other'
+[3484/4632] 0.44 s/answer, ETA 0.1 h | V: "There's one laptop and one TV in the image. So, that's a total of two. If you have any other questio"
+[3504/4632] 0.44 s/answer, ETA 0.1 h | V: "There's one horse and one dog in the image. So, that's two in total. If you have any other questions"
+[3524/4632] 0.44 s/answer, ETA 0.1 h | V: 'There are two bananas and two sandwiches in the image. So, in total, there are four bananas and four'
+[3544/4632] 0.44 s/answer, ETA 0.1 h | V: "There's one potted plant and one toilet in the image. So, that's two in total. If you have any other"
+[3564/4632] 0.44 s/answer, ETA 0.1 h | V: 'There is one fork and one knife in the image. So, the answer is 2. If you have any other questions a'
+[3584/4632] 0.44 s/answer, ETA 0.1 h | V: 'There is one microwave, one oven, and one refrigerator in the image. If you have any other questions'
+[3604/4632] 0.44 s/answer, ETA 0.1 h | V: "There's one bottle and one cup in the image. So, the answer is 2. If you have any other questions ab"
+[3624/4632] 0.44 s/answer, ETA 0.1 h | V: "Well, there's a bowl, a plate, a cup, and some lettuce. That's about it. There's no other kitchen it"
+[3644/4632] 0.44 s/answer, ETA 0.1 h | V: "There's a dog and a cat in the image. So, that's all there is to it. If you have any other questions"
+[3664/4632] 0.44 s/answer, ETA 0.1 h | V: "Well, there's a banana in the image. But other than that, there's not much else. There's some kind o"
+[3684/4632] 0.44 s/answer, ETA 0.1 h | V: "Well, there are some accessories in the image. There's a watch on the man's wrist. And there are som"
+[3704/4632] 0.44 s/answer, ETA 0.1 h | V: 'Well, there are some indoor objects in the image. There are teddy bears, some of which are in differ'
+[3724/4632] 0.44 s/answer, ETA 0.1 h | V: "Well, there's a motorcycle in the image. But other than that, there are also a car and a minivan. So"
+[3744/4632] 0.44 s/answer, ETA 0.1 h | V: "Well, there's a cutting board, a knife, a bowl of salad, a plate with some food, a fan, a jar, and a"
+[3764/4632] 0.44 s/answer, ETA 0.1 h | V: "Well, in the image, there's a pizza on a tray. That's the main kitchen item. There's also a fork on "
+[3784/4632] 0.44 s/answer, ETA 0.1 h | V: 'The image has a bed, a chair, a toilet, and a potted plant. So, all of those are present. If you hav'
+[3804/4632] 0.44 s/answer, ETA 0.1 h | V: "Well, in the image, you can see carrots and broccoli. But there's no cake or hot dog in the picture."
+[3824/4632] 0.44 s/answer, ETA 0.1 h | V: "Well, from what I can see in the image, there's a frisbee, a snowboard, and a baseball glove. But th"
+[3844/4632] 0.44 s/answer, ETA 0.1 h | V: "Well, in the image, there's a horse and a zebra. But there's no cat or sheep that I can see. So, the"
+[3864/4632] 0.44 s/answer, ETA 0.1 h | V: 'The image has a wine glass, a spoon, a cup, and a knife. So, all of those are present. If you have a'
+[3884/4632] 0.44 s/answer, ETA 0.1 h | V: "The image shows a sink, a refrigerator, and a microwave. There's no oven in the image. If you have a"
+[3904/4632] 0.44 s/answer, ETA 0.1 h | V: "The mouse, remote, and TV are present in the image. The cell phone is not in the image. So, that's i"
+[3924/4632] 0.44 s/answer, ETA 0.1 h | V: "In the image, there's a motorcycle, a bus, and a truck. There's no car in the image. So, that's it. "
+[3944/4632] 0.44 s/answer, ETA 0.1 h | V: 'The image has a dining table, a chair, a toilet, and a couch. So, all of those are present. If you h'
+[3964/4632] 0.44 s/answer, ETA 0.1 h | V: 'The image shows a cup, a wine glass, a bottle, and a spoon. So, all of those are present. If you hav'
+[3984/4632] 0.44 s/answer, ETA 0.1 h | V: "Well, in the image, there's a spoon, a bottle, a knife, and a cup. So, all of those are present. If "
+[4004/4632] 0.44 s/answer, ETA 0.1 h | V: "Well, in the image, there's a bicycle. There's no truck or train in the picture. But there is a car."
+[4024/4632] 0.44 s/answer, ETA 0.1 h | V: "The image has a spoon, a fork, and a bottle. There's no knife in the image. So, that's it. If you ha"
+[4044/4632] 0.44 s/answer, ETA 0.1 h | V: "The teddy bear, toothbrush, book, and hair drier are all present in the image. So, that's all you ne"
+[4064/4632] 0.44 s/answer, ETA 0.1 h | V: "Well, from what I can see in the image, there's a couch. But there's no bed, chair, or toilet in the"
+[4084/4632] 0.44 s/answer, ETA 0.1 h | V: "Well, in the image, you can see carrots, broccoli, and there's also an orange. But there's no apple "
+[4104/4632] 0.44 s/answer, ETA 0.1 h | V: "She's holding a kite. And she's standing in the water at the beach. So, what do you think about kite"
+[4124/4632] 0.44 s/answer, ETA 0.1 h | V: "He's riding on a surfboard. He's wearing a swimsuit. So, what do you think about surfing?"
+[4144/4632] 0.44 s/answer, ETA 0.1 h | V: "She's holding an umbrella. She's wearing a floral jacket, black leggings, and pink rain boots. So, t"
+[4164/4632] 0.44 s/answer, ETA 0.1 h | V: "He's carrying a backpack. He's looking at the snowy slope in front of him. What do you think he migh"
+[4184/4632] 0.44 s/answer, ETA 0.1 h | V: "He's holding a baseball bat and he's standing in a baseball diamond. So, that's it. If you have any "
+[4204/4632] 0.44 s/answer, ETA 0.1 h | V: "They're flying a kite. They're standing on the beach. And they're wearing a hat. So, what do you thi"
+[4224/4632] 0.44 s/answer, ETA 0.0 h | V: "He's holding an umbrella. He's wearing a suit. What do you think about his outfit?"
+[4244/4632] 0.44 s/answer, ETA 0.0 h | V: 'The dogs are holding a green toy. The white dog is wearing a black collar, and the black dog is wear'
+[4264/4632] 0.44 s/answer, ETA 0.0 h | V: "They are walking in the snow. They're all wearing white outfits, like white jackets, white pants, an"
+[4284/4632] 0.44 s/answer, ETA 0.0 h | V: "They're riding on a surfboard. And they're wearing a wetsuit. So, what do you think about surfing?"
+[4304/4632] 0.44 s/answer, ETA 0.0 h | V: "She's walking in a pink jacket. That's all I can say about what she's wearing. If you have any other"
+[4324/4632] 0.44 s/answer, ETA 0.0 h | V: "He's chasing a cow. And he's riding a horse. So, what do you think about this scene?"
+[4344/4632] 0.44 s/answer, ETA 0.0 h | V: "The puppy is looking at its reflection in the mirror. It's standing on a wooden floor. So, that's it"
+[4364/4632] 0.44 s/answer, ETA 0.0 h | V: "The cat is looking in a mirror. It's standing on a carpet. So, that's it. If you have any other ques"
+[4384/4632] 0.44 s/answer, ETA 0.0 h | V: "He's sitting on a colorful bench. He's wearing a green jacket, a black shirt, and black shoes. What "
+[4404/4632] 0.44 s/answer, ETA 0.0 h | V: "The child is boarding a train. They are wearing a red jacket. So, that's all there is to it. If you "
+[4424/4632] 0.44 s/answer, ETA 0.0 h | V: "She's standing next to a river and she's standing on the riverbank. So, what do you think about this"
+[4444/4632] 0.44 s/answer, ETA 0.0 h | V: "He's watching a soccer game. He's wearing a polo shirt, a pair of sunglasses, and a lanyard around h"
+[4464/4632] 0.43 s/answer, ETA 0.0 h | V: 'The fur is white. It looks thick and fluffy. What else do you want to know about it?'
+[4484/4632] 0.43 s/answer, ETA 0.0 h | V: "The kite is blue and yellow. It's a medium - sized kite. It's flying high in the sky. If you want to"
+[4504/4632] 0.43 s/answer, ETA 0.0 h | V: "She's wearing a blue shirt. She's standing in a field, looking off to the side. What do you think ab"
+[4524/4632] 0.43 s/answer, ETA 0.0 h | V: "The bird is small in size. It has a mix of brown and white colors on its body. Well, that's about it"
+[4544/4632] 0.43 s/answer, ETA 0.0 h | V: "The wall is brown. It looks like it's made of concrete. What do you think about that color?"
+[4564/4632] 0.43 s/answer, ETA 0.0 h | V: "The horse is white. It's standing next to another horse, and it looks like they might be waiting or "
+[4584/4632] 0.43 s/answer, ETA 0.0 h | V: "The sofa is brown in color and it looks like it's made of leather. What do you think about leather s"
+[4604/4632] 0.43 s/answer, ETA 0.0 h | V: "The head of the cow in the picture is brown. It's made of a material that looks like it could be lea"
+[4624/4632] 0.43 s/answer, ETA 0.0 h | V: "The bowl is white. It's a medium - sized bowl. If you want to know more about it, like what it's use"
+generated 4632 answers (100 tokens max) in 2015 s (0.44 s/answer)
+22 answers hit 100 tokens -> regenerate with 256
+[4/22] 1.63 s/answer, ETA 0.0 h | A: "There's one bus in the image. There's also a truck in the background. The truck is red and has a lar"
+[22/22] 1.43 s/answer, ETA 0.0 h | V: 'Well, there are giraffes and zebras in the image. But you said to mention everything except the zebr'
+generated 22 answers (256 tokens max) in 31 s (1.43 s/answer)
+932 questions, 8360 answers planned; by branch: existence=175, existence_closed=174, count=186, attribute=197, relation=200
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/399 [00:00<?, ?it/s]Loading weights:   0%|          | 1/399 [00:00<00:48,  8.16it/s]Loading weights:  18%|█▊        | 71/399 [00:00<00:00, 380.45it/s]Loading weights:  29%|██▉       | 116/399 [00:00<00:00, 402.54it/s]Loading weights:  43%|████▎     | 172/399 [00:00<00:00, 452.64it/s]Loading weights:  57%|█████▋    | 226/399 [00:00<00:00, 468.81it/s]Loading weights:  72%|███████▏  | 287/399 [00:00<00:00, 513.66it/s]Loading weights:  85%|████████▌ | 340/399 [00:00<00:00, 458.71it/s]Loading weights:  97%|█████████▋| 388/399 [00:00<00:00, 443.96it/s]Loading weights: 100%|██████████| 399/399 [00:00<00:00, 434.85it/s]
+judge 64/4024
+judge 128/4024
+judge 192/4024
+judge 256/4024
+judge 320/4024
+judge 384/4024
+judge 448/4024
+judge 512/4024
+judge 576/4024
+judge 640/4024
+judge 704/4024
+judge 768/4024
+judge 832/4024
+judge 896/4024
+judge 960/4024
+judge 1024/4024
+judge 1088/4024
+judge 1152/4024
+judge 1216/4024
+judge 1280/4024
+judge 1344/4024
+judge 1408/4024
+judge 1472/4024
+judge 1536/4024
+judge 1600/4024
+judge 1664/4024
+judge 1728/4024
+judge 1792/4024
+judge 1856/4024
+judge 1920/4024
+judge 1984/4024
+judge 2048/4024
+judge 2112/4024
+judge 2176/4024
+judge 2240/4024
+judge 2304/4024
+judge 2368/4024
+judge 2432/4024
+judge 2496/4024
+judge 2560/4024
+judge 2624/4024
+judge 2688/4024
+judge 2752/4024
+judge 2816/4024
+judge 2880/4024
+judge 2944/4024
+judge 3008/4024
+judge 3072/4024
+judge 3136/4024
+judge 3200/4024
+judge 3264/4024
+judge 3328/4024
+judge 3392/4024
+judge 3456/4024
+judge 3520/4024
+judge 3584/4024
+judge 3648/4024
+judge 3712/4024
+judge 3776/4024
+judge 3840/4024
+judge 3904/4024
+judge 3968/4024
+judge 4024/4024
+judge (thinking) 64/882
+judge (thinking) 128/882
+judge (thinking) 192/882
+judge (thinking) 256/882
+judge (thinking) 320/882
+judge (thinking) 384/882
+judge (thinking) 448/882
+judge (thinking) 512/882
+judge (thinking) 576/882
+judge (thinking) 640/882
+judge (thinking) 704/882
