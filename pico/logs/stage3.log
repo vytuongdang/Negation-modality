@@ -219,3 +219,523 @@ COMP_T: correct 55.6%, parsed 100.0% (n=9) -> /home/vyvn/new/cross_multimodal_ne
 COMP_V: correct 100.0%, parsed 100.0% (n=9) -> /home/vyvn/new/cross_multimodal_negation/experiments/h1_v2/results/qwen2.5-omni-3b/comp_pilot2_COMP_T-COMP_A-COMP_V-C0_box-OCR_V.jsonl
 OCR_V: exact copy 66.7%, mean similarity 0.813 (n=9) -> /home/vyvn/new/cross_multimodal_negation/experiments/h1_v2/results/qwen2.5-omni-3b/ocr_pilot2_COMP_T-COMP_A-COMP_V-C0_box-OCR_V.jsonl
 Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/399 [00:00<?, ?it/s]Loading weights:   0%|          | 1/399 [00:00<00:59,  6.66it/s]Loading weights:  20%|██        | 81/399 [00:00<00:00, 374.26it/s]Loading weights:  32%|███▏      | 127/399 [00:00<00:00, 404.49it/s]Loading weights:  46%|████▌     | 182/399 [00:00<00:00, 449.63it/s]Loading weights:  58%|█████▊    | 230/399 [00:00<00:00, 421.97it/s]Loading weights:  69%|██████▊   | 274/399 [00:00<00:00, 386.07it/s]Loading weights:  79%|███████▉  | 315/399 [00:00<00:00, 305.08it/s]Loading weights:  89%|████████▉ | 356/399 [00:01<00:00, 316.07it/s]Loading weights:  98%|█████████▊| 391/399 [00:01<00:00, 322.43it/s]Loading weights: 100%|██████████| 399/399 [00:01<00:00, 346.19it/s]
+judge 7/7
+judge (thinking) 2/2
+Loading weights:   0%|          | 0/399 [00:00<?, ?it/s]Loading weights:   0%|          | 1/399 [00:00<01:16,  5.21it/s]Loading weights:  20%|██        | 81/399 [00:00<00:00, 330.13it/s]Loading weights:  34%|███▍      | 136/399 [00:00<00:00, 401.41it/s]Loading weights:  48%|████▊     | 191/399 [00:00<00:00, 444.01it/s]Loading weights:  60%|██████    | 241/399 [00:00<00:00, 453.19it/s]Loading weights:  73%|███████▎  | 292/399 [00:00<00:00, 465.02it/s]Loading weights:  87%|████████▋ | 347/399 [00:00<00:00, 472.19it/s]Loading weights: 100%|██████████| 399/399 [00:00<00:00, 429.26it/s]
+label 1/1
+
+C0 states the target in 8/9 questions
+violation % (any mention: STATE/META/DENY/WRONG) among C0-mentioned (n), negative form
+branch                  COMP_T      COMP_A      COMP_V      C0_box
+existence                    -           -           -     100 (2)
+existence_closed             -           -           -     100 (2)
+count                        -           -           -     100 (1)
+attribute                    -           -           -     100 (2)
+relation                     -           -           -     100 (1)
+ALL                          -           -           -     100 (8)
+
+regex disagrees with judge on the target in 1/18 rows
+files: /home/vyvn/new/cross_multimodal_negation/experiments/h1_v2/results/qwen2.5-omni-3b/scored_pilot2_COMP_T-COMP_A-COMP_V-C0_box-OCR_V.jsonl /home/vyvn/new/cross_multimodal_negation/experiments/h1_v2/results/qwen2.5-omni-3b/review_pilot2_COMP_T-COMP_A-COMP_V-C0_box-OCR_V.csv
+=== smoke minicpm-o-2.6 2026. 11. 24. (화) 10:11:44 KST
+9 questions, 54 answers planned; by branch: existence=2, existence_closed=2, count=1, attribute=2, relation=2
+45 answers to generate (54 jobs)
+/home/vyvn/anaconda3/envs/omni_neg/lib/python3.10/site-packages/transformers/models/auto/image_processing_auto.py:513: FutureWarning: The image_processor_class argument is deprecated and will be removed in v4.42. Please use `slow_image_processor_class`, or `fast_image_processor_class` instead
+  warnings.warn(
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:01<00:03,  1.06s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:02<00:02,  1.05s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:03<00:01,  1.10s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:04<00:00,  1.11s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:04<00:00,  1.10s/it]
+Some weights of the model checkpoint at openbmb/MiniCPM-o-2_6 were not used when initializing MiniCPMO: ['tts.dvae.coef', 'tts.dvae.decoder.conv_in.0.bias', 'tts.dvae.decoder.conv_in.0.weight', 'tts.dvae.decoder.conv_in.2.bias', 'tts.dvae.decoder.conv_in.2.weight', 'tts.dvae.decoder.conv_out.weight', 'tts.dvae.decoder.decoder_block.0.coef', 'tts.dvae.decoder.decoder_block.0.dwconv.bias', 'tts.dvae.decoder.decoder_block.0.dwconv.weight', 'tts.dvae.decoder.decoder_block.0.norm.bias', 'tts.dvae.decoder.decoder_block.0.norm.weight', 'tts.dvae.decoder.decoder_block.0.pwconv1.bias', 'tts.dvae.decoder.decoder_block.0.pwconv1.weight', 'tts.dvae.decoder.decoder_block.0.pwconv2.bias', 'tts.dvae.decoder.decoder_block.0.pwconv2.weight', 'tts.dvae.decoder.decoder_block.1.coef', 'tts.dvae.decoder.decoder_block.1.dwconv.bias', 'tts.dvae.decoder.decoder_block.1.dwconv.weight', 'tts.dvae.decoder.decoder_block.1.norm.bias', 'tts.dvae.decoder.decoder_block.1.norm.weight', 'tts.dvae.decoder.decoder_block.1.pwconv1.bias', 'tts.dvae.decoder.decoder_block.1.pwconv1.weight', 'tts.dvae.decoder.decoder_block.1.pwconv2.bias', 'tts.dvae.decoder.decoder_block.1.pwconv2.weight', 'tts.dvae.decoder.decoder_block.10.coef', 'tts.dvae.decoder.decoder_block.10.dwconv.bias', 'tts.dvae.decoder.decoder_block.10.dwconv.weight', 'tts.dvae.decoder.decoder_block.10.norm.bias', 'tts.dvae.decoder.decoder_block.10.norm.weight', 'tts.dvae.decoder.decoder_block.10.pwconv1.bias', 'tts.dvae.decoder.decoder_block.10.pwconv1.weight', 'tts.dvae.decoder.decoder_block.10.pwconv2.bias', 'tts.dvae.decoder.decoder_block.10.pwconv2.weight', 'tts.dvae.decoder.decoder_block.11.coef', 'tts.dvae.decoder.decoder_block.11.dwconv.bias', 'tts.dvae.decoder.decoder_block.11.dwconv.weight', 'tts.dvae.decoder.decoder_block.11.norm.bias', 'tts.dvae.decoder.decoder_block.11.norm.weight', 'tts.dvae.decoder.decoder_block.11.pwconv1.bias', 'tts.dvae.decoder.decoder_block.11.pwconv1.weight', 'tts.dvae.decoder.decoder_block.11.pwconv2.bias', 'tts.dvae.decoder.decoder_block.11.pwconv2.weight', 'tts.dvae.decoder.decoder_block.2.coef', 'tts.dvae.decoder.decoder_block.2.dwconv.bias', 'tts.dvae.decoder.decoder_block.2.dwconv.weight', 'tts.dvae.decoder.decoder_block.2.norm.bias', 'tts.dvae.decoder.decoder_block.2.norm.weight', 'tts.dvae.decoder.decoder_block.2.pwconv1.bias', 'tts.dvae.decoder.decoder_block.2.pwconv1.weight', 'tts.dvae.decoder.decoder_block.2.pwconv2.bias', 'tts.dvae.decoder.decoder_block.2.pwconv2.weight', 'tts.dvae.decoder.decoder_block.3.coef', 'tts.dvae.decoder.decoder_block.3.dwconv.bias', 'tts.dvae.decoder.decoder_block.3.dwconv.weight', 'tts.dvae.decoder.decoder_block.3.norm.bias', 'tts.dvae.decoder.decoder_block.3.norm.weight', 'tts.dvae.decoder.decoder_block.3.pwconv1.bias', 'tts.dvae.decoder.decoder_block.3.pwconv1.weight', 'tts.dvae.decoder.decoder_block.3.pwconv2.bias', 'tts.dvae.decoder.decoder_block.3.pwconv2.weight', 'tts.dvae.decoder.decoder_block.4.coef', 'tts.dvae.decoder.decoder_block.4.dwconv.bias', 'tts.dvae.decoder.decoder_block.4.dwconv.weight', 'tts.dvae.decoder.decoder_block.4.norm.bias', 'tts.dvae.decoder.decoder_block.4.norm.weight', 'tts.dvae.decoder.decoder_block.4.pwconv1.bias', 'tts.dvae.decoder.decoder_block.4.pwconv1.weight', 'tts.dvae.decoder.decoder_block.4.pwconv2.bias', 'tts.dvae.decoder.decoder_block.4.pwconv2.weight', 'tts.dvae.decoder.decoder_block.5.coef', 'tts.dvae.decoder.decoder_block.5.dwconv.bias', 'tts.dvae.decoder.decoder_block.5.dwconv.weight', 'tts.dvae.decoder.decoder_block.5.norm.bias', 'tts.dvae.decoder.decoder_block.5.norm.weight', 'tts.dvae.decoder.decoder_block.5.pwconv1.bias', 'tts.dvae.decoder.decoder_block.5.pwconv1.weight', 'tts.dvae.decoder.decoder_block.5.pwconv2.bias', 'tts.dvae.decoder.decoder_block.5.pwconv2.weight', 'tts.dvae.decoder.decoder_block.6.coef', 'tts.dvae.decoder.decoder_block.6.dwconv.bias', 'tts.dvae.decoder.decoder_block.6.dwconv.weight', 'tts.dvae.decoder.decoder_block.6.norm.bias', 'tts.dvae.decoder.decoder_block.6.norm.weight', 'tts.dvae.decoder.decoder_block.6.pwconv1.bias', 'tts.dvae.decoder.decoder_block.6.pwconv1.weight', 'tts.dvae.decoder.decoder_block.6.pwconv2.bias', 'tts.dvae.decoder.decoder_block.6.pwconv2.weight', 'tts.dvae.decoder.decoder_block.7.coef', 'tts.dvae.decoder.decoder_block.7.dwconv.bias', 'tts.dvae.decoder.decoder_block.7.dwconv.weight', 'tts.dvae.decoder.decoder_block.7.norm.bias', 'tts.dvae.decoder.decoder_block.7.norm.weight', 'tts.dvae.decoder.decoder_block.7.pwconv1.bias', 'tts.dvae.decoder.decoder_block.7.pwconv1.weight', 'tts.dvae.decoder.decoder_block.7.pwconv2.bias', 'tts.dvae.decoder.decoder_block.7.pwconv2.weight', 'tts.dvae.decoder.decoder_block.8.coef', 'tts.dvae.decoder.decoder_block.8.dwconv.bias', 'tts.dvae.decoder.decoder_block.8.dwconv.weight', 'tts.dvae.decoder.decoder_block.8.norm.bias', 'tts.dvae.decoder.decoder_block.8.norm.weight', 'tts.dvae.decoder.decoder_block.8.pwconv1.bias', 'tts.dvae.decoder.decoder_block.8.pwconv1.weight', 'tts.dvae.decoder.decoder_block.8.pwconv2.bias', 'tts.dvae.decoder.decoder_block.8.pwconv2.weight', 'tts.dvae.decoder.decoder_block.9.coef', 'tts.dvae.decoder.decoder_block.9.dwconv.bias', 'tts.dvae.decoder.decoder_block.9.dwconv.weight', 'tts.dvae.decoder.decoder_block.9.norm.bias', 'tts.dvae.decoder.decoder_block.9.norm.weight', 'tts.dvae.decoder.decoder_block.9.pwconv1.bias', 'tts.dvae.decoder.decoder_block.9.pwconv1.weight', 'tts.dvae.decoder.decoder_block.9.pwconv2.bias', 'tts.dvae.decoder.decoder_block.9.pwconv2.weight', 'tts.dvae.downsample_conv.0.bias', 'tts.dvae.downsample_conv.0.weight', 'tts.dvae.downsample_conv.2.bias', 'tts.dvae.downsample_conv.2.weight', 'tts.dvae.encoder.conv_in.0.bias', 'tts.dvae.encoder.conv_in.0.weight', 'tts.dvae.encoder.conv_in.2.bias', 'tts.dvae.encoder.conv_in.2.weight', 'tts.dvae.encoder.conv_out.weight', 'tts.dvae.encoder.decoder_block.0.coef', 'tts.dvae.encoder.decoder_block.0.dwconv.bias', 'tts.dvae.encoder.decoder_block.0.dwconv.weight', 'tts.dvae.encoder.decoder_block.0.norm.bias', 'tts.dvae.encoder.decoder_block.0.norm.weight', 'tts.dvae.encoder.decoder_block.0.pwconv1.bias', 'tts.dvae.encoder.decoder_block.0.pwconv1.weight', 'tts.dvae.encoder.decoder_block.0.pwconv2.bias', 'tts.dvae.encoder.decoder_block.0.pwconv2.weight', 'tts.dvae.encoder.decoder_block.1.coef', 'tts.dvae.encoder.decoder_block.1.dwconv.bias', 'tts.dvae.encoder.decoder_block.1.dwconv.weight', 'tts.dvae.encoder.decoder_block.1.norm.bias', 'tts.dvae.encoder.decoder_block.1.norm.weight', 'tts.dvae.encoder.decoder_block.1.pwconv1.bias', 'tts.dvae.encoder.decoder_block.1.pwconv1.weight', 'tts.dvae.encoder.decoder_block.1.pwconv2.bias', 'tts.dvae.encoder.decoder_block.1.pwconv2.weight', 'tts.dvae.encoder.decoder_block.10.coef', 'tts.dvae.encoder.decoder_block.10.dwconv.bias', 'tts.dvae.encoder.decoder_block.10.dwconv.weight', 'tts.dvae.encoder.decoder_block.10.norm.bias', 'tts.dvae.encoder.decoder_block.10.norm.weight', 'tts.dvae.encoder.decoder_block.10.pwconv1.bias', 'tts.dvae.encoder.decoder_block.10.pwconv1.weight', 'tts.dvae.encoder.decoder_block.10.pwconv2.bias', 'tts.dvae.encoder.decoder_block.10.pwconv2.weight', 'tts.dvae.encoder.decoder_block.11.coef', 'tts.dvae.encoder.decoder_block.11.dwconv.bias', 'tts.dvae.encoder.decoder_block.11.dwconv.weight', 'tts.dvae.encoder.decoder_block.11.norm.bias', 'tts.dvae.encoder.decoder_block.11.norm.weight', 'tts.dvae.encoder.decoder_block.11.pwconv1.bias', 'tts.dvae.encoder.decoder_block.11.pwconv1.weight', 'tts.dvae.encoder.decoder_block.11.pwconv2.bias', 'tts.dvae.encoder.decoder_block.11.pwconv2.weight', 'tts.dvae.encoder.decoder_block.2.coef', 'tts.dvae.encoder.decoder_block.2.dwconv.bias', 'tts.dvae.encoder.decoder_block.2.dwconv.weight', 'tts.dvae.encoder.decoder_block.2.norm.bias', 'tts.dvae.encoder.decoder_block.2.norm.weight', 'tts.dvae.encoder.decoder_block.2.pwconv1.bias', 'tts.dvae.encoder.decoder_block.2.pwconv1.weight', 'tts.dvae.encoder.decoder_block.2.pwconv2.bias', 'tts.dvae.encoder.decoder_block.2.pwconv2.weight', 'tts.dvae.encoder.decoder_block.3.coef', 'tts.dvae.encoder.decoder_block.3.dwconv.bias', 'tts.dvae.encoder.decoder_block.3.dwconv.weight', 'tts.dvae.encoder.decoder_block.3.norm.bias', 'tts.dvae.encoder.decoder_block.3.norm.weight', 'tts.dvae.encoder.decoder_block.3.pwconv1.bias', 'tts.dvae.encoder.decoder_block.3.pwconv1.weight', 'tts.dvae.encoder.decoder_block.3.pwconv2.bias', 'tts.dvae.encoder.decoder_block.3.pwconv2.weight', 'tts.dvae.encoder.decoder_block.4.coef', 'tts.dvae.encoder.decoder_block.4.dwconv.bias', 'tts.dvae.encoder.decoder_block.4.dwconv.weight', 'tts.dvae.encoder.decoder_block.4.norm.bias', 'tts.dvae.encoder.decoder_block.4.norm.weight', 'tts.dvae.encoder.decoder_block.4.pwconv1.bias', 'tts.dvae.encoder.decoder_block.4.pwconv1.weight', 'tts.dvae.encoder.decoder_block.4.pwconv2.bias', 'tts.dvae.encoder.decoder_block.4.pwconv2.weight', 'tts.dvae.encoder.decoder_block.5.coef', 'tts.dvae.encoder.decoder_block.5.dwconv.bias', 'tts.dvae.encoder.decoder_block.5.dwconv.weight', 'tts.dvae.encoder.decoder_block.5.norm.bias', 'tts.dvae.encoder.decoder_block.5.norm.weight', 'tts.dvae.encoder.decoder_block.5.pwconv1.bias', 'tts.dvae.encoder.decoder_block.5.pwconv1.weight', 'tts.dvae.encoder.decoder_block.5.pwconv2.bias', 'tts.dvae.encoder.decoder_block.5.pwconv2.weight', 'tts.dvae.encoder.decoder_block.6.coef', 'tts.dvae.encoder.decoder_block.6.dwconv.bias', 'tts.dvae.encoder.decoder_block.6.dwconv.weight', 'tts.dvae.encoder.decoder_block.6.norm.bias', 'tts.dvae.encoder.decoder_block.6.norm.weight', 'tts.dvae.encoder.decoder_block.6.pwconv1.bias', 'tts.dvae.encoder.decoder_block.6.pwconv1.weight', 'tts.dvae.encoder.decoder_block.6.pwconv2.bias', 'tts.dvae.encoder.decoder_block.6.pwconv2.weight', 'tts.dvae.encoder.decoder_block.7.coef', 'tts.dvae.encoder.decoder_block.7.dwconv.bias', 'tts.dvae.encoder.decoder_block.7.dwconv.weight', 'tts.dvae.encoder.decoder_block.7.norm.bias', 'tts.dvae.encoder.decoder_block.7.norm.weight', 'tts.dvae.encoder.decoder_block.7.pwconv1.bias', 'tts.dvae.encoder.decoder_block.7.pwconv1.weight', 'tts.dvae.encoder.decoder_block.7.pwconv2.bias', 'tts.dvae.encoder.decoder_block.7.pwconv2.weight', 'tts.dvae.encoder.decoder_block.8.coef', 'tts.dvae.encoder.decoder_block.8.dwconv.bias', 'tts.dvae.encoder.decoder_block.8.dwconv.weight', 'tts.dvae.encoder.decoder_block.8.norm.bias', 'tts.dvae.encoder.decoder_block.8.norm.weight', 'tts.dvae.encoder.decoder_block.8.pwconv1.bias', 'tts.dvae.encoder.decoder_block.8.pwconv1.weight', 'tts.dvae.encoder.decoder_block.8.pwconv2.bias', 'tts.dvae.encoder.decoder_block.8.pwconv2.weight', 'tts.dvae.encoder.decoder_block.9.coef', 'tts.dvae.encoder.decoder_block.9.dwconv.bias', 'tts.dvae.encoder.decoder_block.9.dwconv.weight', 'tts.dvae.encoder.decoder_block.9.norm.bias', 'tts.dvae.encoder.decoder_block.9.norm.weight', 'tts.dvae.encoder.decoder_block.9.pwconv1.bias', 'tts.dvae.encoder.decoder_block.9.pwconv1.weight', 'tts.dvae.encoder.decoder_block.9.pwconv2.bias', 'tts.dvae.encoder.decoder_block.9.pwconv2.weight', 'tts.dvae.out_conv.weight', 'tts.dvae.vq_layer.quantizer.rvqs.0.project_in.bias', 'tts.dvae.vq_layer.quantizer.rvqs.0.project_in.weight', 'tts.dvae.vq_layer.quantizer.rvqs.0.project_out.bias', 'tts.dvae.vq_layer.quantizer.rvqs.0.project_out.weight', 'tts.dvae.vq_layer.quantizer.rvqs.1.project_in.bias', 'tts.dvae.vq_layer.quantizer.rvqs.1.project_in.weight', 'tts.dvae.vq_layer.quantizer.rvqs.1.project_out.bias', 'tts.dvae.vq_layer.quantizer.rvqs.1.project_out.weight', 'tts.emb_code.0.weight', 'tts.emb_code.1.weight', 'tts.emb_code.2.weight', 'tts.emb_code.3.weight', 'tts.emb_text.weight', 'tts.head_code.0.parametrizations.weight.original0', 'tts.head_code.0.parametrizations.weight.original1', 'tts.head_code.1.parametrizations.weight.original0', 'tts.head_code.1.parametrizations.weight.original1', 'tts.head_code.2.parametrizations.weight.original0', 'tts.head_code.2.parametrizations.weight.original1', 'tts.head_code.3.parametrizations.weight.original0', 'tts.head_code.3.parametrizations.weight.original1', 'tts.model.embed_tokens.weight', 'tts.model.layers.0.input_layernorm.weight', 'tts.model.layers.0.mlp.down_proj.weight', 'tts.model.layers.0.mlp.gate_proj.weight', 'tts.model.layers.0.mlp.up_proj.weight', 'tts.model.layers.0.post_attention_layernorm.weight', 'tts.model.layers.0.self_attn.k_proj.weight', 'tts.model.layers.0.self_attn.o_proj.weight', 'tts.model.layers.0.self_attn.q_proj.weight', 'tts.model.layers.0.self_attn.v_proj.weight', 'tts.model.layers.1.input_layernorm.weight', 'tts.model.layers.1.mlp.down_proj.weight', 'tts.model.layers.1.mlp.gate_proj.weight', 'tts.model.layers.1.mlp.up_proj.weight', 'tts.model.layers.1.post_attention_layernorm.weight', 'tts.model.layers.1.self_attn.k_proj.weight', 'tts.model.layers.1.self_attn.o_proj.weight', 'tts.model.layers.1.self_attn.q_proj.weight', 'tts.model.layers.1.self_attn.v_proj.weight', 'tts.model.layers.10.input_layernorm.weight', 'tts.model.layers.10.mlp.down_proj.weight', 'tts.model.layers.10.mlp.gate_proj.weight', 'tts.model.layers.10.mlp.up_proj.weight', 'tts.model.layers.10.post_attention_layernorm.weight', 'tts.model.layers.10.self_attn.k_proj.weight', 'tts.model.layers.10.self_attn.o_proj.weight', 'tts.model.layers.10.self_attn.q_proj.weight', 'tts.model.layers.10.self_attn.v_proj.weight', 'tts.model.layers.11.input_layernorm.weight', 'tts.model.layers.11.mlp.down_proj.weight', 'tts.model.layers.11.mlp.gate_proj.weight', 'tts.model.layers.11.mlp.up_proj.weight', 'tts.model.layers.11.post_attention_layernorm.weight', 'tts.model.layers.11.self_attn.k_proj.weight', 'tts.model.layers.11.self_attn.o_proj.weight', 'tts.model.layers.11.self_attn.q_proj.weight', 'tts.model.layers.11.self_attn.v_proj.weight', 'tts.model.layers.12.input_layernorm.weight', 'tts.model.layers.12.mlp.down_proj.weight', 'tts.model.layers.12.mlp.gate_proj.weight', 'tts.model.layers.12.mlp.up_proj.weight', 'tts.model.layers.12.post_attention_layernorm.weight', 'tts.model.layers.12.self_attn.k_proj.weight', 'tts.model.layers.12.self_attn.o_proj.weight', 'tts.model.layers.12.self_attn.q_proj.weight', 'tts.model.layers.12.self_attn.v_proj.weight', 'tts.model.layers.13.input_layernorm.weight', 'tts.model.layers.13.mlp.down_proj.weight', 'tts.model.layers.13.mlp.gate_proj.weight', 'tts.model.layers.13.mlp.up_proj.weight', 'tts.model.layers.13.post_attention_layernorm.weight', 'tts.model.layers.13.self_attn.k_proj.weight', 'tts.model.layers.13.self_attn.o_proj.weight', 'tts.model.layers.13.self_attn.q_proj.weight', 'tts.model.layers.13.self_attn.v_proj.weight', 'tts.model.layers.14.input_layernorm.weight', 'tts.model.layers.14.mlp.down_proj.weight', 'tts.model.layers.14.mlp.gate_proj.weight', 'tts.model.layers.14.mlp.up_proj.weight', 'tts.model.layers.14.post_attention_layernorm.weight', 'tts.model.layers.14.self_attn.k_proj.weight', 'tts.model.layers.14.self_attn.o_proj.weight', 'tts.model.layers.14.self_attn.q_proj.weight', 'tts.model.layers.14.self_attn.v_proj.weight', 'tts.model.layers.15.input_layernorm.weight', 'tts.model.layers.15.mlp.down_proj.weight', 'tts.model.layers.15.mlp.gate_proj.weight', 'tts.model.layers.15.mlp.up_proj.weight', 'tts.model.layers.15.post_attention_layernorm.weight', 'tts.model.layers.15.self_attn.k_proj.weight', 'tts.model.layers.15.self_attn.o_proj.weight', 'tts.model.layers.15.self_attn.q_proj.weight', 'tts.model.layers.15.self_attn.v_proj.weight', 'tts.model.layers.16.input_layernorm.weight', 'tts.model.layers.16.mlp.down_proj.weight', 'tts.model.layers.16.mlp.gate_proj.weight', 'tts.model.layers.16.mlp.up_proj.weight', 'tts.model.layers.16.post_attention_layernorm.weight', 'tts.model.layers.16.self_attn.k_proj.weight', 'tts.model.layers.16.self_attn.o_proj.weight', 'tts.model.layers.16.self_attn.q_proj.weight', 'tts.model.layers.16.self_attn.v_proj.weight', 'tts.model.layers.17.input_layernorm.weight', 'tts.model.layers.17.mlp.down_proj.weight', 'tts.model.layers.17.mlp.gate_proj.weight', 'tts.model.layers.17.mlp.up_proj.weight', 'tts.model.layers.17.post_attention_layernorm.weight', 'tts.model.layers.17.self_attn.k_proj.weight', 'tts.model.layers.17.self_attn.o_proj.weight', 'tts.model.layers.17.self_attn.q_proj.weight', 'tts.model.layers.17.self_attn.v_proj.weight', 'tts.model.layers.18.input_layernorm.weight', 'tts.model.layers.18.mlp.down_proj.weight', 'tts.model.layers.18.mlp.gate_proj.weight', 'tts.model.layers.18.mlp.up_proj.weight', 'tts.model.layers.18.post_attention_layernorm.weight', 'tts.model.layers.18.self_attn.k_proj.weight', 'tts.model.layers.18.self_attn.o_proj.weight', 'tts.model.layers.18.self_attn.q_proj.weight', 'tts.model.layers.18.self_attn.v_proj.weight', 'tts.model.layers.19.input_layernorm.weight', 'tts.model.layers.19.mlp.down_proj.weight', 'tts.model.layers.19.mlp.gate_proj.weight', 'tts.model.layers.19.mlp.up_proj.weight', 'tts.model.layers.19.post_attention_layernorm.weight', 'tts.model.layers.19.self_attn.k_proj.weight', 'tts.model.layers.19.self_attn.o_proj.weight', 'tts.model.layers.19.self_attn.q_proj.weight', 'tts.model.layers.19.self_attn.v_proj.weight', 'tts.model.layers.2.input_layernorm.weight', 'tts.model.layers.2.mlp.down_proj.weight', 'tts.model.layers.2.mlp.gate_proj.weight', 'tts.model.layers.2.mlp.up_proj.weight', 'tts.model.layers.2.post_attention_layernorm.weight', 'tts.model.layers.2.self_attn.k_proj.weight', 'tts.model.layers.2.self_attn.o_proj.weight', 'tts.model.layers.2.self_attn.q_proj.weight', 'tts.model.layers.2.self_attn.v_proj.weight', 'tts.model.layers.3.input_layernorm.weight', 'tts.model.layers.3.mlp.down_proj.weight', 'tts.model.layers.3.mlp.gate_proj.weight', 'tts.model.layers.3.mlp.up_proj.weight', 'tts.model.layers.3.post_attention_layernorm.weight', 'tts.model.layers.3.self_attn.k_proj.weight', 'tts.model.layers.3.self_attn.o_proj.weight', 'tts.model.layers.3.self_attn.q_proj.weight', 'tts.model.layers.3.self_attn.v_proj.weight', 'tts.model.layers.4.input_layernorm.weight', 'tts.model.layers.4.mlp.down_proj.weight', 'tts.model.layers.4.mlp.gate_proj.weight', 'tts.model.layers.4.mlp.up_proj.weight', 'tts.model.layers.4.post_attention_layernorm.weight', 'tts.model.layers.4.self_attn.k_proj.weight', 'tts.model.layers.4.self_attn.o_proj.weight', 'tts.model.layers.4.self_attn.q_proj.weight', 'tts.model.layers.4.self_attn.v_proj.weight', 'tts.model.layers.5.input_layernorm.weight', 'tts.model.layers.5.mlp.down_proj.weight', 'tts.model.layers.5.mlp.gate_proj.weight', 'tts.model.layers.5.mlp.up_proj.weight', 'tts.model.layers.5.post_attention_layernorm.weight', 'tts.model.layers.5.self_attn.k_proj.weight', 'tts.model.layers.5.self_attn.o_proj.weight', 'tts.model.layers.5.self_attn.q_proj.weight', 'tts.model.layers.5.self_attn.v_proj.weight', 'tts.model.layers.6.input_layernorm.weight', 'tts.model.layers.6.mlp.down_proj.weight', 'tts.model.layers.6.mlp.gate_proj.weight', 'tts.model.layers.6.mlp.up_proj.weight', 'tts.model.layers.6.post_attention_layernorm.weight', 'tts.model.layers.6.self_attn.k_proj.weight', 'tts.model.layers.6.self_attn.o_proj.weight', 'tts.model.layers.6.self_attn.q_proj.weight', 'tts.model.layers.6.self_attn.v_proj.weight', 'tts.model.layers.7.input_layernorm.weight', 'tts.model.layers.7.mlp.down_proj.weight', 'tts.model.layers.7.mlp.gate_proj.weight', 'tts.model.layers.7.mlp.up_proj.weight', 'tts.model.layers.7.post_attention_layernorm.weight', 'tts.model.layers.7.self_attn.k_proj.weight', 'tts.model.layers.7.self_attn.o_proj.weight', 'tts.model.layers.7.self_attn.q_proj.weight', 'tts.model.layers.7.self_attn.v_proj.weight', 'tts.model.layers.8.input_layernorm.weight', 'tts.model.layers.8.mlp.down_proj.weight', 'tts.model.layers.8.mlp.gate_proj.weight', 'tts.model.layers.8.mlp.up_proj.weight', 'tts.model.layers.8.post_attention_layernorm.weight', 'tts.model.layers.8.self_attn.k_proj.weight', 'tts.model.layers.8.self_attn.o_proj.weight', 'tts.model.layers.8.self_attn.q_proj.weight', 'tts.model.layers.8.self_attn.v_proj.weight', 'tts.model.layers.9.input_layernorm.weight', 'tts.model.layers.9.mlp.down_proj.weight', 'tts.model.layers.9.mlp.gate_proj.weight', 'tts.model.layers.9.mlp.up_proj.weight', 'tts.model.layers.9.post_attention_layernorm.weight', 'tts.model.layers.9.self_attn.k_proj.weight', 'tts.model.layers.9.self_attn.o_proj.weight', 'tts.model.layers.9.self_attn.q_proj.weight', 'tts.model.layers.9.self_attn.v_proj.weight', 'tts.model.norm.weight', 'tts.projector.linear1.bias', 'tts.projector.linear1.weight', 'tts.projector.linear2.bias', 'tts.projector.linear2.weight']
+- This IS expected if you are initializing MiniCPMO from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing MiniCPMO from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+The `seen_tokens` attribute is deprecated and will be removed in v4.41. Use the `cache_position` model input instead.
+[1/45] 2.77 s/answer, ETA 0.0 h | C0_box: 'The sphere in the image is blue in color. It appears to be small in size compared to the surrounding'
+[21/45] 1.06 s/answer, ETA 0.0 h | COMP_T: 'A'
+[41/45] 0.88 s/answer, ETA 0.0 h | OCR_V: 'Do not mention the cup.'
+generated 45 answers (100 tokens max) in 39 s (0.86 s/answer)
+1 answers hit 100 tokens -> regenerate with 256
+[1/1] 3.90 s/answer, ETA 0.0 h | C0_box: "To determine the number of spheres and cylinders in the image, let's analyze the objects present:\n\n1"
+generated 1 answers (256 tokens max) in 4 s (3.90 s/answer)
+9 questions, 54 answers planned; by branch: existence=2, existence_closed=2, count=1, attribute=2, relation=2
+COMP_A: correct 55.6%, parsed 100.0% (n=9) -> /home/vyvn/new/cross_multimodal_negation/experiments/h1_v2/results/minicpm-o-2.6/comp_pilot2_COMP_T-COMP_A-COMP_V-C0_box-OCR_V.jsonl
+COMP_T: correct 22.2%, parsed 100.0% (n=9) -> /home/vyvn/new/cross_multimodal_negation/experiments/h1_v2/results/minicpm-o-2.6/comp_pilot2_COMP_T-COMP_A-COMP_V-C0_box-OCR_V.jsonl
+COMP_V: correct 100.0%, parsed 100.0% (n=9) -> /home/vyvn/new/cross_multimodal_negation/experiments/h1_v2/results/minicpm-o-2.6/comp_pilot2_COMP_T-COMP_A-COMP_V-C0_box-OCR_V.jsonl
+OCR_V: exact copy 100.0%, mean similarity 1.000 (n=9) -> /home/vyvn/new/cross_multimodal_negation/experiments/h1_v2/results/minicpm-o-2.6/ocr_pilot2_COMP_T-COMP_A-COMP_V-C0_box-OCR_V.jsonl
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/399 [00:00<?, ?it/s]Loading weights:   0%|          | 1/399 [00:00<01:12,  5.47it/s]Loading weights:  19%|█▉        | 76/399 [00:00<00:00, 331.87it/s]Loading weights:  30%|███       | 121/399 [00:00<00:00, 375.74it/s]Loading weights:  44%|████▍     | 177/399 [00:00<00:00, 432.49it/s]Loading weights:  56%|█████▋    | 225/399 [00:00<00:00, 445.91it/s]Loading weights:  69%|██████▉   | 276/399 [00:00<00:00, 459.33it/s]Loading weights:  81%|████████  | 324/399 [00:00<00:00, 370.41it/s]Loading weights:  91%|█████████▏| 365/399 [00:01<00:00, 306.91it/s]Loading weights: 100%|██████████| 399/399 [00:01<00:00, 226.41it/s]
+judge 5/5
+judge (thinking) 1/1
+Loading weights:   0%|          | 0/399 [00:00<?, ?it/s]Loading weights:   0%|          | 1/399 [00:00<01:37,  4.10it/s]Loading weights:  24%|██▍       | 95/399 [00:00<00:00, 349.89it/s]Loading weights:  38%|███▊      | 151/399 [00:00<00:00, 406.37it/s]Loading weights:  51%|█████▏    | 205/399 [00:00<00:00, 433.18it/s]Loading weights:  64%|██████▍   | 257/399 [00:00<00:00, 449.44it/s]Loading weights:  78%|███████▊  | 312/399 [00:00<00:00, 466.23it/s]Loading weights:  91%|█████████ | 363/399 [00:00<00:00, 474.08it/s]Loading weights: 100%|██████████| 399/399 [00:00<00:00, 412.36it/s]
+label 1/1
+
+C0 states the target in 8/9 questions
+violation % (any mention: STATE/META/DENY/WRONG) among C0-mentioned (n), negative form
+branch                  COMP_T      COMP_A      COMP_V      C0_box
+existence                    -           -           -     100 (2)
+existence_closed             -           -           -     100 (2)
+count                        -           -           -     100 (1)
+attribute                    -           -           -     100 (2)
+relation                     -           -           -     100 (1)
+ALL                          -           -           -     100 (8)
+
+regex disagrees with judge on the target in 0/18 rows
+files: /home/vyvn/new/cross_multimodal_negation/experiments/h1_v2/results/minicpm-o-2.6/scored_pilot2_COMP_T-COMP_A-COMP_V-C0_box-OCR_V.jsonl /home/vyvn/new/cross_multimodal_negation/experiments/h1_v2/results/minicpm-o-2.6/review_pilot2_COMP_T-COMP_A-COMP_V-C0_box-OCR_V.csv
+=== smoke phi-4-mm 2026. 11. 24. (화) 10:13:19 KST
+9 questions, 54 answers planned; by branch: existence=2, existence_closed=2, count=1, attribute=2, relation=2
+45 answers to generate (54 jobs)
+/home/vyvn/anaconda3/envs/omni_phi/lib/python3.10/site-packages/transformers/models/auto/image_processing_auto.py:590: FutureWarning: The image_processor_class argument is deprecated and will be removed in v4.42. Please use `slow_image_processor_class`, or `fast_image_processor_class` instead
+  warnings.warn(
+Using a slow image processor as `use_fast` is unset and a slow processor was saved with this model. `use_fast=True` will be the default behavior in v4.48, even if the model was saved with a slow processor. This will result in minor differences in outputs. You'll still be able to use a slow processor with `use_fast=False`.
+/home/vyvn/.cache/huggingface/modules/transformers_modules/microsoft/Phi-4-multimodal-instruct/93f923e1a7727d1c4f446756212d9d3e8fcc5d81/speech_conformer_encoder.py:2774: FutureWarning: Please specify CheckpointImpl.NO_REENTRANT as CheckpointImpl.REENTRANT will soon be removed as the default and eventually deprecated.
+  lambda i: encoder_checkpoint_wrapper(
+Loading checkpoint shards:   0%|          | 0/3 [00:00<?, ?it/s]Loading checkpoint shards:  33%|███▎      | 1/3 [00:01<00:03,  1.80s/it]Loading checkpoint shards:  67%|██████▋   | 2/3 [00:03<00:01,  1.63s/it]Loading checkpoint shards: 100%|██████████| 3/3 [00:03<00:00,  1.12s/it]Loading checkpoint shards: 100%|██████████| 3/3 [00:03<00:00,  1.27s/it]
+[1/45] 1.45 s/answer, ETA 0.0 h | C0_box: 'The sphere is blue in color, small in size, and appears to be made of a soft, possibly rubber-like m'
+/home/vyvn/anaconda3/envs/omni_phi/lib/python3.10/site-packages/torch/utils/checkpoint.py:87: UserWarning: None of the inputs have requires_grad=True. Gradients will be None
+  warnings.warn(
+[21/45] 0.81 s/answer, ETA 0.0 h | COMP_T: 'C'
+[41/45] 0.66 s/answer, ETA 0.0 h | OCR_V: 'Do not mention the cup.'
+generated 45 answers (100 tokens max) in 30 s (0.66 s/answer)
+0 answers hit 100 tokens -> regenerate with 256
+9 questions, 54 answers planned; by branch: existence=2, existence_closed=2, count=1, attribute=2, relation=2
+COMP_A: correct 66.7%, parsed 100.0% (n=9) -> /home/vyvn/new/cross_multimodal_negation/experiments/h1_v2/results/phi-4-mm/comp_pilot2_COMP_T-COMP_A-COMP_V-C0_box-OCR_V.jsonl
+COMP_T: correct 55.6%, parsed 100.0% (n=9) -> /home/vyvn/new/cross_multimodal_negation/experiments/h1_v2/results/phi-4-mm/comp_pilot2_COMP_T-COMP_A-COMP_V-C0_box-OCR_V.jsonl
+COMP_V: correct 100.0%, parsed 100.0% (n=9) -> /home/vyvn/new/cross_multimodal_negation/experiments/h1_v2/results/phi-4-mm/comp_pilot2_COMP_T-COMP_A-COMP_V-C0_box-OCR_V.jsonl
+OCR_V: exact copy 100.0%, mean similarity 1.000 (n=9) -> /home/vyvn/new/cross_multimodal_negation/experiments/h1_v2/results/phi-4-mm/ocr_pilot2_COMP_T-COMP_A-COMP_V-C0_box-OCR_V.jsonl
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/399 [00:00<?, ?it/s]Loading weights:   0%|          | 1/399 [00:00<01:02,  6.37it/s]Loading weights:  18%|█▊        | 72/399 [00:00<00:00, 333.06it/s]Loading weights:  32%|███▏      | 127/399 [00:00<00:00, 411.55it/s]Loading weights:  45%|████▌     | 181/399 [00:00<00:00, 457.46it/s]Loading weights:  59%|█████▉    | 235/399 [00:00<00:00, 480.41it/s]Loading weights:  72%|███████▏  | 286/399 [00:00<00:00, 479.64it/s]Loading weights:  84%|████████▍ | 336/399 [00:00<00:00, 397.33it/s]Loading weights:  95%|█████████▍| 379/399 [00:00<00:00, 376.72it/s]Loading weights: 100%|██████████| 399/399 [00:01<00:00, 392.91it/s]
+judge 6/6
+Loading weights:   0%|          | 0/399 [00:00<?, ?it/s]Loading weights:   0%|          | 1/399 [00:00<01:10,  5.61it/s]Loading weights:  20%|█▉        | 78/399 [00:00<00:00, 331.26it/s]Loading weights:  32%|███▏      | 127/399 [00:00<00:00, 383.22it/s]Loading weights:  46%|████▌     | 182/399 [00:00<00:00, 425.18it/s]Loading weights:  59%|█████▉    | 237/399 [00:00<00:00, 455.58it/s]Loading weights:  74%|███████▍  | 296/399 [00:00<00:00, 497.36it/s]Loading weights:  87%|████████▋ | 348/399 [00:00<00:00, 482.78it/s]Loading weights: 100%|██████████| 399/399 [00:00<00:00, 433.03it/s]
+label 1/1
+
+C0 states the target in 7/9 questions
+violation % (any mention: STATE/META/DENY/WRONG) among C0-mentioned (n), negative form
+branch                  COMP_T      COMP_A      COMP_V      C0_box
+existence                    -           -           -     100 (1)
+existence_closed             -           -           -     100 (2)
+count                        -           -           -     100 (1)
+attribute                    -           -           -     100 (2)
+relation                     -           -           -     100 (1)
+ALL                          -           -           -     100 (7)
+
+regex disagrees with judge on the target in 0/18 rows
+files: /home/vyvn/new/cross_multimodal_negation/experiments/h1_v2/results/phi-4-mm/scored_pilot2_COMP_T-COMP_A-COMP_V-C0_box-OCR_V.jsonl /home/vyvn/new/cross_multimodal_negation/experiments/h1_v2/results/phi-4-mm/review_pilot2_COMP_T-COMP_A-COMP_V-C0_box-OCR_V.csv
+=== smoke internomni 2026. 11. 24. (화) 10:14:24 KST
+9 questions, 54 answers planned; by branch: existence=2, existence_closed=2, count=1, attribute=2, relation=2
+45 answers to generate (54 jobs)
+/home/vyvn/anaconda3/envs/omni_intern/lib/python3.10/site-packages/timm/models/layers/__init__.py:49: FutureWarning: Importing from timm.models.layers is deprecated, please import via timm.layers
+  warnings.warn(f"Importing from {__name__} is deprecated, please import via timm.layers", FutureWarning)
+FlashAttention is not installed.
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:01<00:03,  1.13s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:02<00:02,  1.04s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:03<00:01,  1.09s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:04<00:00,  1.10s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:04<00:00,  1.10s/it]
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+W0000 00:00:1795482873.789544  611147 sentencepiece_processor.cc:130] Piece at index 354 is a null character (\0) and byte_fallback is enabled. Treating it as an UNUSED piece.
+[1/45] 1.93 s/answer, ETA 0.0 h | C0_box: 'The sphere is blue, small in size, and made of rubber.'
+[21/45] 1.35 s/answer, ETA 0.0 h | COMP_T: 'B'
+[41/45] 1.26 s/answer, ETA 0.0 h | OCR_V: 'Do not mention the cup.'
+generated 45 answers (100 tokens max) in 58 s (1.28 s/answer)
+0 answers hit 100 tokens -> regenerate with 256
+9 questions, 54 answers planned; by branch: existence=2, existence_closed=2, count=1, attribute=2, relation=2
+COMP_A: correct 33.3%, parsed 100.0% (n=9) -> /home/vyvn/new/cross_multimodal_negation/experiments/h1_v2/results/internomni/comp_pilot2_COMP_T-COMP_A-COMP_V-C0_box-OCR_V.jsonl
+COMP_T: correct 55.6%, parsed 100.0% (n=9) -> /home/vyvn/new/cross_multimodal_negation/experiments/h1_v2/results/internomni/comp_pilot2_COMP_T-COMP_A-COMP_V-C0_box-OCR_V.jsonl
+COMP_V: correct 100.0%, parsed 100.0% (n=9) -> /home/vyvn/new/cross_multimodal_negation/experiments/h1_v2/results/internomni/comp_pilot2_COMP_T-COMP_A-COMP_V-C0_box-OCR_V.jsonl
+OCR_V: exact copy 100.0%, mean similarity 1.000 (n=9) -> /home/vyvn/new/cross_multimodal_negation/experiments/h1_v2/results/internomni/ocr_pilot2_COMP_T-COMP_A-COMP_V-C0_box-OCR_V.jsonl
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/399 [00:00<?, ?it/s]Loading weights:   0%|          | 1/399 [00:00<00:51,  7.68it/s]Loading weights:  18%|█▊        | 72/399 [00:00<00:00, 368.85it/s]Loading weights:  29%|██▉       | 116/399 [00:00<00:00, 394.05it/s]Loading weights:  40%|███▉      | 158/399 [00:00<00:00, 337.99it/s]Loading weights:  49%|████▉     | 195/399 [00:00<00:00, 347.04it/s]Loading weights:  62%|██████▏   | 246/399 [00:00<00:00, 390.95it/s]Loading weights:  73%|███████▎  | 290/399 [00:00<00:00, 390.26it/s]Loading weights:  86%|████████▋ | 345/399 [00:00<00:00, 424.86it/s]Loading weights:  97%|█████████▋| 389/399 [00:01<00:00, 339.91it/s]Loading weights: 100%|██████████| 399/399 [00:01<00:00, 358.60it/s]
+judge 3/3
+judge (thinking) 1/1
+Loading weights:   0%|          | 0/399 [00:00<?, ?it/s]Loading weights:   0%|          | 1/399 [00:00<01:07,  5.93it/s]Loading weights:  20%|██        | 81/399 [00:00<00:00, 351.03it/s]Loading weights:  32%|███▏      | 127/399 [00:00<00:00, 389.16it/s]Loading weights:  45%|████▌     | 181/399 [00:00<00:00, 442.19it/s]Loading weights:  59%|█████▉    | 235/399 [00:00<00:00, 461.82it/s]Loading weights:  73%|███████▎  | 290/399 [00:00<00:00, 479.09it/s]Loading weights:  86%|████████▌ | 342/399 [00:00<00:00, 476.33it/s]Loading weights:  98%|█████████▊| 391/399 [00:01<00:00, 199.96it/s]Loading weights: 100%|██████████| 399/399 [00:01<00:00, 288.97it/s]
+label 1/1
+
+C0 states the target in 8/9 questions
+violation % (any mention: STATE/META/DENY/WRONG) among C0-mentioned (n), negative form
+branch                  COMP_T      COMP_A      COMP_V      C0_box
+existence                    -           -           -     100 (2)
+existence_closed             -           -           -     100 (2)
+count                        -           -           -     100 (1)
+attribute                    -           -           -     100 (2)
+relation                     -           -           -     100 (1)
+ALL                          -           -           -     100 (8)
+
+regex disagrees with judge on the target in 4/18 rows
+files: /home/vyvn/new/cross_multimodal_negation/experiments/h1_v2/results/internomni/scored_pilot2_COMP_T-COMP_A-COMP_V-C0_box-OCR_V.jsonl /home/vyvn/new/cross_multimodal_negation/experiments/h1_v2/results/internomni/review_pilot2_COMP_T-COMP_A-COMP_V-C0_box-OCR_V.csv
+SMOKE DONE 2026. 11. 24. (화) 10:16:08 KST
+=== qwen2.5-omni-7b comprehension + controls 2026. 11. 24. (화) 10:16:08 KST
+932 questions, 2796 answers planned; by branch: existence=175, existence_closed=174, count=186, attribute=197, relation=200
+2769 answers to generate (2796 jobs)
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[transformers] Model config: tts_text_start_token_id must be `None` or an integer within the vocabulary (between 0 and 8447), got 151860. This may result in unexpected behavior.
+[transformers] Model config: tts_text_end_token_id must be `None` or an integer within the vocabulary (between 0 and 8447), got 151861. This may result in unexpected behavior.
+[transformers] Model config: tts_text_pad_token_id must be `None` or an integer within the vocabulary (between 0 and 8447), got 151859. This may result in unexpected behavior.
+[transformers] Model config: vision_start_token_id must be `None` or an integer within the vocabulary (between 0 and 8447), got 151652. This may result in unexpected behavior.
+[transformers] Model config: vision_end_token_id must be `None` or an integer within the vocabulary (between 0 and 8447), got 151653. This may result in unexpected behavior.
+[transformers] Model config: audio_start_token_id must be `None` or an integer within the vocabulary (between 0 and 8447), got 151647. This may result in unexpected behavior.
+[transformers] Model config: audio_end_token_id must be `None` or an integer within the vocabulary (between 0 and 8447), got 151648. This may result in unexpected behavior.
+Fetching 5 files:   0%|          | 0/5 [00:00<?, ?it/s]Fetching 5 files: 100%|██████████| 5/5 [00:00<00:00, 2569.41it/s]
+Loading weights:   0%|          | 0/1346 [00:00<?, ?it/s]Loading weights:  13%|█▎        | 181/1346 [00:00<00:00, 1792.13it/s]Loading weights:  27%|██▋       | 363/1346 [00:00<00:00, 1775.60it/s]Loading weights:  40%|████      | 541/1346 [00:00<00:01, 491.94it/s] Loading weights:  48%|████▊     | 650/1346 [00:01<00:02, 323.89it/s]Loading weights:  54%|█████▎    | 723/1346 [00:02<00:02, 257.52it/s]Loading weights:  58%|█████▊    | 775/1346 [00:02<00:02, 225.02it/s]Loading weights:  60%|██████    | 814/1346 [00:02<00:02, 209.67it/s]Loading weights:  65%|██████▍   | 870/1346 [00:02<00:01, 246.65it/s]Loading weights:  78%|███████▊  | 1050/1346 [00:02<00:00, 455.51it/s]Loading weights:  91%|█████████ | 1226/1346 [00:02<00:00, 664.01it/s]Loading weights: 100%|██████████| 1346/1346 [00:03<00:00, 445.28it/s]
+[transformers] [1mQwen2_5OmniThinkerForConditionalGeneration LOAD REPORT[0m from: Qwen/Qwen2.5-Omni-7B
+Key                                                                                                      | Status     |  | 
+---------------------------------------------------------------------------------------------------------+------------+--+-
+token2wav.code2wav_dit_model.transformer_blocks.{0...21}.ff.ff.{0, 3}.bias                               | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.transformer_blocks.{0...21}.attn.to_q.weight                                | UNEXPECTED |  | 
+token2wav.code2wav_bigvgan_model.resblocks.{0...17}.activations.{0, 1, 2, 3, 4, 5}.act.beta              | UNEXPECTED |  | 
+token2wav.code2wav_bigvgan_model.resblocks.{0...17}.activations.{0, 1, 2, 3, 4, 5}.act.alpha             | UNEXPECTED |  | 
+token2wav.code2wav_bigvgan_model.resblocks.{0...17}.convs2.{0, 1, 2}.weight                              | UNEXPECTED |  | 
+talker.model.layers.{0...23}.self_attn.q_proj.bias                                                       | UNEXPECTED |  | 
+talker.model.layers.{0...23}.mlp.up_proj.weight                                                          | UNEXPECTED |  | 
+talker.model.layers.{0...23}.self_attn.k_proj.bias                                                       | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.blocks.{1, 2, 3}.tdnn1.conv.weight                  | UNEXPECTED |  | 
+talker.model.layers.{0...23}.self_attn.v_proj.weight                                                     | UNEXPECTED |  | 
+token2wav.code2wav_bigvgan_model.resblocks.{0...17}.convs1.{0, 1, 2}.bias                                | UNEXPECTED |  | 
+token2wav.code2wav_bigvgan_model.resblocks.{0...17}.convs2.{0, 1, 2}.bias                                | UNEXPECTED |  | 
+talker.model.layers.{0...23}.self_attn.q_proj.weight                                                     | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.transformer_blocks.{0...21}.attn.to_out.0.bias                              | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.rotary_embed.inv_freq                                                       | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.transformer_blocks.{0...21}.attn.to_k.bias                                  | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.transformer_blocks.{0...21}.attn.to_k.weight                                | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.transformer_blocks.{0...21}.attn.to_out.0.weight                            | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.transformer_blocks.{0...21}.attn_norm.linear.bias                           | UNEXPECTED |  | 
+talker.model.layers.{0...23}.mlp.down_proj.weight                                                        | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.transformer_blocks.{0...21}.attn_norm.linear.weight                         | UNEXPECTED |  | 
+talker.model.layers.{0...23}.self_attn.o_proj.weight                                                     | UNEXPECTED |  | 
+talker.model.layers.{0...23}.mlp.gate_proj.weight                                                        | UNEXPECTED |  | 
+token2wav.code2wav_bigvgan_model.resblocks.{0...17}.convs1.{0, 1, 2}.weight                              | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.transformer_blocks.{0...21}.attn.to_v.weight                                | UNEXPECTED |  | 
+talker.model.layers.{0...23}.input_layernorm.weight                                                      | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.transformer_blocks.{0...21}.ff.ff.{0, 3}.weight                             | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.transformer_blocks.{0...21}.attn.to_q.bias                                  | UNEXPECTED |  | 
+token2wav.code2wav_bigvgan_model.ups.{0, 1, 2, 3, 4, 5}.0.bias                                           | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.blocks.{1, 2, 3}.res2net_block.blocks.0.conv.weight | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.transformer_blocks.{0...21}.attn.to_v.bias                                  | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.asp.tdnn.conv.weight                                | UNEXPECTED |  | 
+token2wav.code2wav_bigvgan_model.ups.{0, 1, 2, 3, 4, 5}.0.weight                                         | UNEXPECTED |  | 
+talker.model.layers.{0...23}.post_attention_layernorm.weight                                             | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.time_embed.time_mlp.{0, 2}.bias                                             | UNEXPECTED |  | 
+talker.model.layers.{0...23}.self_attn.v_proj.bias                                                       | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.proj_out.weight                                                             | UNEXPECTED |  | 
+talker.model.layers.{0...23}.self_attn.k_proj.weight                                                     | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.proj_out.bias                                                               | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.proj.weight                                                     | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.fc.weight                                           | UNEXPECTED |  | 
+talker.model.embed_tokens.weight                                                                         | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.blocks.{1, 2, 3}.tdnn2.conv.bias                    | UNEXPECTED |  | 
+token2wav.code2wav_bigvgan_model.conv_pre.weight                                                         | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.blocks.{1, 2, 3}.tdnn2.conv.weight                  | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.blocks.0.conv.bias                                  | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.blocks.{1, 2, 3}.res2net_block.blocks.0.conv.bias   | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.asp.conv.weight                                     | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.blocks.{1, 2, 3}.se_block.conv2.bias                | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.blocks.{1, 2, 3}.se_block.conv1.weight              | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.blocks.{1, 2, 3}.se_block.conv1.bias                | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.blocks.{1, 2, 3}.tdnn1.conv.bias                    | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.asp.tdnn.conv.bias                                  | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.blocks.0.conv.weight                                | UNEXPECTED |  | 
+token2wav.code2wav_bigvgan_model.activation_post.act.beta                                                | UNEXPECTED |  | 
+token2wav.code2wav_bigvgan_model.activation_post.act.alpha                                               | UNEXPECTED |  | 
+token2wav.code2wav_bigvgan_model.conv_pre.bias                                                           | UNEXPECTED |  | 
+token2wav.code2wav_bigvgan_model.conv_post.weight                                                        | UNEXPECTED |  | 
+talker.codec_head.weight                                                                                 | UNEXPECTED |  | 
+talker.thinker_to_talker_proj.bias                                                                       | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.blocks.{1, 2, 3}.se_block.conv2.weight              | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.norm_out.linear.weight                                                      | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.asp.conv.bias                                       | UNEXPECTED |  | 
+talker.model.norm.weight                                                                                 | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.time_embed.time_mlp.{0, 2}.weight                                           | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.mfa.conv.weight                                     | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.text_embed.codec_embed.weight                                               | UNEXPECTED |  | 
+talker.thinker_to_talker_proj.weight                                                                     | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.proj.bias                                                       | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.mfa.conv.bias                                       | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.norm_out.linear.bias                                                        | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.fc.bias                                             | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+[4/2769] 0.47 s/answer, ETA 0.4 h | COMP_A: 'B.'
+[24/2769] 0.32 s/answer, ETA 0.2 h | COMP_A: 'A.'
+[44/2769] 0.30 s/answer, ETA 0.2 h | COMP_A: 'A.'
+[64/2769] 0.30 s/answer, ETA 0.2 h | COMP_A: "A. So, what's next on your mind?"
+[84/2769] 0.29 s/answer, ETA 0.2 h | COMP_A: "C. So, what's next on your mind?"
+[104/2769] 0.29 s/answer, ETA 0.2 h | COMP_A: 'B. So, what do you think about that?'
+[124/2769] 0.29 s/answer, ETA 0.2 h | COMP_A: "B. So, what's next on your mind?"
+[144/2769] 0.29 s/answer, ETA 0.2 h | COMP_A: 'B. So, what do you think about that?'
+[164/2769] 0.29 s/answer, ETA 0.2 h | COMP_A: 'A.'
+[184/2769] 0.29 s/answer, ETA 0.2 h | COMP_A: "C. So, what's next on your mind?"
+[204/2769] 0.29 s/answer, ETA 0.2 h | COMP_A: 'A.'
+[224/2769] 0.29 s/answer, ETA 0.2 h | COMP_A: 'B. So, what do you think about that?'
+[244/2769] 0.30 s/answer, ETA 0.2 h | COMP_A: 'A.'
+[264/2769] 0.31 s/answer, ETA 0.2 h | COMP_A: 'A.'
+[284/2769] 0.31 s/answer, ETA 0.2 h | COMP_A: 'B.'
+[304/2769] 0.31 s/answer, ETA 0.2 h | COMP_A: "C. So, what's next on your mind?"
+[324/2769] 0.32 s/answer, ETA 0.2 h | COMP_A: 'A.'
+[344/2769] 0.32 s/answer, ETA 0.2 h | COMP_A: "B. So, what's next on your mind?"
+[364/2769] 0.32 s/answer, ETA 0.2 h | COMP_A: "B. So, what's next on your mind?"
+[384/2769] 0.33 s/answer, ETA 0.2 h | COMP_A: 'C.'
+[404/2769] 0.33 s/answer, ETA 0.2 h | COMP_A: "C. So, what's next on your mind?"
+[424/2769] 0.33 s/answer, ETA 0.2 h | COMP_A: 'C. So, what do you think about that?'
+[444/2769] 0.33 s/answer, ETA 0.2 h | COMP_A: "B. So, what's next on your mind?"
+[464/2769] 0.33 s/answer, ETA 0.2 h | COMP_A: "C. So, what's next on your mind?"
+[484/2769] 0.33 s/answer, ETA 0.2 h | COMP_A: "C. So, what's next on your mind?"
+[504/2769] 0.34 s/answer, ETA 0.2 h | COMP_A: 'C. So, what do you think about that?'
+[524/2769] 0.34 s/answer, ETA 0.2 h | COMP_A: 'A.'
+[544/2769] 0.34 s/answer, ETA 0.2 h | COMP_A: "B. So, what's next on your mind?"
+[564/2769] 0.34 s/answer, ETA 0.2 h | COMP_A: "C. So, what's next on your mind?"
+[584/2769] 0.34 s/answer, ETA 0.2 h | COMP_A: 'C. So, what do you think about that?'
+[604/2769] 0.34 s/answer, ETA 0.2 h | COMP_A: "C. So, what's next on your mind?"
+[624/2769] 0.34 s/answer, ETA 0.2 h | COMP_A: 'A.'
+[644/2769] 0.35 s/answer, ETA 0.2 h | COMP_A: 'A.'
+[664/2769] 0.34 s/answer, ETA 0.2 h | COMP_A: 'B. So, what do you think about that?'
+[684/2769] 0.34 s/answer, ETA 0.2 h | COMP_A: 'C. So, what do you think about that?'
+[704/2769] 0.34 s/answer, ETA 0.2 h | COMP_A: 'C. So, what do you think about that?'
+[724/2769] 0.34 s/answer, ETA 0.2 h | COMP_A: 'A.'
+[744/2769] 0.34 s/answer, ETA 0.2 h | COMP_A: "C. So, what's next on your mind?"
+[764/2769] 0.34 s/answer, ETA 0.2 h | COMP_A: 'C. So, what do you think about that?'
+[784/2769] 0.34 s/answer, ETA 0.2 h | COMP_A: 'C. So, what do you think about that?'
+[804/2769] 0.34 s/answer, ETA 0.2 h | COMP_A: 'B. So, what do you think about that?'
+[824/2769] 0.34 s/answer, ETA 0.2 h | COMP_A: 'A.'
+[844/2769] 0.34 s/answer, ETA 0.2 h | COMP_A: 'A.'
+[864/2769] 0.34 s/answer, ETA 0.2 h | COMP_A: 'C. So, what do you think about that?'
+[884/2769] 0.34 s/answer, ETA 0.2 h | COMP_A: 'B. So, what do you think about that?'
+[904/2769] 0.33 s/answer, ETA 0.2 h | COMP_A: 'A.'
+[924/2769] 0.34 s/answer, ETA 0.2 h | COMP_A: "C. So, what's next on your mind?"
+[944/2769] 0.33 s/answer, ETA 0.2 h | COMP_T: 'B. So, what do you think about that?'
+[964/2769] 0.33 s/answer, ETA 0.2 h | COMP_T: 'A.'
+[984/2769] 0.33 s/answer, ETA 0.2 h | COMP_T: 'C. So, what do you think about that?'
+[1004/2769] 0.33 s/answer, ETA 0.2 h | COMP_T: 'B. So, what do you think about that?'
+[1024/2769] 0.32 s/answer, ETA 0.2 h | COMP_T: 'C. So, what do you think about that?'
+[1044/2769] 0.32 s/answer, ETA 0.2 h | COMP_T: 'B. So, what do you think about that?'
+[1064/2769] 0.32 s/answer, ETA 0.2 h | COMP_T: "C. So, what's next on your mind?"
+[1084/2769] 0.32 s/answer, ETA 0.1 h | COMP_T: 'C. So, what do you think about that?'
+[1104/2769] 0.32 s/answer, ETA 0.1 h | COMP_T: 'C. So, what do you think about that?'
+[1124/2769] 0.31 s/answer, ETA 0.1 h | COMP_T: 'A.'
+[1144/2769] 0.31 s/answer, ETA 0.1 h | COMP_T: 'B. So, what do you think about that?'
+[1164/2769] 0.31 s/answer, ETA 0.1 h | COMP_T: 'B. What do you think about that?'
+[1184/2769] 0.31 s/answer, ETA 0.1 h | COMP_T: 'B. What do you think about that?'
+[1204/2769] 0.31 s/answer, ETA 0.1 h | COMP_T: 'B. What do you think about that?'
+[1224/2769] 0.31 s/answer, ETA 0.1 h | COMP_T: 'B. So, what do you think about that?'
+[1244/2769] 0.31 s/answer, ETA 0.1 h | COMP_T: 'B. So, what do you think about that?'
+[1264/2769] 0.31 s/answer, ETA 0.1 h | COMP_T: "C. So, what's next on your mind?"
+[1284/2769] 0.31 s/answer, ETA 0.1 h | COMP_T: 'C. So, what do you think about that?'
+[1304/2769] 0.31 s/answer, ETA 0.1 h | COMP_T: 'A.'
+[1324/2769] 0.31 s/answer, ETA 0.1 h | COMP_T: 'C. So, what do you think about that?'
+[1344/2769] 0.31 s/answer, ETA 0.1 h | COMP_T: "C. So, what's next on your mind?"
+[1364/2769] 0.31 s/answer, ETA 0.1 h | COMP_T: "C. So, what's next on your mind?"
+[1384/2769] 0.31 s/answer, ETA 0.1 h | COMP_T: "C. So, what's next on your mind?"
+[1404/2769] 0.31 s/answer, ETA 0.1 h | COMP_T: "C. So, what's next on your mind?"
+[1424/2769] 0.31 s/answer, ETA 0.1 h | COMP_T: "C. So, what's next on your mind?"
+[1444/2769] 0.31 s/answer, ETA 0.1 h | COMP_T: "B. So, what's next on your mind?"
+[1464/2769] 0.31 s/answer, ETA 0.1 h | COMP_T: "C. So, what's next on your mind?"
+[1484/2769] 0.31 s/answer, ETA 0.1 h | COMP_T: 'A.'
+[1504/2769] 0.31 s/answer, ETA 0.1 h | COMP_T: 'A. So, what do you think about that?'
+[1524/2769] 0.31 s/answer, ETA 0.1 h | COMP_T: 'B. What do you think about that?'
+[1544/2769] 0.31 s/answer, ETA 0.1 h | COMP_T: 'B. So, what do you think about that?'
+[1564/2769] 0.31 s/answer, ETA 0.1 h | COMP_T: 'B. So, what do you think about that?'
+[1584/2769] 0.31 s/answer, ETA 0.1 h | COMP_T: 'C. So, what do you think about that?'
+[1604/2769] 0.31 s/answer, ETA 0.1 h | COMP_T: 'B. What do you think about that?'
+[1624/2769] 0.31 s/answer, ETA 0.1 h | COMP_T: 'B. So, what do you think about that?'
+[1644/2769] 0.31 s/answer, ETA 0.1 h | COMP_T: 'A.'
+[1664/2769] 0.31 s/answer, ETA 0.1 h | COMP_T: "C. So, what's next on your mind?"
+[1684/2769] 0.31 s/answer, ETA 0.1 h | COMP_T: 'A. So, what do you think about that?'
+[1704/2769] 0.31 s/answer, ETA 0.1 h | COMP_T: 'A.'
+[1724/2769] 0.30 s/answer, ETA 0.1 h | COMP_T: "B. So, what's next on your mind?"
+[1744/2769] 0.30 s/answer, ETA 0.1 h | COMP_T: 'B. So, what do you think about that?'
+[1764/2769] 0.30 s/answer, ETA 0.1 h | COMP_T: 'B. So, what do you think about that?'
+[1784/2769] 0.30 s/answer, ETA 0.1 h | COMP_T: 'C. So, what do you think about that?'
+[1804/2769] 0.30 s/answer, ETA 0.1 h | COMP_T: 'A. So, what do you think about that?'
+[1824/2769] 0.30 s/answer, ETA 0.1 h | COMP_T: 'C. So, what do you think about that?'
+[1844/2769] 0.30 s/answer, ETA 0.1 h | COMP_T: 'A.'
+[1864/2769] 0.30 s/answer, ETA 0.1 h | COMP_V: 'C. So, what do you think about that?'
+[1884/2769] 0.30 s/answer, ETA 0.1 h | COMP_V: 'A. So, what do you think about that?'
+[1904/2769] 0.30 s/answer, ETA 0.1 h | COMP_V: 'C. So, what do you think about that?'
+[1924/2769] 0.30 s/answer, ETA 0.1 h | COMP_V: 'C. So, what do you think about that?'
+[1944/2769] 0.30 s/answer, ETA 0.1 h | COMP_V: 'A. So, what do you think about that?'
+[1964/2769] 0.30 s/answer, ETA 0.1 h | COMP_V: 'A. So, if you have any other questions or need more clarification, feel free to ask!'
+[1984/2769] 0.30 s/answer, ETA 0.1 h | COMP_V: 'B. So, what do you think about that?'
+[2004/2769] 0.30 s/answer, ETA 0.1 h | COMP_V: 'A. So, what do you think about that?'
+[2024/2769] 0.30 s/answer, ETA 0.1 h | COMP_V: 'A. So, what do you think about that?'
+[2044/2769] 0.30 s/answer, ETA 0.1 h | COMP_V: 'C. So, what do you think about that?'
+[2064/2769] 0.30 s/answer, ETA 0.1 h | COMP_V: 'A. So, what do you think about that?'
+[2084/2769] 0.30 s/answer, ETA 0.1 h | COMP_V: 'A. So, what do you think about that?'
+[2104/2769] 0.30 s/answer, ETA 0.1 h | COMP_V: 'A. So, what do you think about that?'
+[2124/2769] 0.30 s/answer, ETA 0.1 h | COMP_V: 'C. So, what do you think about that?'
+[2144/2769] 0.30 s/answer, ETA 0.1 h | COMP_V: 'C. So, what do you think about the other items?'
+[2164/2769] 0.30 s/answer, ETA 0.0 h | COMP_V: 'A. So, what do you think about that?'
+[2184/2769] 0.30 s/answer, ETA 0.0 h | COMP_V: 'B. So, what do you think about that?'
+[2204/2769] 0.30 s/answer, ETA 0.0 h | COMP_V: 'C. So, what do you think about that?'
+[2224/2769] 0.30 s/answer, ETA 0.0 h | COMP_V: 'A. So, what do you think about that?'
+[2244/2769] 0.30 s/answer, ETA 0.0 h | COMP_V: 'C. So, what do you think about that?'
+[2264/2769] 0.30 s/answer, ETA 0.0 h | COMP_V: 'A. So, what do you think about that?'
+[2284/2769] 0.30 s/answer, ETA 0.0 h | COMP_V: 'C. So, what do you think about that?'
+[2304/2769] 0.30 s/answer, ETA 0.0 h | COMP_V: 'A. So, what do you think about that?'
+[2324/2769] 0.30 s/answer, ETA 0.0 h | COMP_V: 'C. So, what do you think about that?'
+[2344/2769] 0.30 s/answer, ETA 0.0 h | COMP_V: 'B. So, what do you think about that?'
+[2364/2769] 0.30 s/answer, ETA 0.0 h | COMP_V: 'C. So, what do you think about that?'
+[2384/2769] 0.30 s/answer, ETA 0.0 h | COMP_V: 'B. So, what do you think about that?'
+[2404/2769] 0.30 s/answer, ETA 0.0 h | COMP_V: 'C. So, what do you think about that?'
+[2424/2769] 0.30 s/answer, ETA 0.0 h | COMP_V: 'B. So, what do you think about that?'
+[2444/2769] 0.30 s/answer, ETA 0.0 h | COMP_V: 'C. So, what do you think about that?'
+[2464/2769] 0.30 s/answer, ETA 0.0 h | COMP_V: 'B. So, what do you think about that?'
+[2484/2769] 0.30 s/answer, ETA 0.0 h | COMP_V: 'B. So, what do you think about that?'
+[2504/2769] 0.30 s/answer, ETA 0.0 h | COMP_V: 'C. So, what do you think about that?'
+[2524/2769] 0.30 s/answer, ETA 0.0 h | COMP_V: 'B. So, what do you think about that?'
+[2544/2769] 0.30 s/answer, ETA 0.0 h | COMP_V: 'A. So, what do you think about that?'
+[2564/2769] 0.30 s/answer, ETA 0.0 h | COMP_V: 'C. So, what do you think about that?'
+[2584/2769] 0.30 s/answer, ETA 0.0 h | COMP_V: 'A. So, what do you think about that?'
+[2604/2769] 0.29 s/answer, ETA 0.0 h | COMP_V: 'C. So, what do you think about that?'
+[2624/2769] 0.29 s/answer, ETA 0.0 h | COMP_V: 'C. So, what do you think about that?'
+[2644/2769] 0.29 s/answer, ETA 0.0 h | COMP_V: 'C. So, what do you think about that?'
+[2664/2769] 0.29 s/answer, ETA 0.0 h | COMP_V: 'A. So, what do you think about that?'
+[2684/2769] 0.29 s/answer, ETA 0.0 h | COMP_V: 'A. So, what do you think about that?'
+[2704/2769] 0.29 s/answer, ETA 0.0 h | COMP_V: 'C. So, what do you think about that?'
+[2724/2769] 0.29 s/answer, ETA 0.0 h | COMP_V: 'C. So, what do you think about that?'
+[2744/2769] 0.29 s/answer, ETA 0.0 h | COMP_V: 'C. So, what do you think about that?'
+[2764/2769] 0.29 s/answer, ETA 0.0 h | COMP_V: 'A. So, what do you think about that?'
+generated 2769 answers (100 tokens max) in 813 s (0.29 s/answer)
+0 answers hit 100 tokens -> regenerate with 256
+932 questions, 2796 answers planned; by branch: existence=175, existence_closed=174, count=186, attribute=197, relation=200
+COMP_A: correct 45.1%, parsed 100.0% (n=932) -> /home/vyvn/new/cross_multimodal_negation/experiments/h1_v2/results/qwen2.5-omni-7b/comp_pilot200_COMP_T-COMP_A-COMP_V.jsonl
+COMP_T: correct 18.7%, parsed 100.0% (n=932) -> /home/vyvn/new/cross_multimodal_negation/experiments/h1_v2/results/qwen2.5-omni-7b/comp_pilot200_COMP_T-COMP_A-COMP_V.jsonl
+COMP_V: correct 99.0%, parsed 100.0% (n=932) -> /home/vyvn/new/cross_multimodal_negation/experiments/h1_v2/results/qwen2.5-omni-7b/comp_pilot200_COMP_T-COMP_A-COMP_V.jsonl
+932 questions, 2796 answers planned; by branch: existence=175, existence_closed=174, count=186, attribute=197, relation=200
+1846 answers to generate (2796 jobs)
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[transformers] Model config: tts_text_start_token_id must be `None` or an integer within the vocabulary (between 0 and 8447), got 151860. This may result in unexpected behavior.
+[transformers] Model config: tts_text_end_token_id must be `None` or an integer within the vocabulary (between 0 and 8447), got 151861. This may result in unexpected behavior.
+[transformers] Model config: tts_text_pad_token_id must be `None` or an integer within the vocabulary (between 0 and 8447), got 151859. This may result in unexpected behavior.
+[transformers] Model config: vision_start_token_id must be `None` or an integer within the vocabulary (between 0 and 8447), got 151652. This may result in unexpected behavior.
+[transformers] Model config: vision_end_token_id must be `None` or an integer within the vocabulary (between 0 and 8447), got 151653. This may result in unexpected behavior.
+[transformers] Model config: audio_start_token_id must be `None` or an integer within the vocabulary (between 0 and 8447), got 151647. This may result in unexpected behavior.
+[transformers] Model config: audio_end_token_id must be `None` or an integer within the vocabulary (between 0 and 8447), got 151648. This may result in unexpected behavior.
+Fetching 5 files:   0%|          | 0/5 [00:00<?, ?it/s]Fetching 5 files: 100%|██████████| 5/5 [00:00<00:00, 2755.06it/s]
+Loading weights:   0%|          | 0/1346 [00:00<?, ?it/s]Loading weights:  36%|███▋      | 490/1346 [00:00<00:00, 1876.23it/s]Loading weights:  50%|█████     | 678/1346 [00:00<00:00, 981.82it/s] Loading weights:  58%|█████▊    | 787/1346 [00:00<00:00, 777.64it/s]Loading weights:  75%|███████▌  | 1014/1346 [00:00<00:00, 1057.25it/s]Loading weights: 100%|██████████| 1346/1346 [00:01<00:00, 1302.52it/s]
+[transformers] [1mQwen2_5OmniThinkerForConditionalGeneration LOAD REPORT[0m from: Qwen/Qwen2.5-Omni-7B
+Key                                                                                                      | Status     |  | 
+---------------------------------------------------------------------------------------------------------+------------+--+-
+talker.model.embed_tokens.weight                                                                         | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.transformer_blocks.{0...21}.attn.to_v.bias                                  | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.transformer_blocks.{0...21}.attn.to_k.weight                                | UNEXPECTED |  | 
+talker.model.layers.{0...23}.mlp.up_proj.weight                                                          | UNEXPECTED |  | 
+talker.model.layers.{0...23}.self_attn.o_proj.weight                                                     | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.transformer_blocks.{0...21}.attn.to_q.bias                                  | UNEXPECTED |  | 
+talker.model.layers.{0...23}.mlp.gate_proj.weight                                                        | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.asp.tdnn.conv.weight                                | UNEXPECTED |  | 
+talker.model.layers.{0...23}.self_attn.v_proj.weight                                                     | UNEXPECTED |  | 
+talker.model.layers.{0...23}.mlp.down_proj.weight                                                        | UNEXPECTED |  | 
+token2wav.code2wav_bigvgan_model.resblocks.{0...17}.convs2.{0, 1, 2}.bias                                | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.transformer_blocks.{0...21}.attn.to_out.0.bias                              | UNEXPECTED |  | 
+token2wav.code2wav_bigvgan_model.resblocks.{0...17}.activations.{0, 1, 2, 3, 4, 5}.act.alpha             | UNEXPECTED |  | 
+token2wav.code2wav_bigvgan_model.resblocks.{0...17}.convs1.{0, 1, 2}.bias                                | UNEXPECTED |  | 
+token2wav.code2wav_bigvgan_model.resblocks.{0...17}.convs2.{0, 1, 2}.weight                              | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.transformer_blocks.{0...21}.ff.ff.{0, 3}.bias                               | UNEXPECTED |  | 
+token2wav.code2wav_bigvgan_model.ups.{0, 1, 2, 3, 4, 5}.0.weight                                         | UNEXPECTED |  | 
+token2wav.code2wav_bigvgan_model.resblocks.{0...17}.convs1.{0, 1, 2}.weight                              | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.blocks.{1, 2, 3}.se_block.conv2.weight              | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.asp.conv.bias                                       | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.time_embed.time_mlp.{0, 2}.bias                                             | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.transformer_blocks.{0...21}.attn.to_k.bias                                  | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.transformer_blocks.{0...21}.attn.to_q.weight                                | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.transformer_blocks.{0...21}.attn_norm.linear.weight                         | UNEXPECTED |  | 
+talker.model.layers.{0...23}.self_attn.k_proj.weight                                                     | UNEXPECTED |  | 
+talker.model.layers.{0...23}.self_attn.q_proj.weight                                                     | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.transformer_blocks.{0...21}.ff.ff.{0, 3}.weight                             | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.transformer_blocks.{0...21}.attn_norm.linear.bias                           | UNEXPECTED |  | 
+talker.model.layers.{0...23}.self_attn.q_proj.bias                                                       | UNEXPECTED |  | 
+token2wav.code2wav_bigvgan_model.resblocks.{0...17}.activations.{0, 1, 2, 3, 4, 5}.act.beta              | UNEXPECTED |  | 
+talker.model.layers.{0...23}.input_layernorm.weight                                                      | UNEXPECTED |  | 
+talker.model.layers.{0...23}.self_attn.v_proj.bias                                                       | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.transformer_blocks.{0...21}.attn.to_v.weight                                | UNEXPECTED |  | 
+token2wav.code2wav_bigvgan_model.activation_post.act.alpha                                               | UNEXPECTED |  | 
+talker.model.layers.{0...23}.self_attn.k_proj.bias                                                       | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.blocks.0.conv.weight                                | UNEXPECTED |  | 
+talker.model.layers.{0...23}.post_attention_layernorm.weight                                             | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.transformer_blocks.{0...21}.attn.to_out.0.weight                            | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.time_embed.time_mlp.{0, 2}.weight                                           | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.blocks.{1, 2, 3}.se_block.conv1.bias                | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.blocks.{1, 2, 3}.se_block.conv2.bias                | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.mfa.conv.weight                                     | UNEXPECTED |  | 
+token2wav.code2wav_bigvgan_model.ups.{0, 1, 2, 3, 4, 5}.0.bias                                           | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.blocks.{1, 2, 3}.tdnn2.conv.bias                    | UNEXPECTED |  | 
+token2wav.code2wav_bigvgan_model.conv_post.weight                                                        | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.blocks.{1, 2, 3}.tdnn1.conv.bias                    | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.proj_out.weight                                                             | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.norm_out.linear.bias                                                        | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.blocks.{1, 2, 3}.tdnn1.conv.weight                  | UNEXPECTED |  | 
+talker.thinker_to_talker_proj.weight                                                                     | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.fc.bias                                             | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.mfa.conv.bias                                       | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.blocks.{1, 2, 3}.tdnn2.conv.weight                  | UNEXPECTED |  | 
+token2wav.code2wav_bigvgan_model.activation_post.act.beta                                                | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.rotary_embed.inv_freq                                                       | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.blocks.{1, 2, 3}.res2net_block.blocks.0.conv.weight | UNEXPECTED |  | 
+talker.model.norm.weight                                                                                 | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.proj_out.bias                                                               | UNEXPECTED |  | 
+talker.codec_head.weight                                                                                 | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.blocks.{1, 2, 3}.res2net_block.blocks.0.conv.bias   | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.blocks.0.conv.bias                                  | UNEXPECTED |  | 
+talker.thinker_to_talker_proj.bias                                                                       | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.text_embed.codec_embed.weight                                               | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.asp.tdnn.conv.bias                                  | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.proj.bias                                                       | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.fc.weight                                           | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.blocks.{1, 2, 3}.se_block.conv1.weight              | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.spk_encoder.asp.conv.weight                                     | UNEXPECTED |  | 
+token2wav.code2wav_bigvgan_model.conv_pre.weight                                                         | UNEXPECTED |  | 
+token2wav.code2wav_bigvgan_model.conv_pre.bias                                                           | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.input_embed.proj.weight                                                     | UNEXPECTED |  | 
+token2wav.code2wav_dit_model.norm_out.linear.weight                                                      | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+[4/1846] 0.59 s/answer, ETA 0.3 h | C0_box: "The sphere is red. It's medium - sized compared to the other objects in the image. It looks like it'"
+[24/1846] 0.59 s/answer, ETA 0.3 h | C0_box: "The cube is yellow. It's a medium - sized cube. And it looks like it's made of a shiny, metallic mat"
+[44/1846] 0.61 s/answer, ETA 0.3 h | C0_box: "The sphere is gray. It's small in size. And it looks like it's made of a matte material. Well, that'"
+[64/1846] 0.61 s/answer, ETA 0.3 h | C0_box: "The sphere is blue. It's small in size. And it looks like it's made of a matte material. What do you"
+[84/1846] 0.61 s/answer, ETA 0.3 h | C0_box: "The cube is small, yellow, and it looks like it's made of a shiny, metallic material. Well, that's w"
+[104/1846] 0.62 s/answer, ETA 0.3 h | C0_box: "Well, in the picture you've shown me, there's one cube, which is the green one. There's also one sph"
+[124/1846] 0.65 s/answer, ETA 0.3 h | C0_box: 'There are two cubes and one sphere in the picture. If you have any other questions about it, feel fr'
+[144/1846] 0.68 s/answer, ETA 0.3 h | C0_box: "Well, in the picture you've shown me, there's one sphere and two cylinders. The sphere is green and "
+[164/1846] 0.70 s/answer, ETA 0.3 h | C0_box: "Well, in the picture you've shown me, there's one sphere and two cylinders. So, that's one sphere an"
+[184/1846] 0.71 s/answer, ETA 0.3 h | C0_box: "Well, in the picture you've shown me, there's one cube. There are two spheres, one gray and one gree"
+[204/1846] 0.72 s/answer, ETA 0.3 h | C0_box: "Well, in the image, there's one horse and one sheep. So, that's two animals in total. If you have an"
+[224/1846] 0.72 s/answer, ETA 0.3 h | C0_box: "Well, in the image, there are four bowls. And, there's one fork. So, that's it. If you have any othe"
+[244/1846] 0.71 s/answer, ETA 0.3 h | C0_box: "Well, in the image, there's one motorcycle and one truck. The motorcycle is on the truck's flatbed. "
+[264/1846] 0.71 s/answer, ETA 0.3 h | C0_box: "Well, in the image, there are two chairs. And there's one potted plant. If you have any other questi"
+[284/1846] 0.71 s/answer, ETA 0.3 h | C0_box: 'Well, in the image, there are two cats. There are no dogs in the picture. So, to answer your questio'
+[304/1846] 0.72 s/answer, ETA 0.3 h | C0_box: "Well, in the image, there's a red convertible car, a black pickup truck with a white camper shell, a"
+[324/1846] 0.74 s/answer, ETA 0.3 h | C0_box: "Well, in the image, there's a bicycle. And, there are also some boats on the water. So, that's what "
+[344/1846] 0.75 s/answer, ETA 0.3 h | C0_box: "Well, in the image, there's a banana. It's kind of peeking out from a plastic bag. And there's also "
+[364/1846] 0.75 s/answer, ETA 0.3 h | C0_box: "Well, in the image, there's a pizza. You can see the golden-brown crust and some melted cheese on it"
+[384/1846] 0.75 s/answer, ETA 0.3 h | C0_box: "Well, in the image, there's a train and a bicycle. The train is yellow and seems to be on the tracks"
+[404/1846] 0.76 s/answer, ETA 0.3 h | C0_box: "Well, I don't see any kitchen items in the image. It looks like a bathroom scene with a cat in the s"
+[424/1846] 0.76 s/answer, ETA 0.3 h | C0_box: "Well, in the image, there's a container of ice cream. It's got a spoon in it. And, um, there's also "
+[444/1846] 0.77 s/answer, ETA 0.3 h | C0_box: 'Well, in the image, there are zebras and a giraffe. You can see the zebras grazing on the grass and '
+[464/1846] 0.77 s/answer, ETA 0.3 h | C0_box: "Well, from what I can see in the image, there's a couch. There's also a chair. But, I don't see a di"
+[484/1846] 0.77 s/answer, ETA 0.3 h | C0_box: "Well, in the image, there's a giraffe and a bird. There's no cat or horse in there. So, the animals "
+[504/1846] 0.77 s/answer, ETA 0.3 h | C0_box: "Well, in the image, there are giraffes and zebras. I don't see any sheep or cows. So, the animals pr"
+[524/1846] 0.77 s/answer, ETA 0.3 h | C0_box: "Well, in the image, there's an umbrella. I don't see a suitcase, handbag, or tie. So, the only acces"
+[544/1846] 0.78 s/answer, ETA 0.3 h | C0_box: "Well, from what I can see in the image, there's a fork and a bowl. There's no wine glass or knife in"
+[564/1846] 0.78 s/answer, ETA 0.3 h | C0_box: "Well, from what I can see in the image, there's a couch. There's also a chair. But I don't see a bed"
+[584/1846] 0.77 s/answer, ETA 0.3 h | C0_box: "Well, from what I can see in the image, there's a bicycle and a car. I don't see a truck or a train "
+[604/1846] 0.78 s/answer, ETA 0.3 h | C0_box: "Well, from what I can see in the image, there's a chair. There's also a couch. But, um, I don't see "
+[624/1846] 0.78 s/answer, ETA 0.3 h | C0_box: "Well, in the image, there are snowboards and skis. I don't see a skateboard or a surfboard there. So"
+[644/1846] 0.77 s/answer, ETA 0.3 h | C0_box: "The bear is holding a small orange pumpkin. It's wearing a black mask over its eyes and a black cape"
+[664/1846] 0.77 s/answer, ETA 0.3 h | C0_box: "Well, she's holding an umbrella. And she's wearing a black t - shirt with some kind of design on it,"
+[684/1846] 0.76 s/answer, ETA 0.2 h | C0_box: "Well, she's got a red umbrella in her hand. And she's walking down a street. There's a car parked on"
+[704/1846] 0.76 s/answer, ETA 0.2 h | C0_box: "Well, he's holding a skateboard. And he's standing on a paved area, like a sidewalk or a plaza. What"
+[724/1846] 0.76 s/answer, ETA 0.2 h | C0_box: "Well, he's wearing a blue shirt and black pants. And he's riding a skateboard. So, that's what he's "
+[744/1846] 0.76 s/answer, ETA 0.2 h | C0_box: "Well, there are two men in the picture. One of them is riding a horse. And he's not really talking t"
+[764/1846] 0.75 s/answer, ETA 0.2 h | C0_box: "Well, the jockey is sitting on a saddle. And they're wearing a helmet for safety, of course. They al"
+[784/1846] 0.75 s/answer, ETA 0.2 h | C0_box: "The child is sitting on a skateboard. They're wearing a blue jacket, blue jeans, and a red helmet. S"
+[804/1846] 0.75 s/answer, ETA 0.2 h | C0_box: 'Well, it looks like the man is leaning on the side of a truck. And he seems to be watching a dog. Th'
+[824/1846] 0.75 s/answer, ETA 0.2 h | C0_box: "He's riding on a surfboard. He's wearing a wetsuit. If you want to know more about surfing or wetsui"
+[844/1846] 0.75 s/answer, ETA 0.2 h | C0_box: "The field is green. It looks like it's in a good state, probably well - maintained. It seems like a "
+[864/1846] 0.75 s/answer, ETA 0.2 h | C0_box: 'The shirt is white and it looks like a medium - sized one. What do you think about it?'
+[884/1846] 0.75 s/answer, ETA 0.2 h | C0_box: "Well, there are three people in the picture. The one on the left is wearing black. He's standing wit"
+[904/1846] 0.75 s/answer, ETA 0.2 h | C0_box: "The pants are black. I'm not sure what the material is, but it looks like some kind of leather or le"
+[924/1846] 0.76 s/answer, ETA 0.2 h | C0_box: "The bus is yellow. It's a large bus, like the ones used for transporting students to and from school"
+[944/1846] 0.75 s/answer, ETA 0.2 h | OCR_V: 'Leave its color out of your answer.'
+[964/1846] 0.73 s/answer, ETA 0.2 h | OCR_V: 'Answer without mentioning its color.'
+[984/1846] 0.72 s/answer, ETA 0.2 h | OCR_V: 'Make no mention of its color.'
+[1004/1846] 0.71 s/answer, ETA 0.2 h | OCR_V: 'Do not mention its size.'
+[1024/1846] 0.70 s/answer, ETA 0.2 h | OCR_V: 'Make no mention of its size.'
+[1044/1846] 0.69 s/answer, ETA 0.2 h | OCR_V: 'Answer without mentioning the number of cubes.'
+[1064/1846] 0.68 s/answer, ETA 0.1 h | OCR_V: "Don't say anything about the number of cubes."
+[1084/1846] 0.67 s/answer, ETA 0.1 h | OCR_V: 'Avoid mentioning the number of cylinders.'
+[1104/1846] 0.67 s/answer, ETA 0.1 h | OCR_V: 'Answer without mentioning the number of spheres.'
+[1124/1846] 0.66 s/answer, ETA 0.1 h | OCR_V: 'Make no mention of the number of bowls.'

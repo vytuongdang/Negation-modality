@@ -107,6 +107,7 @@ tests (subset first), for example:
 - 2026-11-19 | (Vy) Never pre-conclude a direction before v2 results with CIs; keep notes, reports and the draft
   neutral.
 - 2026-11-24: comparing human labels with a re-scored run must match on the answer text, not on (sample_id, condition): regenerated answers silently pair a human label with a different answer (18/67 items).
+- 2026-11-24: a probe question placed BEFORE an active instruction gets the instruction applied to the probe answer (COMP v1: model avoided the forbidden option, 18.7% < chance). Quote the instruction as content, first, when testing comprehension.
 
 ## 10. New ideas: propose, pilot on a subset, discuss, then scale
 The Idea document is a starting point, not a cage. When Pico sees a better design, a missing control, or a

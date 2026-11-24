@@ -149,6 +149,9 @@
 - Stage 2 DONE 09:41: InternOmni T/A/V 50.1/79.8/95.8 (n 779), T-A -29.8 [-34.0,-25.3], A-V -15.9; recall C0 70, T 74,
   A 27, V 73 -> A answers often short, only about the target (audio taken as question?). COMP_A will check. Reported.
 - Stage 3 RUNNING since 10:10: tmux job-stage3, log pico/logs/stage3.log ('SMOKE DONE', 'TRIAL DONE'/'TRIAL STOPPED'). ETA ~23:00-24:00.
+- 10:45 COMP v1 INVALID as comprehension (instruction after the MCQ is applied to the answer; Qwen-7B COMP_T 18.7%,
+  A 45.1%, V 99.0%). Asked Vy (Telegram) to approve COMP v2 (quoted instruction first + verbatim repeat), see
+  paper/ideas.md. Do NOT edit run_h1v2.py/comp.py while job-stage3 runs (it reloads them per model).
 - Stage 3 runner (was prepared 08:15): experiments/h1_v2/run_stage3.sh = smoke --pilot 2 of COMP_T/A/V C0_box OCR_V
   for all 5 models, then per model: COMP (comp_pilot200.jsonl), C0_box+OCR_V, --forms (H4). Launch when Stage 2 is done:
   cd experiments/h1_v2 && tmux new -d -s job-stage3 "bash run_stage3.sh > ../../pico/logs/stage3.log 2>&1" ; ~12-14 h.

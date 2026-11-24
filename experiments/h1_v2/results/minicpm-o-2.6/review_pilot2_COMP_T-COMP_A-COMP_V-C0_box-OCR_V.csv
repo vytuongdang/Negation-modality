@@ -1,0 +1,50 @@
+﻿sample_id,form,condition,question,negation,answer,stated,target,target_mentioned,regex_target_mentioned,judge_source,target_label,violation,required_recall
+coco-existence-000199,negative,C0,What foods are present in the image?,,"The image contains a variety of vegetables, including broccoli, carrots, and possibly some other mixed vegetables. There are also some pieces of what appears to be tofu or a similar protein source. The dish seems to be a stir-fry or a mixed vegetable dish.","broccoli, carrot",carrot,1,1,fast,STATE,1,1.0
+coco-existence-000199,negative,C0_box,What foods are present in the image?,,"The image contains a variety of vegetables, including broccoli, carrots, mushrooms, and peppers. There are also some pieces of tofu or a similar protein source. The dish appears to be a stir-fry or a mixed vegetable dish with these ingredients.","broccoli, carrot",carrot,1,1,fast,STATE,1,1.0
+coco-existence-000225,negative,C0,What accessories are present in the image?,,"In the image, there is a man wearing a tie and a backpack. He is also holding a cell phone, which he is using to take a picture of himself in the mirror.","backpack, tie",tie,1,1,fast,STATE,1,1.0
+coco-existence-000225,negative,C0_box,What accessories are present in the image?,,"In the image, there is a man wearing a tie and a backpack. He is also holding a cell phone, which he is using to take a picture of himself in the mirror.","backpack, tie",tie,1,1,fast,STATE,1,1.0
+coco-existence_closed-000014,negative,C0,"Which of the following kitchen items are present in the image: cup, bowl, wine glass, and spoon?",,The kitchen items present in the image are a cup and a bowl. There is no wine glass or spoon visible in the image.,"bowl, cup",cup,1,1,fast,STATE,1,1.0
+coco-existence_closed-000014,negative,C0_box,"Which of the following kitchen items are present in the image: cup, bowl, wine glass, and spoon?",,"The kitchen item present in the image is a cup. There is no bowl, wine glass, or spoon visible in the image.",cup,cup,1,1,think,STATE,1,0.0
+coco-existence_closed-000045,negative,C0,"Which of the following foods are present in the image: banana, broccoli, apple, and sandwich?",,The image contains a banana and an apple. There is no broccoli or sandwich present.,"apple, banana",apple,1,1,fast,STATE,1,1.0
+coco-existence_closed-000045,negative,C0_box,"Which of the following foods are present in the image: banana, broccoli, apple, and sandwich?",,The foods present in the image are a banana and an apple. There is no broccoli or sandwich visible.,"apple, banana",apple,1,1,fast,STATE,1,1.0
+clevr-count-000114,negative,C0,How many spheres and cylinders are there?,,"To determine the number of spheres and cylinders in the image, let's analyze the objects present:
+
+1. **Cylinders**:
+   - There are two cylindrical objects visible in the image. One is green, and the other is purple.
+
+2. **Spheres**:
+   - There is one spherical object visible in the image, which is cyan in color.
+
+By counting these objects, we find:
+- Number of cylinders: 2
+- Number of spheres: 1
+
+Therefore, there are 2 cylinders and 1 sphere in the image.","there is 1 sphere, there are 2 cylinders",there is 1 sphere,1,1,fast,STATE,1,1.0
+clevr-count-000114,negative,C0_box,How many spheres and cylinders are there?,,"To determine the number of spheres and cylinders in the image, let's analyze the objects present:
+
+1. **Cylinders**:
+   - There are two cylindrical objects visible in the image. One is green, and the other is purple.
+
+2. **Spheres**:
+   - There is one spherical object visible in the image, which is cyan in color.
+
+Therefore, the total count is:
+- Number of spheres: 1
+- Number of cylinders: 2
+
+So, there is 1 sphere and 2 cylinders in the image.","there is 1 sphere, there are 2 cylinders",there is 1 sphere,1,1,fast,STATE,1,1.0
+clevr-attribute-000005,negative,C0,"Describe the sphere by its color, size, and material.",,"The sphere in the image is blue in color. It appears to be small in size compared to the surrounding cubes. The material of the sphere seems to be matte, as it does not reflect light in the same way that the metallic or glossy surfaces of the cubes do. The surface of the sphere looks smooth and non-reflective. 
+
+Here is a step-by-step analysis:
+1. **Color**: The sphere is distinctly blue.
+2. **Size**: It is smaller than the cubes surrounding it.
+3. **Material**: The sphere has a matte finish, indicating it is not reflective like the metallic or glossy cubes.
+
+This detailed description covers the color, size, and material of the sphere in the image.","sphere is blue, sphere is small",sphere is small,1,1,think,STATE,1,0.5
+clevr-attribute-000005,negative,C0_box,"Describe the sphere by its color, size, and material.",,"The sphere in the image is blue in color. It appears to be small in size compared to the surrounding cubes. The material of the sphere seems to be matte, as it does not reflect light in the same way as the metallic or glossy surfaces of the other objects in the image.","sphere is blue, sphere is small",sphere is small,1,1,think,STATE,1,0.5
+vaw-attribute-000149,negative,C0,Describe the bus by its color and size.,,"The bus is a large red double decker bus, taking up a significant portion of the image.",bus is red,bus is red,1,1,fast,STATE,1,0.0
+vaw-attribute-000149,negative,C0_box,Describe the bus by its color and size.,,The bus is a large red double decker bus.,bus is red,bus is red,1,1,fast,STATE,1,0.0
+gqa-relation-000297,negative,C0,"For the man, say what he is looking at and what he is wearing.",,The man is looking at the keyboard and he is wearing a blue shirt.,man is wearing shirt,man is looking at table,0,0,fast,NONE,0,1.0
+gqa-relation-000297,negative,C0_box,"For the man, say what he is looking at and what he is wearing.",,The man is looking at a keyboard and he is wearing a blue shirt.,man is wearing shirt,man is looking at table,0,0,fast,NONE,0,1.0
+gqa-relation-000208,negative,C0,"For the man, say what he is riding on and what he is wearing.",,The man is riding on a skateboard and he is wearing a white shirt.,"man is riding on skateboard, man is wearing shirt",man is riding on skateboard,1,1,fast,STATE,1,1.0
+gqa-relation-000208,negative,C0_box,"For the man, say what he is riding on and what he is wearing.",,The man is riding on a skateboard and he is wearing a white shirt.,"man is riding on skateboard, man is wearing shirt",man is riding on skateboard,1,1,fast,STATE,1,1.0

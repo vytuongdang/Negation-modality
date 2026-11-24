@@ -25,3 +25,15 @@ Pilot on ≤300 samples in a new versioned folder; scale only after Vy agrees.
 
 ## I4. Instruction position (H3-C)  [from Idea doc, refine after H1]
 - Instruction before the image vs after the question, text and audio, same samples.
+
+## 2026-11-24: H3-B comprehension v1 is not valid as a comprehension test (Qwen-7B, 932 q)
+- COMP_T / COMP_A put the multiple-choice question FIRST and the instruction AFTER it (same slot as T / A).
+  Result: COMP_T 18.7% correct (below 33% chance), COMP_A 45.1%, COMP_V 99.0%. Answers are "B. So, what's next on
+  your mind?": the model treats the trailing instruction ("Leave the carrot out of your answer.") as a command on
+  its MCQ answer and avoids the forbidden option (existence: 11/175 correct, it picks an absent object instead).
+- So v1 measures obedience, not comprehension. Keep v1 as data (it shows the instruction is applied), do not use it as H3-B.
+- Proposal COMP v2 (needs Vy OK; code after Stage 3 ends, ~1-2 GPU h for 5 models): the instruction is quoted as
+  content, delivered first, and the question asks about it:
+  T: [image] "Here is an instruction:" + instruction text item + "Which item does this instruction say must not be mentioned? (A)..(B)..(C).. Answer with the letter only."
+  A: same with the audio item; V: the instruction image + "Which item does the instruction written in the image say must not be mentioned? ...".
+  Plus a verbatim check per channel: repeat the instruction word for word (T trivial copy, A = ASR_A, V = OCR_V exists).
