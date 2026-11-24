@@ -4,6 +4,7 @@
 # Stops at the first failure (exit 1, "TRIAL STOPPED"); answers are cached, so a rerun resumes.
 cd "$(dirname "$0")"
 export PYTHONNOUSERSITE=1
+export PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
 NEG=~/anaconda3/envs/negation/bin/python
 MODELS_TO_RUN=("$@"); [ $# -eq 0 ] && MODELS_TO_RUN=(qwen2.5-omni-7b qwen2.5-omni-3b minicpm-o-2.6 phi-4-mm internomni)
 fail() { echo "FAILED $1 $(date)"; echo "TRIAL STOPPED $(date)"; exit 1; }

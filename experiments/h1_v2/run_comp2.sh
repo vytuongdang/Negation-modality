@@ -4,6 +4,7 @@
 # in pico/logs/stage3.log (one GPU job at a time). Smoke --pilot 2 for all models first. Stops at the first failure.
 cd "$(dirname "$0")"
 export PYTHONNOUSERSITE=1
+export PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
 NEG=~/anaconda3/envs/negation/bin/python
 LOG3=../../pico/logs/stage3.log
 if [ "$1" = "--wait" ]; then

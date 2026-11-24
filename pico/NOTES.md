@@ -246,3 +246,11 @@
   Note: negative form obeyed BETTER than "Mention only Y" (Delta < 0) and exceptive much worse (names X).
 - Qwen-3B controls: OCR_V exact 866/932 (92.9%); C0_box 84.0 vs C0 85.7 (McNemar p=0.037, small).
 - TODO when Stage 3 done: all-model H4 + controls table, Telegram stage report, fill paper TBDs (draft_v1.md + latex).
+
+## 2026-11-24 20:37 Stage 3 CRASH FIXED + RESTARTED (Vy urgent note 20:35)
+- 19:51 OOM in judge thinking retry (4096 tok, batch 8) scoring qwen-3b --forms. Fix in create_data/src/judge.py:
+  RETRY_BATCH_SIZE=2 for budgets > THINK_TOKENS, _free_cuda() before each pass; PYTORCH_CUDA_ALLOC_CONF=expandable_segments
+  in run_stage3.sh + run_comp2.sh. Prompt/budgets/cache keys unchanged.
+- RUNNING tmux job-stage3 = run_stage3.sh qwen-3b minicpm phi internomni (log pico/logs/stage3.log; old log stage3_run1.log)
+  && run_comp2.sh (all 5, log pico/logs/comp2.log). ETA stage3 ~16:00 11-25, comp2 ~23:00 11-25.
+- Vy rule: while a job runs check at most every 1 h (sleep_seconds <= 3600) so a crash idles the GPU < 1 h.

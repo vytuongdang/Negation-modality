@@ -33,6 +33,8 @@ PROMPT_VERSION = "v2"       # prompt without the question (dataset baseline)
 PROMPT_VERSION_Q = "v3"     # prompt with the question (experiments, since 2026-11-23)
 THINK_TOKENS = 1500         # first thinking try (cache key unchanged, so old replies are reused)
 THINK_RETRY_TOKENS = 4096   # retry for replies that did not reach the JSON
+RETRY_BATCH_SIZE = 2        # 2026-11-24: batch 8 x 4096 tokens went OOM on the 24 GB TITAN RTX (memory only; same
+                            # prompt, budget and cache keys, so cached results stay valid)
 
 PROMPT = """Below is an answer about an image, and a numbered list of facts.
 Which facts does the answer state? Rules:
@@ -141,6 +143,16 @@ def parse(reply, comps):
     return {c["id"]: (i in idx) for i, c in enumerate(comps, 1)}
 
 
+def _free_cuda():
+    try:
+        import gc, torch
+        gc.collect()
+        if torch.cuda.is_available():
+            torch.cuda.empty_cache()
+    except ImportError:
+        pass
+
+
 class Judge:
     def __init__(self, cache_path, batch_size=8):
         self.cache_path = Path(cache_path)
@@ -163,11 +175,13 @@ class Judge:
                 from llm import LocalLLM
                 self.llm = LocalLLM(JUDGE_MODEL)
             self.cache_path.parent.mkdir(parents=True, exist_ok=True)
-            step = self.batch_size * 8
+            bs = min(self.batch_size, RETRY_BATCH_SIZE) if thinking and budget > THINK_TOKENS else self.batch_size
+            step = bs * 8
+            _free_cuda()
             for i in range(0, len(todo), step):
                 chunk = todo[i:i + step]
                 replies = self.llm.chat([build_prompt(c, a, q) for _, (c, a, q) in chunk],
-                                        max_new_tokens=budget if thinking else 40, batch_size=self.batch_size,
+                                        max_new_tokens=budget if thinking else 40, batch_size=bs,
                                         thinking=thinking)
                 with open(self.cache_path, "a") as f:
                     for (k, (c, a, q)), reply in zip(chunk, replies):
