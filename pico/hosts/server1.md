@@ -13,3 +13,11 @@ Git (repo shared with B200 through GitHub `origin`, branch main):
 - Never edit a file that a running job will load later (wrapper scripts instead), on either machine.
 - Result files: do not commit outputs of a run tag that B200 also writes (e.g. full runs); pilots here use
   their own tags (pilot*, smoke*).
+
+Dataset on each machine (create_data/dataset/ is NOT in git; each machine has its own copy):
+- server 1 = the SUBSET (1,150 units / 1,142 images; pilot200 = 932 questions). All results so far use it.
+- B200 = the FULL dataset v2 (built on B200: `subset_units.py --restore`, then the pipeline; TTS also on B200).
+  A rebuild re-runs B2/B3, so the same sample_id can mean a different item on the two machines: never mix
+  results across machines by sample_id. B200 run tags start with `full` (e.g. scored_full.jsonl).
+- Never commit a change to shared config/code that only one machine's dataset needs: use command-line
+  options or pico/host.env instead.
