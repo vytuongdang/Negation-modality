@@ -152,6 +152,12 @@
 - 10:45 COMP v1 INVALID as comprehension (instruction after the MCQ is applied to the answer; Qwen-7B COMP_T 18.7%,
   A 45.1%, V 99.0%). Asked Vy (Telegram) to approve COMP v2 (quoted instruction first + verbatim repeat), see
   paper/ideas.md. Do NOT edit run_h1v2.py/comp.py while job-stage3 runs (it reloads them per model).
+- 10:44 Vy APPROVED COMP v2. CODE READY 11:0x: experiments/h1_v2/run_comp2.py = wrapper around run_h1v2 (no edit to
+  run_h1v2.py/comp.py): COMP2_T/A/V (instruction quoted first: "Here is an [spoken] instruction:" + item, then MCQ,
+  same options as v1) + REP_T/REP_A (repeat word for word) + OCR_V; CPU-checked prompts. run_comp2.sh = smoke --pilot 2
+  all 5, then pilot200 all 5, then analyze_comp.py --version v2 (-> analysis_comp2_pilot200.md, NC + verbatim, CIs).
+  tmux job-comp2 = run_comp2.sh --wait: WAITS until job-stage3 ends with TRIAL DONE, then starts (log pico/logs/comp2.log).
+  If stage3 STOPS, comp2 does not start: fix stage3, then start comp2 by hand. When done: brief neutral Telegram (NC per channel, CIs).
 - Stage 3 runner (was prepared 08:15): experiments/h1_v2/run_stage3.sh = smoke --pilot 2 of COMP_T/A/V C0_box OCR_V
   for all 5 models, then per model: COMP (comp_pilot200.jsonl), C0_box+OCR_V, --forms (H4). Launch when Stage 2 is done:
   cd experiments/h1_v2 && tmux new -d -s job-stage3 "bash run_stage3.sh > ../../pico/logs/stage3.log 2>&1" ; ~12-14 h.

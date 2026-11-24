@@ -739,3 +739,48 @@ Notes:
 [1084/1846] 0.67 s/answer, ETA 0.1 h | OCR_V: 'Avoid mentioning the number of cylinders.'
 [1104/1846] 0.67 s/answer, ETA 0.1 h | OCR_V: 'Answer without mentioning the number of spheres.'
 [1124/1846] 0.66 s/answer, ETA 0.1 h | OCR_V: 'Make no mention of the number of bowls.'
+[1144/1846] 0.65 s/answer, ETA 0.1 h | OCR_V: 'Answer without mentioning the number of motorcycles.'
+[1164/1846] 0.65 s/answer, ETA 0.1 h | OCR_V: 'Avoid mentioning the number of knives.'
+[1184/1846] 0.64 s/answer, ETA 0.1 h | OCR_V: 'Make no mention of the number of cats.'
+[1204/1846] 0.63 s/answer, ETA 0.1 h | OCR_V: "Don't say anything about the number of sheep."
+[1224/1846] 0.63 s/answer, ETA 0.1 h | OCR_V: 'Never refer to the dining table.'
+[1244/1846] 0.62 s/answer, ETA 0.1 h | OCR_V: 'Leave the carrot out of your answer.'
+[1264/1846] 0.62 s/answer, ETA 0.1 h | OCR_V: "Don't say anything about the horse."
+[1284/1846] 0.61 s/answer, ETA 0.1 h | OCR_V: "Don't say anything about the cat."
+[1304/1846] 0.61 s/answer, ETA 0.1 h | OCR_V: 'Leave the chair out of your answer.'
+[1324/1846] 0.60 s/answer, ETA 0.1 h | OCR_V: 'Avoid mentioning the dining table.'
+[1344/1846] 0.60 s/answer, ETA 0.1 h | OCR_V: 'Leave the suitcase out of your answer.'
+[1364/1846] 0.59 s/answer, ETA 0.1 h | OCR_V: 'Make no mention of the carrot.'
+[1384/1846] 0.59 s/answer, ETA 0.1 h | OCR_V: 'Avoid mentioning the car.'
+[1404/1846] 0.58 s/answer, ETA 0.1 h | OCR_V: 'Do not mention the spoon.'
+[1424/1846] 0.58 s/answer, ETA 0.1 h | OCR_V: 'Avoid mentioning the backpack.'
+[1444/1846] 0.57 s/answer, ETA 0.1 h | OCR_V: 'Avoid mentioning the banana.'
+[1464/1846] 0.57 s/answer, ETA 0.1 h | OCR_V: "Don't say anything about the truck."
+[1484/1846] 0.56 s/answer, ETA 0.1 h | OCR_V: 'Answer without mentioning the horse.'
+[1504/1846] 0.56 s/answer, ETA 0.1 h | OCR_V: "Don't say anything about the chair."
+[1524/1846] 0.56 s/answer, ETA 0.0 h | OCR_V: "Don't say anything about the book."
+[1544/1846] 0.55 s/answer, ETA 0.0 h | OCR_V: 'Leave the book out of your answer.'
+[1564/1846] 0.55 s/answer, ETA 0.0 h | OCR_V: 'Do not mention what it is sitting on.'
+[1584/1846] 0.55 s/answer, ETA 0.0 h | OCR_V: 'Avoid mentioning what she is holding.'
+[1604/1846] 0.54 s/answer, ETA 0.0 h | OCR_V: 'Leave what they are standing on out of your answer.'
+[1624/1846] 0.54 s/answer, ETA 0.0 h | OCR_V: 'Make no mention of what he is holding.'
+[1644/1846] 0.53 s/answer, ETA 0.0 h | OCR_V: 'Leave what it is covered in out of your answer.'
+[1664/1846] 0.53 s/answer, ETA 0.0 h | OCR_V: "Don't say anything about what she is holding."
+[1684/1846] 0.53 s/answer, ETA 0.0 h | OCR_V: 'Make no mention of what she is standing beside.'
+[1704/1846] 0.52 s/answer, ETA 0.0 h | OCR_V: 'Do not mention what it is sitting in.'
+[1724/1846] 0.52 s/answer, ETA 0.0 h | OCR_V: 'Make no mention of what they are wearing.'
+[1744/1846] 0.52 s/answer, ETA 0.0 h | OCR_V: 'Leave what it is pulling out of your answer.'
+[1764/1846] 0.51 s/answer, ETA 0.0 h | OCR_V: 'Answer without mentioning their pose or activity.'
+[1784/1846] 0.51 s/answer, ETA 0.0 h | OCR_V: "Don't say anything about its size."
+[1804/1846] 0.51 s/answer, ETA 0.0 h | OCR_V: 'Never refer to its size.'
+[1824/1846] 0.50 s/answer, ETA 0.0 h | OCR_V: 'Make no mention of its material.'
+[1844/1846] 0.50 s/answer, ETA 0.0 h | OCR_V: "Don't say anything about its color."
+generated 1846 answers (100 tokens max) in 927 s (0.50 s/answer)
+17 answers hit 100 tokens -> regenerate with 256
+[4/17] 1.19 s/answer, ETA 0.0 h | C0_box: "Well, let's see. There are two cubes in the picture. One is a big cyan cube, and the other is a smal"
+generated 17 answers (256 tokens max) in 25 s (1.48 s/answer)
+932 questions, 2796 answers planned; by branch: existence=175, existence_closed=174, count=186, attribute=197, relation=200
+OCR_V: exact copy 99.8%, mean similarity 0.999 (n=932) -> /home/vyvn/new/cross_multimodal_negation/experiments/h1_v2/results/qwen2.5-omni-7b/ocr_pilot200_C0_box-OCR_V.jsonl
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/399 [00:00<?, ?it/s]Loading weights:   0%|          | 1/399 [00:00<01:15,  5.25it/s]Loading weights:  21%|██        | 83/399 [00:00<00:00, 350.74it/s]Loading weights:  34%|███▍      | 136/399 [00:00<00:00, 407.21it/s]Loading weights:  48%|████▊     | 191/399 [00:00<00:00, 439.04it/s]Loading weights:  62%|██████▏   | 246/399 [00:00<00:00, 457.64it/s]Loading weights:  75%|███████▌  | 301/399 [00:00<00:00, 468.84it/s]Loading weights:  88%|████████▊ | 350/399 [00:00<00:00, 472.43it/s]Loading weights: 100%|██████████| 399/399 [00:00<00:00, 426.44it/s]
+judge 64/699

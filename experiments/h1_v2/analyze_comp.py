@@ -18,6 +18,10 @@ from analyze import bootstrap, read_jsonl
 HERE = Path(__file__).resolve().parent
 RES = HERE / "results"
 CH = {"T": "COMP_T", "A": "COMP_A", "V": "COMP_V"}
+# v2 (run_comp2.py, Vy 2026-11-24): instruction quoted first, then the MCQ; plus verbatim repeat per channel
+V2_CONDS = "COMP2_T-COMP2_A-COMP2_V-REP_T-REP_A-OCR_V"
+CH2 = {"T": "COMP2_T", "A": "COMP2_A", "V": "COMP2_V"}
+REP2 = {"T": "REP_T", "A": "REP_A", "V": "OCR_V"}
 
 
 def rate(rows, f):
@@ -38,13 +42,16 @@ def main():
     ap.add_argument("--tag", default="pilot200")
     ap.add_argument("--models", nargs="*", default=["qwen2.5-omni-7b", "qwen2.5-omni-3b", "minicpm-o-2.6",
                                                      "phi-4-mm", "internomni"])
+    ap.add_argument("--version", choices=["v1", "v2"], default="v1")
     args = ap.parse_args()
+    v2 = args.version == "v2"
+    ch_map = CH2 if v2 else CH
     rng = random.Random(0)
-    out = [f"# H3-B comprehension ({args.tag})\n",
+    out = [f"# H3-B comprehension {args.version} ({args.tag})\n",
            "NC = forbidden item picked among 3 options (chance 33.3%). Violation among C0-mentioned questions. "
            "95% CIs: bootstrap over images. Understood vs not = association only.\n"]
     for m in args.models:
-        cf = RES / m / f"comp_{args.tag}_COMP_T-COMP_A-COMP_V.jsonl"
+        cf = RES / m / (f"comp_{args.tag}_{V2_CONDS}.jsonl" if v2 else f"comp_{args.tag}_COMP_T-COMP_A-COMP_V.jsonl")
         sf = RES / m / f"scored_{args.tag}.jsonl"
         if not cf.exists() or not sf.exists():
             out.append(f"\n## {m}\nmissing {cf.name if not cf.exists() else sf.name}\n")
@@ -56,7 +63,7 @@ def main():
         out.append(f"\n## {m}\n")
         out.append("| channel | NC % [95% CI] | parsed % | violation if understood | violation if not understood |")
         out.append("|---|---|---|---|---|")
-        for ch, cc in CH.items():
+        for ch, cc in ch_map.items():
             rows = [r for (sid, c), r in comp.items() if c == cc]
             sids = [r["sample_id"] for r in rows]
             ok = {r["sample_id"]: r["comp_correct"] for r in rows}
@@ -71,7 +78,20 @@ def main():
                 l2, h2 = bootstrap(sub, image, lambda p: rate(p, lambda s: viol[s]), rng) if sub else (None, None)
                 cells.append(fmt(v, l2, h2, len(sub)))
             out.append(f"| {ch} | {fmt(nc, lo, hi, len(rows))} | {fmt(parsed)} | {cells[0]} | {cells[1]} |")
-    path = HERE / f"analysis_comp_{args.tag}.md"
+        of = RES / m / f"ocr_{args.tag}_{V2_CONDS}.jsonl"
+        if v2 and of.exists():
+            ocr = list(read_jsonl(of))
+            out.append("\n| channel | verbatim repeat: exact % [95% CI] | mean similarity |")
+            out.append("|---|---|---|")
+            for ch, cc in REP2.items():
+                rows = [r for r in ocr if r["condition"] == cc]
+                if not rows:
+                    continue
+                ex = {r["sample_id"]: r["ocr_exact"] for r in rows}
+                lo, hi = bootstrap(list(ex), image, lambda p: rate(p, lambda s: ex[s]), rng)
+                sim = sum(r["ocr_sim"] for r in rows) / len(rows)
+                out.append(f"| {ch} ({cc}) | {fmt(rate(rows, lambda r: r['ocr_exact']), lo, hi, len(rows))} | {sim:.3f} |")
+    path = HERE / (f"analysis_comp2_{args.tag}.md" if v2 else f"analysis_comp_{args.tag}.md")
     path.write_text("\n".join(out) + "\n")
     print("\n".join(out))
     print("->", path)
