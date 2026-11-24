@@ -63,6 +63,8 @@ build() {
   req=$(mktemp); grep -vP "$SKIP" "$e.freeze.txt" > "$req"
   # old source packages (openai-whisper) import pkg_resources while building: setuptools < 81 + no build isolation
   "$py" -m pip install -q "setuptools<81" wheel
+  # numpy first, at server 1's version: sdists built without isolation (pyworld) compile against it
+  grep '^numpy==' "$e.freeze.txt" | xargs -r "$py" -m pip install -q --no-deps
   "$py" -m pip install -q --no-deps --no-build-isolation -r "$req" || { echo "FAILED packages $e"; rm -f "$req"; return 1; }
   rm -f "$req"
   if [ "$e" = cosyvoice ]; then   # server 1's onnxruntime-gpu 1.18 needs cuDNN 8; torch 2.7 ships cuDNN 9
