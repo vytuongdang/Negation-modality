@@ -226,3 +226,7 @@
 - Step 2: paper/draft_v1.md (plain markdown) from claims/outline/ideas/related_work/PLAN + Stage 1-3 results;
   every number from result files with 95% CI, marked pilot; [TBD: ...] for unfinished; neutral; Methods = real design
   (C0/T/A/V, violation kinds, judge v3, COMP v1/v2); "What is still missing" list at end. Telegram when ready.
+- 14:2x paper/draft_v1.md written + committed (868e3c8; numbers from analysis_pilot200 + new experiments/h1_v2/marginal_cis.py
+  -> paper/marginal_cis_pilot200.md; Qwen-7B C0_box-C0 -0.2 [-1.9,+1.6], OCR 930/932). style_notes.md being written by a
+  background subagent (if it is missing at the next step: write it yourself from the 3 papers). DONE 14:5x: style_notes.md (subagent, 15-rule checklist) + draft_v1.md rewritten to it; both Telegram reports sent.
+  Next for the paper: fill [TBD]s from Stage 3 (H4, OCR_V/C0_box all models) and COMP v2; Figure 1 real outputs.

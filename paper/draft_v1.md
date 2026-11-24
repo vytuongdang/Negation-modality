@@ -1,167 +1,205 @@
-# Does a prohibition survive the channel? Negative instructions in text, speech, and image for omni-models
+# Typed, Spoken, or Shown: Do Omni-Models Obey a Prohibition Equally in Every Channel?
 
-Draft v1 (Pico, 2026-11-24) for Vy + Huy. Target: ACL 2027 (ARR). Plain markdown.
-All numbers are PILOT numbers (dataset v2 subset, 932 questions) unless marked otherwise. Every number comes from
-the result files named in brackets. Placeholders look like [TBD: ...]. No claim about which channel is "better"
-is made beyond what the confidence intervals show, per model.
+Draft v1 (Pico, 2026-11-24) for Vy + Huy. Target: ACL 2027 (ARR). Plain markdown; style follows paper/style_notes.md.
+All numbers are PILOT numbers (dataset v2 subset, 932 questions) from the files named in brackets. Unfinished work
+is marked [TBD: ...]. No claim about a "better" channel is made beyond what the per-model CIs show.
+
+Channel coding used everywhere (text, figures, tables): C0 = no instruction (grey), T = typed (blue),
+A = spoken (orange), V = written in the image (green).
+
+Running example (pilot item coco-existence-000199): a photo of a stir-fry; question "What foods are present in the
+image?"; instruction "Leave the carrot out of your answer." (template N7).
 
 ---
 
 ## Abstract
 
-Omni-models accept text, speech and images in a single prompt, so a user can type, say, or show what the model must
-not do. We ask whether a negative instruction ("Do not mention the dog.") is obeyed equally when it arrives through
-these three channels. We build a component-level negation VQA benchmark on COCO, VAW, GQA and CLEVR in which every
-question has a forbidden answer component, and the same instruction is delivered as a separate text segment, as
-synthetic speech, or as text written inside the image. Violations are counted only where the model states the
-component without any instruction, so every comparison is paired within an image. In a pilot with five open
-omni-models (932 questions), instructions written in the image are violated in 89-96% of cases, although the one
-model checked so far transcribes them almost perfectly (Qwen2.5-Omni-7B: 930/932 exact), while the text-versus-speech gap is large but
-changes sign across models (from 20.0 points more violations under text to 29.8 points more under speech).
-[TBD: one sentence on H4, whether the gap is specific to negation (affirmative and exceptive forms).]
-[TBD: one sentence on H2/H3-A conflict results.] We release the benchmark, audio, rendered images and scoring code.
+Omni-models take text, speech and images in one prompt, so a user can type, say, or show what a model must not do.
+Work on negation has studied the content of queries, not whether a prohibition survives the channel it arrives in.
+We build a paired benchmark in which each image-question pair has one forbidden answer component and the same
+instruction ("Leave the carrot out of your answer.") is given as a separate text item, as synthetic speech, or as
+text written in the image; violations are counted only where the model names the component without any
+instruction. In a pilot with five open omni-models (932 questions), in-image instructions are violated in 88.9%
+[86.7, 91.0] to 95.8% [94.2, 97.0] of cases, although the one model checked so far transcribes them almost
+perfectly (930 of 932). Typed and spoken instructions differ by 4 to 30 points, but the sign of the difference
+changes across models. [TBD: one sentence on H4, whether the gap is specific to negation.] [TBD: one sentence on
+the conflict tests.] The design separates reading, understanding and obeying an instruction per channel.
+[TBD: URL.]
 
 ---
 
 ## Figure 1 (planned)
 
-Left: one image (e.g. a kitchen), the question "What foods are present in the image?", and the instruction
-"Leave the carrot out of your answer." shown three ways: as a text block, as a waveform, written on the image.
-Right: violation rate among C0-mentioned questions per channel for the five models (dots with 95% CIs,
-experiments/figures/h1v2_violation_pilot200.png restyled).
-Caption idea: "The same prohibition, three channels. Written in the image it is read but almost never obeyed; text
-versus speech depends on the model."
+(a) The running example: one image, the question, and "Leave the carrot out of your answer." delivered three ways
+(typed block, waveform, text on the image), plus the no-instruction answer C0 that names the carrot.
+(b) [TBD: the real outputs of 2-3 models for the three channels, each marked obeyed / violated.]
+(c) Violation rate per model and channel, dots with 95% CIs (from experiments/figures/h1v2_violation_pilot200.png).
+Caption idea: "The same prohibition in three channels. (a) Input. (b) Outputs. (c) Violation among questions where
+the model names the target without instruction (n = 772-799 per model, image bootstrap CIs). Written in the image,
+the prohibition is almost always violated; typed versus spoken depends on the model."
 
 ---
 
 ## 1 Introduction
 
-Omni-models such as Qwen2.5-Omni, MiniCPM-o and Phi-4-multimodal take images, audio and text in one prompt. In use,
-constraints reach them through all three: a user types "don't mention the price", says it aloud in a voice
-assistant, or the constraint sits on a slide or a sign in the picture. Negative constraints are a known weak spot
-of language and vision-language models: negated queries are often treated like affirmative ones, and naming a
-forbidden concept can make it more likely to appear. Whether a prohibition is followed *equally well* when the same
-words come through a different channel has not been measured.
+Omni-models such as Qwen2.5-Omni, MiniCPM-o and Phi-4-multimodal accept images, audio and text together. In use,
+constraints reach them through all three: a user types "don't mention the price", says it to a voice assistant, or
+the rule sits on a slide in the picture. If a model obeys "do not mention X" when typed but not when spoken or
+shown, a user's constraint depends on how it was delivered.
 
-A fair comparison is harder than it looks. (i) A model can only "comply" with "do not mention X" if it would have
-mentioned X otherwise, so violation must be conditioned on the model's own unconstrained answer. (ii) Channels
-differ in more than modality: an instruction glued into the question string is not the same input as a separate
-audio segment, and text drawn on an image also covers pixels. (iii) A channel gap may reflect instruction following
-in general rather than negation; separating the two needs affirmative and exceptive versions of the same
-constraint. (iv) A model may fail to obey because it did not hear or read the instruction; comprehension must be
-probed separately.
+Negation is a known weak spot. Vision-language models often read negated queries like affirmative ones (NegBench,
+NegVQA), and naming a forbidden concept can make it more likely to appear (arXiv 2404.15154). Separately, audio-text
+studies find that models follow text when text and audio disagree (MCR-Bench, ALME). But no study holds the
+instruction fixed and changes only the channel, so it is unknown whether a prohibition is channel-robust.
 
-We design the benchmark and the experiments around these four points and test five open omni-models.
+We ask: is a negative instruction obeyed equally when the same words arrive typed, spoken, or written in the image,
+and if not, is the gap about negation or about the channel? Figure 1 shows the setup on one example.
 
-Contributions:
-1. A component-level negation VQA benchmark (dataset v2): images from four sources, five question branches
-   (existence, closed existence, count, attribute, relation), a forbidden component per question with aliases,
-   seven negative templates, affirmative and exceptive forms, ASR-checked synthetic speech in two voices, and
-   rendered in-image instructions with an empty-box control. [TBD: final size after the full build.]
-2. A paired evaluation protocol: violation among questions where the model's own no-instruction answer (C0) states
-   the target, four violation kinds (STATE, META, DENY, WRONG), an LLM judge that reads the question
-   (agreement with a human annotator kappa = 0.83 on 49 answers, pilot), and image-level bootstrap CIs.
-3. A pilot study on five omni-models showing that (a) in-image instructions are violated in 89-96% of cases (and, for the one model
-   checked so far, read correctly), and (b) the text-versus-speech gap is model-specific in sign. [TBD: H4 result.]
-4. Diagnostics that separate reading, understanding and obeying: OCR of the in-image instruction, an empty-box
-   control, multiple-choice comprehension per channel, and conflict tests between channels (H2, H3-A). [TBD: results.]
+A fair comparison needs four controls. (i) A model can only comply with "do not mention the carrot" if it would
+otherwise mention it, so violation is conditioned on its own no-instruction answer C0. (ii) Audio is always a
+separate segment, so the typed instruction is also a separate item (not glued into the question). (iii) Text on the
+image covers pixels, so an empty box of the same size is a control (C0_box). (iv) A model may disobey because it did
+not read or hear the instruction, or because it follows any instruction worse in that channel; we therefore probe
+transcription and comprehension per channel, and compare negative with affirmative and exceptive forms (H4).
+
+We build a component-level negation benchmark (Sec. 3), define a paired protocol (Sec. 4), and test five open
+omni-models on a 932-question pilot (Sec. 5-6). Our pilot findings:
+
+1. The five models name the target without instruction in 82.8% [80.6, 85.3] to 85.7% [83.5, 87.9] of questions,
+   so roughly 780 questions per model can test compliance (Sec. 5.1).
+2. Written in the image, the prohibition is violated in 88.9% to 95.8% of cases in every model (Sec. 5.2). For
+   Qwen2.5-Omni-7B this is not a reading failure: it transcribes the written instruction exactly in 930/932 images,
+   and the empty box alone changes nothing (-0.2 pp [-1.9, +1.6]) (Sec. 5.1). [TBD: other four models.]
+3. Typed and spoken prohibitions differ in every model (T - A from +20.0 [+16.2, +23.8] to -29.8 [-34.0, -25.3]
+   pp), but three models violate more when typed and two more when spoken: the pilot shows no single channel
+   ordering (Sec. 5.3).
+4. A comprehension probe placed before the instruction is itself obeyed: Qwen2.5-Omni-7B picks the forbidden item
+   in only 18.7% [16.1, 21.0] of typed cases, below the 33.3% chance level. Comprehension must be tested with the
+   instruction quoted as content (Sec. 6.1).
+5. [TBD: H4: whether the channel gaps remain when the instruction is affirmative or exceptive (Sec. 5.4).]
 
 ---
 
 ## 2 Related work
 
-Negation in vision-language models. NegBench (Alhamoud et al., CVPR 2025, arXiv 2501.09425) and NegVQA
-(arXiv 2505.22946) show that VLMs often misread negated queries and captions. These works test understanding of
-negated *content*; we test compliance with a prohibition on what the *answer* may say, and how the channel of the
-prohibition matters.
+**Negation in vision-language models.** NegBench (Alhamoud et al., CVPR 2025, arXiv 2501.09425) and NegVQA
+(arXiv 2505.22946) show that VLMs misread negated captions and questions. They test understanding of negated
+content; we test compliance with a prohibition on the answer, delivered through different channels.
 
-Negative instructions and priming. Naming a forbidden concept can increase its appearance in generation (negative
-prompts in text-to-image models, arXiv 2404.15154) [TBD: verify Truhn et al., arXiv 2503.22395, before citing].
-Our exceptive form ("Mention everything except X") names X without a negation word and serves as the priming control.
+**Negative instructions and priming.** Negative prompts in text-to-image models can push generation toward the
+forbidden concept (arXiv 2404.15154). [TBD: verify Truhn et al., arXiv 2503.22395.] Our exceptive form ("Mention
+everything except the carrot.") names the target without a negation word and serves as the priming control.
 
-Instructions inside the image. Typographic and visual prompt injection show that text drawn into an image can steer
-LVLMs (arXiv 2408.03554, 2503.11519, 2604.12371). Our visual channel is the benign case: a legitimate instruction
-written in the image, with an empty-box control for the covered pixels.
+**Instructions inside the image.** Typographic and visual prompt injection show that drawn-in text can steer LVLMs
+(arXiv 2408.03554, 2503.11519, 2604.12371). These are adversarial; our V channel is a legitimate instruction from the
+user, with an OCR check and an empty-box control.
 
-Speech versus text and modality conflict. Spoken instructions are followed less reliably than the same text in many
-audio-language models (arXiv 2603.01502; VoiceBench [TBD: citation]), and when audio and text disagree, models tend
-to follow text (MCR-Bench, arXiv 2508.15407; ALME, arXiv 2602.11488); XModBench (arXiv 2510.15148) and OmniBench
-report cross-modal inconsistency in omni-models. Whether *negative* instructions show the same dominance pattern is
-the question our H2 / H3-A conflict design answers. [TBD: verify every link before submission.]
+**Speech versus text instructions.** Spoken input is followed less reliably than the same text in many
+audio-language models (arXiv 2603.01502; VoiceBench [TBD: citation]); under audio-text conflict models tend to
+follow text (MCR-Bench, arXiv 2508.15407; ALME, arXiv 2602.11488); XModBench (arXiv 2510.15148) and OmniBench report
+cross-modal inconsistency. None tests a negative instruction across channels with a paired baseline; our H2/H3-A
+conflict tests ask whether dominance changes with polarity.
+
+| work | negation | text instr. | audio instr. | in-image instr. | paired no-instr. baseline | CIs |
+|---|---|---|---|---|---|---|
+| NegBench / NegVQA | yes | yes | no | no | no | [TBD] |
+| visual prompt injection | no | yes | no | yes | partly | [TBD] |
+| MCR-Bench / ALME | no | yes | yes | no | no | [TBD] |
+| ours | yes | yes | yes | yes | yes | yes |
+
+[TBD: verify every row and link before submission.]
 
 ---
 
 ## 3 Benchmark (dataset v2)
 
-Sources and branches. Images come from COCO (existence, closed existence, count), CLEVR (count, attribute), VAW
-(attribute) and GQA (relation). For each image a question has several answer components (e.g. the foods in the
-image); one component is the target that the instruction forbids. Components carry aliases (e.g. "dining table" /
-"table") for scoring.
+The pipeline has six steps (counts for the pilot subset; full build [TBD]):
 
-Image selection. Pixel filters (blur, brightness, black-and-white, large text, near-duplicates) and a VLM check
-(Qwen3-VL-8B yes/no on every component, distractor, and large text) select images. Full selection: COCO 950, CLEVR
-600, VAW 950, GQA 654 images, 5,335 units. The pilot uses a subset of 1,150 units (230 per branch); 79 units are
-excluded where two components cannot be separated (same object with two labels, part-whole such as keyboard /
-laptop, attribute overlap), leaving 1,071. Own review of 60 random accepted images: 6 (10%) had doubtful ground
-truth; this mostly drops out because violation is conditioned on the model's own C0.
+1. **Collect** image-question units from COCO (existence, closed existence, count), CLEVR (count, attribute), VAW
+   (attribute) and GQA (relation). Each question has several answer components with aliases (e.g. "dining table" /
+   "table"); one is the target.
+2. **Filter** images with pixel checks (blur, brightness, black-and-white, large text, near-duplicates) and a VLM
+   check (Qwen3-VL-8B, yes/no on every component and distractor): COCO 950, CLEVR 600, VAW 950, GQA 654 images,
+   5,335 units.
+3. **Subset and clean** for the pilot: 1,150 units (230 per branch); drop 79 where two components cannot be told
+   apart (same object with two labels, part-whole such as keyboard / laptop, overlapping attributes): 1,071 units.
+   One negative sample per unit, ASR-checked audio only: 932 questions.
+4. **Phrase** the prohibition with one of seven templates (Table 2); a 10% subset repeats all seven. Forms for H4:
+   exceptive "Mention everything except {X}." (all branches) and affirmative "Mention only {Y}." (closed existence,
+   count, attribute, relation only; in open existence it would give away the answer).
+5. **Speak** every sentence with CosyVoice2-0.5B (two cloned voices, female / male, 50/50) and transcribe it with
+   Whisper: 1,330 sentences, 33 (2.5%) mismatches flagged and left out of the pilot.
+6. **Render** the sentence onto the image away from the question's objects (5.4% still overlap a component,
+   flagged), plus an empty-box twin for C0_box.
 
-Instructions. Seven negative templates: N1 "Do not mention {X}.", N2 "Don't say anything about {X}.", N3 "Never
-refer to {X}.", N4 "Make no mention of {X}.", N5 "Answer without mentioning {X}.", N6 "Avoid mentioning {X}.",
-N7 "Leave {X} out of your answer." (N6 and N7 have no negation word.) One template per question; a 10% subset
-repeats all seven (template sweep). Forms for H4: exceptive "Mention everything except {X}." (all branches) and
-affirmative "Mention only {Y}." (only where the question already lists every option: closed existence, count,
-attribute, relation; in open existence it would leak the answer).
+Arithmetic: 932 questions x 4 H1 conditions (C0, T, A, V) = 3,728 answers per model in the H1 pilot.
 
-Speech. Every sentence is synthesised with CosyVoice2-0.5B (zero-shot cloning, one female and one male voice, 50/50)
-and transcribed with Whisper; 33 of 1,330 sentences (2.5%) do not match and are flagged (asr_ok = false); the pilot
-uses asr_ok units only.
+Table 2 (templates): N1 "Do not mention {X}." · N2 "Don't say anything about {X}." · N3 "Never refer to {X}." ·
+N4 "Make no mention of {X}." · N5 "Answer without mentioning {X}." · N6 "Avoid mentioning {X}." · N7 "Leave {X}
+out of your answer." N6 and N7 carry no negation word.
 
-In-image text. The instruction is rendered on the image away from the question's objects; 5.4% of rendered images
-still overlap a component (occludes_subject, reported separately). For each, an empty-box image with the same box and
-no text is the visual control (C0_box).
-
-[TBD: Table 1, statistics of the final build per source / branch / split / form.]
+Quality: in our own review of 60 random accepted units, 6 (10%) had doubtful ground truth; conditioning on C0
+removes most of them from the violation counts. [TBD: Table 1, statistics of the full build per source, branch,
+split, form.]
 
 ---
 
 ## 4 Experimental setup
 
-Models. Qwen2.5-Omni-7B and -3B (thinker only), MiniCPM-o 2.6, Phi-4-multimodal-instruct, InternOmni. Greedy
-decoding, 100 new tokens (answers that hit the limit are regenerated with 256).
+**Models.** Qwen2.5-Omni-7B and -3B (thinker only), MiniCPM-o 2.6, Phi-4-multimodal-instruct, InternOmni. Greedy
+decoding, 100 new tokens; answers that hit the limit are regenerated with 256.
 
-Conditions (H1). Input order is image, then question, then instruction; items are separated by a newline.
-- C0: image + question, no instruction.
-- T: question, then the instruction as its own text item (the fair text match for audio, which is always a
-  separate segment).
-- A: question, then the spoken instruction.
-- V: the image with the instruction written in it, then the question.
-Controls: C0_box (empty box, no text, no instruction), OCR_V (the model transcribes the written instruction).
+**Conditions.** Input order: image, question, instruction; items separated by a newline.
+C0: image + question. T: question, then the instruction as its own text item. A: question, then the spoken
+instruction. V: the image with the instruction written in it, then the question. Controls: C0_box (empty box, no
+instruction) and OCR_V (transcribe the text in the image).
 
-Comprehension (H3-B). COMP v1 asked a three-option multiple-choice question ("which item were you asked not to
-mention?") with the instruction in its usual slot after the question. This turned out to measure obedience, not
-comprehension (Section 6). COMP v2 quotes the instruction first as content ("Here is an [spoken] instruction:"),
-then asks the same multiple-choice question, and adds a verbatim repeat task per channel (REP_T, REP_A).
+**Violation rate.** In plain words: how often the model still names the forbidden component, among questions where
+it names that component without any instruction. Symbol: v_m = P(target named | channel m, C0 names target).
+A high v_m means the prohibition in channel m is mostly ignored. Example: if C0 lists "broccoli, tofu, carrot" and
+the T answer lists "broccoli, tofu, and no carrot", that is a violation. Conditioning on C0 is needed because not
+naming something the model would never name is not compliance.
 
-Scoring. Primary metric: violation = any mention of the forbidden component among questions whose C0 answer states
-it. Each violation is labelled STATE (states the fact), META (names it to exclude it), DENY (says it is absent or
-false) or WRONG (gives a different value); leak = STATE is secondary. Judge v3: Qwen3-8B reads the question, the
-components and the answer; disagreements with a regex second opinion get a thinking pass; bare-number answers in
-the count branch are scored by rule. Required recall (share of the other components still stated) measures
-over-suppression.
+**Violation kinds.** STATE (states the fact: "there is a carrot"), META (names it to exclude it: "apart from the
+carrot..."), DENY (says it is absent or false: "there is no carrot"), WRONG (gives a different value, e.g. a wrong
+count). Leak = STATE is a secondary metric.
 
-Statistics. Paired comparisons within question; 95% CIs from 1,000-2,000 bootstrap resamples over images
-(template-sweep copies are not independent); exact McNemar tests.
+**Negation penalty (H4).** F_m = 1 - v_m is compliance. Delta_m = F_aff,m - F_neg,m: how much harder the negative
+form is than the affirmative one in channel m. A high Delta_audio - Delta_text would mean negation, not instruction
+following in general, is harder by speech.
 
-Human check. Vy labelled 67 answers of an earlier run; on the 49 whose answer is unchanged, judge v3 agrees on
-93.9% (kappa 0.83). [TBD: blind 300-item check (Vy) + 100 overlap (Huy) on pilot v2.]
+**Required recall.** Share of the other (allowed) components still named; a drop means over-suppression.
+
+**Scoring.** Judge v3: Qwen3-8B reads the question, the components and the answer; disagreements with a regex
+second opinion get a thinking pass; bare-number answers in the count branch are scored by rule; a label pass
+assigns the violation kind. Against one human annotator (Vy) on 49 unchanged answers: 93.9% agreement, kappa 0.83.
+[TBD: blind 300-item check (Vy) and 100-item overlap (Huy).]
+
+**Statistics.** All comparisons are paired within question. 95% CIs are percentile bootstrap over images
+(1,000-2,000 resamples); paired differences also get an exact McNemar test.
+
+**Comprehension (H3-B).** COMP v1: three-option multiple choice ("which item were you asked not to mention?") with
+the instruction in its usual slot after the question. COMP v2: the instruction is quoted first as content ("Here
+is an [spoken] instruction:"), then the same multiple choice, plus a verbatim repeat task per channel (REP_T, REP_A).
 
 ---
 
 ## 5 Results (pilot, 932 questions)
 
-### 5.1 The model states the target without instruction in 83-86% of questions
+### 5.1 Sanity checks: the models name the targets, and Qwen2.5-Omni-7B reads the written instruction
 
-| model | C0 states target % [95% CI] | n C0-mentioned |
+**Experiments.** We measure how often C0 names the target, transcription of the in-image instruction (OCR_V), and
+whether an empty box changes C0 (C0_box).
+
+**Results.** All five models name the target without instruction in 83-86% of questions (Table 3). For
+Qwen2.5-Omni-7B, OCR_V is exact in 930/932 images (99.8%), and C0_box - C0 = -0.2 pp [-1.9, +1.6] (n = 932).
+Speech: all pilot audio passed the Whisper check (Sec. 3). [TBD: OCR_V, C0_box for the other four models.]
+
+Table 3. Share of questions where C0 names the target (95% CI, image bootstrap; n = 932 per model) and the number
+kept for compliance tests. Takeaway: about 780 testable questions per model, with similar rates across models.
+[paper/marginal_cis_pilot200.md]
+
+| model | C0 names target % [95% CI] | n C0-mentioned |
 |---|---|---|
 | Qwen2.5-Omni-7B | 84.8 [82.5, 87.1] | 790 |
 | Qwen2.5-Omni-3B | 85.7 [83.5, 87.9] | 799 |
@@ -169,11 +207,19 @@ Human check. Vy labelled 67 answers of an earlier run; on the 49 whose answer is
 | Phi-4-MM | 82.8 [80.6, 85.3] | 772 |
 | InternOmni | 83.6 [81.3, 85.9] | 779 |
 
-[paper/marginal_cis_pilot200.md]
+### 5.2 Prohibitions written in the image are violated in about nine of ten cases in all five models
 
-### 5.2 Finding 1: instructions written in the image are almost never obeyed
+**Experiments.** Violation rate v_m for T, A, V among C0-mentioned questions (Table 4).
 
-Violation rate (%) among C0-mentioned questions, 95% image-bootstrap CIs [paper/marginal_cis_pilot200.md]:
+**Results.** V is violated in 88.9-95.8% of cases, above T and A in every model (paired A - V from -15.9
+[-19.0, -12.8] pp for InternOmni to -75.8 [-78.9, -72.8] pp for Qwen2.5-Omni-7B, McNemar p < 1e-20 for every T vs V and A vs V pair
+[experiments/REPORT.md, analysis_pilot200.md]). Most V violations are STATE (82-94% of C0-mentioned questions): the
+model answers as if the written instruction were absent. For Qwen2.5-Omni-7B, which reads it (Sec. 5.1), this
+points to obeying, not reading, as the failure; whether the model understands the text as an instruction to it is
+open [TBD: COMP v2].
+
+Table 4. Violation rate (%) among C0-mentioned questions, 95% image-bootstrap CIs (n = 772-799 per model).
+Takeaway: V is high everywhere; T versus A depends on the model. [paper/marginal_cis_pilot200.md]
 
 | model | T | A | V |
 |---|---|---|---|
@@ -183,17 +229,21 @@ Violation rate (%) among C0-mentioned questions, 95% image-bootstrap CIs [paper/
 | Phi-4-MM | 26.0 [23.1, 29.1] | 40.9 [37.4, 44.4] | 91.3 [89.2, 93.1] |
 | InternOmni | 50.1 [46.5, 53.5] | 79.8 [77.0, 82.5] | 95.8 [94.2, 97.0] |
 
-V exceeds both T and A in every model (paired A-V from -15.9 [-19.0, -12.8] for InternOmni to -75.8
-[-78.9, -72.8] for Qwen2.5-Omni-7B; experiments/REPORT.md). The violations under V are mostly plain statements
-(STATE 82-94% of C0-mentioned questions): the model answers the question as if the written instruction were not there.
+### 5.3 Typed and spoken prohibitions differ in every model, in opposite directions across models
 
-Is the instruction read? For Qwen2.5-Omni-7B, asked to transcribe it, the model reproduces it exactly in 930 of 932
-images (99.8%), and the empty box alone does not change whether the target is mentioned (C0_box - C0 = -0.2 pp
-[-1.9, +1.6], n = 932). So, for this model, the in-image instruction is read and the covered pixels do not matter,
-yet it is violated in 88.9% of cases. [TBD: OCR_V and C0_box for the other four models (Stage 3 running).]
-[TBD: COMP v2: does the model *understand* the written text as an instruction?]
+**Experiments.** Paired difference T - A per model (Table 5).
 
-### 5.3 Finding 2: the text-versus-speech gap is large but its sign depends on the model
+**Results.** Every CI excludes zero. Qwen2.5-Omni-7B, Qwen2.5-Omni-3B and MiniCPM-o violate more when typed;
+Phi-4-MM and InternOmni violate more when spoken. The same signs appeared for the four models of an earlier run
+with a different scoring rule (pilot v1), so the pattern is not a product of the judge change. Two model-specific
+behaviours qualify the numbers:
+- InternOmni under A: required recall falls from 70.1% (C0) to 26.8% (T 74.3%, V 73.4%); many answers are one
+  sentence about the forbidden item only, possibly because the spoken instruction is taken as the question
+  (conjecture; [TBD: COMP v2 A]).
+- Phi-4-MM over-suppresses in the count branch: required recall 74% at C0, 7% under T, 17% under A.
+
+Table 5. Paired T - A (pp), 95% image-bootstrap CI, C0-mentioned questions. Takeaway: large gaps, no common
+direction. [experiments/REPORT.md]
 
 | model | T - A (pp) [95% CI] |
 |---|---|
@@ -203,79 +253,69 @@ yet it is violated in 88.9% of cases. [TBD: OCR_V and C0_box for the other four 
 | Phi-4-MM | -14.9 [-19.2, -10.8] |
 | InternOmni | -29.8 [-34.0, -25.3] |
 
-[experiments/REPORT.md] Every CI excludes zero, but three models violate more under text and two more under speech.
-There is therefore no single channel ordering across models in this pilot. The same signs appeared in an earlier
-run with a different scoring rule (pilot v1, four models), which suggests the pattern is not an artefact of the
-judge change.
+### 5.4 Is the channel gap specific to negation? (H4)
 
-Two model-specific behaviours qualify these numbers:
-- InternOmni under A: required recall falls from 70.1% (C0) to 26.8% (A) (T 74.3%, V 73.4%). Many answers are one
-  sentence about the forbidden item only, as if the spoken instruction were taken as the question. Its high A
-  violation may reflect the role it assigns to audio rather than negation. [TBD: COMP v2 A for InternOmni.]
-- Phi-4-MM over-suppresses in the count branch (required recall 74% at C0 to 7% under T, 17% under A): it drops
-  the other counts as well.
+[TBD: Delta_m per channel with CIs; Delta_audio - Delta_text and Delta_visual - Delta_text; exceptive versus
+negative per channel. Source: Stage 3 forms run (running), analyze.py H4 section.]
 
-### 5.4 Is the gap about negation? (H4)
+### 5.5 Which channel wins when channels conflict? (H2, H3-A)
 
-[TBD: Δ_m = F_aff,m - F_neg,m per channel with CIs; Δ_audio - Δ_text and Δ_visual - Δ_text; exceptive versus
-negative per channel (priming). Source: Stage 3 forms run, analyze.py H4 section.]
-
-### 5.5 Which channel wins in a conflict? (H2, H3-A)
-
-[TBD: H2 (positive request and negation in different channels, 3 channel pairs x 2 directions) and H3-A (same
-layouts with a conflicting positive instruction). Code only; waiting for Vy.]
+[TBD: H2 = positive request and negation in different channels (3 channel pairs x 2 directions); H3-A = same
+layouts with a conflicting positive instruction. Code only; waiting for Vy.]
 
 ---
 
 ## 6 Analysis
 
-Comprehension probes can themselves be obeyed. In COMP v1 the multiple-choice question came first and the
-instruction after it. Qwen2.5-Omni-7B picked the forbidden item in only 18.7% [16.1, 21.0] of text cases, below the
-33.3% chance level, versus 45.1% [42.1, 48.2] for audio and 99.0% [98.4, 99.6] for visual
-[experiments/h1_v2/analysis_comp_pilot200.md]. The answers show the model applying the instruction to its
-multiple-choice answer (it avoids the forbidden option). COMP v1 is therefore a measure of obedience; COMP v2 quotes
-the instruction as content first. We do not interpret the v1 channel ordering further: it mixes reading,
-understanding and obeying. [TBD: COMP v2 per channel and model.]
+### 6.1 A comprehension probe before the instruction is obeyed, not answered
 
-Violation kinds. For Qwen2.5-Omni-7B, META and DENY are small (2-4%) in every channel; DENY is concentrated in
-closed existence (21.5% under T), where saying "there is no X" still names X. [TBD: table for all models.]
+In COMP v1 the multiple-choice question came first and the instruction after it. Qwen2.5-Omni-7B picked the
+forbidden item in 18.7% [16.1, 21.0] of typed cases (below 33.3% chance), 45.1% [42.1, 48.2] spoken, 99.0%
+[98.4, 99.6] written in the image (n = 932 each) [experiments/h1_v2/analysis_comp_pilot200.md]. Its answers avoid the
+forbidden option, i.e. the instruction is applied to the probe. COMP v1 therefore mixes reading, understanding and
+obeying, and we do not interpret its channel ordering; COMP v2 quotes the instruction as content.
+[TBD: COMP v2 for all five models.]
 
-Template wording. N3 ("Never refer to") is kept in all main numbers and reported separately; for
-Qwen2.5-Omni-7B, T - A without N3 is +4.8 [+2.3, +7.5] and with N3 only -1.1 [-10.3, +8.0] (n = 87).
-[TBD: template effects for all models; explicit (N1-N5) versus implicit (N6-N7) cues per channel.]
+### 6.2 Violation kinds
 
-Split. For Qwen2.5-Omni-7B, violation on train-split images and val images is similar (T 17.3 vs 17.0, A 14.2 vs
-10.7, V 87.9 vs 90.9); split is confounded with source (CLEVR is all val). [TBD: CIs; all models.]
+For Qwen2.5-Omni-7B, META and DENY stay at 2-4% in every channel; DENY is concentrated in closed existence (21.5%
+under T), where "there is no carrot" still names the carrot. [TBD: all models, with CIs.]
 
-Voice and occlusion. Qwen2.5-Omni-7B: A violation 13.4% (female voice, n = 409) vs 12.6% (male, n = 381); V 88.9%
-without and 88.1% with occlusion (n = 42). [TBD: CIs; all models.]
+### 6.3 Wording, split, voice, occlusion
 
-[TBD: H3-C instruction before vs after the image; H3-D violation vs target area.]
+Template N3 ("Never refer to") is kept in all main numbers and reported separately: for Qwen2.5-Omni-7B, T - A is
++4.8 [+2.3, +7.5] without N3 and -1.1 [-10.3, +8.0] with N3 only (n = 87). Train versus val images: T 17.3 vs 17.0,
+A 14.2 vs 10.7, V 87.9 vs 90.9 (split confounded with source; CLEVR is all val). Voice: A 13.4% female (n = 409)
+vs 12.6% male (n = 381). Occlusion: V 88.9% vs 88.1% (n = 42 occluded). All for Qwen2.5-Omni-7B.
+[TBD: CIs and all models; explicit (N1-N5) versus implicit (N6-N7) cues per channel; H3-C instruction before the
+image; H3-D violation by target area.]
 
 ---
 
 ## 7 Limitations
 
 - Pilot size: 932 questions from a 1,150-unit subset; the full build is not done.
-- Synthetic speech (two cloned voices, English only); real and diverse voices are planned.
-- The question is always in text, which may favour the text channel; T is a separate text item to match audio.
-- Image selection uses a VLM check, which may favour easy images; about 10% of reviewed accepted units had doubtful
+- Synthetic speech: two cloned voices, English only; real and diverse voices are not yet tested.
+- The question is always typed, which may favour the text channel; T is a separate item to match audio.
+- The visual channel is typographic text, not a prohibition sign (a design decision).
+- Images were filtered with a VLM check, which may favour easy images; about 10% of reviewed units had doubtful
   ground truth.
-- The judge is an LLM (Qwen3-8B); agreement with one human annotator is kappa 0.83 on 49 answers. A larger blind
-  check is pending.
-- The visual channel is typographic text, not a symbolic prohibition sign (Vy's design decision).
-- Five open models up to ~8B parameters; no closed or larger omni-models yet.
+- The judge is an LLM (Qwen3-8B); agreement with one annotator is kappa 0.83 on 49 answers; a larger blind check is
+  pending.
+- Five open models up to about 8B parameters; no larger or closed omni-models.
+- Not measured yet: comprehension per channel (COMP v2), negation specificity (H4), conflict (H2, H3-A), instruction
+  position (H3-C).
 
 ---
 
-## What is still missing (for v2 of this draft)
+## What is still missing (for draft v2)
 
-1. Stage 3 for the remaining four models: OCR_V, C0_box, COMP v1 (running).
-2. COMP v2 (understanding per channel, verbatim repeat) for all five models (queued after Stage 3).
-3. H4: affirmative and exceptive forms, Δ_m per channel with CIs (running in Stage 3).
-4. H2 and H3-A conflict experiments (code only; needs Vy's OK and new TTS / rendered images).
-5. H3-C (instruction before the image) and H3-D (target area) analysis.
+1. Stage 3 for the remaining four models: OCR_V, C0_box, COMP v1 (running on the GPU).
+2. COMP v2 (understanding per channel + verbatim repeat), five models (queued after Stage 3).
+3. H4 affirmative / exceptive forms, Delta_m per channel with CIs (running in Stage 3).
+4. H2 and H3-A conflict experiments (code only; needs Vy's OK, new TTS and rendered images).
+5. H3-C (instruction before the image) and H3-D (target area).
 6. Human check of pilot v2 (Vy 300 items, Huy 100 overlap).
-7. Full dataset build (~2.5k images) and the final benchmark statistics table.
-8. Per-model tables for violation kinds, templates, split, voice, occlusion with CIs (Appendix).
-9. Verified citations for every related-work entry; Figure 1.
+7. Full dataset build (~2.5k images) and Table 1 statistics.
+8. Appendix tables per model (kinds, templates, split, voice, occlusion) with CIs.
+9. Figure 1 with real model outputs; verified citations and related-work table.
