@@ -1,5 +1,10 @@
 # NOTES (B200 runner's memory)
 
+## >>> RULE (Vy, 2026-11-24 ~21:35 KST): NO PERIODIC CHECKS <<<
+- job-stage1 posts to Telegram itself when it finishes or fails. End EVERY step by writing 43200 to pico/sleep_seconds
+  (sleep 12 h). Only work when Vy sends a message (arrives as pico/note.txt, wakes the runner within 10 s).
+  This supersedes the "~45 min checks" in the block below.
+
 ## >>> 2026-11-24 12:22 UTC: RUNNER (pico tmux) WATCHING job-stage1 (per pico/note.txt) <<<
 - Vy restarted the runner (pico/stop gone). Task from note.txt: watch job-stage1 (pid 1338300, GPU 2, started 11:58 UTC),
   sleep ~2700 s between checks, Telegram at each stage change; if it vanishes without EXIT: report last log lines +
