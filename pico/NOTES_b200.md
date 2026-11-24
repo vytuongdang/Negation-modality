@@ -1,6 +1,7 @@
 # NOTES (B200 runner's memory)
 
 ## >>> 2026-11-25 00:10 KST: H1 FULL RUNNING (tmux job-h1-full, GPU 2, log pico/logs/h1_full.log, ends "EXIT n") <<<
+- 18:15 UTC: judge THINKING pass is the bottleneck: ~1,100 rows/h (batch_size=8, 1500 tok), 3,549 rows (23% regex-disagree) = ~3.2 h/model -> all 5 done ~21-22 UTC 11-25. Asked Vy (Telegram 03:15 KST) for OK to raise judge batch to 32 between models; no reply = keep as is. Do NOT edit judge.py while job runs (later models re-import it).
 - 17:15 UTC: qwen7b gen done 6,230 s (0.36 s/ans; 95 regen at 256 tok); judge pass 1 15,208 rows ~10 min; then judge (thinking) 3,549 rows. Remaining 4 models ~12 h.
 - 2026-11-24 16:05 UTC: qwen7b gen 7,544/17,524 at 0.44 s/answer (gen ends ~17:15 UTC, then judge: measure its speed). Projected all 5 done ~06-09 UTC 11-25.
 - NEVER `git commit -a` on B200 (it commits the deleted old results + B200 smoke files over server 1 tracked pilot2 files); add files by name.
