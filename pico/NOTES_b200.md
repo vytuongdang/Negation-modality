@@ -1,6 +1,43 @@
 # NOTES (B200 runner's memory)
 
-## >>> RUNNER STATE 2026-11-24 10:10 UTC (Pico) <<<
+## >>> 2026-11-24 12:22 UTC: RUNNER (pico tmux) WATCHING job-stage1 (per pico/note.txt) <<<
+- Vy restarted the runner (pico/stop gone). Task from note.txt: watch job-stage1 (pid 1338300, GPU 2, started 11:58 UTC),
+  sleep ~2700 s between checks, Telegram at each stage change; if it vanishes without EXIT: report last log lines +
+  dmesg/OOM, do NOT restart without Vy's OK. No other GPU job. Do not commit the deleted old results.
+- 12:21 UTC: still in B2 (no progress output), pid alive, 18 GB on GPU 2. Times to Vy in KST (UTC+9).
+
+## >>> 2026-11-24 12:20 UTC: H2 + H3-A CODE WRITTEN (not run; Vy decides when) <<<
+- New files only (nothing stage 1 / H1 uses was edited): create_data/src/h2_assets.py (render = question written in the
+  image, CPU, env negation; tts = question audio, GPU 2, env cosyvoice; status), experiments/common/h2_common.py (6
+  layouts, selection = same as run_h1v2.select, input builder), experiments/h1_v2/run_h2.py (generate + score exactly
+  like run_h1v2; scoring block is a COPY of run_h1v2.main, keep in sync), analyze_h2.py (violation per layout, direction
+  contrasts per channel pair with paired CIs / McNemar, H2 minus H3A), experiments/h1_v2/run_b200_h2.sh.
+- Subset or full: `--pilot N` (N units per branch) or `--all`, same selection as H1 so answers are cached/shared.
+  Examples: `bash run_b200_h2.sh assets pilot 40` then `bash run_b200_h2.sh run pilot 40 qwen2.5-omni-7b`
+  (env FAMILIES / LAYOUTS / H3A_FORM choose families, layouts, H3-A form).
+- H3-A instruction default = H4 affirmative form ("Mention only {Y}."): its audio/image already exist. PLAN's
+  "Describe the cat instead." wording NOT used: Vy has to approve. qT_iA / qT_iV are identical to H1's A / V (cache).
+- Tested on CPU only: py_compile, layout builder on dummy rows, analyze_h2.py on synthetic rows. NOT tested yet: render
+  / tts on the real dataset (needs stage 1 to finish) and every adapter with audio-only or image-only questions.
+
+## >>> 2026-11-24 11:58 UTC: Vy OK'd GPU 2 (ONLY GPU 2). STAGE 1 RUNNING (Claude in Vy's terminal) <<<
+- Vy: GPU 2 is free, run the dataset build then H1 (staged; Vy decides H4/COMP/etc. later via Telegram). pico/stop stays
+  (the runner is not running; do not start it, Vy's Claude drives the stages by hand).
+- Stage 1 = tmux job-stage1: `bash create_data/run_b200_stage1.sh` (steps 3-7 on GPU 2, then TTS + Whisper, then
+  flag_excluded_units), log pico/logs/stage1.log (ends with "EXIT n"), Telegram message at the end. B2 prints no progress bar.
+- Stage 2 (not started yet) = `bash experiments/h1_v2/run_b200_h1.sh smoke|full [models]` (GPU 2 only, stops at first
+  failure, tag pilot2 / all, log pico/logs/h1_<mode>.log). Order: smoke on all 5 models (measure s/answer), then full.
+- Done on CPU meanwhile: matplotlib installed in env negation (--no-deps); analyze.py got --asr_ok_only (main analysis on
+  asr_ok units, run once without as the sensitivity check). Models: all downloads finished (dl_models.log).
+
+## >>> 2026-11-24 10:07 UTC: Vy's STOP STILL HOLDS (Claude in Vy's terminal) <<<
+- The runner (tmux pico) restarted job-build-full on GPU 1 at 10:05 although Vy had ordered "no GPU". Claude KILLED it
+  again at 10:07 (it had only loaded Qwen3-8B, nothing written) and created pico/stop so the runner exits after its
+  current pause. Do NOT remove pico/stop or restart any GPU job until Vy says so explicitly. Vy is asking Claude to
+  review ALL code first so that ONE command runs the whole thing later (CPU-only review, discussion with Vy).
+  The "RUNNER STATE" block just below is superseded by this.
+
+## >>> RUNNER STATE 2026-11-24 10:10 UTC (Pico) -- SUPERSEDED, see the STOP block above <<<
 - First build try (GPU 3, started 09:51) DIED silently at 09:52 right after Qwen3-8B loaded: no traceback, no EXIT
   line, tmux session gone (cause unknown; log kept as pico/logs/build_full_try1.log). RESTARTED 10:05 UTC in tmux
   job-build-full on GPU 1 (CUDA_VISIBLE_DEVICES=1, 17.5 GB), same command, log pico/logs/build_full.log (ends "EXIT n").
@@ -84,3 +121,6 @@
 - Nothing has run here yet. First job when the runner starts: verify the envs (envs/setup_b200.sh --check),
   read pico/hosts/b200.md, PLAN.md and server 1's pico/NOTES.md (to see the state of the study), then report
   to Vy and wait for instructions.
+
+## VY'S DECISION 2026-11-24: asr_ok
+- Run ALL units (no asr_ok filter before running; `--all` as is, flag kept in every row). Main analysis on asr_ok=True, plus a sensitivity check on all units. Dataset stays at 2.8k images (2,799 / 4,675 units); the ~2.5k cleanup comes later.
