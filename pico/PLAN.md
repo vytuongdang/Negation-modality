@@ -29,8 +29,9 @@ Written by Claude in Vy's terminal from Vy's approval sheet. Vy approves it by s
 - Answers that hit 100 tokens are regenerated with 256 (`omnilib.LONG_NEW_TOKENS`, `AnswerCache.final`).
 - Excluded units: `create_data/dataset/out/excluded_units.jsonl` (79 of 1150: double label, part-whole,
   attribute overlap). Pilot = old pilot200 selection minus excluded = 932 questions.
-- Bad images (Vy 2026-11-24): never rebuild to drop them; list them in `dataset/out/excluded_images.jsonl` and run
-  `create_data/src/exclude_images.py` (adds their units to excluded_units.jsonl, reason bad_image; re-run after flag_excluded_units.py).
+- Bad images (Vy 2026-11-24): never rebuild to drop them. After the build + Vy's review, list them in
+  `dataset/out/excluded_images.jsonl` and run `create_data/src/filter_benchmark.py`: the benchmark in out/ itself
+  loses those units (ids unchanged, nothing regenerated; unfiltered copy in out_unfiltered/). H1 runs on the filtered set.
 - Old results ("pilot v1") are kept as `results/<model>/scored_pilot200_sepv1.jsonl`: history only.
 
 ## Stage 0 - smoke test (RUN)

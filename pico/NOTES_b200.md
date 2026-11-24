@@ -1,21 +1,23 @@
 # NOTES (B200 runner's memory)
 
-## >>> BAD-IMAGE CLEANUP = FILTER ONLY (Vy, 2026-11-24 23:01 KST) <<<
-- Build ONCE (stage 1 as running). Never rebuild from step 3 to drop images. Each removed image: add a row
-  {"image": ..., "reason": ...} to create_data/dataset/out/excluded_images.jsonl AND list it (id + reason) in the
-  "Removed images" list below; then `cd create_data/src && PYTHONNOUSERSITE=1 ~/anaconda3/envs/negation/bin/python
-  exclude_images.py` (new script) adds all units of those images to out/excluded_units.jsonl with reason bad_image.
-  Re-run exclude_images.py after ANY run of flag_excluded_units.py (it rewrites that file; stage 1 runs it at the end).
-- Consumers already read excluded_units.jsonl, no code change: omnilib.load_dataset (run_h1v2 / run_h2 select on
-  the FULL set with keep_excluded=True, then drop -> selection stays stable, cached answers reused), analyze.py,
-  analyze_h2.py, marginal_cis.py. All questions / forms / audio / visual of a unit carry its unit_id -> all dropped.
-- Dependency check (2026-11-24): a rebuild WOULD change remaining items: B3 template-sweep subset = rng.sample over
-  all units; sample_id = per source-branch counters in file order; TTS voice = shuffle over all sentences. Target
-  choice and template draw are per-unit seeded (crc32 of unit_id); forms/visual/export are per sample. Filtering
-  changes none of this. Side effects to report: sweep share and voice balance shift slightly; `--pilot N` gives
-  < N per branch when picked units are excluded (selection is done before the drop). analyze.py's printed reason
-  text says "double label / part-whole / attribute overlap" only (cosmetic).
-- Removed images: (none yet; the review comes after stage 1)
+## >>> BAD-IMAGE CLEANUP = FILTER THE BENCHMARK ITSELF, BEFORE H1 (Vy, 2026-11-24 23:04 KST; replaces 23:01) <<<
+- Order: (1) stage 1 builds the full dataset ONCE (never rebuild from step 3 for image cleanup); (2) after the build
+  AND Vy's review: list bad images {"image": "images/...", "reason": ...} (exact path as in samples.jsonl) in
+  create_data/dataset/out/excluded_images.jsonl + the "Removed images" list below, then
+  `cd create_data/src && PYTHONNOUSERSITE=1 ~/anaconda3/envs/negation/bin/python filter_benchmark.py` (--dry_run first);
+  (3) only then H1, reading the filtered out/ as usual (no bad-image logic in run/analysis code; asr_ok handling
+  and flag_excluded_units' excluded_units.jsonl stay as they are). Do NOT start H1 until Vy says OK.
+- filter_benchmark.py: copies the unfiltered build once to dataset/out_unfiltered/ (always filters FROM it, so it is
+  idempotent), rewrites every out/*.jsonl without the rows of those images' units (samples, forms, compact*,
+  excluded_units), prunes the audio manifest (copy kept as manifest_unfiltered.jsonl), MOVES per-sample wav/visual
+  files of removed samples to dataset/removed_images/. sample_ids are kept, nothing regenerated.
+- Dependency check (2026-11-24): a REBUILD would change remaining items (B3 sweep subset = rng.sample over all units;
+  sample_id = per source-branch counters in file order; TTS voice = shuffle over all sentences). Filtering does not:
+  ids are not renumbered, targets/templates are seeded per unit (crc32 of unit_id), forms carry pair_of + unit_id
+  and are dropped with their unit, audio/visual are per sample. Dry run on the partial build (3 test images): 9
+  units, 39 samples removed; samples 7471->7450, forms 8545->8527, compact_all 16016->15977 (consistent).
+  Side effects to state: template-sweep share and voice balance shift slightly.
+- Removed images: (none yet; review after stage 1, then Vy's review)
 
 ## >>> RULE (Vy, 2026-11-24 ~21:35 KST): NO PERIODIC CHECKS <<<
 - job-stage1 posts to Telegram itself when it finishes or fails. End EVERY step by writing 43200 to pico/sleep_seconds
@@ -114,7 +116,7 @@
   Apply with: cd create_data/src && PYTHONNOUSERSITE=1 ~/anaconda3/envs/negation/bin/python subset_images.py
   --n_images 2800 ; then `bash ../run_v2_all.sh rest` (B2 -> B3 -> forms -> export -> visual -> TTS -> exclusions).
   NOT applied yet. units_full.jsonl (5,335 units / 3,154 images) stays as the pool; dropping bad images later =
-  [SUPERSEDED 2026-11-24 23:01 KST: NO rebuild; filter only, see the BAD-IMAGE CLEANUP block at the top].
+  [SUPERSEDED 2026-11-24 23:04 KST: NO rebuild; filter the benchmark with filter_benchmark.py, see the top block].
 - Bad-image cleanup after the build: use the review page + selection_report (sharpness etc.) + B2 human-verify
   sample; record every removed image id and why in this file (never drop images because of results).
 
