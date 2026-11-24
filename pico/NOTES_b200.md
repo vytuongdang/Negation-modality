@@ -1,6 +1,7 @@
 # NOTES (B200 runner's memory)
 
 ## >>> 2026-11-25 00:10 KST: H1 FULL RUNNING (tmux job-h1-full, GPU 2, log pico/logs/h1_full.log, ends "EXIT n") <<<
+- 17:15 UTC: qwen7b gen done 6,230 s (0.36 s/ans; 95 regen at 256 tok); judge pass 1 15,208 rows ~10 min; then judge (thinking) 3,549 rows. Remaining 4 models ~12 h.
 - 2026-11-24 16:05 UTC: qwen7b gen 7,544/17,524 at 0.44 s/answer (gen ends ~17:15 UTC, then judge: measure its speed). Projected all 5 done ~06-09 UTC 11-25.
 - NEVER `git commit -a` on B200 (it commits the deleted old results + B200 smoke files over server 1 tracked pilot2 files); add files by name.
 - Smoke OK on all 5 (s/answer gen: qwen7b 0.36, qwen3b 0.40, minicpm 0.72, phi 0.88, internomni 0.49). Smoke tag pilot2.
