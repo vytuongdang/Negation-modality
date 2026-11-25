@@ -12,6 +12,7 @@
   with a separate cache file via a new wrapper script (not done).
 - 06:05 UTC: last hour rates: minicpm 1,580 ans/h (alone 4,500), phi 2,500 (alone 4,090), intern 6,200 (alone 7,350) = 10,280/h combined vs ~4,100-7,350 sequential -> parallel ~1.7x faster overall. Left: minicpm 12.9k, phi 14.7k, intern 10.5k -> intern ~07:45, all gen ~10-11 UTC.
 - 07:06 UTC: last hour minicpm 940/h (long CLEVR count answers), phi 1,800, intern 6,000 (13.1k, ends ~07:50). Combined 8.8k/h.
+- 08:06 UTC: minicpm 8.5k (2,900/h), phi 5.3k (only 660/h: CLEVR, long "### Your explanation" answers), intern main pass done, regen 119 long answers. RACE RULE: if phi parallel gen has not ended when main job finishes minicpm scoring, kill tmux job-h1-gen-phi-4-mm just before (main resumes from the cache, no loss).
 - 04:50 UTC: QWEN3B FULL DONE (145 think_error rows). Analysis asr_ok: experiments/h1_v2/full_analysis_qwen3b_asrok.md + figures/full_h1v2_*_qwen3b_asrok.png.
   C0 82.0% (3,558/4,338). Violation T 65.4, A 50.3, V 90.6; T-A +15.1 pp [13.5, 16.8], McNemar p 5e-73. Count/relation T ~90 vs A ~70.
   N3-only T-A +4.9 [1.0, 8.9]. Val T 73.5/A 53.6, train 58.5/47.4. Recall C0 81.4, T 81.8, A 82.7, V 78.4.
