@@ -16,8 +16,21 @@
   units dropped; every image used once in the whole list; every question has all H4 forms its branch supports (existence
   has exceptive only, by design). Drawn from the same one-sample-per-unit selection as H1 full, so C0/T/A/V answers come
   from the answers.jsonl cache. It is NOT the old server-1 pilot200 (932 questions, different ids).
-  TODO after H1 full ends: add `--pilot_list experiments/h1_v2/pilot1000.json` to run_h1v2.py / run_h2.py (NOT edited
-  now: later models re-import run_h1v2.py while the main job runs). Then use this one list for H2, H3, H4 and the methods.
+  UPDATE 2026-11-25 (Claude): run_h1v2.py is NOT edited (H1 job re-imports it). Instead use the wrapper
+  experiments/h1_v2/run_pilot.py = run_h1v2.py on pilot1000.json (same args: --model, --forms, --conds ..., --generate_only,
+  --score_only; output tag pilot1000[_forms][_<conds>]; shares answers.jsonl / judge.jsonl with H1). Dry-run checked
+  (1,000 ids found, 5 branches), NO model run yet. run_h2.py and h2_assets.py now take `--pilot_list FILE` (tag h2_pilot1000).
+- H2 + H3-A = READY BUT DO NOT RUN until Vy says "run H2" (Vy 2026-11-25). Done: code (h2_common.py, run_h2.py,
+  h2_assets.py, analyze_h2.py, run_b200_h2.sh with `list` selection), question images for the 1,000 questions (CPU,
+  dataset/h2/question_image, 75 of 1,000 occlude an object), question audio = TTS on GPU 2 (CosyVoice2, 512 unique
+  question texts, started 11:43 UTC, log pico/logs/h2_tts.log, ~85 min; it is an asset job, not an H2 run: do not kill it,
+  do not start another one). When it ends: `h2_assets.py status --pilot_list ...` must show 1000 audios; check the
+  asr mismatches line. Then to run: `bash experiments/h1_v2/run_b200_h2.sh run list [models]` (smoke --pilot 2 does not
+  fit the `list` selection: smoke with a small H2 run on 2 models first, ask Vy). H3-A uses the AFFIRMATIVE form, which
+  does not exist for the 200 existence questions (skipped, reported by run_h2.py); use H3A_FORM=exceptive for them if Vy
+  wants all 1,000. 12 conditions per question; qT_iA / qT_iV reuse H1's A / V answers from the cache.
+- NOT DONE (needs an omnilib.py edit, so after H1 full ends): H3-C (instruction BEFORE the image), the adapters put the
+  image first.
 - EXTENDING pilot -> full (e.g. H4): keep every result already produced for the 1,000 pilot questions, then run ONLY
   the questions not yet run. The pilot is a subset of the full one-sample-per-unit selection (seed 42), so
   answers.jsonl (keyed by input hash) and judge.jsonl are reused automatically. Do not change code, prompts, judge,
@@ -25,6 +38,29 @@
   scoring first and write it down). Final numbers = analysis on ALL questions pooled, never "pilot + random rest" and
   never the balanced pilot alone (it is 200 per branch; full is natural: attribute 1,518 ... relation 620). In the paper
   say that H4 first ran on the pilot and was then extended.
+- >>> SCHEDULE AFTER H1 FULL (Vy 2026-11-25; follow in this order; Vy also sends the same text in Telegram) <<<
+  0. Confirm H1 full ended (EXIT 0, all 5 models). git pull --rebase origin/main + push. Run the 5-model analysis (asr_ok main +
+     all-units sensitivity), commit by file name (never git commit -a), send Vy ONE short report. Check that the H2 question-audio TTS
+     (pico/logs/h2_tts.log) finished: `h2_assets.py status --pilot_list ...` must show 1000 audios; if it crashed, report (restart only if dead).
+  1. Write experiments/h1_v2/run_b200_pilot.sh (like run_b200_h1.sh) using run_pilot.py (NOT run_h1v2.py edits, NOT pilot1000.json
+     changes). GPU 2 only, nvidia-smi before each job, one failure = stop, tmux job-<name>, log pico/logs/<name>.log ending "EXIT n".
+     Same envs as H1 (qwen: negation; minicpm: omni_neg gen + negation score; phi: omni_phi; internomni: omni_intern).
+     GENERATION in two batches: batch 1 = 3 models in parallel, batch 2 = the other 2 in parallel after batch 1 finished
+     generating; NEVER all 5 at once. Suggested: batch 1 = qwen2.5-omni-7b, qwen2.5-omni-3b, minicpm-o-2.6; batch 2 = phi-4-mm,
+     internomni (change if nvidia-smi shows a better balance). Scoring one model at a time (shared results/judge.jsonl); it may overlap
+     with the next batch's generation. >>> SEND VY A SHORT MESSAGE when the script is written and the smoke passed, BEFORE the real H4 run
+     (what runs, which batches, ETA). <<<
+  2. H4 FIRST: run_pilot.py --model <m> --forms on the 1,000 pilot, all 5 models (T/A/V, both forms). Smoke first with
+     run_h1v2.py --pilot 2 --forms on one model. Analyse: Delta_m = F_aff - F_neg per channel, Delta_audio - Delta_text and
+     Delta_visual - Delta_text with 95% CIs, exceptive next to it, required recall. >>> SEND VY A SHORT REPORT (numbers + CIs, no direction
+     claims) BEFORE starting step 3. <<<
+  3. H3-B and controls on the same list: --conds COMP_T COMP_A COMP_V and --conds C0_box OCR_V (5 models). Report NC per channel and
+     OCR copy rate per model.
+  4. After step 3: short report to Vy (H3-B NC per channel, OCR copy rate, controls), then STOP.
+  5. H2 / H3-A: ready, DO NOT RUN until Vy writes "run H2". Then `bash experiments/h1_v2/run_b200_h2.sh run list <models>` (small run on
+     2 models first). H3-C and the method work are not coded: do not start them.
+  Rules unchanged: hourly heartbeat only, no event-by-event Telegram, crash / stopped job = urgent message at once, never kill other
+  people's jobs, keep this file current after each step, tell Vy if the volume has < 30 GB free.
 - NOT NEEDED NOW: real voices and child voice (old stage 6). Keep only the 2 CosyVoice2 voices (female / male).
 - METHOD PART (idea stage, nothing coded): reduce violations on Qwen2.5-Omni-3B and 7B, on the pilot1000 subset only.
   Order: (1) training-free baselines: transcribe-then-obey (model first copies the instruction from audio/image as text),
@@ -50,6 +86,13 @@
   with a separate cache file via a new wrapper script (not done).
 - 06:05 UTC: last hour rates: minicpm 1,580 ans/h (alone 4,500), phi 2,500 (alone 4,090), intern 6,200 (alone 7,350) = 10,280/h combined vs ~4,100-7,350 sequential -> parallel ~1.7x faster overall. Left: minicpm 12.9k, phi 14.7k, intern 10.5k -> intern ~07:45, all gen ~10-11 UTC.
 - 07:06 UTC: last hour minicpm 940/h (long CLEVR count answers), phi 1,800, intern 6,000 (13.1k, ends ~07:50). Combined 8.8k/h.
+- 12:05 UTC: Vy's Telegram 21:02 KST = the SCHEDULE AFTER H1 FULL block above (received, follow it). WROTE
+  experiments/h1_v2/run_b200_pilot.sh (bash -n OK, NOT run, not committed yet): stages smoke [model] (run_h1v2.py --pilot 2
+  --forms, default qwen 3b) | forms | comp | ctrl; batch1 qwen7b+qwen3b+minicpm gen in parallel, then batch2 phi+intern gen
+  while batch1 scores one at a time; logs pico/logs/<stage>_gen_<model>.log; run as tmux job-pilot-<stage>, log
+  pico/logs/pilot_<stage>.log + "EXIT n". Smoke only AFTER H1 full ends (judge.jsonl shared with the H1 scorer).
+  H1 state: minicpm judge pass 1 done 12:03, thinking pass now (~3 h); phi parallel gen 16.0k (ETA ~12:45); H2 TTS (pid
+  3703709, not tmux) 143/512 texts at 12:03 -> ends ~13:15 UTC. H1 full end estimate ~23-24 UTC (phi + intern judge ~4 h each).
 - 11:07 UTC: minicpm main gen done; regen 1,500 truncated answers (256 tok, 3 s/ans, ETA ~11:50), judge -> ~16 UTC. phi 14.2k, ETA ~12:30 + its own regen.
 - 10:07 UTC: minicpm 15.3k (gen ETA ~11:00), phi 12.2k (+5k/h, ETA ~12:30 UTC, before main reaches phi ~15 UTC: race unlikely).
 - 09:06 UTC: intern parallel gen EXIT 0 (incl. 119 regen). Last hour minicpm 3,660 (12.2k, gen ETA ~11:15 UTC, judge -> ~15:15), phi 1,900 (7.2k, ETA ~13-15 UTC). Race with main job reaching phi ~15:15: decide at ~14 UTC.
