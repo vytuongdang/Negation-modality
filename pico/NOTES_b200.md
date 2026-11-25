@@ -1,6 +1,7 @@
 # NOTES (B200 runner's memory)
 
 ## >>> 2026-11-25 00:10 KST: H1 FULL RUNNING (tmux job-h1-full, GPU 2, log pico/logs/h1_full.log, ends "EXIT n") <<<
+- origin/main has 5 new commits (incl. be8ab2b judge.py OOM fix for the 4096 retry, analyze.py merges forms/C0_box). NOT pulled during the run (would change judge.py under later models). Pull --rebase + push AFTER H1 full ends; then use the new analyze.py. If a model's thinking retry OOMs, that commit is the fix (state it in the report).
 - 00:45 UTC 11-25 Note from Vy (09:37 KST): if InternOmni (or any step) fails, fix at once without waiting, restart ONLY the failed/remaining
   models on GPU 2 (`tmux new -d -s job-h1-full2 "bash experiments/h1_v2/run_b200_h1.sh full <models> >> pico/logs/h1_full.log 2>&1; echo EXIT \$? >> pico/logs/h1_full.log"`), then 5-model analysis, brief report.
   Check tail of h1_full.log for FAILED/EXIT at every wake. Tokenizer fix re-verified 00:45 UTC: sentencepiece 0.2.0 in omni_intern, local
