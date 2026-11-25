@@ -74,6 +74,15 @@
   (STATE / META / DENY / WRONG) and use OCR_V / V_card before interpreting V. (b) T vs A changes sign across models
   (InternOmni seems to treat the audio as the question, A recall 27%): compare paired within a model only.
 
+## >>> 2026-11-25 19:17 UTC: H1 FULL DONE (EXIT 0, 19:06 UTC, all 5 models; intern 33 think_error rows) <<<
+- git: committed pilot1000 list / run_pilot.py / H2 --pilot_list code, pull --rebase (conflict in analyze.py resolved = keep
+  origin's forms/C0_box merge + B200 asr_ok/--remove filters), pushed 3f4fa7e. judge.py now has be8ab2b (OOM fix in the 4096
+  retry; H1 full ran WITHOUT it; all pilot1000 runs use it -> state in report).
+- 19:21 smoke EXIT 0 (48 ans, 0.47 s/ans). 19:28 STARTED tmux job-pilot-forms (H4, log pico/logs/pilot_forms.log; gen logs forms_gen_<m>.log): batch1 qwen7b 0.78, qwen3b 0.86, minicpm 3.1 s/ans (5.4k each; minicpm ~4.6 h).
+- RUNNING: tmux job-analysis (CPU, slow: >20 min for asrok): analyze.py --tag all --asr_ok_only then without; logs pico/logs/analysis_full_{asrok,allunits}.log.
+  Rename outputs to full_* before commit. tmux job-pilot-smoke (GPU 2): run_b200_pilot.sh smoke (qwen3b --pilot 2 --forms), log
+  pico/logs/pilot_smoke.log. Then: report to Vy (step 0 + smoke), then forms stage (H4), comp, ctrl.
+
 ## >>> 2026-11-25 00:10 KST: H1 FULL RUNNING (tmux job-h1-full, GPU 2, log pico/logs/h1_full.log, ends "EXIT n") <<<
 - 04:58 UTC (Vy note 13:57 KST: parallelise): started GENERATION ONLY of phi-4-mm and internomni in parallel on GPU 2
   (tmux job-h1-gen-phi-4-mm / job-h1-gen-internomni, logs pico/logs/h1_gen_<model>.log ending "EXIT n"; same cmd as
