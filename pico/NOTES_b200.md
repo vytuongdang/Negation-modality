@@ -86,6 +86,8 @@
   with a separate cache file via a new wrapper script (not done).
 - 06:05 UTC: last hour rates: minicpm 1,580 ans/h (alone 4,500), phi 2,500 (alone 4,090), intern 6,200 (alone 7,350) = 10,280/h combined vs ~4,100-7,350 sequential -> parallel ~1.7x faster overall. Left: minicpm 12.9k, phi 14.7k, intern 10.5k -> intern ~07:45, all gen ~10-11 UTC.
 - 07:06 UTC: last hour minicpm 940/h (long CLEVR count answers), phi 1,800, intern 6,000 (13.1k, ends ~07:50). Combined 8.8k/h.
+- >>> Vy 21:08 KST 11-25: GPU 2 = Vy's own GPU, the ONLY one for now. After step 0 is done, run steps 1-3 at once WITHOUT
+  waiting for replies (the messages at smoke / H4 / H3-B are reports, NOT approvals). Still STOP after step 4; no H2 until "run H2". <<<
 - 12:05 UTC: Vy's Telegram 21:02 KST = the SCHEDULE AFTER H1 FULL block above (received, follow it). WROTE
   experiments/h1_v2/run_b200_pilot.sh (bash -n OK, NOT run, not committed yet): stages smoke [model] (run_h1v2.py --pilot 2
   --forms, default qwen 3b) | forms | comp | ctrl; batch1 qwen7b+qwen3b+minicpm gen in parallel, then batch2 phi+intern gen
