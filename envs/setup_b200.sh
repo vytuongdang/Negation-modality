@@ -67,6 +67,8 @@ build() {
   grep '^numpy==' "$e.freeze.txt" | xargs -r "$py" -m pip install -q --no-deps
   "$py" -m pip install -q --no-deps --no-build-isolation -r "$req" || { echo "FAILED packages $e"; rm -f "$req"; return 1; }
   rm -f "$req"
+  # InternOmni tokenizer.model fails to load with sentencepiece 0.2.2 ("piece must not include null character"); 0.2.0 loads it
+  if [ "$e" = omni_intern ]; then "$py" -m pip install -q --no-deps sentencepiece==0.2.0 || echo "WARNING $e: sentencepiece 0.2.0 pin failed"; fi
   if [ "$e" = cosyvoice ]; then   # server 1's onnxruntime-gpu 1.18 needs cuDNN 8; torch 2.7 ships cuDNN 9
     "$py" -m pip install -q --no-deps onnxruntime-gpu==1.22.0 || echo "WARNING $e: onnxruntime-gpu upgrade failed"
   fi

@@ -1,6 +1,11 @@
 # NOTES (B200 runner's memory)
 
 ## >>> 2026-11-25 00:10 KST: H1 FULL RUNNING (tmux job-h1-full, GPU 2, log pico/logs/h1_full.log, ends "EXIT n") <<<
+- 00:45 UTC 11-25 Note from Vy (09:37 KST): if InternOmni (or any step) fails, fix at once without waiting, restart ONLY the failed/remaining
+  models on GPU 2 (`tmux new -d -s job-h1-full2 "bash experiments/h1_v2/run_b200_h1.sh full <models> >> pico/logs/h1_full.log 2>&1; echo EXIT \$? >> pico/logs/h1_full.log"`), then 5-model analysis, brief report.
+  Check tail of h1_full.log for FAILED/EXIT at every wake. Tokenizer fix re-verified 00:45 UTC: sentencepiece 0.2.0 in omni_intern, local
+  tokenizer.model sha256 f868398f..., spm + AutoTokenizer (local dir) load OK (92,544 pieces). envs/setup_b200.sh now pins it (committed).
+  ETA: qwen3b judge ends ~03:45 UTC; minicpm ~03:45-11:00; phi ~11:00-18:30; InternOmni starts ~18:30 UTC (03:30 KST 26/11), done ~23:30 UTC.
 - 22:30 UTC: QWEN7B FULL DONE (scored_all.jsonl). 113 think_error rows (fast verdict kept, in review_all.csv). Analysis (asr_ok, 52 units out):
   experiments/h1_v2/full_analysis_qwen7b_asrok.md + figures/full_h1v2_*_qwen7b_asrok.png. C0 81.5% (3,535/4,338). Violation T 17.3,
   A 13.5, V 89.0; T-A +3.8 pp [2.6, 5.0], McNemar p 5e-10 (matches server-1 subset +4.2). Val T 16.1/A 10.4, train 18.2/15.9.
