@@ -88,6 +88,10 @@
 - 21:23 UTC: minicpm 2,721/5,400 (ends ~23:10), intern early 5,101 (ends ~21:30), phi early 2,181 at 1.4 s (ends ~22:40).
   STARTED tmux job-forms-early-score-qwen7b (judge, log pico/logs/forms_early_score_qwen7b.log, est. ~1.2 h -> ~22:40). It MUST end before
   job-pilot-forms prints '=== score qwen2.5-omni-7b' (only one judge writer on results/judge.jsonl); if not, kill the early score session.
+- 22:43 UTC: intern early gen EXIT 0. phi early 4,361/5,400 (~23:15), minicpm 4,601 (~23:20 + regen). Early qwen7b judge slower (thinking 640/1176).
+  tmux watch-forms-race kills job-forms-early-score-qwen7b automatically when the script prints '=== score qwen2.5-omni-7b' (judge
+  appends per batch, so the script resumes from the cache). Same race for phi: script will start phi gen from cache; if early phi still
+  running then, kill job-forms-early-phi-4-mm (check at next wake).
   Rename outputs to full_* before commit. tmux job-pilot-smoke (GPU 2): run_b200_pilot.sh smoke (qwen3b --pilot 2 --forms), log
   pico/logs/pilot_smoke.log. Then: report to Vy (step 0 + smoke), then forms stage (H4), comp, ctrl.
 
