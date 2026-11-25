@@ -92,6 +92,9 @@
   tmux watch-forms-race kills job-forms-early-score-qwen7b automatically when the script prints '=== score qwen2.5-omni-7b' (judge
   appends per batch, so the script resumes from the cache). Same race for phi: script will start phi gen from cache; if early phi still
   running then, tmux watch-forms-race-phi kills job-forms-early-phi-4-mm automatically.
+- 23:28 UTC: minicpm in regen (181/501 at 7.5 s -> ~00:15 UTC); phi early 5,321/5,400; qwen7b early judge 1088/1176.
+  tmux job-forms-early-score-qwen3b starts qwen3b judge when qwen7b early judge ends (log forms_early_score_qwen3b.log);
+  tmux watch-forms-race-3b kills it as soon as the script prints any '=== score' line (script resumes from cache).
   Rename outputs to full_* before commit. tmux job-pilot-smoke (GPU 2): run_b200_pilot.sh smoke (qwen3b --pilot 2 --forms), log
   pico/logs/pilot_smoke.log. Then: report to Vy (step 0 + smoke), then forms stage (H4), comp, ctrl.
 
