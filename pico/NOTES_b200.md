@@ -80,7 +80,11 @@
   retry; H1 full ran WITHOUT it; all pilot1000 runs use it -> state in report).
 - 19:21 smoke EXIT 0 (48 ans, 0.47 s/ans). 19:28 STARTED tmux job-pilot-forms (H4, log pico/logs/pilot_forms.log; gen logs forms_gen_<m>.log): batch1 qwen7b 0.78, qwen3b 0.86, minicpm 3.1 s/ans (5.4k each; minicpm ~4.6 h).
 - 19:55 UTC: 5-MODEL ASR_OK ANALYSIS DONE -> experiments/h1_v2/full_analysis_5models_asrok.md + figures/full_h1v2_{violation,forms}_5models_asrok.png (committed). Viol T/A/V (T-A [CI]): qwen7b 17.3/13.5/89.0 (+3.8 [2.6,5.0]); qwen3b 65.4/50.3/90.6 (+15.1); minicpm 48.1/30.1/93.9 (+17.9 [16.2,19.7]); phi 27.6/37.4/87.2 (-9.8 [-11.9,-7.7]); intern 49.2/80.8/94.7 (-31.6 [-33.7,-29.7]). Recall C0/T/A/V: intern 71/73/25/73, phi 81/64/68/78, minicpm 80/85/84/79. Sign of T-A differs by model. Report sent to Vy (Telegram + photo). TODO: claims.md update once (shared file), all-units sensitivity.
-- RUNNING: tmux job-analysis (CPU) all-units sensitivity (~20 min, analysis_full_allunits.log; output analysis_all.md -> rename full_analysis_5models_allunits.md): analyze.py --tag all --asr_ok_only then without; logs pico/logs/analysis_full_{asrok,allunits}.log.
+- 20:30 UTC: all-units sensitivity DONE (full_analysis_5models_allunits.md, committed): T-A same as asr_ok within 0.2 pp for all 5 models.
+- H4 forms: qwen7b gen done 20:21, qwen3b 20:24; minicpm 1,481/5,400 at 2.4 s (ends ~23:05 UTC); script waits for it before batch2.
+  To use idle GPU, STARTED EARLY batch-2 gen by hand (same cmd, same answers cache): tmux job-forms-early-internomni / job-forms-early-phi-4-mm,
+  logs pico/logs/forms_early_gen_<m>.log ("EXIT n"). RACE RULE: if early phi/intern gen is still running when job-pilot-forms prints
+  '--- gen phi-4-mm' (after minicpm), kill the EARLY tmux session (the script's copy resumes from the cache).
   Rename outputs to full_* before commit. tmux job-pilot-smoke (GPU 2): run_b200_pilot.sh smoke (qwen3b --pilot 2 --forms), log
   pico/logs/pilot_smoke.log. Then: report to Vy (step 0 + smoke), then forms stage (H4), comp, ctrl.
 
