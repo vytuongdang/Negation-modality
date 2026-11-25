@@ -88,6 +88,7 @@
 - 07:06 UTC: last hour minicpm 940/h (long CLEVR count answers), phi 1,800, intern 6,000 (13.1k, ends ~07:50). Combined 8.8k/h.
 - >>> Vy 21:08 KST 11-25: GPU 2 = Vy's own GPU, the ONLY one for now. After step 0 is done, run steps 1-3 at once WITHOUT
   waiting for replies (the messages at smoke / H4 / H3-B are reports, NOT approvals). Still STOP after step 4; no H2 until "run H2". <<<
+- 13:08 UTC: minicpm judge thinking 896/3048 (~14/min, ends ~15:40 UTC); phi main gen done (29,101 s), regen 236; H2 TTS 460/512, 7 asr mismatches, ends ~13:20.
 - 12:05 UTC: Vy's Telegram 21:02 KST = the SCHEDULE AFTER H1 FULL block above (received, follow it). WROTE
   experiments/h1_v2/run_b200_pilot.sh (bash -n OK, NOT run, not committed yet): stages smoke [model] (run_h1v2.py --pilot 2
   --forms, default qwen 3b) | forms | comp | ctrl; batch1 qwen7b+qwen3b+minicpm gen in parallel, then batch2 phi+intern gen
