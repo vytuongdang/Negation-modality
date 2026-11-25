@@ -8,6 +8,7 @@ extended later: rows and files that already exist are reused, only new units are
     PYTHONNOUSERSITE=1 ~/anaconda3/envs/negation/bin/python h2_assets.py render --all
     # 2. audio (GPU, `cosyvoice` env): CosyVoice2, same two voices 50/50, Whisper check (asr_ok)
     PYTHONNOUSERSITE=1 CUDA_VISIBLE_DEVICES=2 ~/anaconda3/envs/cosyvoice/bin/python h2_assets.py tts --pilot 40
+    PYTHONNOUSERSITE=1 ~/anaconda3/envs/negation/bin/python h2_assets.py render --pilot_list ../../experiments/h1_v2/pilot1000.json
     python h2_assets.py status --pilot 40                          # what exists, what is missing (no GPU, `negation` env)
     (`tts` takes no selection: it makes the audio for every row of questions.jsonl that has none)
 
@@ -158,14 +159,15 @@ def main():
     g = ap.add_mutually_exclusive_group()
     g.add_argument("--pilot", type=int, help="units per branch (same selection as run_h1v2.py --pilot)")
     g.add_argument("--all", action="store_true", help="every unit")
+    g.add_argument("--pilot_list", help="fixed list of sample ids (experiments/h1_v2/pilot1000.json)")
     ap.add_argument("--seed", type=int, default=42)
     args = ap.parse_args()
     if args.cmd == "tts":   # works on questions.jsonl only: no import of the H1 runner in the cosyvoice env
         return cmd_tts(args)
-    if args.pilot is None and not args.all:
-        ap.error("render / status need --pilot N or --all")
-    samples, _ = H.select_samples(args.pilot, args.all, args.seed)
-    print(f"{len(samples)} units selected ({'all' if args.all else f'pilot {args.pilot} per branch'})", flush=True)
+    if args.pilot is None and not args.all and not args.pilot_list:
+        ap.error("render / status need --pilot N, --all or --pilot_list FILE")
+    samples, _ = H.select_samples(args.pilot, args.all, args.seed, args.pilot_list)
+    print(f"{len(samples)} units selected ({H.list_tag(args.pilot, args.all, args.pilot_list)})", flush=True)
     {"render": cmd_render, "status": cmd_status}[args.cmd](args, samples)
 
 

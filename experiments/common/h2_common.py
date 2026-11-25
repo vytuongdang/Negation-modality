@@ -26,6 +26,7 @@ New assets (made by create_data/src/h2_assets.py, listed in dataset/h2/questions
 as audio (CosyVoice2, same 2 voices, Whisper check) and the question written in the image (same box style as the
 visual instruction, placed away from the question's objects).
 """
+import json
 import sys
 from collections import defaultdict
 from pathlib import Path
@@ -59,18 +60,31 @@ def load_questions():
     return {r["unit_id"]: r for r in read_jsonl(QFILE)} if QFILE.exists() else {}
 
 
-def select_samples(pilot, all_units, seed=42):
-    """The same question selection as H1 (run_h1v2.select): `pilot` units per branch, or every unit.
+def select_samples(pilot, all_units, seed=42, pilot_list=None):
+    """The same question selection as H1 (run_h1v2.select): `pilot` units per branch, or every unit; or the FIXED list
+    of sample ids in `pilot_list` (experiments/h1_v2/pilot1000.json, made by make_pilot.py).
     -> (negative samples, {negative sample id: {form: form sample}})"""
-    sys.path.insert(0, str(HERE.parent / "h1_v2"))
-    import run_h1v2
     data_all, data = load_dataset(keep_excluded=True), load_dataset()
-    samples = [s for s in run_h1v2.select(data_all, None if all_units else pilot, seed) if s["id"] in data]
+    if pilot_list:
+        ids = [r["sample_id"] for r in json.loads(Path(pilot_list).read_text())["samples"]]
+        missing = [i for i in ids if i not in data]
+        if missing:
+            raise SystemExit(f"{len(missing)} ids of {pilot_list} are not in the dataset (first: {missing[0]})")
+        samples = [data[i] for i in ids]
+    else:
+        sys.path.insert(0, str(HERE.parent / "h1_v2"))
+        import run_h1v2
+        samples = [s for s in run_h1v2.select(data_all, None if all_units else pilot, seed) if s["id"] in data]
     forms = defaultdict(dict)
     for s in data.values():
         if s["form"] != "negative":
             forms[s["pair_of"]][s["form"]] = s
     return samples, forms
+
+
+def list_tag(pilot, all_units, pilot_list):
+    """'pilot1000' for a list file named pilot1000.json, 'pilot40' for --pilot 40, 'all' for --all."""
+    return Path(pilot_list).stem if pilot_list else ("all" if all_units else f"pilot{pilot}")
 
 
 def instruction_sample(s, forms, family, h3a_form="affirmative"):

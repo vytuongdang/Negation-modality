@@ -1,14 +1,16 @@
 #!/bin/bash
 # B200 H2 + H3-A (written 2026-11-24, NOT started: Vy decides when). GPU 2 only, stops at the first failure.
-#   bash run_b200_h2.sh assets <pilot N | all>          # question images (CPU) + question audio (GPU 2, cosyvoice env)
-#   bash run_b200_h2.sh run    <pilot N | all> [models] # generate + score H2 and H3-A, default all 5 models
+#   bash run_b200_h2.sh assets <list | pilot N | all>          # question images (CPU) + question audio (GPU 2, cosyvoice env)
+#   bash run_b200_h2.sh run    <list | pilot N | all> [models]   (list = pilot1000.json, tag h2_pilot1000) # generate + score H2 and H3-A, default all 5 models
 # Options through environment variables: FAMILIES="H2 H3A", LAYOUTS="TA AT TV VT AV VA", H3A_FORM=affirmative|exceptive.
 # Subset or full is the only choice you make: "pilot 40" (40 units per branch = 200 questions) or "all".
 cd "$(dirname "$0")"
 ROOT="$(cd ../.. && pwd)"
 export PYTHONNOUSERSITE=1 CUDA_VISIBLE_DEVICES=2
 STEP=$1; SEL_KIND=$2
-case $SEL_KIND in pilot) SEL="--pilot $3"; shift 3 ;; all) SEL="--all"; shift 2 ;; *) echo "usage: $0 assets|run pilot N|all [models]"; exit 1 ;; esac
+case $SEL_KIND in pilot) SEL="--pilot $3"; shift 3 ;; all) SEL="--all"; shift 2 ;;
+  list) SEL="--pilot_list $ROOT/experiments/h1_v2/pilot1000.json"; shift 2 ;;   # the fixed 1,000-question list (Vy 2026-11-25)
+  *) echo "usage: $0 assets|run list|pilot N|all [models]"; exit 1 ;; esac
 NEG=~/anaconda3/envs/negation/bin/python
 SRC=$ROOT/create_data/src
 FAMILIES=${FAMILIES:-"H2 H3A"}; LAYOUTS=${LAYOUTS:-"TA AT TV VT AV VA"}; H3A_FORM=${H3A_FORM:-affirmative}

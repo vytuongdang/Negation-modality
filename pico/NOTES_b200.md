@@ -88,6 +88,8 @@
 - 07:06 UTC: last hour minicpm 940/h (long CLEVR count answers), phi 1,800, intern 6,000 (13.1k, ends ~07:50). Combined 8.8k/h.
 - >>> Vy 21:08 KST 11-25: GPU 2 = Vy's own GPU, the ONLY one for now. After step 0 is done, run steps 1-3 at once WITHOUT
   waiting for replies (the messages at smoke / H4 / H3-B are reports, NOT approvals). Still STOP after step 4; no H2 until "run H2". <<<
+- 19:01 UTC: intern thinking 1491/1491 done, no-JSON retry next; H1 ends ~19:15.
+- 18:10 UTC: PHI FULL SCORED (scored_all.jsonl, 15:24-17:31). internomni score_only since 17:31: pass 1 done, thinking 640/1491 -> ends ~19:00 UTC.
 - 17:10 UTC: phi thinking 1728/1762 (phi done ~17:20), intern score next (~3.5 h -> ~21 UTC).
 - 16:10 UTC: MINICPM FULL SCORED (42 think_error rows). phi score_only started 15:24 (gen all cached); thinking 640/1762 (only 1,762 disagree rows) -> phi ends ~17:30, intern ~17:30-21 UTC.
 - 15:09 UTC: minicpm thinking 3048/3048 done (retry of no-JSON rows next), then phi score_only.

@@ -8,6 +8,7 @@ whose own C0 answer states it), so the numbers are comparable with H1 / H4. C0 i
 Subset or full, chosen on the command line (same selection as run_h1v2.py):
     --pilot N     N units per branch (sources round-robin, distinct images, instruction audio that passed ASR)
     --all         every unit
+    --pilot_list  FILE  the fixed list of sample ids (experiments/h1_v2/pilot1000.json); tag h2_pilot1000
 Choose what to run:
     --families H2 H3A      (default both)       --h3a_form affirmative|exceptive  (the positive instruction of H3-A)
     --layouts TA AT ...    (default all 6; two letters = question channel, instruction channel)
@@ -64,6 +65,7 @@ def main():
     g = ap.add_mutually_exclusive_group(required=True)
     g.add_argument("--pilot", type=int, help="units per branch")
     g.add_argument("--all", action="store_true")
+    g.add_argument("--pilot_list", help="fixed list of sample ids, e.g. experiments/h1_v2/pilot1000.json")
     ap.add_argument("--families", nargs="*", default=list(H.FAMILIES), choices=list(H.FAMILIES))
     ap.add_argument("--layouts", nargs="*", default=["".join(l) for l in H.LAYOUTS],
                     choices=["".join(l) for l in H.LAYOUTS], help="question channel + instruction channel, e.g. TA AT")
@@ -75,7 +77,7 @@ def main():
     args = ap.parse_args()
 
     layouts = [tuple(l) for l in args.layouts]
-    tag = "h2_" + ("all" if args.all else f"pilot{args.pilot}")
+    tag = "h2_" + H.list_tag(args.pilot, args.all, args.pilot_list)
     if args.h3a_form != "affirmative" and "H3A" in args.families:
         tag += f"_h3a_{args.h3a_form}"
     if args.families != list(H.FAMILIES):
@@ -85,7 +87,7 @@ def main():
     out = RESULTS / args.model
     out.mkdir(parents=True, exist_ok=True)
 
-    samples, forms = H.select_samples(args.pilot, args.all, args.seed)
+    samples, forms = H.select_samples(args.pilot, args.all, args.seed, args.pilot_list)
     qrows = H.load_questions()
     plan, skipped = build_plan(samples, forms, qrows, args.families, layouts, args.h3a_form)
     conds = sorted({c for _, c, _, _ in plan if c != "C0"})
