@@ -1,6 +1,10 @@
 # NOTES (B200 runner's memory)
 
 ## >>> 2026-11-25 00:10 KST: H1 FULL RUNNING (tmux job-h1-full, GPU 2, log pico/logs/h1_full.log, ends "EXIT n") <<<
+- 04:50 UTC: QWEN3B FULL DONE (145 think_error rows). Analysis asr_ok: experiments/h1_v2/full_analysis_qwen3b_asrok.md + figures/full_h1v2_*_qwen3b_asrok.png.
+  C0 82.0% (3,558/4,338). Violation T 65.4, A 50.3, V 90.6; T-A +15.1 pp [13.5, 16.8], McNemar p 5e-73. Count/relation T ~90 vs A ~70.
+  N3-only T-A +4.9 [1.0, 8.9]. Val T 73.5/A 53.6, train 58.5/47.4. Recall C0 81.4, T 81.8, A 82.7, V 78.4.
+  MiniCPM gen started 04:17 UTC, 0.80 s/ans (ETA gen ~08:20 UTC, then judge ~4 h -> ~12:30 UTC); phi then internomni (all done ~03-05 UTC 11-26).
 - 01:40 UTC: qwen3b judge thinking 1,792/3,472, no errors; volume 279 GB free. qwen3b ends ~03:10 UTC.
 - origin/main has 5 new commits (incl. be8ab2b judge.py OOM fix for the 4096 retry, analyze.py merges forms/C0_box). NOT pulled during the run (would change judge.py under later models). Pull --rebase + push AFTER H1 full ends; then use the new analyze.py. If a model's thinking retry OOMs, that commit is the fix (state it in the report).
 - 00:45 UTC 11-25 Note from Vy (09:37 KST): if InternOmni (or any step) fails, fix at once without waiting, restart ONLY the failed/remaining
