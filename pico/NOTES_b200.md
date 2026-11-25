@@ -1,5 +1,43 @@
 # NOTES (B200 runner's memory)
 
+## >>> VY'S DECISIONS 2026-11-25 (written by Claude in Vy's terminal; read before planning the next stages) <<<
+- TARGET: ACL 2027 main, ARR deadline 2027-01-04 (AoE, per 2027.aclweb.org). The paper needs a METHOD part that reduces
+  the violations, not only the benchmark + analysis.
+- SCOPE: H1 = FULL (running). H2, H3-A, H3-C, H4 = run only on the fixed pilot of 1,000 questions (below). H3-B (multiple
+  choice, scored by letter, no judge) is cheap: may run full. H4 may be extended to full for Qwen-7B/3B if the pilot
+  CIs for Delta_audio - Delta_text cross 0. Per-branch (200 each) and train/val results on the pilot are weak:
+  existence_closed has only 7 val questions, so do not claim per-branch or split effects from the pilot.
+- H4 cost: 2 forms x 3 channels = 6 new answers per question (~25.6k per model on full). Option offered to Vy: drop V
+  (violated 89-95%, ceiling) and/or run only the affirmative form first (exceptive only if the interaction shows).
+  Not decided yet: ask Vy before running H4.
+- FIXED PILOT LIST (new, CPU only, not committed): experiments/h1_v2/pilot1000.json + pilot1000_summary.md, made by
+  experiments/h1_v2/make_pilot.py (seed 42). 1,000 questions = 200 per branch; voice 500 female / 500 male (100/100 per
+  branch); COCO 500, GQA 200, CLEVR 199, VAW 101; templates N1-N7 141-145 each; train 673 / val 327; asr_ok only; excluded
+  units dropped; every image used once in the whole list; every question has all H4 forms its branch supports (existence
+  has exceptive only, by design). Drawn from the same one-sample-per-unit selection as H1 full, so C0/T/A/V answers come
+  from the answers.jsonl cache. It is NOT the old server-1 pilot200 (932 questions, different ids).
+  TODO after H1 full ends: add `--pilot_list experiments/h1_v2/pilot1000.json` to run_h1v2.py / run_h2.py (NOT edited
+  now: later models re-import run_h1v2.py while the main job runs). Then use this one list for H2, H3, H4 and the methods.
+- EXTENDING pilot -> full (e.g. H4): keep every result already produced for the 1,000 pilot questions, then run ONLY
+  the questions not yet run. The pilot is a subset of the full one-sample-per-unit selection (seed 42), so
+  answers.jsonl (keyed by input hash) and judge.jsonl are reused automatically. Do not change code, prompts, judge,
+  decoding or max tokens between the two parts (if judge.py must change, e.g. be8ab2b, check it does not change the
+  scoring first and write it down). Final numbers = analysis on ALL questions pooled, never "pilot + random rest" and
+  never the balanced pilot alone (it is 200 per branch; full is natural: attribute 1,518 ... relation 620). In the paper
+  say that H4 first ran on the pilot and was then extended.
+- NOT NEEDED NOW: real voices and child voice (old stage 6). Keep only the 2 CosyVoice2 voices (female / male).
+- METHOD PART (idea stage, nothing coded): reduce violations on Qwen2.5-Omni-3B and 7B, on the pilot1000 subset only.
+  Order: (1) training-free baselines: transcribe-then-obey (model first copies the instruction from audio/image as text),
+  contrastive / CFG decoding (logit with instruction minus w x logit without it); (2) activation steering (a "prohibition"
+  direction taken from the text instruction, added at the audio / image instruction positions); (3) LoRA trained on one
+  channel and tested on the others (split by IMAGE, never by question; check val images). Every method must report
+  required recall next to violation (over-suppression check; Phi-4 count recall already dropped 74 -> 7%). Judge is slow
+  (~4 h per 17.5k answers), so 1k questions x 4 conditions ~1 h per configuration. Write code now, run after H1 full.
+- Two things to check before the paper claims anything: (a) V is violated 89-95% even for Qwen-7B, which obeys T well:
+  V may measure "treats text inside the image as an instruction", not negation by channel; split violations by kind
+  (STATE / META / DENY / WRONG) and use OCR_V / V_card before interpreting V. (b) T vs A changes sign across models
+  (InternOmni seems to treat the audio as the question, A recall 27%): compare paired within a model only.
+
 ## >>> 2026-11-25 00:10 KST: H1 FULL RUNNING (tmux job-h1-full, GPU 2, log pico/logs/h1_full.log, ends "EXIT n") <<<
 - 04:58 UTC (Vy note 13:57 KST: parallelise): started GENERATION ONLY of phi-4-mm and internomni in parallel on GPU 2
   (tmux job-h1-gen-phi-4-mm / job-h1-gen-internomni, logs pico/logs/h1_gen_<model>.log ending "EXIT n"; same cmd as
@@ -12,6 +50,7 @@
   with a separate cache file via a new wrapper script (not done).
 - 06:05 UTC: last hour rates: minicpm 1,580 ans/h (alone 4,500), phi 2,500 (alone 4,090), intern 6,200 (alone 7,350) = 10,280/h combined vs ~4,100-7,350 sequential -> parallel ~1.7x faster overall. Left: minicpm 12.9k, phi 14.7k, intern 10.5k -> intern ~07:45, all gen ~10-11 UTC.
 - 07:06 UTC: last hour minicpm 940/h (long CLEVR count answers), phi 1,800, intern 6,000 (13.1k, ends ~07:50). Combined 8.8k/h.
+- 11:07 UTC: minicpm main gen done; regen 1,500 truncated answers (256 tok, 3 s/ans, ETA ~11:50), judge -> ~16 UTC. phi 14.2k, ETA ~12:30 + its own regen.
 - 10:07 UTC: minicpm 15.3k (gen ETA ~11:00), phi 12.2k (+5k/h, ETA ~12:30 UTC, before main reaches phi ~15 UTC: race unlikely).
 - 09:06 UTC: intern parallel gen EXIT 0 (incl. 119 regen). Last hour minicpm 3,660 (12.2k, gen ETA ~11:15 UTC, judge -> ~15:15), phi 1,900 (7.2k, ETA ~13-15 UTC). Race with main job reaching phi ~15:15: decide at ~14 UTC.
 - 08:06 UTC: minicpm 8.5k (2,900/h), phi 5.3k (only 660/h: CLEVR, long "### Your explanation" answers), intern main pass done, regen 119 long answers. RACE RULE: if phi parallel gen has not ended when main job finishes minicpm scoring, kill tmux job-h1-gen-phi-4-mm just before (main resumes from the cache, no loss).
