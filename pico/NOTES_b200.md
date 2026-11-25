@@ -1,6 +1,15 @@
 # NOTES (B200 runner's memory)
 
 ## >>> 2026-11-25 00:10 KST: H1 FULL RUNNING (tmux job-h1-full, GPU 2, log pico/logs/h1_full.log, ends "EXIT n") <<<
+- 04:58 UTC (Vy note 13:57 KST: parallelise): started GENERATION ONLY of phi-4-mm and internomni in parallel on GPU 2
+  (tmux job-h1-gen-phi-4-mm / job-h1-gen-internomni, logs pico/logs/h1_gen_<model>.log ending "EXIT n"; same cmd as
+  run_b200_h1.sh with --generate_only, same answers.jsonl cache). Speeds with 3 jobs: phi 1.07 s/ans (ETA ~10:15 UTC),
+  internomni 0.47 (~07:15), minicpm ~0.9+ (gen ~08:45, judge -> ~12:45). GPU 2 63 GB used of 183.
+  Scoring NOT parallel: results/judge.jsonl is shared and its loader crashes on a malformed line (long thinking
+  replies from 2 writers could interleave). Main job reaches phi after minicpm scoring: gen = all cache hits, then
+  score_only -> phi judge ~12:45-16:45, internomni ~16:45-20:45 UTC, then analysis. MUST check phi parallel gen ended
+  (EXIT 0) before main reaches phi, else duplicate gen (harmless but wasteful). Option to offer Vy: parallel judge
+  with a separate cache file via a new wrapper script (not done).
 - 04:50 UTC: QWEN3B FULL DONE (145 think_error rows). Analysis asr_ok: experiments/h1_v2/full_analysis_qwen3b_asrok.md + figures/full_h1v2_*_qwen3b_asrok.png.
   C0 82.0% (3,558/4,338). Violation T 65.4, A 50.3, V 90.6; T-A +15.1 pp [13.5, 16.8], McNemar p 5e-73. Count/relation T ~90 vs A ~70.
   N3-only T-A +4.9 [1.0, 8.9]. Val T 73.5/A 53.6, train 58.5/47.4. Recall C0 81.4, T 81.8, A 82.7, V 78.4.
