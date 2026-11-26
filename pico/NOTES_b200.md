@@ -95,6 +95,8 @@
 - 23:28 UTC: minicpm in regen (181/501 at 7.5 s -> ~00:15 UTC); phi early 5,321/5,400; qwen7b early judge 1088/1176.
   tmux job-forms-early-score-qwen3b starts qwen3b judge when qwen7b early judge ends (log forms_early_score_qwen3b.log);
   tmux watch-forms-race-3b kills it as soon as the script prints any '=== score' line (script resumes from cache).
+- 00:18 UTC 11-26: ALL H4 GENERATION DONE (phi/intern early EXIT 0, minicpm regen 501 done). Script scoring since 00:02: qwen7b (early run
+  did most; killed at retry pass, script finishing the retry), then qwen3b, minicpm, phi, intern (~1.5 h each) -> ~07-08 UTC. Watchers exited.
   Rename outputs to full_* before commit. tmux job-pilot-smoke (GPU 2): run_b200_pilot.sh smoke (qwen3b --pilot 2 --forms), log
   pico/logs/pilot_smoke.log. Then: report to Vy (step 0 + smoke), then forms stage (H4), comp, ctrl.
 
