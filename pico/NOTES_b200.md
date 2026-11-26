@@ -115,6 +115,14 @@
   (pico/logs/pilot_ctrl.log). After both: analyze_comp.py (H3-B NC per channel) + controls (OCR copy rate), report = step 4, then STOP.
   git pull --rebase fails (unstaged deletions of old tracked results, not mine): fetch shows origin has nothing new; pushed 13 commits.
 
+- 09:15 UTC 11-26: STEP 3 DONE (comp EXIT 0 06:28, ctrl EXIT 0 08:10). STEP 4 report SENT. NOW STOPPED per schedule; GPU 2 idle.
+  scored_pilot1000.jsonl (derived, ignored) = C0/T/A/V rows of scored_all.jsonl for the 1,000 pilot ids (analyze_comp needs it).
+  Summary: experiments/h1_v2/pilot1000_comp_ctrl_5models.md (+ analysis_comp_pilot1000.md, analysis_pilot1000_asrok.md). H3-B v1 NC
+  confounded with obedience (known lesson). OCR_V exact 94-100%; V - C0_box -0.7..-6.0 pp -> V failure not reading. Lesson added to RESEARCH.md.
+  NOTE: analyze.py primary metric = field 'violation' (any mention), NOT target_mentioned; use r.get('violation') in ad-hoc scripts.
+  WAITING for Vy: (a) "run H2" (b) H4 full extension for qwen7b/3b? (c) H3-B v2 on B200? Do not start any GPU job without one of these.
+  TODO (CPU, optional): paper/claims.md update (shared file, coordinate).
+
 ## >>> 2026-11-25 00:10 KST: H1 FULL RUNNING (tmux job-h1-full, GPU 2, log pico/logs/h1_full.log, ends "EXIT n") <<<
 - 04:58 UTC (Vy note 13:57 KST: parallelise): started GENERATION ONLY of phi-4-mm and internomni in parallel on GPU 2
   (tmux job-h1-gen-phi-4-mm / job-h1-gen-internomni, logs pico/logs/h1_gen_<model>.log ending "EXIT n"; same cmd as
