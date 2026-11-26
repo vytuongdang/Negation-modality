@@ -36,6 +36,7 @@
   17:10 DONE: number audit (subagent, audit/number_audit.md; 6 small fixes applied) + think_error sensitivity (H1 robust;
   H4 Qwen-3B aff A-T and MiniCPM exc A-T CIs cross 0 -> marked fragile). Committed 2e0b67e.
   Vy style note (00:13 KST) DONE: draft follows paper/style_notes.md §3, style log in draft_b200_review.md; confirm in the final msg.
+  19:11 UTC: minicpm H2 judge retry pass (almost done), phi + intern next (~01-03 UTC).
   LEFT: after job-h2-rest EXIT 0: analyze_h2.py 5 models, H2 section, re-review, ONE Telegram msg.
 - 15:45 UTC 11-26: job-h2-qwen EXIT 0 (15:40). job-h2-rest running (minicpm gen started ~15:41, first answer 3.1 s).
   Vy note (Telegram 00:13 KST 11-27): draft must imitate the STYLE/STRUCTURE of "Deep and shallow biases in language models" (An Vo et al.,
