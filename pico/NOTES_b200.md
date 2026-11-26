@@ -129,6 +129,14 @@
   then tmux job-h2-rest: run list minicpm-o-2.6 phi-4-mm internomni (log h2_rest.log). Existence (200 q) skipped for H3-A (affirmative form): report.
   No H3-C, no method work.
 
+- 11:00 UTC 11-26: Vy 19:11 KST: write STEERING code while H2 runs (code only). DONE, commit d0d66ec pushed, message sent:
+  experiments/h1_v2/steer/{steerlib,direction,run_steer,analyze_steer,smoke_cpu}.py + README.md (+ .gitignore results/).
+  Direction = mean(h at text instr tokens, "Do not mention X.") - mean("Mention X."), per layer, TRAIN images (673); eval VAL (327).
+  Steer A at audio tokens, V at box tokens (--v_pos box) or all image tokens; rand control; cfg (pairs in batch, forced same token);
+  transcribe-then-obey. Own cache steer/results/<model>/answers.jsonl; H1 caches READ ONLY; judge = shared results/judge.jsonl
+  (only one judge writer: never score steer while H2 scores). smoke_cpu.py ALL PASS (text_box is [x,y,w,h]: fixed).
+  NO GPU run until H2/H3-A finished AND Vy says OK.
+
 ## >>> 2026-11-25 00:10 KST: H1 FULL RUNNING (tmux job-h1-full, GPU 2, log pico/logs/h1_full.log, ends "EXIT n") <<<
 - 04:58 UTC (Vy note 13:57 KST: parallelise): started GENERATION ONLY of phi-4-mm and internomni in parallel on GPU 2
   (tmux job-h1-gen-phi-4-mm / job-h1-gen-internomni, logs pico/logs/h1_gen_<model>.log ending "EXIT n"; same cmd as
