@@ -125,3 +125,4 @@ surprising pattern worth chasing:
 - 2026-11-23 | Never edit a script that a running job will start again later (run_trial.sh re-imports
   run_h1v2.py per model): a new module name `comp` clashed with a local lambda and crashed 3 of 4 models, and the
   runner hid it behind "TRIAL DONE". Runner scripts must stop on the first failure; new code goes in only between jobs.
+- 2026-11-26 (B200, pilot1000, 5 models): models copy the in-image instruction almost verbatim (OCR_V exact 94-100%) yet V lowers mention vs the empty-box control C0_box by only 0.7-6 pp: V failure is not a reading failure; the written instruction is read but mostly not treated as an instruction.
