@@ -1,5 +1,31 @@
 # NOTES (B200 runner's memory)
 
+>>> 2026-11-26 15:35 UTC — CURRENT STATE / NEXT (read first) <<<
+- RUNNING: job-h2-qwen (qwen3b judge retry, ends ~15:45) -> tmux job-h2-rest auto-starts minicpm, phi, intern H2/H3-A when h2_qwen.log has
+  "EXIT 0" (log pico/logs/h2_rest.log, "EXIT n"; EXIT 99 = qwen failed, rest not started -> tell Vy). ETA rest ~10-12 h (~03-04 UTC 11-27).
+  Do NOT run steering (code ready, commit d0d66ec) until Vy OKs. Only one judge writer at a time.
+- VY TASK (Telegram 00:12 KST 11-27, received 15:12 UTC): AFTER H2/H3-A finished + analysed (no GPU, no further OK needed):
+  (1) paper DRAFT from real results only -> NEW files paper/draft_b200_v1.md + paper/draft_b200_review.md (never overwrite paper/draft_v1.md,
+      server 1's). Every number from experiments/h1_v2 analysis files (H1 full 5 models: full_analysis_5models_asrok.md / _allunits.md;
+      H4: pilot1000_forms_5models_asrok.md; H3-B + OCR + C0_box: pilot1000_comp_ctrl_5models.md, analysis_comp_pilot1000.md,
+      analysis_pilot1000_asrok.md; H2/H3-A: analysis_h2_pilot1000_asrok.md (rerun for 5 models)). Placeholders, clearly marked, naming the
+      experiment, for missing results (NEU neutral-word / cue control NOT run; steering/method NOT run; COMP v2 not run on B200; H3-C not coded).
+      No direction claim beyond CIs. Framing: pico/RESEARCH.md, paper/ideas.md, paper/outline.md, paper/style_notes.md (checklist §Synthesis),
+      paper/related_work.md, server-1 draft_v1.md only for structure.
+  (2) REVIEW in draft_b200_review.md: a) method audit: judge reliability (think_error rows keep fast verdict: counts per model/run;
+      regex-vs-judge disagreement counts; SENSITIVITY analysis excluding think_error rows), asr_ok vs all, excluded units (276) / removed
+      images, pilot1000 vs full (no per-branch/split claims from pilot), one answer per unit + image bootstrap, truncation 100->256 regen counts;
+      b) number audit: re-derive every draft number from result files, list mismatches; c) confounds: V 87-95% incl. affirmative (OCR_V,
+      C0_box, kind split STATE/META/DENY/WRONG), InternOmni audio-as-question (A recall ~25-27%), T-A sign flips (within-model only),
+      over-suppression (recall), C0 ~80%; d) what data supports, weak claims, ranked next experiments with GPU-h cost (NEU control, full H4,
+      method, COMP v2, H3-C), honest framing (main vs Findings).
+  (3) re-review after each section, fix + log changes. Then ONE short Telegram msg: files, 3-5 supported findings, top problems, ranked next
+      experiments (ask, don't run). git pull --rebase first (if blocked by the old unstaged deletions: fetch + check origin has nothing new),
+      commit by file name only, push.
+  PLAN: the audit part (a, b, c) on finished runs (H1/H4/H3-B/controls) can be done now on CPU while job-h2-rest runs; write the draft
+  sections that do not need H2 too; add H2/H3-A sections + final review + message after job-h2-rest EXIT 0 and analyze_h2.py on 5 models.
+- H2 qwen7b preview numbers are in the 13:30 UTC line below.
+
 ## >>> VY'S DECISIONS 2026-11-25 (written by Claude in Vy's terminal; read before planning the next stages) <<<
 - TARGET: ACL 2027 main, ARR deadline 2027-01-04 (AoE, per 2027.aclweb.org). The paper needs a METHOD part that reduces
   the violations, not only the benchmark + analysis.
