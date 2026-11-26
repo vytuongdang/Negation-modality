@@ -105,6 +105,16 @@
 
 - 02:20 UTC 11-26: qwen3b judge retry pass (16/66) -> done ~02:30; then minicpm, phi, intern scoring (~1.5 h each) -> job-pilot-forms EXIT ~07 UTC. Next wake: check EXIT, run analyze for 5 models (pilot1000_forms_5models), report, then comp + ctrl stages.
 
+- 05:39 UTC 11-26: H4 PILOT DONE (job-pilot-forms EXIT 0; think_error rows qwen7b 57, qwen3b 47, minicpm 21, phi 21, intern 28).
+  Analysis -> experiments/h1_v2/pilot1000_forms_5models_asrok.md + figures/pilot1000_h4_{forms,violation}_5models_asrok.png (committed, pushed).
+  Delta_audio-Delta_text (aff-neg): qwen7b -3.6 [-8.2,+0.9], qwen3b -4.2 [-9.0,+0.6], minicpm +11.9 [6.6,17.6], phi +11.9 [7.0,17.0],
+  intern +36.3 [30.9,41.8]. exc-neg A-T: qwen7b -0.1, qwen3b -19.3 [-24.1,-14.7], minicpm +5.7, phi +8.1, intern +0.4. V at ceiling (86-97%)
+  in ALL forms incl. affirmative -> Delta_V uninformative. qwen7b obeys aff worse than neg (Delta_text -19.6). Report sent to Vy (+photo).
+  Qwen CIs cross 0 -> H4 full extension for qwen7b/3b is an option: ASKED Vy, NOT run.
+- 05:43 UTC: STARTED tmux job-pilot-comp-ctrl (GPU 2): run_b200_pilot.sh comp (log pico/logs/pilot_comp.log, "EXIT n") then ctrl
+  (pico/logs/pilot_ctrl.log). After both: analyze_comp.py (H3-B NC per channel) + controls (OCR copy rate), report = step 4, then STOP.
+  git pull --rebase fails (unstaged deletions of old tracked results, not mine): fetch shows origin has nothing new; pushed 13 commits.
+
 ## >>> 2026-11-25 00:10 KST: H1 FULL RUNNING (tmux job-h1-full, GPU 2, log pico/logs/h1_full.log, ends "EXIT n") <<<
 - 04:58 UTC (Vy note 13:57 KST: parallelise): started GENERATION ONLY of phi-4-mm and internomni in parallel on GPU 2
   (tmux job-h1-gen-phi-4-mm / job-h1-gen-internomni, logs pico/logs/h1_gen_<model>.log ending "EXIT n"; same cmd as
