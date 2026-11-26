@@ -103,6 +103,8 @@
   Rename outputs to full_* before commit. tmux job-pilot-smoke (GPU 2): run_b200_pilot.sh smoke (qwen3b --pilot 2 --forms), log
   pico/logs/pilot_smoke.log. Then: report to Vy (step 0 + smoke), then forms stage (H4), comp, ctrl.
 
+- 02:20 UTC 11-26: qwen3b judge retry pass (16/66) -> done ~02:30; then minicpm, phi, intern scoring (~1.5 h each) -> job-pilot-forms EXIT ~07 UTC. Next wake: check EXIT, run analyze for 5 models (pilot1000_forms_5models), report, then comp + ctrl stages.
+
 ## >>> 2026-11-25 00:10 KST: H1 FULL RUNNING (tmux job-h1-full, GPU 2, log pico/logs/h1_full.log, ends "EXIT n") <<<
 - 04:58 UTC (Vy note 13:57 KST: parallelise): started GENERATION ONLY of phi-4-mm and internomni in parallel on GPU 2
   (tmux job-h1-gen-phi-4-mm / job-h1-gen-internomni, logs pico/logs/h1_gen_<model>.log ending "EXIT n"; same cmd as
