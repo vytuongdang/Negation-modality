@@ -111,7 +111,7 @@
   intern +36.3 [30.9,41.8]. exc-neg A-T: qwen7b -0.1, qwen3b -19.3 [-24.1,-14.7], minicpm +5.7, phi +8.1, intern +0.4. V at ceiling (86-97%)
   in ALL forms incl. affirmative -> Delta_V uninformative. qwen7b obeys aff worse than neg (Delta_text -19.6). Report sent to Vy (+photo).
   Qwen CIs cross 0 -> H4 full extension for qwen7b/3b is an option: ASKED Vy, NOT run.
-- 05:43 UTC: STARTED tmux job-pilot-comp-ctrl (GPU 2): run_b200_pilot.sh comp (log pico/logs/pilot_comp.log, "EXIT n") then ctrl
+- 05:43 UTC (05:52 speeds qwen7b 0.71, qwen3b 0.64, minicpm 1.1 s/ans; 3000 ans/model; comp ~08 UTC, ctrl ~11-12 UTC): STARTED tmux job-pilot-comp-ctrl (GPU 2): run_b200_pilot.sh comp (log pico/logs/pilot_comp.log, "EXIT n") then ctrl
   (pico/logs/pilot_ctrl.log). After both: analyze_comp.py (H3-B NC per channel) + controls (OCR copy rate), report = step 4, then STOP.
   git pull --rebase fails (unstaged deletions of old tracked results, not mine): fetch shows origin has nothing new; pushed 13 commits.
 
