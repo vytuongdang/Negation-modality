@@ -97,6 +97,9 @@
   tmux watch-forms-race-3b kills it as soon as the script prints any '=== score' line (script resumes from cache).
 - 00:18 UTC 11-26: ALL H4 GENERATION DONE (phi/intern early EXIT 0, minicpm regen 501 done). Script scoring since 00:02: qwen7b (early run
   did most; killed at retry pass, script finishing the retry), then qwen3b, minicpm, phi, intern (~1.5 h each) -> ~07-08 UTC. Watchers exited.
+- 01:25 UTC: qwen7b scored (00:02-00:45), qwen3b judge running. analyze.py --tag pilot1000_forms --models <m> --asr_ok_only WORKS
+  (H4 table with Delta CIs; scored_pilot1000_forms has C0 1000 + T/A/V 2800 each). Qwen7b preview: Delta aff-neg T -19.6, A -23.2, V +4.3,
+  A-T -3.6 [-8.7,+1.0]; exc-neg A-T -0.1 [-4.4,+4.1]. Final: run for all 5 when job-pilot-forms EXIT, rename -> pilot1000_forms_5models.
   Rename outputs to full_* before commit. tmux job-pilot-smoke (GPU 2): run_b200_pilot.sh smoke (qwen3b --pilot 2 --forms), log
   pico/logs/pilot_smoke.log. Then: report to Vy (step 0 + smoke), then forms stage (H4), comp, ctrl.
 
