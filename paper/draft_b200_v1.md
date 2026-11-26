@@ -28,7 +28,7 @@ affirmative and exceptive controls, part of the spoken–typed difference appear
 models, and the exceptive control shows that this depends on the model. Channel effects in omni-models therefore
 have to be measured per model and against matched controls. [URL]
 
-(~185 words: trim to 170 at the end. H2 sentence to add when 5-model H2 is in.)
+(208 words: trim to ~170 at the end. H2 sentence to add when 5-model H2 is in.)
 
 ---
 
@@ -86,7 +86,7 @@ as follows:
    them.** Asked to copy the text, the models reproduce it exactly in 94–100% of cases. Against an empty box, the
    written prohibition lowers mentions by only 0.7–6.0 points (Sec. 4.2). [src: FULL, CTRL]
 3. **The in-image failure is not specific to negation.** Affirmative instructions written in the image are ignored
-   as often (violation 86–95%), so Δ_V is near zero in every model (Sec. 4.4). [src: H4]
+   as often (violation 86–95%), so Δ_V stays within ±4.3 points in every model (Sec. 4.4). [src: H4]
 4. **Part of the spoken–typed gap appears specific to negation in three models, but the exceptive control limits
    this claim.** In the 1,000-question pilot, Δ_A − Δ_T (negation penalty, spoken minus typed) is +11.9 for
    MiniCPM-o, +11.9 for Phi-4-MM and +36.3 for InternOmni, with CIs excluding 0. For both Qwen models the CI
@@ -129,7 +129,7 @@ question lists all options, so it is absent for open existence, where it would g
    images first).
 3. **Phrase** each unit with a template and its forms (Qwen3-8B for B2/B3). 4,390 units reach the H1 run.
 4. **Exclude** units whose components cannot be told apart (276: double labels, part–whole pairs, overlapping
-   attributes) and 3 images removed by hand (too dark). [src: notes; create_data/dataset/out/removed_images.jsonl]
+   attributes) and 3 images removed by hand (2 too dark, 1 wrong VAW label). [src: notes; create_data/dataset/out/removed_images.jsonl]
 5. **Speak** every sentence with CosyVoice2-0.5B (two voices, female 2,339 / male 1,999 in the analysed set) and
    check it with Whisper large-v3-turbo. 52 units fail the check and are left out of the main analysis; they are
    kept in a sensitivity analysis.
@@ -142,7 +142,8 @@ Arithmetic: 4,390 units × 4 H1 conditions = 17,560 answers per model (all units
 [src: AUD judge_audit.md rows]
 
 **Pilot list.** H4, the controls, H3-B and H2/H3-A ran on a fixed list of 1,000 of these questions: 200 per branch,
-voices 500/500, all asr_ok, each image used once, seed 42 [src: pilot1000_summary.md]. The pilot is balanced by
+voices 500/500, all asr_ok for the negative audio, each image used once, seed 42 [src: pilot1000_summary.md]. The
+analyses keep the 987 units whose affirmative/exceptive audio also passed ASR (985 in H2). The pilot is balanced by
 branch while the full set is not, so pilot and full numbers are not directly comparable.
 
 ---
@@ -203,17 +204,17 @@ points, and the difference is significant only for Qwen-3B (84.0 vs 81.7, McNema
 | Phi-4-MM | 80.2 | 98.1 | 81.2 → 80.2 |
 | InternOmni | 80.3 | 99.0 | 82.6 → 82.6 |
 
-Caption: n = 4,338 (full) and 1,000 (pilot). Thus the channels can be compared: targets are usually named, and
+Caption: n = 4,338 (full); pilot OCR_V n = 1,000, C0 / C0_box n = 987 (asr_ok for every form). Thus the channels can be compared: targets are usually named, and
 written text is read.
 
 ### 4.2 Prohibitions written in the image are violated in about nine of ten cases in all five models
 
 **Experiments.** V vs T and A on the full set. V vs C0_box on the pilot (paired).
 
-**Results.** V violation is 87.2–94.7% in every model (Table 2) [src: FULL]. Against the empty-box control, the
-written prohibition lowers mentions by 6.0 [4.0, 8.0] points (Qwen-7B), 2.1 [0.4, 3.9] (Qwen-3B), 3.2 [1.6, 4.9]
+**Results.** V violation is 87.2–94.7% in every model (Table 2) [src: FULL]. Among questions whose C0 answer names the target, and against the empty-box
+control, the written prohibition lowers mentions by 6.0 [4.0, 8.0] points (Qwen-7B), 2.1 [0.4, 3.9] (Qwen-3B), 3.2 [1.6, 4.9]
 (MiniCPM-o), 5.2 [3.1, 7.4] (Phi-4) and 0.7 [−0.8, 2.2] (InternOmni) [src: CTRL; quick script, to be re-derived,
-see review]. Together with OCR_V, this suggests that the failure is not in reading: the written text is read but
+re-derived in audit/number_audit.md]. Together with OCR_V, this suggests that the failure is not in reading: the written text is read but
 mostly not acted on as an instruction. Violations under V are mostly plain statements (STATE 80.4–93.3% of C0-mentioned questions; META up to 6.2%
 in the Qwen models) [src: FULL, kind tables]. Box overlap with a question object does not explain it: with vs without overlap, V is 91.9 vs 88.9
 (Qwen-7B), 94.7 vs 90.4 (Qwen-3B), 92.4 vs 94.0 (MiniCPM-o), 88.8 vs 87.1 (Phi-4), 93.1 vs 94.8 (InternOmni); only
@@ -298,8 +299,10 @@ job-h2-rest.]**
 ## 5 Analysis
 
 ### 5.1 Violation kinds
-Violations are mostly STATE in all channels. DENY ("there is no dog") is the next most common kind and is largest
-for the typed prohibition in closed existence (InternOmni 10.9%) [src: FULL kind tables]. **[PLACEHOLDER: per-model
+Violations are mostly STATE in all channels. Under V, META (naming the target in order to exclude it) is the
+second kind for both Qwen models (6.2 / 6.1%) and Phi-4. DENY ("there is no dog") is concentrated in closed
+existence under the typed prohibition (MiniCPM-o 34.2%, Qwen-7B 25.3%, Qwen-3B 23.2%, InternOmni 10.9%) [src: FULL
+kind tables]. There, saying an option is absent is close to answering the closed question. **[PLACEHOLDER: per-model
 kind summary table T/A/V.]**
 
 ### 5.2 Over-suppression and the "audio as question" pattern

@@ -58,8 +58,19 @@ under C0 and V are longer, so they have more room to name the target. For MiniCP
 difference is too small to drive a 17.9-point gap. Report the per-condition rates in the appendix.
 
 ## (b) Number audit
-[PENDING: experiments/h1_v2/audit/number_audit.md, made independently: every draft number re-found in its source
-file, plus the V − C0_box differences re-derived from raw rows because they came from an unsaved script.]
+Done independently (subagent, read-only), see experiments/h1_v2/audit/number_audit.md. 129 claim rows were checked. Tables
+2, 3, §4.1, the findings list, the H2 preview and the dataset counts all match. Found and FIXED in the draft: abstract
+word count (208, not ~185); removed images = 2 too dark + 1 wrong VAW label; pilot C0/C0_box n = 987, not 1,000
+(13 units fail ASR on their affirmative/exceptive audio; H2 uses 985); "Δ_V near zero" → "within ±4.3" (Qwen-7B
+Δ_V +4.3 [1.3, 7.3] excludes 0); §5.1 kind ranking was wrong (under V, META > DENY for the Qwen models and Phi-4;
+DENY is large in closed existence under T: MiniCPM-o 34.2%, Qwen-7B 25.3%, Qwen-3B 23.2%).
+V − C0_box re-derived from raw rows (audit/rederive_v_minus_c0box.py): every point estimate is identical, and the
+CI ends differ by ≤ 0.2. The original script used 1,000 units, analyze.py 987: same values within 0.2. Conditioning
+on C0_box instead of C0 makes every effect larger (−3.6 to −9.1; InternOmni's CI then excludes 0). The C0-conditioned
+version is the fair one (it does not select on the value being subtracted), and the draft now says which
+conditioning it uses.
+
+New confound found by the audit (c11 below): DENY counts as a violation.
 
 ## (c) Confounds and how the draft handles them
 
@@ -93,6 +104,14 @@ file, plus the V − C0_box differences re-derived from raw rows because they ca
    difference is therefore also a source difference. No contamination claim without a per-source split table.
 10. **Torch 2.7.1 on B200 vs 2.6 on server 1.** Small numerical differences are possible. All draft numbers are
     from B200 only, so this does not matter as long as the two machines' results are not mixed.
+
+11. **DENY counted as violation.** In closed existence under T, a large part of the violations are "there is no X"
+    (MiniCPM-o: 34.2 of its 85.9 violation points there; FULL kind table). For a closed question, saying an option is absent
+    still names it, and it is often false (the VLM check says X is present), so counting it is defensible. But it
+    should be shown as its own column, and the headline T − A should be repeated with leak (= STATE only). The leak
+    column exists in FULL (paired kind table): T − A by leak is +2.9 (Qwen-7B), +14.8 (Qwen-3B), +18.1 (MiniCPM-o),
+    −8.0 (Phi-4), −32.7 (InternOmni). Every sign and CI matches the any-mention metric, so S1 does not depend on
+    counting DENY.
 
 ## (d) What the data support, what is weak, what to run next
 
@@ -153,3 +172,4 @@ because our effects are smaller and model-dependent.
 - 2026-11-26 16:xx: draft v1 written (all sections except H2 5-model); section pointers fixed (findings pointed
   to 5.x, results are 4.x); V kind range corrected to STATE 80.4–93.3 (first draft said 86–93, not in the file);
   occlusion placeholder filled from FULL.
+- 2026-11-26 17:xx: number audit applied (6 fixes above); confound c11 (DENY) added with the leak-only check.
