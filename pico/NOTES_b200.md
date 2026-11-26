@@ -137,6 +137,12 @@
   (only one judge writer: never score steer while H2 scores). smoke_cpu.py ALL PASS (text_box is [x,y,w,h]: fixed).
   NO GPU run until H2/H3-A finished AND Vy says OK.
 
+- 13:30 UTC 11-26: H2 qwen7b DONE (10:09-13:10, 65 think_error rows); qwen3b gen started 13:11 (0.56 s/ans, gen ~14:15, judge -> ~15:45).
+  Preview analyze_h2.py --tag h2_pilot1000 --models qwen2.5-omni-7b --asr_ok_only (experiments/h1_v2/analysis_h2_pilot1000_asrok.md, rerun for
+  all models later): qT_iA 13.2 / qA_iT 17.5 (H2 diff -4.3 [-7.1,-1.6]; H3A +2.7 [-0.9,6.3]; H2-H3A T-A -7.9 [-12.9,-3.1]); any iV ~86-90,
+  any qV ~17-20 (T-V, A-V H2-H3A ~0). qT_iA/qT_iV match H1 A/V (consistency OK). Spot check: closed-list H3A omission labelled DENY (judge rule; caveat).
+  NEXT: when job-h2-qwen EXIT 0 -> tmux job-h2-rest (run list minicpm-o-2.6 phi-4-mm internomni, log pico/logs/h2_rest.log), short note to Vy.
+
 ## >>> 2026-11-25 00:10 KST: H1 FULL RUNNING (tmux job-h1-full, GPU 2, log pico/logs/h1_full.log, ends "EXIT n") <<<
 - 04:58 UTC (Vy note 13:57 KST: parallelise): started GENERATION ONLY of phi-4-mm and internomni in parallel on GPU 2
   (tmux job-h1-gen-phi-4-mm / job-h1-gen-internomni, logs pico/logs/h1_gen_<model>.log ending "EXIT n"; same cmd as
