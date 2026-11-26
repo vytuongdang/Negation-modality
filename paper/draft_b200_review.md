@@ -16,7 +16,14 @@ paper. Change log at the end.
   disagreement is expected. It shows how much rests on the judge rather than on string matching. InternOmni's
   higher rate matches its longer, less list-like answers to spoken instructions (conjecture).
 - **Sensitivity without think_error units** (union over models: 290 units in H1 full, 129 in forms; analyze.py
-  --remove): [PENDING: audit/run_sens.sh -> analysis_all_asrok_rm.md, analysis_pilot1000_forms_asrok_rm.md].
+  --remove; audit/run_sens.sh -> experiments/h1_v2/analysis_all_asrok_rm.md, analysis_pilot1000_forms_asrok_rm.md):
+  H1 full: T − A unchanged within 0.3 points for every model (Qwen-7B +3.7 [2.5, 5.0], Qwen-3B +15.2, MiniCPM-o +18.2,
+  Phi-4 −10.1, InternOmni −31.6). S1 is robust.
+  H4 pilot (the union removes ~12% of the pilot units, n aff 574–592): most Δ_A − Δ_T values move by ≤ 1.2 points, but
+  two borderline CIs cross zero. Qwen-3B aff−neg goes from −4.2 [−9.0, +0.6] to −5.4 [−10.7, −0.5], and MiniCPM-o
+  exc−neg from +5.7 [+0.6, +10.9] to +5.0 [−0.3, +10.5]. **So these two are fragile: the draft must not call
+  either of them an effect.** The large ones (MiniCPM-o / Phi-4 / InternOmni aff−neg, Qwen-3B exc−neg −20.7) hold.
+  Removing think_error units also removes the hardest-to-judge items, so this is a robustness check, not a correction.
 - Human agreement exists only for server 1's subset (49 answers, 93.9%, κ 0.83). **No human check on B200
   answers.** This is the largest method gap for a judge-scored paper. Recommendation: a blind 300-item sample
   stratified by model × channel (Vy), plus 100 overlapping items (Huy), before submission.
@@ -173,3 +180,4 @@ because our effects are smaller and model-dependent.
   to 5.x, results are 4.x); V kind range corrected to STATE 80.4–93.3 (first draft said 86–93, not in the file);
   occlusion placeholder filled from FULL.
 - 2026-11-26 17:xx: number audit applied (6 fixes above); confound c11 (DENY) added with the leak-only check.
+- 2026-11-26 17:xx: think_error sensitivity added (a1); two borderline H4 CIs marked fragile in the draft.

@@ -251,7 +251,8 @@ on units that have an affirmative form (n = 647–669). The exceptive analogue c
 For the two Qwen models the CI includes zero (Table 3). The exceptive reference, which keeps the target's name in
 the instruction, gives a different picture. InternOmni's spoken penalty vanishes. MiniCPM-o and Phi-4 keep a
 smaller positive effect. Qwen-3B shows a negative one. So the evidence for negation-specific channel effects
-depends on the model and on the reference form. In V, Δ is within ±4.3 points in every model, because in-image
+depends on the model and on the reference form. Two borderline results (Qwen-3B aff−neg, MiniCPM-o exc−neg) cross
+zero when the units with an unresolved judge verdict are removed (review a1), so we do not count them as effects. In V, Δ is within ±4.3 points in every model, because in-image
 instructions of every form are mostly not followed.
 
 Table 3. Δ_A − Δ_T in points [95% CI], pilot, asr_ok. [src: H4]
