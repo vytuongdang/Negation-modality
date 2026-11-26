@@ -123,6 +123,12 @@
   WAITING for Vy: (a) "run H2" (b) H4 full extension for qwen7b/3b? (c) H3-B v2 on B200? Do not start any GPU job without one of these.
   TODO (CPU, optional): paper/claims.md update (shared file, coordinate).
 
+- 10:10 UTC 11-26: Vy "run H2" (Telegram 19:09 KST). Preflight: h2_assets status 1000/1000 audios+images, GPU 2 empty, 398 GB free.
+  STARTED tmux job-h2-qwen: run_b200_h2.sh run list qwen2.5-omni-7b qwen2.5-omni-3b (log pico/logs/h2_qwen.log, "EXIT n"; models sequential,
+  gen+score each; 7,200 answers/model, qwen7b 0.5 s/ans). ETA ~14:30 UTC. Then check answers/scores by eye + analyze_h2.py on 2 models,
+  then tmux job-h2-rest: run list minicpm-o-2.6 phi-4-mm internomni (log h2_rest.log). Existence (200 q) skipped for H3-A (affirmative form): report.
+  No H3-C, no method work.
+
 ## >>> 2026-11-25 00:10 KST: H1 FULL RUNNING (tmux job-h1-full, GPU 2, log pico/logs/h1_full.log, ends "EXIT n") <<<
 - 04:58 UTC (Vy note 13:57 KST: parallelise): started GENERATION ONLY of phi-4-mm and internomni in parallel on GPU 2
   (tmux job-h1-gen-phi-4-mm / job-h1-gen-internomni, logs pico/logs/h1_gen_<model>.log ending "EXIT n"; same cmd as
