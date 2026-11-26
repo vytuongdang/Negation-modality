@@ -37,6 +37,7 @@
   H4 Qwen-3B aff A-T and MiniCPM exc A-T CIs cross 0 -> marked fragile). Committed 2e0b67e.
   Vy style note (00:13 KST) DONE: draft follows paper/style_notes.md §3, style log in draft_b200_review.md; confirm in the final msg.
   19:11 UTC: minicpm H2 judge retry pass (almost done), phi + intern next (~01-03 UTC).
+  22:50 UTC: phi H2 done; analyze_h2 on 4 models; draft 4.5 written (Table 4, intern row PENDING, finding 6 still placeholder).
   LEFT: after job-h2-rest EXIT 0: analyze_h2.py 5 models, H2 section, re-review, ONE Telegram msg.
 - 15:45 UTC 11-26: job-h2-qwen EXIT 0 (15:40). job-h2-rest running (minicpm gen started ~15:41, first answer 3.1 s).
   Vy note (Telegram 00:13 KST 11-27): draft must imitate the STYLE/STRUCTURE of "Deep and shallow biases in language models" (An Vo et al.,

@@ -287,15 +287,45 @@ whichever channel carries it. H2 − H3-A asks whether this depends on negation.
 channels*. The Idea document's H2 instead gives two contradictory instructions ("Mention X." typed + "Do not
 mention X." spoken). That version has not been run.
 
-**Results (preview, Qwen2.5-Omni-7B only).** With negation, a prohibition is obeyed slightly better when typed
-with a spoken question than when spoken with a typed question: qT_iA 13.2% vs qA_iT 17.5%, −4.3 [−7.1, −1.6].
-Without negation the direction effect is +2.7 [−0.9, 6.3], and H2 − H3-A for T–A is −7.9 [−12.9, −3.1] [src: H2].
-Whenever the instruction is the in-image item it is violated in 86–90% of cases, and whenever the question is the
-in-image item the instruction is obeyed (17–20%). For T–V and A–V, H2 − H3-A ≈ 0.
-**[PLACEHOLDER: 5-model H2/H3-A table and text (analyze_h2.py --tag h2_pilot1000 --asr_ok_only, all models), job
-job-h2-rest.]**
+**Results.** For typed vs spoken, the direction in which the prohibition travels matters in every model analysed
+so far. It matters more with negation than with a positive instruction. The sign follows each model's H1 gap.
+When the instruction is written in the image, it is not followed whichever channel carries the question. When the
+*question* is written in the image, the typed or spoken prohibition is obeyed less than a typed or spoken positive
+instruction in three of four models (Table 4).
 
----
+Table 4. Direction effects (violation of q1_i2 minus q2_i1, points [95% CI]) with negation (H2) and without (H3-A),
+and their difference, on units that have both. Pilot, asr_ok. [src: H2]
+
+| model | H2 qT_iA − qA_iT | H3-A qT_iA − qA_iT | H2 − H3-A (T–A) | H2 − H3-A (T–V) | H2 − H3-A (A–V) |
+|---|---|---|---|---|---|
+| Qwen2.5-Omni-7B | −4.3 [−7.0, −1.6] | +2.7 [−1.0, +6.4] | −7.9 [−12.7, −3.3] | +0.7 [−4.0, +5.5] | +1.2 [−3.7, +6.3] |
+| Qwen2.5-Omni-3B | −18.6 [−22.1, −15.1] | +1.4 [−1.8, +4.5] | −15.4 [−20.2, −10.4] | −33.8 [−38.8, −29.2] | −29.9 [−34.9, −24.8] |
+| MiniCPM-o 2.6 | −23.9 [−27.7, −20.3] | −11.4 [−15.1, −7.7] | −13.9 [−19.5, −8.3] | −34.6 [−38.9, −30.3] | −13.6 [−18.2, −9.1] |
+| Phi-4-MM | +10.0 [+6.0, +13.9] | +5.9 [+2.5, +9.1] | +5.9 [+0.2, +11.5] | −18.4 [−23.7, −12.8] | −20.1 [−26.2, −14.4] |
+| InternOmni | [PENDING] | [PENDING] | [PENDING] | [PENDING] | [PENDING] |
+
+Caption: n = 800–832 (H2) and 646–668 (H3-A; open existence has no affirmative form). Negative T–A values mean
+that the instruction is violated less when it is spoken (and the question typed) than in the reverse layout. Thus
+the T–A direction effect is larger with negation than without in all four models, with the same sign as the
+model's H1 typed–spoken gap.
+
+Reading. (i) **Typed vs spoken.** H1 compared a typed with a spoken prohibition under a typed question. H2 swaps
+the question's channel as well. In Qwen-7B, Qwen-3B and MiniCPM-o, the spoken prohibition with a typed question
+(qT_iA: 13.2 / 49.2 / 30.4%) is violated less than the typed prohibition with a spoken question (qA_iT: 17.5 / 67.8 /
+54.3%). Phi-4 shows the reverse (42.6 vs 32.6%), as in H1. Without negation the effect is small or absent for the
+two Qwen models (+2.7, +1.4, CIs include 0). It is smaller for MiniCPM-o (−11.4) and Phi-4 (+5.9). So part of
+the typed–spoken asymmetry appears only with negation. For Phi-4 the H2 − H3-A interval only just excludes 0
+([+0.2, +11.5]). (ii) **In-image instructions.** Whenever the instruction is in the image (qT_iV, qA_iV), violation
+is 82–95% in both families, as in H1. (iii) **In-image questions.** When the question is in the image and the
+instruction is typed or spoken, the positive instruction is violated in 14–20% of cases, but the prohibition in
+31–55% (Qwen-3B, MiniCPM-o, Phi-4; Qwen-7B 17–20% for both). This is a negation-specific penalty that appears only
+when the question is read from the image (conjecture: the model treats the written question as the main task and
+the typed/spoken prohibition as weaker context). Recall is lower in these layouts (Phi-4 qV_iT 55.6%, qV_iA 50.4%),
+so part of the question may be missed.
+
+Not supported: a claim that one channel "dominates" in general. The direction and size depend on the model and on
+polarity. Caveat: the H2 run is a question-vs-instruction swap, not the Idea document's two contradictory
+instructions (review c7).
 
 ## 5 Analysis
 
