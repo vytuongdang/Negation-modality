@@ -33,7 +33,9 @@
   pico/logs/audit_sens.log "EXIT n"). A subagent writes audit/number_audit.md (draft numbers vs files + V-C0_box re-derived).
   Found: H2 as run = question-vs-instruction channel swap, NOT the Idea-doc conflict (typed "Mention X" + spoken "Do not mention X"):
   flagged in draft 4.5 + review c7. NOTES "intern 33 think_error" for H1 is wrong (file: 14; phi 33). 9 units lost in B2/B3 (4,399->4,390).
-  LEFT: fill (b) number audit + sensitivity into review; after job-h2-rest EXIT 0: analyze_h2.py 5 models, H2 section, re-review, ONE Telegram msg.
+  17:10 DONE: number audit (subagent, audit/number_audit.md; 6 small fixes applied) + think_error sensitivity (H1 robust;
+  H4 Qwen-3B aff A-T and MiniCPM exc A-T CIs cross 0 -> marked fragile). Committed 2e0b67e.
+  LEFT: after job-h2-rest EXIT 0: analyze_h2.py 5 models, H2 section, re-review, ONE Telegram msg.
 - 15:45 UTC 11-26: job-h2-qwen EXIT 0 (15:40). job-h2-rest running (minicpm gen started ~15:41, first answer 3.1 s).
   Vy note (Telegram 00:13 KST 11-27): draft must imitate the STYLE/STRUCTURE of "Deep and shallow biases in language models" (An Vo et al.,
   EMNLP 2026): use paper/style_notes.md (server 1 already studied it) first; no copied sentences; record the style choices taken in
