@@ -8,6 +8,9 @@
   tmux new -d -s job-neu-minicpm "cd experiments/h1_v2 && PYTHONNOUSERSITE=1 CUDA_VISIBLE_DEVICES=2 ~/anaconda3/envs/omni_neg/bin/python -u run_neu.py --model minicpm-o-2.6 --generate_only --batch_size 1 >> ../../pico/logs/neu_gen_minicpm-o-2.6.log 2>&1"
   NEU scoring of minicpm/phi/intern: run_neu.py --model <m> --score_only (negation env), one judge at a time, after the qwen3b early score ends.
   No other new GPU job until Vy says so. The 13:20 block above is superseded except its state/resume lines.
+- 16:50 UTC 11-27: NEU phi gen EXIT 0 (6,000 done). NEU qwen3b judge in last retry pass (16/59, slow), log neu_early_score.log.
+  COMP2 minicpm regen 301/569 at 36 s/ans (~19 UTC), then phi + intern COMP2. ASKED Vy whether to judge NEU phi + intern
+  (new GPU process, ~20 GB) after qwen3b ends; do NOT start before her OK. Then: analyze_neu.py (CPU) on scored models -> reports.
 >>> 2026-11-27 13:20 UTC: ALL MY GPU JOBS STOPPED (Vy order, Telegram 20:22 + 22:16 KST). WAIT: start NO GPU job until Vy says so. <<<
 Stopped (tmux kill-session; nothing deleted; caches answers.jsonl / judge.jsonl checked: last lines valid JSON):
   job-neu (PID 1852884 minicpm NEU gen), job-neu-early-phi (PID 2954424), job-neu-early-score (PID 3341200 qwen3b NEU judge),
