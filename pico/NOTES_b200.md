@@ -29,7 +29,7 @@
   H3-C code: experiments/h1_v2/run_h3c.py (adapter SUBCLASSES in its own process, omnilib.py NOT edited; NOLEAD__ marker on the main-image
   path -> no leading image, image as an item after the instruction); conds C0 T A (cache) + T_first A_first; V SKIPPED (no V_card images,
   would need rendering). Runner run_b200_h3c.sh smoke | gen N | score N (score waits while a NEU/H2 --score_only process runs).
-  RUNNING tmux job-h3c = smoke (--pilot 2, 5 models), log pico/logs/h3c.log. Then READ answers, then gen 200 x 5, score when NEU judge idle.
+  Smoke EXIT 0 (03:28): prompts verified (Qwen prompt printed: instr \n image \n question), models see the image; T_first/A_first 100% viol in all 5 (n 8-9). RUNNING job-h3c: gen 200 then score 200 (waits while NEU scores). analyze_h3c.py --tag h3c_pilot200 -> analysis_h3c_pilot.md. Caveat: _first is also before the question (T_pre would separate; not H3-C, propose only).
   CPU tables DONE (cpu_tables_b200.py, reproduces analyze.py: qwen7b 3535 C0-mentioned, 17.3/13.5/89.0): h3d_area_b200.md (large-small
   tertile T: +9.8/+6.6/+5.6/+4.3/-2.6 for qwen7b/qwen3b/minicpm/phi/intern; observational, branch-confounded), split_by_source_b200.md
   (CLEVR = val only, COCO mostly train: split ~ source, no train/val claim), dataset_stats_b200_full.md (4,338 units / 2,627 images).
