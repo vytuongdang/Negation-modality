@@ -25,6 +25,15 @@
   "answer starts with the instruction" rate (scorer unchanged). After: write analysis_comp2_pilot1000.md with CIs, V "violation if
   understood vs not", message Vy (table + caveats, no channel conclusion from COMP2 alone).
   (Lines above saying "COMP v2 RUNNING on B200 since 02:50 UTC 11-27 (job-comp2)" are superseded.)
+- 03:15 UTC 11-27: Vy (Telegram 12:09 KST) OK'd H3-C code+run on pilot (200 first, 1000 if smoke clean), steering OFF; + 3 CPU tables.
+  H3-C code: experiments/h1_v2/run_h3c.py (adapter SUBCLASSES in its own process, omnilib.py NOT edited; NOLEAD__ marker on the main-image
+  path -> no leading image, image as an item after the instruction); conds C0 T A (cache) + T_first A_first; V SKIPPED (no V_card images,
+  would need rendering). Runner run_b200_h3c.sh smoke | gen N | score N (score waits while a NEU/H2 --score_only process runs).
+  RUNNING tmux job-h3c = smoke (--pilot 2, 5 models), log pico/logs/h3c.log. Then READ answers, then gen 200 x 5, score when NEU judge idle.
+  CPU tables DONE (cpu_tables_b200.py, reproduces analyze.py: qwen7b 3535 C0-mentioned, 17.3/13.5/89.0): h3d_area_b200.md (large-small
+  tertile T: +9.8/+6.6/+5.6/+4.3/-2.6 for qwen7b/qwen3b/minicpm/phi/intern; observational, branch-confounded), split_by_source_b200.md
+  (CLEVR = val only, COCO mostly train: split ~ source, no train/val claim), dataset_stats_b200_full.md (4,338 units / 2,627 images).
+  (Lines above saying "H3-C coded 11-27 (run_h3c.py)" are superseded.)
 >>> 2026-11-26 15:35 UTC — CURRENT STATE / NEXT (read first) <<<
 - RUNNING: job-h2-qwen (qwen3b judge retry, ends ~15:45) -> tmux job-h2-rest auto-starts minicpm, phi, intern H2/H3-A when h2_qwen.log has
   "EXIT 0" (log pico/logs/h2_rest.log, "EXIT n"; EXIT 99 = qwen failed, rest not started -> tell Vy). ETA rest ~10-12 h (~03-04 UTC 11-27).
@@ -34,7 +43,7 @@
       server 1's). Every number from experiments/h1_v2 analysis files (H1 full 5 models: full_analysis_5models_asrok.md / _allunits.md;
       H4: pilot1000_forms_5models_asrok.md; H3-B + OCR + C0_box: pilot1000_comp_ctrl_5models.md, analysis_comp_pilot1000.md,
       analysis_pilot1000_asrok.md; H2/H3-A: analysis_h2_pilot1000_asrok.md (rerun for 5 models)). Placeholders, clearly marked, naming the
-      experiment, for missing results (NEU neutral-word / cue control NOT run; steering/method NOT run; COMP v2 RUNNING on B200 since 02:50 UTC 11-27 (job-comp2); H3-C not coded).
+      experiment, for missing results (NEU neutral-word / cue control NOT run; steering/method NOT run; COMP v2 RUNNING on B200 since 02:50 UTC 11-27 (job-comp2); H3-C coded 11-27 (run_h3c.py)).
       No direction claim beyond CIs. Framing: pico/RESEARCH.md, paper/ideas.md, paper/outline.md, paper/style_notes.md (checklist §Synthesis),
       paper/related_work.md, server-1 draft_v1.md only for structure.
   (2) REVIEW in draft_b200_review.md: a) method audit: judge reliability (think_error rows keep fast verdict: counts per model/run;
