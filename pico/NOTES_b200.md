@@ -55,6 +55,9 @@
   negation-specific yes/no/unknown, "Negation takeaway:" per H block; numbers cross-checked VI vs EN automatically). Build:
   bash paper/build_report_H.sh [names] (default both). Commit 8bb0e89 pushed, sent to Vy (paths + PDFs). Old report_H_results.md kept.
   WHEN NEU / COMP2 / H4 full / H3-C finish: update BOTH _vi and _en (same numbers), rebuild, resend.
+- 07:50 UTC 11-27: NEU intern gen EXIT 0; minicpm 4.6k/6k (~10 UTC); phi 1.76k/6k at 8.7 s (~10 h; GPU 2 168/183 GB, 93%);
+  early judge qwen7b thinking 832/1053; comp2 4.36k/5k (~08:30); h4full gen qwen7b 14.3k (~08:30), qwen3b 12.9k (~09 UTC).
+  Next wake ~10:50: analyze comp2 (analyze_comp.py --tag pilot1000 --version v2 runs at the end of job-comp2) -> update both reports.
 >>> 2026-11-26 15:35 UTC — CURRENT STATE / NEXT (read first) <<<
 - RUNNING: job-h2-qwen (qwen3b judge retry, ends ~15:45) -> tmux job-h2-rest auto-starts minicpm, phi, intern H2/H3-A when h2_qwen.log has
   "EXIT 0" (log pico/logs/h2_rest.log, "EXIT n"; EXIT 99 = qwen failed, rest not started -> tell Vy). ETA rest ~10-12 h (~03-04 UTC 11-27).
