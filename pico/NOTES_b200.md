@@ -46,6 +46,11 @@
 - 04:45 UTC 11-27: Vy (13:38 KST) asked for a PDF report: DONE paper/report_H_results.md + .pdf (6 pages; build: paper/build_report_H.sh,
   pandoc + xelatex, lmodern removed), commit 4018081, sent via Telegram (--doc). COMP v2 partial (qwen7b/3b): understood ~100% T/A/V,
   V violation if understood 90.4 / 92.8 -> analysis_comp2_pilot1000.md (rerun when job-comp2 ends). Update the report when NEU/H3-C/H4 full/COMP2 finish.
+- 04:45 UTC 11-27: NEU gen qwen7b/qwen3b DONE; minicpm 3.6k/6k (3.2 s, ~07 UTC + regen); intern early 3.1k/6k (~06 UTC); phi early
+  only 0.7k/6k at 5.7 s (~13 UTC, the bottleneck); job-comp2 2.5k/5k (~06 UTC); h4full qwen7b 2.9k/16.8k (~09:30), qwen3b 2.4k/16.8k (~10 UTC).
+  Judge was idle -> STARTED tmux job-neu-early-score (pico/early_score_neu.sh: run_neu.py --score_only qwen7b then qwen3b; log
+  pico/logs/neu_early_score.log "EXIT n"); tmux watch-neu-score kills it when neu_run.log prints '=== score' (script resumes from judge cache).
+  H3-C score 200 still queued (run_b200_h3c.sh score 200 waits for NEU score_only; minicpm/phi/intern H3-C gen not done yet).
 >>> 2026-11-26 15:35 UTC — CURRENT STATE / NEXT (read first) <<<
 - RUNNING: job-h2-qwen (qwen3b judge retry, ends ~15:45) -> tmux job-h2-rest auto-starts minicpm, phi, intern H2/H3-A when h2_qwen.log has
   "EXIT 0" (log pico/logs/h2_rest.log, "EXIT n"; EXIT 99 = qwen failed, rest not started -> tell Vy). ETA rest ~10-12 h (~03-04 UTC 11-27).
