@@ -17,6 +17,14 @@
   negation (original image). Smoke qwen7b --pilot 2 EXIT 0 (0.43 s/ans). RUNNING tmux job-neu (log pico/logs/neu_run.log "EXIT n";
   gen logs neu_gen_<m>.log): batch1 gen qwen7b/qwen3b/minicpm parallel, then batch2 phi/intern gen while batch1 scored one at a time.
   ETA ~09-10 UTC. Then: analyze_neu.py -> analysis_neu_pilot1000.md, update draft + review, ONE Telegram msg (D per channel + CIs, framing).
+- 02:50 UTC 11-27: Vy (via Claude in Vy's terminal) OK'd COMP v2 on B200, in parallel with NEU on GPU 2. RUNNING tmux job-comp2:
+  experiments/h1_v2/run_b200_comp2.sh (new file; run_comp2.register() + run_pilot.select_list composed in `python -c`, no code edit;
+  conds COMP2_T COMP2_A COMP2_V REP_T REP_A + OCR_V (cached, only so file names match analyze_comp v2); judge-free). Log pico/logs/comp2.log
+  ("EXIT n"); ends with analyze_comp.py --tag pilot1000 --version v2 -> analysis_comp2_pilot1000.md. Smoke (--pilot 2, 5 models) PASSED.
+  Caveat seen in smoke: MiniCPM REP_T repeats the sentence in a loop -> exact 0% though content right; report a separate supplementary
+  "answer starts with the instruction" rate (scorer unchanged). After: write analysis_comp2_pilot1000.md with CIs, V "violation if
+  understood vs not", message Vy (table + caveats, no channel conclusion from COMP2 alone).
+  (Lines above saying "COMP v2 RUNNING on B200 since 02:50 UTC 11-27 (job-comp2)" are superseded.)
 >>> 2026-11-26 15:35 UTC — CURRENT STATE / NEXT (read first) <<<
 - RUNNING: job-h2-qwen (qwen3b judge retry, ends ~15:45) -> tmux job-h2-rest auto-starts minicpm, phi, intern H2/H3-A when h2_qwen.log has
   "EXIT 0" (log pico/logs/h2_rest.log, "EXIT n"; EXIT 99 = qwen failed, rest not started -> tell Vy). ETA rest ~10-12 h (~03-04 UTC 11-27).
@@ -26,7 +34,7 @@
       server 1's). Every number from experiments/h1_v2 analysis files (H1 full 5 models: full_analysis_5models_asrok.md / _allunits.md;
       H4: pilot1000_forms_5models_asrok.md; H3-B + OCR + C0_box: pilot1000_comp_ctrl_5models.md, analysis_comp_pilot1000.md,
       analysis_pilot1000_asrok.md; H2/H3-A: analysis_h2_pilot1000_asrok.md (rerun for 5 models)). Placeholders, clearly marked, naming the
-      experiment, for missing results (NEU neutral-word / cue control NOT run; steering/method NOT run; COMP v2 not run on B200; H3-C not coded).
+      experiment, for missing results (NEU neutral-word / cue control NOT run; steering/method NOT run; COMP v2 RUNNING on B200 since 02:50 UTC 11-27 (job-comp2); H3-C not coded).
       No direction claim beyond CIs. Framing: pico/RESEARCH.md, paper/ideas.md, paper/outline.md, paper/style_notes.md (checklist §Synthesis),
       paper/related_work.md, server-1 draft_v1.md only for structure.
   (2) REVIEW in draft_b200_review.md: a) method audit: judge reliability (think_error rows keep fast verdict: counts per model/run;
