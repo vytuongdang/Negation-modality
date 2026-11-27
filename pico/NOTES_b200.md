@@ -42,6 +42,9 @@
   QUEUE (judge one model at a time; never 2 judge writers): NEU scoring (run_b200_neu.sh does it), then H3-C score 200 (bash
   run_b200_h3c.sh score 200; gen minicpm/phi/intern 200 first when those models are free), then H4 full scoring:
   run_h1v2.py --model <q> --all --forms --score_only (negation env), then analyze.py --tag all_forms. COMP2 then analysis_comp2.
+- 04:45 UTC 11-27: Vy (13:38 KST) asked for a PDF report: DONE paper/report_H_results.md + .pdf (6 pages; build: paper/build_report_H.sh,
+  pandoc + xelatex, lmodern removed), commit 4018081, sent via Telegram (--doc). COMP v2 partial (qwen7b/3b): understood ~100% T/A/V,
+  V violation if understood 90.4 / 92.8 -> analysis_comp2_pilot1000.md (rerun when job-comp2 ends). Update the report when NEU/H3-C/H4 full/COMP2 finish.
 >>> 2026-11-26 15:35 UTC — CURRENT STATE / NEXT (read first) <<<
 - RUNNING: job-h2-qwen (qwen3b judge retry, ends ~15:45) -> tmux job-h2-rest auto-starts minicpm, phi, intern H2/H3-A when h2_qwen.log has
   "EXIT 0" (log pico/logs/h2_rest.log, "EXIT n"; EXIT 99 = qwen failed, rest not started -> tell Vy). ETA rest ~10-12 h (~03-04 UTC 11-27).
