@@ -42,6 +42,7 @@
   QUEUE (judge one model at a time; never 2 judge writers): NEU scoring (run_b200_neu.sh does it), then H3-C score 200 (bash
   run_b200_h3c.sh score 200; gen minicpm/phi/intern 200 first when those models are free), then H4 full scoring:
   run_h1v2.py --model <q> --all --forms --score_only (negation env), then analyze.py --tag all_forms. COMP2 then analysis_comp2.
+- 04:50 UTC: report rewritten in Vietnamese with Vy's exact labels (commit 8a90144, sent with absolute path).
 - 04:45 UTC 11-27: Vy (13:38 KST) asked for a PDF report: DONE paper/report_H_results.md + .pdf (6 pages; build: paper/build_report_H.sh,
   pandoc + xelatex, lmodern removed), commit 4018081, sent via Telegram (--doc). COMP v2 partial (qwen7b/3b): understood ~100% T/A/V,
   V violation if understood 90.4 / 92.8 -> analysis_comp2_pilot1000.md (rerun when job-comp2 ends). Update the report when NEU/H3-C/H4 full/COMP2 finish.
