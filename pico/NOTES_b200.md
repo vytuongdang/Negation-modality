@@ -9,6 +9,14 @@
   per model only. Scope pilot1000, 5 models, 2 gen batches if needed. NEW files only (run_neu.py etc.), do NOT edit run_h1v2/run_pilot/
   run_h2/omnilib/judge. CPU smoke (--pilot 2) first. Rows id-stamped (image_id, unit_id, sample_id, W), resumable cache, commit by name,
   push. After analysis: update draft_b200_v1 + review, ONE short Telegram msg (per-channel NEU-NEG + CIs, framing). Hourly heartbeat only.
+- 01:30 UTC 11-27: NEU READY + RUNNING. Assets (dataset/neu/): words Tuesday/galaxy/philosophy/algebra/democracy, 200 units each,
+  automatic check (question + full record + COCO/CLEVR/VAW vocab + GQA scene graph per image; positive controls dog/red caught; no word
+  rejected; no captions in raw) -> neu/word_check.jsonl; 1000 images rendered (52 occlude a question object, flagged); TTS 10 audios
+  (5 sentences x 2 voices), all ASR ok. Code (new files, commit ab66327 pushed): create_data/src/neu_assets.py, experiments/h1_v2/run_neu.py
+  (10 conds: C0 T A V cached + NEU_T NEU_A NEU_V V_cue NEU_V_cue T_cue), analyze_neu.py, run_b200_neu.sh. T_cue = CUE + question + typed
+  negation (original image). Smoke qwen7b --pilot 2 EXIT 0 (0.43 s/ans). RUNNING tmux job-neu (log pico/logs/neu_run.log "EXIT n";
+  gen logs neu_gen_<m>.log): batch1 gen qwen7b/qwen3b/minicpm parallel, then batch2 phi/intern gen while batch1 scored one at a time.
+  ETA ~09-10 UTC. Then: analyze_neu.py -> analysis_neu_pilot1000.md, update draft + review, ONE Telegram msg (D per channel + CIs, framing).
 >>> 2026-11-26 15:35 UTC — CURRENT STATE / NEXT (read first) <<<
 - RUNNING: job-h2-qwen (qwen3b judge retry, ends ~15:45) -> tmux job-h2-rest auto-starts minicpm, phi, intern H2/H3-A when h2_qwen.log has
   "EXIT 0" (log pico/logs/h2_rest.log, "EXIT n"; EXIT 99 = qwen failed, rest not started -> tell Vy). ETA rest ~10-12 h (~03-04 UTC 11-27).
