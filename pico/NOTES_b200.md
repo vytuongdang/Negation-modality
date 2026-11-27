@@ -1,5 +1,14 @@
 # NOTES (B200 runner's memory)
 
+>>> 2026-11-27 10:15 KST... (Telegram 10:15 = 01:15 UTC? check) VY: RUN NEU CONTROL NOW on GPU 2 (no further OK needed). Spec:
+  neutral instr "Include the word '<W>' in your answer.", W from ~5 words unrelated to the image, not in question/caption/annotation
+  (automatic check, logged); same channel/position/font/voice/form as negation: NEU_T, NEU_A, NEU_V. NEU audio = CosyVoice on B200
+  (+Whisper check, asset job GPU 2); NEU images = render_visual.py (same placement, not covering main object). Cues: V_cue, NEU_V_cue =
+  "The image contains an instruction for you." before the question; T_cue = small control. Scoring: NEU followed = W in answer (string,
+  plurals); also target mention under NEU. Main metric per channel: NEU follow - NEG follow, 95% image bootstrap CI; 2x2 {V,V_cue}x{NEG,NEU};
+  per model only. Scope pilot1000, 5 models, 2 gen batches if needed. NEW files only (run_neu.py etc.), do NOT edit run_h1v2/run_pilot/
+  run_h2/omnilib/judge. CPU smoke (--pilot 2) first. Rows id-stamped (image_id, unit_id, sample_id, W), resumable cache, commit by name,
+  push. After analysis: update draft_b200_v1 + review, ONE short Telegram msg (per-channel NEU-NEG + CIs, framing). Hourly heartbeat only.
 >>> 2026-11-26 15:35 UTC — CURRENT STATE / NEXT (read first) <<<
 - RUNNING: job-h2-qwen (qwen3b judge retry, ends ~15:45) -> tmux job-h2-rest auto-starts minicpm, phi, intern H2/H3-A when h2_qwen.log has
   "EXIT 0" (log pico/logs/h2_rest.log, "EXIT n"; EXIT 99 = qwen failed, rest not started -> tell Vy). ETA rest ~10-12 h (~03-04 UTC 11-27).
