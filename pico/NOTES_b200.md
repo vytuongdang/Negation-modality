@@ -51,6 +51,10 @@
   Judge was idle -> STARTED tmux job-neu-early-score (pico/early_score_neu.sh: run_neu.py --score_only qwen7b then qwen3b; log
   pico/logs/neu_early_score.log "EXIT n"); tmux watch-neu-score kills it when neu_run.log prints '=== score' (script resumes from judge cache).
   H3-C score 200 still queued (run_b200_h3c.sh score 200 waits for NEU score_only; minicpm/phi/intern H3-C gen not done yet).
+- 04:55 UTC 11-27: Vy (13:41 KST) negation-focused report: DONE paper/report_H_results_vi.md/.pdf + _en.md/.pdf (overview table with
+  negation-specific yes/no/unknown, "Negation takeaway:" per H block; numbers cross-checked VI vs EN automatically). Build:
+  bash paper/build_report_H.sh [names] (default both). Commit 8bb0e89 pushed, sent to Vy (paths + PDFs). Old report_H_results.md kept.
+  WHEN NEU / COMP2 / H4 full / H3-C finish: update BOTH _vi and _en (same numbers), rebuild, resend.
 >>> 2026-11-26 15:35 UTC — CURRENT STATE / NEXT (read first) <<<
 - RUNNING: job-h2-qwen (qwen3b judge retry, ends ~15:45) -> tmux job-h2-rest auto-starts minicpm, phi, intern H2/H3-A when h2_qwen.log has
   "EXIT 0" (log pico/logs/h2_rest.log, "EXIT n"; EXIT 99 = qwen failed, rest not started -> tell Vy). ETA rest ~10-12 h (~03-04 UTC 11-27).
