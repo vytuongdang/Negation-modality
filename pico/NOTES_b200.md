@@ -1,5 +1,13 @@
 # NOTES (B200 runner's memory)
 
+>>> 2026-11-27 13:30 UTC: Vy CORRECTION (22:17 KST) replaces "stop all": only NEU MiniCPM-o gen (PID 1852884, GPU 2) must stay stopped.
+  It arrived after the 13:20 full stop, so RESTORED (resume from caches, GPU 2, 97 GB free before): job-neu-early-phi (NEU phi gen, 693 left),
+  job-neu-early-score (qwen7b cached -> qwen3b NEU judge), job-comp2 = run_b200_comp2.sh minicpm-o-2.6 phi-4-mm internomni (log
+  pico/logs/comp2_resume.log "EXIT n"; minicpm COMP2 regen 569 left at ~40 s/ans, then phi, intern, then analyze_comp v2).
+  NOT restarted: job-neu (it would regenerate minicpm NEU). NEU MiniCPM-o: 5,961/6,000 cached; resume ONLY after Vy OK:
+  tmux new -d -s job-neu-minicpm "cd experiments/h1_v2 && PYTHONNOUSERSITE=1 CUDA_VISIBLE_DEVICES=2 ~/anaconda3/envs/omni_neg/bin/python -u run_neu.py --model minicpm-o-2.6 --generate_only --batch_size 1 >> ../../pico/logs/neu_gen_minicpm-o-2.6.log 2>&1"
+  NEU scoring of minicpm/phi/intern: run_neu.py --model <m> --score_only (negation env), one judge at a time, after the qwen3b early score ends.
+  No other new GPU job until Vy says so. The 13:20 block above is superseded except its state/resume lines.
 >>> 2026-11-27 13:20 UTC: ALL MY GPU JOBS STOPPED (Vy order, Telegram 20:22 + 22:16 KST). WAIT: start NO GPU job until Vy says so. <<<
 Stopped (tmux kill-session; nothing deleted; caches answers.jsonl / judge.jsonl checked: last lines valid JSON):
   job-neu (PID 1852884 minicpm NEU gen), job-neu-early-phi (PID 2954424), job-neu-early-score (PID 3341200 qwen3b NEU judge),
