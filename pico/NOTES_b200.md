@@ -1,5 +1,28 @@
 # NOTES (B200 runner's memory)
 
+>>> 2026-11-27 13:20 UTC: ALL MY GPU JOBS STOPPED (Vy order, Telegram 20:22 + 22:16 KST). WAIT: start NO GPU job until Vy says so. <<<
+Stopped (tmux kill-session; nothing deleted; caches answers.jsonl / judge.jsonl checked: last lines valid JSON):
+  job-neu (PID 1852884 minicpm NEU gen), job-neu-early-phi (PID 2954424), job-neu-early-score (PID 3341200 qwen3b NEU judge),
+  job-comp2 (PID 2930248 minicpm COMP2 regen), watchers watch-neu-score/-phi/-intern. All 4 PIDs were on GPU 2 (uuid bc59..., CUDA_VISIBLE_DEVICES=2),
+  NOT GPU 1. Verified with nvidia-smi: no process of this project left on any GPU.
+NOT MINE (left alone, told Vy): tmux job-tts0-3, job-tts-rev0-2, job-tts-rnd101/102, job-finish, job-h1-smoke, cmn2-* and the cosyvoice
+  benchmark/tts_prompts.py PIDs 3155975 3155978 3155979 3155981 3157047 3246962 (+3435055 3435095 3435211): all cwd
+  /home/jovyan/gpu-4-nodes-volume2/vy/cross_multimodal_negation_2 (another Pico, project cmn2), CUDA_VISIBLE_DEVICES=2.
+  Also not mine: uncommitted edits in paper/latex/* (do not commit them).
+State at stop (logs in pico/logs/):
+  NEU gen (neu_gen_<m>.log, neu_early_<m>.log): qwen7b, qwen3b, intern DONE; minicpm 5,961/6,000; phi 5,301/6,000.
+  NEU judge (neu_early_score.log): qwen7b DONE (results/qwen2.5-omni-7b/scored_neu_pilot1000.jsonl); qwen3b in thinking pass 320/967; minicpm/phi/intern 0.
+  COMP2 (comp2.log): qwen7b, qwen3b DONE; minicpm main gen done, regen (256 tok) 221/795 at 36 s/ans; phi, intern NOT started; analyze not run.
+  H4 full (h4full_qwen7b/3b.log): gen DONE both (EXIT 0); scoring NOT started.
+  H3-C (h3c.log): gen 200 Qwen DONE; minicpm/phi/intern gen not done; scoring not started.
+RESUME (all resume from caches; GPU 2 only, after Vy's OK; one judge writer at a time):
+  NEU:   tmux new -d -s job-neu "bash experiments/h1_v2/run_b200_neu.sh > pico/logs/neu_run.log 2>&1"   (gens resume from cache, then scores all 5)
+  COMP2: tmux new -d -s job-comp2 "bash experiments/h1_v2/run_b200_comp2.sh minicpm-o-2.6 phi-4-mm internomni > pico/logs/comp2_resume.log 2>&1"
+         (smoke re-runs quickly; analyze_comp.py --tag pilot1000 --version v2 at the end covers all 5)
+  H4 full score: cd experiments/h1_v2 && PYTHONNOUSERSITE=1 CUDA_VISIBLE_DEVICES=2 ~/anaconda3/envs/negation/bin/python -u run_h1v2.py --model <qwen2.5-omni-7b|3b> --all --forms --score_only
+         then analyze.py --tag all_forms (after NEU scoring, not in parallel with another judge)
+  H3-C:  bash experiments/h1_v2/run_b200_h3c.sh gen 200 <models>; then bash experiments/h1_v2/run_b200_h3c.sh score 200
+
 >>> 2026-11-27 10:15 KST... (Telegram 10:15 = 01:15 UTC? check) VY: RUN NEU CONTROL NOW on GPU 2 (no further OK needed). Spec:
   neutral instr "Include the word '<W>' in your answer.", W from ~5 words unrelated to the image, not in question/caption/annotation
   (automatic check, logged); same channel/position/font/voice/form as negation: NEU_T, NEU_A, NEU_V. NEU audio = CosyVoice on B200
