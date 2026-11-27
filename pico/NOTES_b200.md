@@ -34,6 +34,14 @@
   tertile T: +9.8/+6.6/+5.6/+4.3/-2.6 for qwen7b/qwen3b/minicpm/phi/intern; observational, branch-confounded), split_by_source_b200.md
   (CLEVR = val only, COCO mostly train: split ~ source, no train/val claim), dataset_stats_b200_full.md (4,338 units / 2,627 images).
   (Lines above saying "H3-C coded 11-27 (run_h3c.py)" are superseded.)
+- 04:00 UTC 11-27: Vy (12:09/12:22 KST): push GPU 2 >90% with more parallel GENERATION (judge one at a time). Measured before 69% util,
+  116 GB free. Added one at a time: job-neu-early-phi + job-neu-early-intern (pico/early_gen.sh; watchers watch-neu-phi / watch-neu-intern
+  kill the early copy when neu_run.log prints '--- gen <model>'; script resumes from cache), job-h3c relaunched for Qwen only (gen 200 DONE
+  03:40), job-h4full-qwen7b / job-h4full-qwen3b = run_h1v2.py --all --forms --generate_only (16,827 / 16,791 new; logs h4full_qwen*.log
+  "EXIT n"). Util 76-95%, total ~11-13k answers/h, no gain beyond -> stopped adding. Report sent.
+  QUEUE (judge one model at a time; never 2 judge writers): NEU scoring (run_b200_neu.sh does it), then H3-C score 200 (bash
+  run_b200_h3c.sh score 200; gen minicpm/phi/intern 200 first when those models are free), then H4 full scoring:
+  run_h1v2.py --model <q> --all --forms --score_only (negation env), then analyze.py --tag all_forms. COMP2 then analysis_comp2.
 >>> 2026-11-26 15:35 UTC — CURRENT STATE / NEXT (read first) <<<
 - RUNNING: job-h2-qwen (qwen3b judge retry, ends ~15:45) -> tmux job-h2-rest auto-starts minicpm, phi, intern H2/H3-A when h2_qwen.log has
   "EXIT 0" (log pico/logs/h2_rest.log, "EXIT n"; EXIT 99 = qwen failed, rest not started -> tell Vy). ETA rest ~10-12 h (~03-04 UTC 11-27).
