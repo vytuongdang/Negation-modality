@@ -1,5 +1,5 @@
 ---
-title: "Cross-channel negation: kết quả theo giả thuyết, tập trung vào negation (B200, cập nhật 2026-11-27 04:50 UTC)"
+title: "Cross-channel negation: kết quả theo giả thuyết, tập trung vào negation (B200, cập nhật 2026-11-27 20:00 UTC)"
 author: "Pico, cho buổi họp của Vy"
 geometry: margin=1.8cm
 fontsize: 10pt
@@ -29,14 +29,14 @@ Cột cuối: **có** = riêng cho negation (đã có đối chứng cho thấy 
 
 | H | Kiểm tra gì | Kết quả một dòng | Riêng cho negation? |
 |---|---|---|---|
-| H1 (full) | Cùng lệnh cấm qua T / A / V | T ≠ A ở cả 5 mô hình, chiều tùy mô hình; V bị vi phạm 87–95% | T vs A: **chưa biết** (H1 không có đối chứng; xem H4, H3-A, NEU). V: **không** (xem H4) |
+| H1 (full) | Cùng lệnh cấm qua T / A / V | T ≠ A ở cả 5 mô hình, chiều tùy mô hình; V bị vi phạm 87–95% | T vs A: **có** ở Qwen theo NEU, **chưa biết** ở 3 mô hình khác (xem H4, H3-A, NEU). V: **không** (H4, NEU) |
 | Controls (pilot) | Mô hình có đọc được chữ trong ảnh? ô trống có ảnh hưởng? | Chép đúng 94–100%; ô trống gần như không đổi gì; lệnh trong ảnh chỉ giảm nhắc target 0–6 điểm | **không** (về đọc chữ, không về negation) |
 | H3-B v2 (pilot, 2/5 mô hình) | Mô hình có *hiểu* lệnh cấm ở từng kênh? | Qwen hiểu ~100% ở cả T/A/V; vẫn vi phạm V 90–93% khi đã hiểu | **chưa biết** (chưa có đối chứng hiểu lệnh affirmative) |
 | H4 (pilot) | Gap A − T với negation so với affirmative / exceptive | So với affirmative: gap lớn hơn với negation ở MiniCPM-o, Phi-4, InternOmni; Qwen: CI chứa 0. So với exceptive: nhỏ lại / đổi chiều. V ~ trần ở mọi dạng | A − T: **có** ở 3 mô hình (vs affirmative), **chưa biết** ở Qwen; V: **không** |
 | H2 (pilot) | Hoán đổi kênh câu hỏi / kênh lệnh cấm | Chiều hoán đổi có ảnh hưởng ở cả 5 mô hình, cùng chiều với H1 | **chưa biết** khi đứng một mình (H3-A trả lời) |
 | H3-A (pilot) | Cùng bố cục H2 nhưng lệnh affirmative | Hiệu ứng chiều lớn hơn khi có negation ở cả 5 mô hình (Phi-4 sát ngưỡng) | **có** (pattern riêng cho negation nhất quán nhất tới giờ) |
 | H3-D (full, CPU) | Target lớn có dễ bị vi phạm hơn? | Có ở 4/5 mô hình (T, A); InternOmni ngược lại; quan sát, lẫn branch | **chưa biết** (không có đối chứng affirmative theo kích thước) |
-| NEU | Kênh kém với *mọi* lệnh, hay chỉ với negation? | Kết quả: đang chạy | **chưa biết** (NEU sẽ quyết định phần còn lại) |
+| NEU (pilot, 2/5 mô hình) | Kênh kém với *mọi* lệnh, hay chỉ với negation? | Qwen: lệnh neutral trong ảnh cũng bị lờ (follow 7–10%); gap gõ/nói chỉ có với lệnh cấm (D_A − D_T −7,3 / −20,5) | T vs A: **có** ở Qwen; V: **không**; 3 mô hình khác **chưa biết** |
 | H3-C | Lệnh đặt trước ảnh so với sau câu hỏi | Kết quả: đang chạy (smoke: 100% vi phạm khi lệnh đặt trước) | **chưa biết** |
 | H4 full (Qwen) | H4 với ~4 lần dữ liệu cho Qwen | Kết quả: đang chạy | **chưa biết** |
 
@@ -61,7 +61,8 @@ Bỏ các dòng judge lỗi: analysis_all_asrok_rm.md. Recall = tỉ lệ thành
 
 - Lệnh cấm gõ và lệnh cấm nói được tuân theo khác nhau ở **cả 5 mô hình** (mọi CI không chứa 0), nhưng **chiều khác nhau
   theo mô hình**: không có kênh nào "yếu hơn" nói chung. *Riêng cho negation: chưa biết*, vì H1 chỉ có lệnh phủ định;
-  cùng một gap có thể xuất hiện với bất kỳ lệnh nào (H4, H3-A, NEU kiểm tra điều này).
+  cùng một gap có thể xuất hiện với bất kỳ lệnh nào (H4, H3-A, NEU kiểm tra điều này). NEU (mới, Qwen-7B/3B): gap gõ/nói
+  chỉ có với lệnh cấm, nên ở Qwen nó *riêng cho negation*; 3 mô hình kia chưa có NEU.
 - Lệnh cấm viết trong ảnh (V) bị vi phạm 87–95% ở cả 5 mô hình. *Riêng cho negation: không*: H4 cho thấy lệnh affirmative
   và exceptive trong ảnh cũng bị lờ ở mức gần như vậy (86–97%).
 - Recall của InternOmni tụt còn 25% khi lệnh được nói: mô hình có vẻ coi câu nói là câu hỏi, nên violation rate A của nó
@@ -235,22 +236,45 @@ hoặc không có; có negation thì gap lớn, ở cả 5 mô hình (pilot, jud
 
 **Điểm chính về negation:** target nổi bật khó bị "nén" hơn, nhưng chưa biết đó là chuyện của negation hay của việc mô tả ảnh nói chung.
 
-# NEU control: mô hình kém ở việc làm theo BẤT KỲ lệnh nào trong một kênh, hay chỉ kém ở negation?
+# NEU control: mô hình kém ở việc làm theo BẤT KỲ lệnh nào trong một kênh, hay chỉ kém ở negation? (pilot, 2/5 mô hình)
 
-Lệnh neutral là "Include the word W in your answer.", cùng kênh, cùng vị trí, cùng giọng, cùng kiểu ô với lệnh cấm.
+Lệnh neutral là "Include the word W in your answer.", cùng kênh, cùng vị trí, cùng giọng, cùng kiểu ô với lệnh cấm. NEU follow
+= W có trong câu trả lời (so chuỗi, không cần judge); NEG follow = 1 − violation (judge). Trên các câu C0-mentioned
+(Qwen-7B n=846, Qwen-3B n=842). Khi không có lệnh, W xuất hiện 0%.
 
-**Kết quả: Đang chạy.** (04:45 UTC) Qwen-7B/3B sinh xong, judge đang chấm sớm Qwen-7B (448/5.101). MiniCPM-o 3.601/6.000,
-InternOmni 3.261/6.000, Phi-4 761/6.000 (chậm nhất, khoảng 8 giờ ở tốc độ GPU dùng chung). Judge chấm từng mô hình một,
-khoảng 1,2 giờ mỗi mô hình.
+**Kết quả NEU:** follow % và D = NEU − NEG (điểm) [95% CI].
 
-**Findings mong đợi:**
+| model | kênh | NEG follow | NEU follow | D = NEU − NEG |
+|---|---|---|---|---|
+| Qwen2.5-Omni-7B | T | 82,4 | 84,9 | +2,5 [−0,9, +5,9] |
+| | A | 86,5 | 81,7 | −4,8 [−8,4, −1,4] |
+| | V | 10,0 | 9,5 | −0,6 [−3,2, +2,2] |
+| Qwen2.5-Omni-3B | T | 36,9 | 85,5 | +48,6 [+44,7, +53,0] |
+| | A | 50,7 | 78,7 | +28,0 [+23,6, +32,4] |
+| | V | 7,8 | 6,5 | −1,3 [−3,8, +1,2] |
 
-- Nếu (NEU follow − NEG follow) khác nhau theo kênh (CI của hiệu không chứa 0): gap kênh của H1 **riêng cho negation**.
-- Nếu nó gần như nhau ở T, A, V: gap H1 là khả năng làm theo lệnh nói chung theo kênh, **không riêng cho negation**.
-- Với V: nếu NEU_V cũng bị lờ ~90% thì xác nhận lần nữa V **không riêng cho negation**; bảng 2×2 {V, V + "The image contains
-  an instruction for you."} × {NEG, NEU} cho biết việc báo trước có giúp lệnh trong ảnh được coi là lệnh không.
+| model | D_A − D_T [95% CI] | A − T với NEG | A − T với NEU | cue trong ảnh: NEG / NEU (điểm) |
+|---|---|---|---|---|
+| Qwen2.5-Omni-7B | −7,3 [−11,2, −3,5] | +4,1 [+1,5, +6,6] | −3,2 [−6,3, −0,1] | +0,7 [−0,9, +2,5] / −1,8 [−3,5, −0,1] |
+| Qwen2.5-Omni-3B | −20,5 [−25,1, −16,0] | +13,8 [+10,7, +17,1] | −6,8 [−9,7, −3,8] | +1,1 [−0,6, +2,7] / −1,2 [−2,9, +0,5] |
+| MiniCPM-o, Phi-4, InternOmni | chưa có (MiniCPM-o sinh bị dừng theo lệnh Vy; Phi-4, InternOmni sinh xong, chờ Vy OK để chấm) | | | |
 
-**Điểm chính về negation:** NEU là đối chứng quyết định cho phần "chưa biết" của H1 (T vs A) và H3-B.
+\small Nguồn: experiments/h1_v2/analysis_neu_pilot1000.md. Lưu ý: NEG và NEU được chấm bằng hai cách khác nhau (judge vs so
+chuỗi); tỉ lệ follow NEU khác nhau theo từ (vd. Qwen-7B NEU_T: "philosophy" 63%, "democracy" 98%).\normalsize
+
+**=> Rút ra findings là:**
+
+- **Kênh ảnh:** lệnh neutral trong ảnh cũng bị lờ y như lệnh cấm (NEU_V follow 7–10%, D_V ≈ 0). Câu báo trước "The image
+  contains an instruction for you." không giúp (≤ 2 điểm). *Riêng cho negation: không* (xác nhận lần ba, sau H4 và controls).
+- **Gõ vs nói:** với lệnh cấm, ở Qwen lệnh nói được theo **tốt hơn** lệnh gõ; với lệnh neutral thì ngược lại (gõ tốt hơn).
+  D_A − D_T khác 0 ở cả hai Qwen: *riêng cho negation: có* (ở Qwen, so với neutral). Điều này khác H4 so với affirmative,
+  nơi CI của Qwen chứa 0; H4 full đang chờ chấm sẽ cho biết thêm.
+- **Negation penalty:** Qwen-3B theo lệnh cấm kém hơn lệnh neutral rất nhiều (T +48,6, A +28,0); Qwen-7B gần như không
+  (T +2,5, CI chứa 0).
+- Chỉ 2/5 mô hình, pilot: chưa khái quát.
+
+**Điểm chính về negation:** ở hai mô hình Qwen, khoảng cách gõ/nói chỉ có (hoặc đổi chiều) khi lệnh là phủ định, nên nó riêng
+cho negation; còn kênh ảnh thì thất bại với mọi lệnh, không riêng cho negation.
 
 # H3-C: lệnh cấm đặt TRƯỚC ảnh so với đặt sau câu hỏi
 

@@ -1,5 +1,5 @@
 ---
-title: "Cross-channel negation: results by hypothesis, focused on negation (B200, updated 2026-11-27 04:50 UTC)"
+title: "Cross-channel negation: results by hypothesis, focused on negation (B200, updated 2026-11-27 20:00 UTC)"
 author: "Pico, for Vy's meeting"
 geometry: margin=1.8cm
 fontsize: 10pt
@@ -30,14 +30,14 @@ Last column: **yes** = negation-specific (a control shows the difference is smal
 
 | H | What it tests | Result in one line | Negation-specific? |
 |---|---|---|---|
-| H1 (full) | Same negative instruction via T / A / V | T ≠ A in all 5 models, direction depends on the model; V violated 87–95% | T vs A: **unknown** (H1 has no control; see H4, H3-A, NEU). V: **no** (see H4) |
+| H1 (full) | Same negative instruction via T / A / V | T ≠ A in all 5 models, direction depends on the model; V violated 87–95% | T vs A: **yes** in Qwen per NEU, **unknown** in the other 3 models (see H4, H3-A, NEU). V: **no** (H4, NEU) |
 | Controls (pilot) | Can models read text in the image? Does an empty box matter? | Exact copy 94–100%; empty box changes almost nothing; instruction in image lowers target mention only 0–6 points | **no** (about reading, not negation) |
 | H3-B v2 (pilot, 2/5 models) | Do models *understand* the negative instruction per channel? | Qwen understands ~100% in T/A/V; still violates V 90–93% when understood | **unknown** (no affirmative comprehension control yet) |
 | H4 (pilot) | A − T gap for negation vs affirmative / exceptive | Vs affirmative: larger gap with negation in MiniCPM-o, Phi-4, InternOmni; Qwen: CI includes 0. Vs exceptive: smaller / flips. V at ceiling in every form | A − T: **yes** in 3 models (vs affirmative), **unknown** for Qwen; V: **no** |
 | H2 (pilot) | Swap question channel / instruction channel | Swap direction matters in all 5 models, same direction as H1 | **unknown** on its own (H3-A answers it) |
 | H3-A (pilot) | Same layouts as H2 with an affirmative instruction | Direction effect larger with negation in all 5 models (Phi-4 borderline) | **yes** (most consistent negation-specific pattern so far) |
 | H3-D (full, CPU) | Are larger targets violated more? | Yes in 4/5 models (T, A); InternOmni opposite; observational, branch-confounded | **unknown** (no affirmative size control) |
-| NEU | Is a channel bad at *any* instruction, or only at negation? | Results: running | **unknown** (NEU decides the rest) |
+| NEU (pilot, 2/5 models) | Is a channel bad at *any* instruction, or only at negation? | Qwen: neutral instruction in the image ignored too (follow 7–10%); typed/spoken gap only with negation (D_A − D_T −7.3 / −20.5) | T vs A: **yes** in Qwen; V: **no**; other 3 models **unknown** |
 | H3-C | Instruction before the image vs after the question | Results: running (smoke: 100% violation with instruction first) | **unknown** |
 | H4 full (Qwen) | H4 with ~4x the data for Qwen | Results: running | **unknown** |
 
@@ -62,7 +62,8 @@ judge-error rows: analysis_all_asrok_rm.md. Recall = share of allowed components
 
 - Typed and spoken negative instructions are obeyed differently in **all 5 models** (no CI contains 0), but the **direction
   depends on the model**: no channel is "weaker" in general. *Negation-specific: unknown*, because H1 has only negative
-  instructions; the same gap could appear with any instruction (H4, H3-A, NEU test this).
+  instructions; the same gap could appear with any instruction (H4, H3-A, NEU test this). NEU (new, Qwen-7B/3B): the
+  typed/spoken gap appears only for the negative instruction, so in Qwen it is *negation-specific*; no NEU yet for the other 3.
 - The negative instruction written in the image (V) is violated 87–95% in all 5 models. *Negation-specific: no*: H4 shows
   that affirmative and exceptive instructions in the image are ignored about as often (86–97%).
 - InternOmni's recall drops to 25% when the instruction is spoken: it seems to treat the speech as the question, so its A
@@ -245,24 +246,47 @@ small or absent; with negation it is large, in all 5 models (pilot, judge not ye
 **Negation takeaway:** salient targets are harder to suppress, but it is not known whether this is about negation or about
 image description in general.
 
-# NEU control: are models bad at obeying ANY instruction in a channel, or only negation?
+# NEU control: are models bad at obeying ANY instruction in a channel, or only negation? (pilot, 2/5 models)
 
 The neutral instruction is "Include the word W in your answer.", same channel, position, voice and box style as the negative
-instruction.
+instruction. NEU follow = W appears in the answer (string match, no judge); NEG follow = 1 − violation (judge). On
+C0-mentioned questions (Qwen-7B n=846, Qwen-3B n=842). Without any instruction W appears 0% of the time.
 
-**Results: running.** (04:45 UTC) Qwen-7B/3B generated; the judge is already scoring Qwen-7B early (448/5,101). MiniCPM-o
-3,601/6,000, InternOmni 3,261/6,000, Phi-4 761/6,000 (slowest, about 8 h at shared-GPU speed). The judge scores one model at
-a time, about 1.2 h per model.
+**Results NEU:** follow % and D = NEU − NEG (points) [95% CI].
 
-**Expected findings:**
+| model | channel | NEG follow | NEU follow | D = NEU − NEG |
+|---|---|---|---|---|
+| Qwen2.5-Omni-7B | T | 82.4 | 84.9 | +2.5 [−0.9, +5.9] |
+| | A | 86.5 | 81.7 | −4.8 [−8.4, −1.4] |
+| | V | 10.0 | 9.5 | −0.6 [−3.2, +2.2] |
+| Qwen2.5-Omni-3B | T | 36.9 | 85.5 | +48.6 [+44.7, +53.0] |
+| | A | 50.7 | 78.7 | +28.0 [+23.6, +32.4] |
+| | V | 7.8 | 6.5 | −1.3 [−3.8, +1.2] |
 
-- If (NEU follow − NEG follow) differs by channel (CI of the difference excludes 0): the H1 channel gap is
-  **negation-specific**.
-- If it is about the same in T, A, V: the H1 gap is general instruction following by channel, **not negation-specific**.
-- For V: if NEU_V is also ignored ~90%, this confirms again that V is **not negation-specific**; the 2×2 table {V, V + "The
-  image contains an instruction for you."} × {NEG, NEU} shows whether announcing the instruction makes image text count as one.
+| model | D_A − D_T [95% CI] | A − T for NEG | A − T for NEU | cue in image: NEG / NEU (points) |
+|---|---|---|---|---|
+| Qwen2.5-Omni-7B | −7.3 [−11.2, −3.5] | +4.1 [+1.5, +6.6] | −3.2 [−6.3, −0.1] | +0.7 [−0.9, +2.5] / −1.8 [−3.5, −0.1] |
+| Qwen2.5-Omni-3B | −20.5 [−25.1, −16.0] | +13.8 [+10.7, +17.1] | −6.8 [−9.7, −3.8] | +1.1 [−0.6, +2.7] / −1.2 [−2.9, +0.5] |
+| MiniCPM-o, Phi-4, InternOmni | not yet (MiniCPM-o generation stopped on Vy's order; Phi-4, InternOmni generated, scoring waits for Vy's OK) | | | |
 
-**Negation takeaway:** NEU is the deciding control for the "unknown" part of H1 (T vs A) and of H3-B.
+\small Source: experiments/h1_v2/analysis_neu_pilot1000.md. Caveat: NEG and NEU are scored differently (judge vs string
+match); NEU follow varies by word (e.g. Qwen-7B NEU_T: "philosophy" 63%, "democracy" 98%).\normalsize
+
+**=> Findings:**
+
+- **Image channel:** the neutral instruction in the image is ignored just like the negative one (NEU_V follow 7–10%,
+  D_V ≈ 0). The cue "The image contains an instruction for you." does not help (≤ 2 points). *Negation-specific: no*
+  (confirmed a third time, after H4 and the controls).
+- **Typed vs spoken:** for the negative instruction, Qwen follows the spoken one **better** than the typed one; for the
+  neutral instruction it is the other way round (typed better). D_A − D_T differs from 0 in both Qwen models:
+  *negation-specific: yes* (in Qwen, against the neutral control). This differs from H4 against the affirmative form,
+  where the Qwen CIs include 0; H4 full (waiting for scoring) will say more.
+- **Negation penalty:** Qwen-3B follows the negative instruction much worse than the neutral one (T +48.6, A +28.0);
+  Qwen-7B hardly (T +2.5, CI includes 0).
+- Only 2/5 models, pilot: no generalisation yet.
+
+**Negation takeaway:** in both Qwen models the typed/spoken gap exists (or flips) only when the instruction is negative, so it
+is negation-specific; the image channel fails for every instruction, so it is not negation-specific.
 
 # H3-C: negative instruction BEFORE the image vs after the question
 

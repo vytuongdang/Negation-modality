@@ -11,6 +11,11 @@
 - 16:50 UTC 11-27: NEU phi gen EXIT 0 (6,000 done). NEU qwen3b judge in last retry pass (16/59, slow), log neu_early_score.log.
   COMP2 minicpm regen 301/569 at 36 s/ans (~19 UTC), then phi + intern COMP2. ASKED Vy whether to judge NEU phi + intern
   (new GPU process, ~20 GB) after qwen3b ends; do NOT start before her OK. Then: analyze_neu.py (CPU) on scored models -> reports.
+- 20:05 UTC 11-27: NEU qwen3b judge EXIT 0. analyze_neu.py (CPU) -> experiments/h1_v2/analysis_neu_pilot1000.md (qwen7b + qwen3b):
+  V: NEU_V follow 9.5 / 6.5 vs NEG 10.0 / 7.8 (D_V ~0); cue no help. D = NEU - NEG: 7B T +2.5 [-0.9,5.9], A -4.8 [-8.4,-1.4];
+  3B T +48.6, A +28.0. D_A - D_T: 7B -7.3 [-11.2,-3.5], 3B -20.5 [-25.1,-16.0] (A better for NEG, T better for NEU).
+  Reports vi+en updated (NEU block + overview + H1), rebuilt, lesson added to RESEARCH.md. COMP2 resume: minicpm done 19:06, phi gen
+  ~3.1k/5k, then intern, then analyze_comp v2. Still waiting for Vy's OK to judge NEU phi + intern (asked 16:50); NEU minicpm stopped.
 >>> 2026-11-27 13:20 UTC: ALL MY GPU JOBS STOPPED (Vy order, Telegram 20:22 + 22:16 KST). WAIT: start NO GPU job until Vy says so. <<<
 Stopped (tmux kill-session; nothing deleted; caches answers.jsonl / judge.jsonl checked: last lines valid JSON):
   job-neu (PID 1852884 minicpm NEU gen), job-neu-early-phi (PID 2954424), job-neu-early-score (PID 3341200 qwen3b NEU judge),
