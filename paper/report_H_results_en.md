@@ -1,5 +1,5 @@
 ---
-title: "Cross-channel negation: results by hypothesis, focused on negation (B200, updated 2026-11-27 20:00 UTC)"
+title: "Cross-channel negation: results by hypothesis, focused on negation (B200, updated 2026-11-27 23:10 UTC)"
 author: "Pico, for Vy's meeting"
 geometry: margin=1.8cm
 fontsize: 10pt
@@ -32,7 +32,7 @@ Last column: **yes** = negation-specific (a control shows the difference is smal
 |---|---|---|---|
 | H1 (full) | Same negative instruction via T / A / V | T ≠ A in all 5 models, direction depends on the model; V violated 87–95% | T vs A: **yes** in Qwen per NEU, **unknown** in the other 3 models (see H4, H3-A, NEU). V: **no** (H4, NEU) |
 | Controls (pilot) | Can models read text in the image? Does an empty box matter? | Exact copy 94–100%; empty box changes almost nothing; instruction in image lowers target mention only 0–6 points | **no** (about reading, not negation) |
-| H3-B v2 (pilot, 2/5 models) | Do models *understand* the negative instruction per channel? | Qwen understands ~100% in T/A/V; still violates V 90–93% when understood | **unknown** (no affirmative comprehension control yet) |
+| H3-B v2 (pilot) | Do models *understand* the negative instruction per channel? | All 5 understand what is forbidden ≥ 95% in T/V, ≥ 97% in A (except InternOmni 75.5%); when understood still violate V 90–96%, T/A 13–80% | **unknown** (no affirmative comprehension control yet) |
 | H4 (pilot) | A − T gap for negation vs affirmative / exceptive | Vs affirmative: larger gap with negation in MiniCPM-o, Phi-4, InternOmni; Qwen: CI includes 0. Vs exceptive: smaller / flips. V at ceiling in every form | A − T: **yes** in 3 models (vs affirmative), **unknown** for Qwen; V: **no** |
 | H2 (pilot) | Swap question channel / instruction channel | Swap direction matters in all 5 models, same direction as H1 | **unknown** on its own (H3-A answers it) |
 | H3-A (pilot) | Same layouts as H2 with an affirmative instruction | Direction effect larger with negation in all 5 models (Phi-4 borderline) | **yes** (most consistent negation-specific pattern so far) |
@@ -99,35 +99,43 @@ audit/number_audit.md (point estimates match, CIs within 0.2).\normalsize
 **Negation takeaway:** the image-channel failure comes neither from OCR nor from negation: models read the instruction but do
 not treat image text as an instruction, negative or not.
 
-# H3-B: do models understand the negative instruction in each channel, separately from obeying it? (COMP v1 done; COMP v2 running)
+# H3-B: do models understand the negative instruction in each channel, separately from obeying it? (pilot, all 5 models)
 
 **Results H3-B:**
 
 - **COMP v1 is invalid:** the question came after an instruction that was still in force, so models applied the
   instruction to the multiple-choice answer too (e.g. Qwen-7B T correct 21.2%, MiniCPM-o T 8.8%, below the 33% chance
   level; analysis_comp_pilot1000.md).
-- **COMP v2** quotes the negative instruction first, then asks "what does this instruction forbid mentioning?" (3 options).
-  Pilot, 2/5 models done:
+- **COMP v2** quotes the negative instruction first, then asks "what does this instruction forbid mentioning?" (3 options,
+  chance 33%), n=1,000 per channel. "Repeat" = the answer starts with the instruction (REP_T, REP_A, OCR_V). Violation is
+  on C0-mentioned questions where the model understood the instruction.
 
-| model | understood % T / A / V [95% CI] | verbatim repeat exact % T / A / V | violation when understood T / A / V |
+| model | understood % T / A / V | repeat % T / A / V | violation when understood % T / A / V (n) |
 |---|---|---|---|
-| Qwen2.5-Omni-7B | 100.0 / 99.9 [99.7, 100] / 100.0 | 99.3 / 97.1 / 99.8 | 17.3 / 13.3 / 90.4 [88.4, 92.4] (n=820–821) |
-| Qwen2.5-Omni-3B | 99.7 [99.3, 100] / 99.8 [99.5, 100] / 100.0 | 92.2 / 95.6 / 93.6 | 63.2 / 49.2 / 92.8 [90.9, 94.5] (n=802–805) |
-| MiniCPM-o, Phi-4, InternOmni | running | running | running |
+| Qwen2.5-Omni-7B | 100.0 / 99.9 / 100.0 | 99.3 / 97.4 / 99.8 | 17.3 / 13.3 / 90.4 (820–821) |
+| Qwen2.5-Omni-3B | 99.7 / 99.8 / 100.0 | 94.2 / 95.9 / 93.6 | 63.2 / 49.2 / 92.8 (802–805) |
+| MiniCPM-o 2.6 | 95.4 / 97.1 / 99.3 | 95.9 / 80.9 / 99.7 | 50.9 / 30.6 / 94.7 (764–796) |
+| Phi-4-MM | 99.8 / 99.8 / 100.0 | 98.1 / 96.1 / 98.1 | 25.2 / 41.9 / 90.5 (781–783) |
+| InternOmni | 97.7 / 75.5 / 100.0 | 98.1 / 65.1 / 99.1 | 49.4 / 79.8 / 96.0 (589–795) |
 
-\small Source: experiments/h1_v2/analysis_comp2_pilot1000.md (partial; rerun when job-comp2 ends). MiniCPM-o repeats the
-typed sentence in a loop, so its REP_T "exact" score is falsely low; a "starts with the instruction" check will be added.\normalsize
+\small Source: experiments/h1_v2/analysis_comp2_pilot1000.md (95% CIs over images there; every "understood" CI is ≤ 5.2
+points wide); "repeat" = comp2_startswith_pilot1000.md (prefix match, original scorer unchanged). The original "exact" scores
+are the same except MiniCPM-o REP_T: 7.7% exact because it repeats the sentence in a loop, 95.9% by prefix.\normalsize
 
 **=> Findings:**
 
-- Both Qwen models **understand what the negative instruction forbids** in all three channels (~100%), including V.
-- Even when they understood it, they still violate it 13–63% in T/A and 90–93% in V: the bottleneck is **obeying**, not
-  **understanding** the negation. Waiting for the other 3 models.
+- All 5 models **understand what is forbidden** in T and V (≥ 95%) and in A (≥ 97%), except InternOmni with the spoken
+  instruction (75.5%; repeats the spoken sentence only 65.1%): part of InternOmni's A failure is hearing/understanding. But
+  when it understood, InternOmni still violates A 79.8% (when not understood: 82.0%, n=206), so poor understanding does not
+  explain most of it.
+- Even when they understood, models still violate the negative instruction 13–80% in T/A and 90–96% in V; within each
+  model the T vs A order is the same as in H1. So the T/A gap and the V failure lie in **obeying**, not in **understanding**
+  the negative instruction.
 - *Negation-specific: unknown*: COMP v2 asks only about the negative instruction; there is no matching affirmative
   comprehension question yet.
 
-**Negation takeaway:** models understand *what* is forbidden in every channel; non-compliance happens after comprehension.
-Whether this is specific to negation is not yet known.
+**Negation takeaway:** models understand *what* is forbidden in every channel (except InternOmni when listening);
+non-compliance happens after comprehension. Whether comprehension is specific to negation is not yet known.
 
 # H4: is the channel gap specific to negation, compared with a positive instruction? (pilot)
 

@@ -32,13 +32,43 @@ NC = forbidden item picked among 3 options (chance 33.3%). Violation among C0-me
 | V (OCR_V) | 93.6 [92.1, 95.0] (n=1000) | 0.971 |
 
 ## minicpm-o-2.6
-missing comp_pilot1000_COMP2_T-COMP2_A-COMP2_V-REP_T-REP_A-OCR_V.jsonl
 
+| channel | NC % [95% CI] | parsed % | violation if understood | violation if not understood |
+|---|---|---|---|---|
+| T | 95.4 [94.0, 96.6] (n=1000) | 100.0 | 50.9 [47.4, 54.5] (n=764) | 42.1 [26.3, 57.9] (n=38) |
+| A | 97.1 [96.1, 98.1] (n=1000) | 100.0 | 30.6 [27.5, 33.8] (n=775) | 33.3 [14.8, 51.9] (n=27) |
+| V | 99.3 [98.7, 99.7] (n=1000) | 100.0 | 94.7 [93.1, 96.2] (n=796) | 100.0 [100.0, 100.0] (n=6) |
+
+| channel | verbatim repeat: exact % [95% CI] | mean similarity |
+|---|---|---|
+| T (REP_T) | 7.7 [6.1, 9.3] (n=1000) | 0.190 |
+| A (REP_A) | 80.4 [77.8, 82.8] (n=1000) | 0.851 |
+| V (OCR_V) | 99.7 [99.3, 100.0] (n=1000) | 0.999 |
 
 ## phi-4-mm
-missing comp_pilot1000_COMP2_T-COMP2_A-COMP2_V-REP_T-REP_A-OCR_V.jsonl
 
+| channel | NC % [95% CI] | parsed % | violation if understood | violation if not understood |
+|---|---|---|---|---|
+| T | 99.8 [99.5, 100.0] (n=1000) | 100.0 | 25.2 [22.3, 28.4] (n=781) | 50.0 [0.0, 100.0] (n=2) |
+| A | 99.8 [99.5, 100.0] (n=1000) | 100.0 | 41.9 [38.4, 45.3] (n=782) | 100.0 [100.0, 100.0] (n=1) |
+| V | 100.0 [100.0, 100.0] (n=1000) | 100.0 | 90.5 [88.5, 92.5] (n=783) | n/a |
+
+| channel | verbatim repeat: exact % [95% CI] | mean similarity |
+|---|---|---|
+| T (REP_T) | 96.6 [95.4, 97.7] (n=1000) | 0.982 |
+| A (REP_A) | 95.5 [94.2, 96.8] (n=1000) | 0.976 |
+| V (OCR_V) | 98.1 [97.2, 98.9] (n=1000) | 0.986 |
 
 ## internomni
-missing comp_pilot1000_COMP2_T-COMP2_A-COMP2_V-REP_T-REP_A-OCR_V.jsonl
 
+| channel | NC % [95% CI] | parsed % | violation if understood | violation if not understood |
+|---|---|---|---|---|
+| T | 97.7 [96.7, 98.6] (n=1000) | 100.0 | 49.4 [45.7, 53.0] (n=772) | 69.6 [52.2, 87.0] (n=23) |
+| A | 75.5 [72.9, 78.1] (n=1000) | 100.0 | 79.8 [76.6, 83.2] (n=589) | 82.0 [76.2, 87.4] (n=206) |
+| V | 100.0 [100.0, 100.0] (n=1000) | 100.0 | 96.0 [94.5, 97.4] (n=795) | n/a |
+
+| channel | verbatim repeat: exact % [95% CI] | mean similarity |
+|---|---|---|
+| T (REP_T) | 97.9 [97.0, 98.7] (n=1000) | 0.985 |
+| A (REP_A) | 64.6 [61.7, 67.5] (n=1000) | 0.753 |
+| V (OCR_V) | 99.0 [98.4, 99.6] (n=1000) | 0.995 |

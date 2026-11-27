@@ -1,5 +1,5 @@
 ---
-title: "Cross-channel negation: kết quả theo giả thuyết, tập trung vào negation (B200, cập nhật 2026-11-27 20:00 UTC)"
+title: "Cross-channel negation: kết quả theo giả thuyết, tập trung vào negation (B200, cập nhật 2026-11-27 23:10 UTC)"
 author: "Pico, cho buổi họp của Vy"
 geometry: margin=1.8cm
 fontsize: 10pt
@@ -31,7 +31,7 @@ Cột cuối: **có** = riêng cho negation (đã có đối chứng cho thấy 
 |---|---|---|---|
 | H1 (full) | Cùng lệnh cấm qua T / A / V | T ≠ A ở cả 5 mô hình, chiều tùy mô hình; V bị vi phạm 87–95% | T vs A: **có** ở Qwen theo NEU, **chưa biết** ở 3 mô hình khác (xem H4, H3-A, NEU). V: **không** (H4, NEU) |
 | Controls (pilot) | Mô hình có đọc được chữ trong ảnh? ô trống có ảnh hưởng? | Chép đúng 94–100%; ô trống gần như không đổi gì; lệnh trong ảnh chỉ giảm nhắc target 0–6 điểm | **không** (về đọc chữ, không về negation) |
-| H3-B v2 (pilot, 2/5 mô hình) | Mô hình có *hiểu* lệnh cấm ở từng kênh? | Qwen hiểu ~100% ở cả T/A/V; vẫn vi phạm V 90–93% khi đã hiểu | **chưa biết** (chưa có đối chứng hiểu lệnh affirmative) |
+| H3-B v2 (pilot) | Mô hình có *hiểu* lệnh cấm ở từng kênh? | Cả 5 hiểu cái bị cấm ≥ 95% ở T/V, ≥ 97% ở A (trừ InternOmni 75,5%); đã hiểu vẫn vi phạm V 90–96%, T/A 13–80% | **chưa biết** (chưa có đối chứng hiểu lệnh affirmative) |
 | H4 (pilot) | Gap A − T với negation so với affirmative / exceptive | So với affirmative: gap lớn hơn với negation ở MiniCPM-o, Phi-4, InternOmni; Qwen: CI chứa 0. So với exceptive: nhỏ lại / đổi chiều. V ~ trần ở mọi dạng | A − T: **có** ở 3 mô hình (vs affirmative), **chưa biết** ở Qwen; V: **không** |
 | H2 (pilot) | Hoán đổi kênh câu hỏi / kênh lệnh cấm | Chiều hoán đổi có ảnh hưởng ở cả 5 mô hình, cùng chiều với H1 | **chưa biết** khi đứng một mình (H3-A trả lời) |
 | H3-A (pilot) | Cùng bố cục H2 nhưng lệnh affirmative | Hiệu ứng chiều lớn hơn khi có negation ở cả 5 mô hình (Phi-4 sát ngưỡng) | **có** (pattern riêng cho negation nhất quán nhất tới giờ) |
@@ -97,32 +97,39 @@ audit/number_audit.md (điểm ước lượng trùng, CI lệch ≤ 0,2).\norma
 **Điểm chính về negation:** thất bại ở kênh ảnh không đến từ OCR, và cũng không đến từ negation: mô hình đọc được lệnh nhưng
 không coi chữ trong ảnh là lệnh, dù lệnh có phủ định hay không.
 
-# H3-B: mô hình có hiểu lệnh cấm ở từng kênh không, tách riêng khỏi việc có làm theo hay không? (COMP v1 xong; COMP v2 đang chạy)
+# H3-B: mô hình có hiểu lệnh cấm ở từng kênh không, tách riêng khỏi việc có làm theo hay không? (pilot, đủ 5 mô hình)
 
 **Kết quả H3-B:**
 
 - **COMP v1 không hợp lệ:** câu hỏi đặt sau một lệnh còn hiệu lực, nên mô hình áp lệnh vào luôn câu trả lời trắc nghiệm
   (vd. Qwen-7B ở T đúng 21,2%, MiniCPM-o ở T đúng 8,8%, dưới mức ngẫu nhiên 33%; analysis_comp_pilot1000.md).
-- **COMP v2** trích dẫn lệnh cấm trước rồi hỏi "lệnh này cấm nhắc tới cái gì?" (3 lựa chọn). Pilot, mới xong 2/5 mô hình:
+- **COMP v2** trích dẫn lệnh cấm trước rồi hỏi "lệnh này cấm nhắc tới cái gì?" (3 lựa chọn, ngẫu nhiên 33%), n=1.000 mỗi kênh.
+  "Lặp lại" = câu trả lời bắt đầu bằng đúng câu lệnh (REP_T, REP_A, OCR_V). Violation tính trên các câu C0-mentioned mà mô
+  hình đã hiểu lệnh.
 
-| model | hiểu lệnh cấm % T / A / V [95% CI] | lặp nguyên văn exact % T / A / V | violation khi đã hiểu T / A / V |
+| model | hiểu lệnh cấm % T / A / V | lặp lại % T / A / V | violation khi đã hiểu % T / A / V (n) |
 |---|---|---|---|
-| Qwen2.5-Omni-7B | 100,0 / 99,9 [99,7, 100] / 100,0 | 99,3 / 97,1 / 99,8 | 17,3 / 13,3 / 90,4 [88,4, 92,4] (n=820–821) |
-| Qwen2.5-Omni-3B | 99,7 [99,3, 100] / 99,8 [99,5, 100] / 100,0 | 92,2 / 95,6 / 93,6 | 63,2 / 49,2 / 92,8 [90,9, 94,5] (n=802–805) |
-| MiniCPM-o, Phi-4, InternOmni | đang chạy | đang chạy | đang chạy |
+| Qwen2.5-Omni-7B | 100,0 / 99,9 / 100,0 | 99,3 / 97,4 / 99,8 | 17,3 / 13,3 / 90,4 (820–821) |
+| Qwen2.5-Omni-3B | 99,7 / 99,8 / 100,0 | 94,2 / 95,9 / 93,6 | 63,2 / 49,2 / 92,8 (802–805) |
+| MiniCPM-o 2.6 | 95,4 / 97,1 / 99,3 | 95,9 / 80,9 / 99,7 | 50,9 / 30,6 / 94,7 (764–796) |
+| Phi-4-MM | 99,8 / 99,8 / 100,0 | 98,1 / 96,1 / 98,1 | 25,2 / 41,9 / 90,5 (781–783) |
+| InternOmni | 97,7 / 75,5 / 100,0 | 98,1 / 65,1 / 99,1 | 49,4 / 79,8 / 96,0 (589–795) |
 
-\small Nguồn: experiments/h1_v2/analysis_comp2_pilot1000.md (một phần; chạy lại khi job-comp2 xong). MiniCPM-o lặp câu gõ
-thành vòng nên điểm "exact" REP_T bị thấp giả; sẽ báo thêm phép kiểm tra phần đầu câu.\normalsize
+\small Nguồn: experiments/h1_v2/analysis_comp2_pilot1000.md (CI 95% theo ảnh ở đó; mọi CI của "hiểu lệnh" rộng ≤ 5,2 điểm);
+"lặp lại" = comp2_startswith_pilot1000.md (khớp phần đầu câu, scorer gốc không đổi). Điểm "exact" gốc giống hệt trừ MiniCPM-o
+REP_T: 7,7% exact vì mô hình lặp câu thành vòng, 95,9% khi xét phần đầu câu.\normalsize
 
 **=> Rút ra findings là:**
 
-- Hai mô hình Qwen **hiểu nội dung lệnh cấm** ở cả ba kênh (~100%), kể cả V.
-- Dù đã hiểu, chúng vẫn vi phạm lệnh cấm 13–63% ở T/A và 90–93% ở V: điểm nghẽn là **làm theo**, không phải **hiểu** lệnh
-  cấm. Cần đợi 3 mô hình còn lại.
+- Cả 5 mô hình **hiểu cái gì bị cấm** ở T và V (≥ 95%) và ở A (≥ 97%), trừ InternOmni khi lệnh được nói (75,5%; chỉ lặp lại
+  đúng câu nói 65,1%): một phần lỗi A của InternOmni là nghe/hiểu. Nhưng khi đã hiểu, InternOmni vẫn vi phạm A 79,8%
+  (khi không hiểu: 82,0%, n=206), nên hiểu kém không giải thích được phần lớn.
+- Khi đã hiểu, mô hình vẫn vi phạm lệnh cấm 13–80% ở T/A và 90–96% ở V; thứ tự T vs A trong từng mô hình giống H1. Vậy
+  gap T/A và thất bại ở V nằm ở bước **làm theo**, không ở bước **hiểu** lệnh cấm.
 - *Riêng cho negation: chưa biết*: COMP v2 chỉ hỏi về lệnh cấm, chưa có câu hỏi hiểu lệnh affirmative tương ứng.
 
-**Điểm chính về negation:** mô hình hiểu được *cái gì* bị cấm ở mọi kênh; việc không tuân theo xảy ra sau bước hiểu. Chưa
-biết điều này có riêng cho negation không.
+**Điểm chính về negation:** mô hình hiểu được *cái gì* bị cấm ở mọi kênh (trừ InternOmni khi nghe); việc không tuân theo xảy
+ra sau bước hiểu. Bước hiểu này có riêng cho negation không thì chưa biết.
 
 # H4: khoảng cách giữa các kênh có riêng cho phủ định không, khi so với một lệnh tích cực? (pilot)
 

@@ -16,6 +16,10 @@
   3B T +48.6, A +28.0. D_A - D_T: 7B -7.3 [-11.2,-3.5], 3B -20.5 [-25.1,-16.0] (A better for NEG, T better for NEU).
   Reports vi+en updated (NEU block + overview + H1), rebuilt, lesson added to RESEARCH.md. COMP2 resume: minicpm done 19:06, phi gen
   ~3.1k/5k, then intern, then analyze_comp v2. Still waiting for Vy's OK to judge NEU phi + intern (asked 16:50); NEU minicpm stopped.
+- 23:10 UTC 11-27: COMP2 DONE (comp2_resume.log EXIT 0, 22:11) -> analysis_comp2_pilot1000.md (5 models) + new CPU check
+  comp2_startswith.py -> comp2_startswith_pilot1000.md (MiniCPM REP_T exact 7.7 -> starts-with 95.9). Understood T/A/V >= 95 / 97 / 99,
+  except InternOmni A 75.5 (REP_A 65.1); viol when understood V 90-96. Reports vi+en H3-B block + overview updated, rebuilt, sent.
+  GPU: none of my jobs running now. Waiting for Vy: OK to judge NEU phi + intern? H4 full scoring? H3-C? NEU minicpm stays stopped.
 >>> 2026-11-27 13:20 UTC: ALL MY GPU JOBS STOPPED (Vy order, Telegram 20:22 + 22:16 KST). WAIT: start NO GPU job until Vy says so. <<<
 Stopped (tmux kill-session; nothing deleted; caches answers.jsonl / judge.jsonl checked: last lines valid JSON):
   job-neu (PID 1852884 minicpm NEU gen), job-neu-early-phi (PID 2954424), job-neu-early-score (PID 3341200 qwen3b NEU judge),
