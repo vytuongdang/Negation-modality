@@ -25,7 +25,7 @@ disagree = judge target_mentioned != regex_target_mentioned (all rows, all condi
 | pilot1000_C0_box-OCR_V | UNION | | | | | | | 15 |
 | h2_pilot1000 | qwen2.5-omni-7b | 11800 | 9417 | 2318 | 65 | 0.55 | 665 (5.6%) | 58 |
 | h2_pilot1000 | qwen2.5-omni-3b | 11800 | 9486 | 2276 | 38 | 0.32 | 702 (5.9%) | 35 |
-| h2_pilot1000 | minicpm-o-2.6 | (missing) | | | | | | |
-| h2_pilot1000 | phi-4-mm | (missing) | | | | | | |
-| h2_pilot1000 | internomni | (missing) | | | | | | |
-| h2_pilot1000 | UNION | | | | | | | 89 |
+| h2_pilot1000 | minicpm-o-2.6 | 11800 | 9383 | 2382 | 35 | 0.30 | 813 (6.9%) | 31 |
+| h2_pilot1000 | phi-4-mm | 11800 | 9708 | 2064 | 28 | 0.24 | 551 (4.7%) | 24 |
+| h2_pilot1000 | internomni | 11800 | 9908 | 1856 | 36 | 0.31 | 735 (6.2%) | 29 |
+| h2_pilot1000 | UNION | | | | | | | 149 |

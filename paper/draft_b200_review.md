@@ -8,7 +8,7 @@ paper. Change log at the end.
 ### a1. Judge reliability [src: experiments/h1_v2/audit/judge_audit.md, audit_judge.py]
 - think_error rows (the thinking judge returned no JSON, so the fast verdict is kept) are rare. H1 full: Qwen-7B 113
   (0.64%), Qwen-3B 145 (0.83%), MiniCPM-o 42 (0.24%), Phi-4 33 (0.19%), InternOmni 14 (0.08%). Forms pilot:
-  21–57 per model (0.22–0.61%). Controls: 3–5. H2: Qwen-7B 65, Qwen-3B 38 (other models pending).
+  21–57 per model (0.22–0.61%). Controls: 3–5. H2: 28–65 per model (0.24–0.55%; union 149 units).
   NOTE: NOTES_b200 (2026-11-25) says "intern 33 think_error rows" for H1 full, but the scored file has 14. Phi has
   33. The note probably swapped the two models. The file counts are the ones to use.
 - Judge vs regex disagreement on the target (any condition): 5.6–10.3% of rows in H1 full (InternOmni highest,
@@ -133,9 +133,16 @@ New confound found by the audit (c11 below): DENY counts as a violation.
 **Weak / pilot only:**
 - W1. Negation-specific spoken–typed penalty (H4): CIs exclude 0 for 3 models with the affirmative reference, but
   the exceptive reference shrinks or reverses it. Pilot n ≈ 650–830. Do not headline it.
-- W2. H2/H3-A: one model so far. H2 − H3-A for T–A on Qwen-7B is −7.9 [−12.9, −3.1], i.e. the direction effect
-  differs with vs without negation. This is interesting, but it is one model, the pilot, and an operationalisation
-  that differs from the Idea doc.
+- W2. H2/H3-A (5 models, pilot): the T–A direction effect is larger with negation than without in all five
+  (H2 − H3-A: Qwen-7B −7.9, Qwen-3B −15.4, MiniCPM-o −13.9, Phi-4 +5.9 [+0.2, +11.5], InternOmni +32.5). The sign
+  follows each model's H1 gap. This is the most consistent negation-specific pattern so far, but it rests on the
+  pilot and on the question-vs-instruction swap (c7). For InternOmni it is confounded with audio-as-question (recall
+  10–27% under spoken prohibitions). Phi-4's CI is borderline. Think_error sensitivity (149 units removed,
+  analysis_h2_pilot1000_asrok_rm.md): H2 − H3-A for T–A is −8.6 / −17.6 / −14.5 / +6.6 [+0.4, +12.6] / +32.9. All CIs
+  still exclude 0.
+- W2b. A question written in the image weakens typed/spoken prohibitions but not positive instructions in four of
+  five models (prohibition 30–69% vs positive 9–20%). Part of it may be a missed question: recall drops to 50–56%
+  for Phi-4 there.
 - W3. Anything per branch, split, template or voice from the pilot.
 
 **Ranked next experiments (ask Vy; costs on B200 GPU 2, generation + judge):**
@@ -181,3 +188,4 @@ because our effects are smaller and model-dependent.
   occlusion placeholder filled from FULL.
 - 2026-11-26 17:xx: number audit applied (6 fixes above); confound c11 (DENY) added with the leak-only check.
 - 2026-11-26 17:xx: think_error sensitivity added (a1); two borderline H4 CIs marked fragile in the draft.
+- 2026-11-27 01:xx: H2/H3-A 5 models added (draft 4.5, Table 4, finding 6, abstract rewritten to ~180 words); re-reviewed: every H2 number checked against analysis_h2_pilot1000_asrok.md by hand; InternOmni H2 caveat (audio-as-question) added in the text; W2/W2b updated.

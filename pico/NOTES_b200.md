@@ -38,7 +38,9 @@
   Vy style note (00:13 KST) DONE: draft follows paper/style_notes.md §3, style log in draft_b200_review.md; confirm in the final msg.
   19:11 UTC: minicpm H2 judge retry pass (almost done), phi + intern next (~01-03 UTC).
   22:50 UTC: phi H2 done; analyze_h2 on 4 models; draft 4.5 written (Table 4, intern row PENDING, finding 6 still placeholder).
-  LEFT: after job-h2-rest EXIT 0: analyze_h2.py 5 models, H2 section, re-review, ONE Telegram msg.
+  01:20 UTC 11-27: job-h2-rest EXIT 0 (00:38). analyze_h2 5 models -> analysis_h2_pilot1000_asrok.md (+ _rm sensitivity, robust).
+  Draft 4.5/Table 4/finding 6/abstract done; review W2/W2b updated. Then: commit+push, ONE Telegram msg (sent), STOP GPU (wait for Vy).
+  OLD LEFT (done): after job-h2-rest EXIT 0: analyze_h2.py 5 models, H2 section, re-review, ONE Telegram msg.
 - 15:45 UTC 11-26: job-h2-qwen EXIT 0 (15:40). job-h2-rest running (minicpm gen started ~15:41, first answer 3.1 s).
   Vy note (Telegram 00:13 KST 11-27): draft must imitate the STYLE/STRUCTURE of "Deep and shallow biases in language models" (An Vo et al.,
   EMNLP 2026): use paper/style_notes.md (server 1 already studied it) first; no copied sentences; record the style choices taken in

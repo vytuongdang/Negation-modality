@@ -16,19 +16,18 @@ Source abbreviations (all under experiments/h1_v2/):
 ## Abstract
 
 Omni-models accept instructions that are typed, spoken, or written inside an image. We ask whether a prohibition
-("Do not mention the dog.") is obeyed equally in each of these channels. Earlier studies of negation and of
-modality conflict use text, or change the content together with the channel, so this question has had no
-controlled test. We build a paired benchmark of 4,338 visual questions over 2,627 images. Each question appears
-without any instruction, with a typed prohibition, with a spoken one, and with one written in the image, and
-violations are counted only where the model names the target when given no instruction. In five open omni-models,
-the typed–spoken gap ranges from −31.6 to +17.9 points, and its sign depends on the model. Prohibitions written in
-the image are violated in 87–95% of cases. The models copy the same text almost perfectly when asked to read it,
-and affirmative instructions written in the image are ignored just as often. In a 1,000-question pilot with
-affirmative and exceptive controls, part of the spoken–typed difference appears specific to negation in three
-models, and the exceptive control shows that this depends on the model. Channel effects in omni-models therefore
-have to be measured per model and against matched controls. [URL]
+("Do not mention the dog.") is obeyed equally in each channel. Prior work on negation and modality conflict is
+text-only or changes content together with channel. We build a paired benchmark of 4,338 visual questions over
+2,627 images. Each question is asked without instruction and with the same prohibition typed, spoken, or written
+in the image, and violations are counted only where the model names the target without instruction. Across five
+open omni-models, the typed–spoken gap ranges from −31.6 to +17.9 points, and its sign depends on the model.
+Prohibitions written in the image are violated in 87–95% of cases, although the models can copy that text, and
+affirmative written instructions fare no better. In a 1,000-question pilot, swapping the channels of the question
+and the instruction shows a typed–spoken asymmetry that is larger with negation than without in all five models.
+Affirmative and exceptive controls indicate that how much of it is negation-specific depends on the model.
+Channel effects must therefore be measured per model, against matched controls. [URL]
 
-(208 words: trim to ~170 at the end. H2 sentence to add when 5-model H2 is in.)
+(~180 words; trim before submission.)
 
 ---
 
@@ -95,8 +94,11 @@ as follows:
 5. **Spoken instructions can be taken as the question.** InternOmni keeps 73% of the allowed components under a
    typed prohibition but 25% under a spoken one (no-instruction baseline 71%). Violation alone therefore misses an
    important way to fail (Sec. 5.2). [src: FULL]
-6. [PLACEHOLDER: H2/H3-A finding, 5 models: does the channel of the instruction "win" against the channel of the
-   question, and does this differ with vs without negation? Qwen-7B preview in Sec. 4.5.]
+6. **When the question and the prohibition come through different channels, the channel of the prohibition
+   matters more with negation than with a positive instruction.** The extra direction effect for typed vs spoken
+   (H2 − H3-A) ranges from −15.4 to +32.5 points, its CI excludes 0 in all five models, and its sign follows each
+   model's H1 gap. A question written in the image makes typed and spoken prohibitions weaker in four of five
+   models (Sec. 4.5). [src: H2]
 
 ---
 
@@ -287,11 +289,10 @@ whichever channel carries it. H2 − H3-A asks whether this depends on negation.
 channels*. The Idea document's H2 instead gives two contradictory instructions ("Mention X." typed + "Do not
 mention X." spoken). That version has not been run.
 
-**Results.** For typed vs spoken, the direction in which the prohibition travels matters in every model analysed
-so far. It matters more with negation than with a positive instruction. The sign follows each model's H1 gap.
+**Results.** For typed vs spoken, the direction in which the prohibition travels matters in all five models. It matters more with negation than with a positive instruction. The sign follows each model's H1 gap.
 When the instruction is written in the image, it is not followed whichever channel carries the question. When the
 *question* is written in the image, the typed or spoken prohibition is obeyed less than a typed or spoken positive
-instruction in three of four models (Table 4).
+instruction in four of five models (Table 4).
 
 Table 4. Direction effects (violation of q1_i2 minus q2_i1, points [95% CI]) with negation (H2) and without (H3-A),
 and their difference, on units that have both. Pilot, asr_ok. [src: H2]
@@ -302,23 +303,26 @@ and their difference, on units that have both. Pilot, asr_ok. [src: H2]
 | Qwen2.5-Omni-3B | −18.6 [−22.1, −15.1] | +1.4 [−1.8, +4.5] | −15.4 [−20.2, −10.4] | −33.8 [−38.8, −29.2] | −29.9 [−34.9, −24.8] |
 | MiniCPM-o 2.6 | −23.9 [−27.7, −20.3] | −11.4 [−15.1, −7.7] | −13.9 [−19.5, −8.3] | −34.6 [−38.9, −30.3] | −13.6 [−18.2, −9.1] |
 | Phi-4-MM | +10.0 [+6.0, +13.9] | +5.9 [+2.5, +9.1] | +5.9 [+0.2, +11.5] | −18.4 [−23.7, −12.8] | −20.1 [−26.2, −14.4] |
-| InternOmni | [PENDING] | [PENDING] | [PENDING] | [PENDING] | [PENDING] |
+| InternOmni | +37.2 [+32.9, +41.4] | +5.9 [+2.1, +9.7] | +32.5 [+26.9, +38.2] | −19.8 [−24.2, −15.3] | −56.2 [−61.5, −50.9] |
 
 Caption: n = 800–832 (H2) and 646–668 (H3-A; open existence has no affirmative form). Negative T–A values mean
 that the instruction is violated less when it is spoken (and the question typed) than in the reverse layout. Thus
-the T–A direction effect is larger with negation than without in all four models, with the same sign as the
-model's H1 typed–spoken gap.
+in all five models the T–A direction effect is larger with negation than without, and the channel that does
+better is the one that did better in that model's H1 typed–spoken comparison.
 
 Reading. (i) **Typed vs spoken.** H1 compared a typed with a spoken prohibition under a typed question. H2 swaps
 the question's channel as well. In Qwen-7B, Qwen-3B and MiniCPM-o, the spoken prohibition with a typed question
 (qT_iA: 13.2 / 49.2 / 30.4%) is violated less than the typed prohibition with a spoken question (qA_iT: 17.5 / 67.8 /
-54.3%). Phi-4 shows the reverse (42.6 vs 32.6%), as in H1. Without negation the effect is small or absent for the
-two Qwen models (+2.7, +1.4, CIs include 0). It is smaller for MiniCPM-o (−11.4) and Phi-4 (+5.9). So part of
-the typed–spoken asymmetry appears only with negation. For Phi-4 the H2 − H3-A interval only just excludes 0
+54.3%). Phi-4 (42.6 vs 32.6%) and InternOmni (80.1 vs 42.9%) show the reverse, as in H1. Without negation the effect is small or absent for the
+two Qwen models (+2.7, +1.4, CIs include 0). It is smaller for MiniCPM-o (−11.4) and Phi-4 (+5.9). InternOmni's direction effect is +5.9 without negation and +37.2 with it. Its recall under a spoken prohibition
+is 26.7% (qT_iA) and 10.0% (qV_iA), against 74% with a spoken positive instruction. This is the audio-as-question
+pattern again: the spoken negative sentence names X, while the affirmative names Y (same caveat as H4). So part of
+the typed–spoken asymmetry appears only with negation, but for InternOmni this cannot be separated from answering
+the spoken sentence. For Phi-4 the H2 − H3-A interval only just excludes 0
 ([+0.2, +11.5]). (ii) **In-image instructions.** Whenever the instruction is in the image (qT_iV, qA_iV), violation
 is 82–95% in both families, as in H1. (iii) **In-image questions.** When the question is in the image and the
-instruction is typed or spoken, the positive instruction is violated in 14–20% of cases, but the prohibition in
-31–55% (Qwen-3B, MiniCPM-o, Phi-4; Qwen-7B 17–20% for both). This is a negation-specific penalty that appears only
+instruction is typed or spoken, the positive instruction is violated in 9–20% of cases, but the prohibition in
+31–55% (Qwen-3B, MiniCPM-o, Phi-4) and in 30% / 69% (qV_iT / qV_iA) in InternOmni; Qwen-7B is at 17–20% for both. This is a negation-specific penalty that appears only
 when the question is read from the image (conjecture: the model treats the written question as the main task and
 the typed/spoken prohibition as weaker context). Recall is lower in these layouts (Phi-4 qV_iT 55.6%, qV_iA 50.4%),
 so part of the question may be missed.
