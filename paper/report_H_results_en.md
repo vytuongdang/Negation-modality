@@ -1,5 +1,5 @@
 ---
-title: "Cross-channel negation: results by hypothesis, focused on negation (B200, updated 2026-11-27 23:10 UTC)"
+title: "Cross-channel negation: results by hypothesis, focused on negation (B200, updated 2026-11-28 05:30 UTC)"
 author: "Pico, for Vy's meeting"
 geometry: margin=1.8cm
 fontsize: 10pt
@@ -36,7 +36,7 @@ Last column: **yes** = negation-specific (a control shows the difference is smal
 | H4 (pilot) | A − T gap for negation vs affirmative / exceptive | Vs affirmative: larger gap with negation in MiniCPM-o, Phi-4, InternOmni; Qwen: CI includes 0. Vs exceptive: smaller / flips. V at ceiling in every form | A − T: **yes** in 3 models (vs affirmative), **unknown** for Qwen; V: **no** |
 | H2 (pilot) | Swap question channel / instruction channel | Swap direction matters in all 5 models, same direction as H1 | **unknown** on its own (H3-A answers it) |
 | H3-A (pilot) | Same layouts as H2 with an affirmative instruction | Direction effect larger with negation in all 5 models (Phi-4 borderline) | **yes** (most consistent negation-specific pattern so far) |
-| H3-D (full, CPU) | Are larger targets violated more? | Yes in 4/5 models (T, A); InternOmni opposite; observational, branch-confounded | **unknown** (no affirmative size control) |
+| H3-D (full + pilot, CPU) | Are larger targets violated more? | Yes in 4/5 models (T, A); InternOmni opposite; on the pilot the effect also appears (or is larger) with affirmative / exceptive instructions | **no** (pilot, wide CIs) |
 | NEU (pilot, 2/5 models) | Is a channel bad at *any* instruction, or only at negation? | Qwen: neutral instruction in the image ignored too (follow 7–10%); typed/spoken gap only with negation (D_A − D_T −7.3 / −20.5) | T vs A: **yes** in Qwen; V: **no**; other 3 models **unknown** |
 | H3-C | Instruction before the image vs after the question | Results: running (smoke: 100% violation with instruction first) | **unknown** |
 | H4 full (Qwen) | H4 with ~4x the data for Qwen | Results: running | **unknown** |
@@ -243,16 +243,31 @@ small or absent; with negation it is large, in all 5 models (pilot, judge not ye
 
 \small Source: experiments/h1_v2/h3d_area_b200.md, split_by_source_b200.md, dataset_stats_b200_full.md.\normalsize
 
+**Additional check (pilot, CPU, new 2026-11-28):** is the size effect specific to negation? Interaction = (large − small)
+under the negative instruction minus (large − small) under the affirmative / exceptive instruction, same units, points
+[95% CI]; n = 535–550 (aff), 695–708 (exc), ~180–235 units per tertile. V: every interaction near 0.
+
+| model | T: neg − aff | A: neg − aff | T: neg − exc | A: neg − exc |
+|---|---|---|---|---|
+| Qwen2.5-Omni-7B | −1.5 [−13.6, +10.6] | −11.4 [−22.6, −0.6] | −2.5 [−12.3, +7.3] | −11.9 [−21.3, −2.1] |
+| Qwen2.5-Omni-3B | +1.7 [−12.4, +15.0] | +14.0 [+0.5, +27.4] | +2.6 [−7.1, +11.8] | +3.5 [−7.3, +13.6] |
+| MiniCPM-o 2.6 | −1.1 [−13.2, +11.5] | −1.1 [−13.1, +10.4] | −0.1 [−10.6, +10.2] | −3.6 [−13.7, +6.9] |
+| Phi-4-MM | −9.9 [−20.8, +1.2] | +8.7 [−2.7, +20.7] | −0.8 [−10.8, +9.2] | −3.4 [−14.2, +7.5] |
+| InternOmni | −13.4 [−24.8, −1.5] | −16.0 [−28.1, −4.6] | −18.9 [−28.8, −9.3] | −14.2 [−22.7, −5.0] |
+
+\small Source: experiments/h1_v2/h3d_forms_pilot1000.md (h3d_forms_b200.py; same violation field as analyze.py).\normalsize
+
 **=> Findings:**
 
-- In 4/5 models, larger targets are violated more in T and A; InternOmni goes the other way.
+- In 4/5 models (full set), larger targets are violated more in T and A; InternOmni goes the other way.
 - Observational and confounded with branch (clearest in the attribute branch); B1 keeps only objects covering ≥ 3% of the image.
 - CLEVR is val only and COCO almost all train: **no train vs val claim**.
-- *Negation-specific: unknown*: not yet checked whether affirmative instructions show the same size effect (can be computed
-  on CPU from H4).
+- On the pilot, the size effect is **not larger under negation** than under the affirmative / exceptive instruction: most
+  interaction CIs include 0; Qwen-7B (A) and InternOmni (T, A) even show a **smaller** size effect under negation; only
+  Qwen-3B A vs affirmative is larger (+14.0, borderline, not repeated vs exceptive). *Negation-specific: no* (pilot, wide CIs).
 
-**Negation takeaway:** salient targets are harder to suppress, but it is not known whether this is about negation or about
-image description in general.
+**Negation takeaway:** salient targets are harder to suppress, but this holds for every instruction form (affirmative,
+exceptive), so it is **not negation-specific** (pilot, wide CIs).
 
 # NEU control: are models bad at obeying ANY instruction in a channel, or only negation? (pilot, 2/5 models)
 

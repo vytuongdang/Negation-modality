@@ -20,6 +20,10 @@
   comp2_startswith.py -> comp2_startswith_pilot1000.md (MiniCPM REP_T exact 7.7 -> starts-with 95.9). Understood T/A/V >= 95 / 97 / 99,
   except InternOmni A 75.5 (REP_A 65.1); viol when understood V 90-96. Reports vi+en H3-B block + overview updated, rebuilt, sent.
   GPU: none of my jobs running now. Waiting for Vy: OK to judge NEU phi + intern? H4 full scoring? H3-C? NEU minicpm stays stopped.
+- 05:30 UTC 11-28: no reply from Vy yet (no GPU job of mine running). CPU: h3d_forms_b200.py -> h3d_forms_pilot1000.md (size effect
+  large-small tertile per form on pilot H4 rows): interaction neg - aff/exc mostly CI incl. 0; Qwen-7B A and InternOmni T/A SMALLER under
+  negation; only Qwen-3B A vs aff +14.0 [+0.5,+27.4]. -> H3-D "not negation-specific (pilot, wide CIs)" in both reports (rebuilt, sent).
+  Still waiting for Vy's OK: judge NEU phi + intern, H4 full scoring, H3-C. NEU minicpm stays stopped.
 >>> 2026-11-27 13:20 UTC: ALL MY GPU JOBS STOPPED (Vy order, Telegram 20:22 + 22:16 KST). WAIT: start NO GPU job until Vy says so. <<<
 Stopped (tmux kill-session; nothing deleted; caches answers.jsonl / judge.jsonl checked: last lines valid JSON):
   job-neu (PID 1852884 minicpm NEU gen), job-neu-early-phi (PID 2954424), job-neu-early-score (PID 3341200 qwen3b NEU judge),

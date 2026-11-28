@@ -1,5 +1,5 @@
 ---
-title: "Cross-channel negation: kết quả theo giả thuyết, tập trung vào negation (B200, cập nhật 2026-11-27 23:10 UTC)"
+title: "Cross-channel negation: kết quả theo giả thuyết, tập trung vào negation (B200, cập nhật 2026-11-28 05:30 UTC)"
 author: "Pico, cho buổi họp của Vy"
 geometry: margin=1.8cm
 fontsize: 10pt
@@ -35,7 +35,7 @@ Cột cuối: **có** = riêng cho negation (đã có đối chứng cho thấy 
 | H4 (pilot) | Gap A − T với negation so với affirmative / exceptive | So với affirmative: gap lớn hơn với negation ở MiniCPM-o, Phi-4, InternOmni; Qwen: CI chứa 0. So với exceptive: nhỏ lại / đổi chiều. V ~ trần ở mọi dạng | A − T: **có** ở 3 mô hình (vs affirmative), **chưa biết** ở Qwen; V: **không** |
 | H2 (pilot) | Hoán đổi kênh câu hỏi / kênh lệnh cấm | Chiều hoán đổi có ảnh hưởng ở cả 5 mô hình, cùng chiều với H1 | **chưa biết** khi đứng một mình (H3-A trả lời) |
 | H3-A (pilot) | Cùng bố cục H2 nhưng lệnh affirmative | Hiệu ứng chiều lớn hơn khi có negation ở cả 5 mô hình (Phi-4 sát ngưỡng) | **có** (pattern riêng cho negation nhất quán nhất tới giờ) |
-| H3-D (full, CPU) | Target lớn có dễ bị vi phạm hơn? | Có ở 4/5 mô hình (T, A); InternOmni ngược lại; quan sát, lẫn branch | **chưa biết** (không có đối chứng affirmative theo kích thước) |
+| H3-D (full + pilot, CPU) | Target lớn có dễ bị vi phạm hơn? | Có ở 4/5 mô hình (T, A); InternOmni ngược lại; trên pilot hiệu ứng này cũng có (hoặc lớn hơn) với lệnh affirmative / exceptive | **không** (pilot, CI rộng) |
 | NEU (pilot, 2/5 mô hình) | Kênh kém với *mọi* lệnh, hay chỉ với negation? | Qwen: lệnh neutral trong ảnh cũng bị lờ (follow 7–10%); gap gõ/nói chỉ có với lệnh cấm (D_A − D_T −7,3 / −20,5) | T vs A: **có** ở Qwen; V: **không**; 3 mô hình khác **chưa biết** |
 | H3-C | Lệnh đặt trước ảnh so với sau câu hỏi | Kết quả: đang chạy (smoke: 100% vi phạm khi lệnh đặt trước) | **chưa biết** |
 | H4 full (Qwen) | H4 với ~4 lần dữ liệu cho Qwen | Kết quả: đang chạy | **chưa biết** |
@@ -234,14 +234,31 @@ hoặc không có; có negation thì gap lớn, ở cả 5 mô hình (pilot, jud
 
 \small Nguồn: experiments/h1_v2/h3d_area_b200.md, split_by_source_b200.md, dataset_stats_b200_full.md.\normalsize
 
+**Kiểm tra thêm (pilot, CPU, mới 2026-11-28):** hiệu ứng kích thước có riêng cho negation không? Interaction = (lớn − nhỏ)
+dưới lệnh cấm trừ (lớn − nhỏ) dưới lệnh affirmative / exceptive, cùng các unit, điểm [95% CI]; n = 535–550 (aff), 695–708 (exc),
+mỗi tertile ~180–235 unit. V: mọi interaction gần 0.
+
+| model | T: neg − aff | A: neg − aff | T: neg − exc | A: neg − exc |
+|---|---|---|---|---|
+| Qwen2.5-Omni-7B | −1,5 [−13,6, +10,6] | −11,4 [−22,6, −0,6] | −2,5 [−12,3, +7,3] | −11,9 [−21,3, −2,1] |
+| Qwen2.5-Omni-3B | +1,7 [−12,4, +15,0] | +14,0 [+0,5, +27,4] | +2,6 [−7,1, +11,8] | +3,5 [−7,3, +13,6] |
+| MiniCPM-o 2.6 | −1,1 [−13,2, +11,5] | −1,1 [−13,1, +10,4] | −0,1 [−10,6, +10,2] | −3,6 [−13,7, +6,9] |
+| Phi-4-MM | −9,9 [−20,8, +1,2] | +8,7 [−2,7, +20,7] | −0,8 [−10,8, +9,2] | −3,4 [−14,2, +7,5] |
+| InternOmni | −13,4 [−24,8, −1,5] | −16,0 [−28,1, −4,6] | −18,9 [−28,8, −9,3] | −14,2 [−22,7, −5,0] |
+
+\small Nguồn: experiments/h1_v2/h3d_forms_pilot1000.md (h3d_forms_b200.py; cùng trường violation như analyze.py).\normalsize
+
 **=> Rút ra findings là:**
 
-- Ở 4/5 mô hình, target lớn bị vi phạm nhiều hơn ở T và A; InternOmni ngược lại.
+- Ở 4/5 mô hình (full set), target lớn bị vi phạm nhiều hơn ở T và A; InternOmni ngược lại.
 - Chỉ là quan sát và lẫn với branch (rõ nhất trong branch attribute); B1 chỉ giữ vật chiếm ≥ 3% ảnh.
 - CLEVR chỉ có val, COCO gần như toàn train: **không kết luận train vs val**.
-- *Riêng cho negation: chưa biết*: chưa xem lệnh affirmative có cùng hiệu ứng kích thước không (có thể tính trên CPU từ H4).
+- Trên pilot, hiệu ứng kích thước **không lớn hơn dưới lệnh cấm** so với lệnh affirmative / exceptive: phần lớn CI của
+  interaction chứa 0; Qwen-7B (A) và InternOmni (T, A) còn có hiệu ứng kích thước **nhỏ hơn** dưới lệnh cấm; chỉ Qwen-3B A so
+  với affirmative lớn hơn (+14,0, sát ngưỡng, không lặp lại so với exceptive). *Riêng cho negation: không* (pilot, CI rộng).
 
-**Điểm chính về negation:** target nổi bật khó bị "nén" hơn, nhưng chưa biết đó là chuyện của negation hay của việc mô tả ảnh nói chung.
+**Điểm chính về negation:** target nổi bật khó bị "nén" hơn, nhưng điều này đúng với mọi dạng lệnh (affirmative, exceptive),
+nên **không riêng cho negation** (pilot, CI rộng).
 
 # NEU control: mô hình kém ở việc làm theo BẤT KỲ lệnh nào trong một kênh, hay chỉ kém ở negation? (pilot, 2/5 mô hình)
 
